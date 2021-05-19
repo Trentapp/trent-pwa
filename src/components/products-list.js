@@ -1,4 +1,6 @@
 
+// TODO: connect to backend to return products (setup axios, create service folder and file to connect to backend, update this component)
+// later add filtering
 
 const ProductsList = props => {
     return(
