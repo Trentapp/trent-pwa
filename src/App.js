@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import HomePage from "./components/home";
 import ProductsList from "./components/products-list";
+import Product from "./components/product"
 
 function App() {
   return (
@@ -25,8 +26,10 @@ function App() {
       <div className="container mt-3">
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/products" exact
+          <Route exact path="/products"
             render={(props) => (<ProductsList {...props}/>)} /> {/* I think it actually should not be rendered (just included as component), but it is just a test for now */}
+          <Route path="/products/product/:id"
+            render={(props) => (<Product {...props} />)} />
         </Switch>
       </div>
     </div>

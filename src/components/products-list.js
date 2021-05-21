@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import ProductDataService from "../services/product-data";
-
+import {Link} from "react-router-dom";
 
 // TODO: connect to backend to return products (setup axios, create service folder and file to connect to backend, update this component)
 // later add filtering
@@ -36,6 +36,11 @@ const ProductsList = props => {
                         <strong>Price per Hour: </strong>{product.price.perHour}€<br/>
                         <strong>Price per Day: </strong>{product.price.perDay}€
                       </p>
+                      <div>
+                        <Link to={`/products/product/${product._id}`} className="btn btn-primary col-lg-5 mx-1 mb-1">
+                          View details
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
