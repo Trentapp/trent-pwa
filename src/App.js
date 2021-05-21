@@ -10,9 +10,9 @@ function App() {
   return (
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <a href="/" className="navbar-brand">
+        <Link to={"/"} className="navbar-brand">
           FairLeih
-        </a> {/* If I leave a homepage, that is not a separate landing page, I should replace the <a>-Link with <Link> for faster loading */}
+        </Link> 
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link to={"/products"} className="nav-link">
@@ -25,7 +25,7 @@ function App() {
       <div className="container mt-3">
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/products"
+          <Route path="/products" exact
             render={(props) => (<ProductsList {...props}/>)} /> {/* I think it actually should not be rendered (just included as component), but it is just a test for now */}
         </Switch>
       </div>
