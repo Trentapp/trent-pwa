@@ -22,7 +22,7 @@ const Product = props => {
     return(
         <div>
             <h2>{product.name}</h2>
-            <p>Price: {product.price.perHour}€/hour, {product.price.perDay}€/day</p>
+            <p>Price: {product.pricePerHour}€/hour, {product.pricePerDay}€/day</p>
             <p><span>Desc: </span>{product.desc}</p>
             <p>more features and better style to be added.</p>
         </div>

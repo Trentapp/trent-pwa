@@ -33,8 +33,8 @@ const ProductsList = props => {
                       <h5 className="card-title">{product.name}</h5>
                       <p className="card-text">
                         <strong>Description: </strong>{product.desc}<br/>
-                        <strong>Price per Hour: </strong>{product.price.perHour}€<br/>
-                        <strong>Price per Day: </strong>{product.price.perDay}€
+                        <strong>Price per Hour: </strong>{product.pricePerHour}€<br/>
+                        <strong>Price per Day: </strong>{product.pricePerDay}€
                       </p>
                       <div>
                         <Link to={`/products/product/${product._id}`} className="btn btn-primary col-lg-5 mx-1 mb-1">
