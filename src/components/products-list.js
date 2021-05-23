@@ -6,36 +6,67 @@ import {Link} from "react-router-dom";
 // later add filtering
 
 const ProductsList = props => {
-
     const [products, setProducts] = useState([]);
-    const [filters, setFilters] = useState({});//not sure if this is the best way because we often only need to update one filter and not reset the entire filter object
+    const [filters, setFilters] = useState({name: "", day_price_max: "", hour_price_max: ""});//not sure if this is the best way because we often only need to update one filter and not reset the entire filter object
     //add possibilities for pagination later
-    
-    const find = async () => {
-        try {
-            const response = await ProductDataService.find(filters);
-            console.log(response.data); //check if everything is ok here (do I need response.data.products ?)
-            setProducts(response.data);
-        } catch(e) {
-            console.log("Error in products-list getAllProducts: ", e);
-        }
+
+    const onChangeSearchName = e => {
+      e.persist();
+      setFilters(filters => ({...filters, name: e.target.value}));
     }
 
-    const getAllProducts = async () => {
-        try {
-            const response = await ProductDataService.getAll();
-            setProducts(response.data);
-        } catch(e) {
-            console.log("Error in products-list getAllProducts: ", e);
-        }
-    };
-    useEffect(() => {
-        find();
-    }, []);
+    const onChangeDayPriceFilter = e => {
+      e.persist();
+      setFilters(filters => ({...filters, day_price_max: e.target.value}));
+    }
 
+    const onChangeHourPriceFilter = e => {
+      e.persist();
+      setFilters(filters => ({...filters, hour_price_max: e.target.value}));
+    }
+
+    useEffect(() => {
+        const find = async () => {
+            try {
+                const response = await ProductDataService.find(filters);
+                setProducts(response.data);
+            } catch(e) {
+                console.log("Error in products-list find: ", e);
+            }
+        }
+        find();
+    }, [filters]);
+
+    //maybe add later that the results are automatically updated when you change a filter property and you don't need to click on apply
     return(
         <div>
-            <p>Search and filter options will be provided soon.</p>
+            <div className="row pb-2">
+              <div className="input-group col-lg-4">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Search by name"
+                  value={filters.name}
+                  onChange={onChangeSearchName}
+                />
+              </div>
+              <div className="input-group col-lg-4">
+                <input
+                  type="number"
+                  className="form-control"
+                  placeholder="Maximum day price (in €)"
+                  value={filters.day_price_max}
+                  onChange={onChangeDayPriceFilter}
+                />
+                <input
+                  type="number"
+                  className="form-control"
+                  placeholder="Maximum hour price (in €)"
+                  value={filters.hour_price_max}
+                  onChange={onChangeHourPriceFilter}
+                />
+              </div>
+            </div>
             <div className="row">
             {products.map((product) => {
               return (
