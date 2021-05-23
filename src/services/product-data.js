@@ -17,6 +17,10 @@ class ProductDataService {
         }
         return http.get(req_str);
     }
+
+    createProduct(data){
+        return http.post("/products/create", data);
+    }
 };
 
 export default new ProductDataService();
