@@ -8,6 +8,18 @@ import {Link} from "react-router-dom";
 const ProductsList = props => {
 
     const [products, setProducts] = useState([]);
+    const [filters, setFilters] = useState({});//not sure if this is the best way because we often only need to update one filter and not reset the entire filter object
+    //add possibilities for pagination later
+    
+    const find = async () => {
+        try {
+            const response = await ProductDataService.find(filters);
+            console.log(response.data); //check if everything is ok here (do I need response.data.products ?)
+            setProducts(response.data);
+        } catch(e) {
+            console.log("Error in products-list getAllProducts: ", e);
+        }
+    }
 
     const getAllProducts = async () => {
         try {
@@ -18,7 +30,7 @@ const ProductsList = props => {
         }
     };
     useEffect(() => {
-        getAllProducts();
+        find();
     }, []);
 
     return(
