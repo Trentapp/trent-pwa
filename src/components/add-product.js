@@ -4,13 +4,15 @@ import ProductDataService from "../services/product-data";
 //TODO: add an editing mode
 
 const AddProduct = props => {
-    const initialProductState = {
+    const initialProductState = { //maybe not use empty strings here. I'm not sure if they pass the required argument. 
         name: "",
         desc: "",
         pricePerHour: "",
         pricePerDay: "",
     };
     const [product, setProduct] = useState(initialProductState);
+
+    //should those onChange functions be async?
 
     const onChangeName = e => {
         e.persist();
@@ -32,8 +34,12 @@ const AddProduct = props => {
         setProduct(product => ({...product, pricePerDay: e.target.value}));
     };
 
-    const saveProduct = () => {
-
+    const saveProduct = async () => {
+        try {
+            const response = await ProductDataService.createProduct(product);
+        } catch(e) {
+            console.log(`Error in saving new product: ${e}`);
+        }
         // add a redirect (to home or to the newly created product) and perhaps a "submitted successfully" message
     };
 

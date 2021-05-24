@@ -22,6 +22,13 @@ function App() {
             </Link>
           </li>
         </div>
+        <div className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <Link to={"/products/create"} className="nav-link">
+              Add a product
+            </Link>
+          </li>
+        </div>
       </nav>
 
       <div className="container mt-3">

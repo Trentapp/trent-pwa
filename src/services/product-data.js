@@ -19,6 +19,7 @@ class ProductDataService {
     }
 
     createProduct(data){
+        console.log("data: ", data);
         return http.post("/products/create", data);
     }
 };
