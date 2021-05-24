@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from "react";
 import ProductDataService from "../services/product-data";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 const Product = props => {
     const [product, setProduct] = useState({}); //maybe add better initial state
+    let history = useHistory();
 
     const getProduct = async id => {
         try {
@@ -12,7 +13,16 @@ const Product = props => {
         } catch(e) {
             console.log("Error in product.js - getProduct: ", e);
         }
-    }
+    };
+
+    const deleteProduct = async () => {
+        try {
+            await ProductDataService.deleteProduct(product._id);
+            history.push("/products");
+        } catch(e) {
+            console.log("Failed to delete product: ", e);
+        }
+    };
 
     useEffect(() => {
         getProduct(props.match.params.id);
@@ -24,7 +34,8 @@ const Product = props => {
             <p>Price: {product.pricePerHour}€/hour, {product.pricePerDay}€/day</p>
             <p><span>Description: </span>{product.desc}</p>
             <p>more features and better style to be added.</p>
-            <Link to={`/products/update/${product._id}`}>Edit product</Link>
+            <p><Link to={`/products/update/${product._id}`}>Edit product</Link></p>
+            <button type="button" className="btn btn-danger" onClick={deleteProduct}>Delete</button>
         </div>
     )
 }

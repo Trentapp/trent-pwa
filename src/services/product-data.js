@@ -25,6 +25,10 @@ class ProductDataService {
     updateProduct(productId, data){
         return http.put(`/products/product/update/${productId}`, data);
     }
+
+    deleteProduct(productId){
+        return http.delete(`/products/product/delete/${productId}`);
+    }
 };
 
 export default new ProductDataService();
