@@ -21,6 +21,10 @@ class ProductDataService {
     createProduct(data){
         return http.post("/products/create", data);
     }
+
+    updateProduct(productId, data){
+        return http.put(`/products/product/update/${productId}`, data);
+    }
 };
 
 export default new ProductDataService();

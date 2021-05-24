@@ -40,6 +40,8 @@ function App() {
             render={(props) => (<Product {...props} />)} />
           <Route exact path="/products/create"
             render={(props) => (<AddProduct {...props} />)} />
+          <Route exact path="/products/update/:id"
+            render={(props) => (<AddProduct {...props} productIdToUpdate={props.match.params.id} />)} />
         </Switch>
       </div>
     </div>

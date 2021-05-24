@@ -37,8 +37,14 @@ const AddProduct = props => {
 
     const saveProduct = async () => {
         try {
-            const response = await ProductDataService.createProduct(product);
-            setSubmittedID(response.data._id);
+            let response;
+            if (props.productIdToUpdate){
+                response = await ProductDataService.updateProduct(props.productIdToUpdate, product);
+                setSubmittedID(props.productIdToUpdate);
+            } else {
+                response = await ProductDataService.createProduct(product);
+                setSubmittedID(response.data._id);
+            }
         } catch(e) {
             console.log(`Error in saving new product: ${e}`);
         }
