@@ -9,7 +9,6 @@ const Product = props => {
         try {
             const response = await ProductDataService.get(id);
             setProduct(response.data);
-            console.log(response.data);
         } catch(e) {
             console.log("Error in product.js - getProduct: ", e);
         }
