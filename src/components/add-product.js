@@ -42,7 +42,6 @@ const AddProduct = props => {
         } catch(e) {
             console.log(`Error in saving new product: ${e}`);
         }
-        // add a redirect (to home or to the newly created product) and perhaps a "submitted successfully" message
     };
 
     return(
