@@ -34,6 +34,14 @@ const Product = props => {
             <p>Price: {product.pricePerHour}€/hour, {product.pricePerDay}€/day</p>
             <p><span>Description: </span>{product.desc}</p>
             <p>more features and better style to be added.</p>
+            {product.address ? (
+                <>
+                <span>Location</span>
+                <p>{product.address.street} {product.address.houseNumber}</p>
+                <p>...</p>
+                <p>{product.address.country}</p>
+                </>
+            ) : (<></>)}
             <p><Link to={`/products/update/${product._id}`}>Edit product</Link></p>
             <button type="button" className="btn btn-danger" onClick={deleteProduct}>Delete</button>
         </div>
