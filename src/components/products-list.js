@@ -69,6 +69,7 @@ const ProductsList = props => {
             </div>
             <div className="row">
             {products.map((product) => {
+              //TODO: add address here and include view map
               return (
                 <div className="col-lg-4 pb-1" key={product._id}>
                   <div className="card">

@@ -1,17 +1,33 @@
-import React, {useState} from "react";
+import React, {useState, useMemo} from "react";
 import ProductDataService from "../services/product-data";
 import {Redirect} from "react-router-dom";
 //TODO: add an editing mode
 
 const AddProduct = props => {
-    const initialProductState = { //maybe not use empty strings here. I'm not sure if they pass the required argument. 
-        name: "",
-        desc: "",
-        pricePerHour: "",
-        pricePerDay: "",
-    };
-    const [product, setProduct] = useState(initialProductState);
+        
+    const [product, setProduct] = useState({});
     const [submittedID, setSubmittedID] = useState(null);
+
+    const getOldProduct = async () => {
+        try {
+            if (props.productIdToUpdate){
+                const initialProductState = await ProductDataService.get(props.productIdToUpdate);
+                setProduct(initialProductState.data);
+            } else {
+                setProduct({
+                    name: "",
+                    desc: "",
+                    pricePerHour: "",
+                    pricePerDay: "",
+                });
+            }
+            
+        } catch(e) {
+            console.log("Error trying to retrieve old product state: ", e);
+        }
+    }
+    
+    useMemo(getOldProduct, [props.productIdToUpdate]);
 
     //should those onChange functions be async?
 
