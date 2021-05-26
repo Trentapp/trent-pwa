@@ -84,6 +84,12 @@ const ProductsList = props => {
                         <Link to={`/products/product/${product._id}`} className="btn btn-primary col-lg-5 mx-1 mb-1">
                           View details
                         </Link>
+                        { product.address ? (
+                        <a className="btn btn-primary col-lg-5 mx-1 mb-1" href={"https://www.google.com/maps/place/" + 
+                          `${product.address.street} ${product.address.houseNumber}, ${product.address.city}`}>
+                          View Map
+                        </a>
+                        ) : (<></>)}
                       </div>
                     </div>
                   </div>

@@ -1,8 +1,9 @@
 import React, {useState, useMemo} from "react";
 import ProductDataService from "../services/product-data";
 import {Redirect} from "react-router-dom";
-//TODO: add an editing mode
 
+
+//later: make location of product the location of the user by default
 const AddProduct = props => {
         
     const [product, setProduct] = useState({});
@@ -19,6 +20,13 @@ const AddProduct = props => {
                     desc: "",
                     pricePerHour: "",
                     pricePerDay: "",
+                    address: {
+                        street: "",
+                        houseNumber: "",
+                        zipcode: "",
+                        city: "",
+                        country: "",
+                    }
                 });
             }
             
