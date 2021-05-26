@@ -11,7 +11,7 @@ const AddProduct = props => {
     const getOldProduct = async () => {
         try {
             if (props.productIdToUpdate){
-                const initialProductState = await ProductDataService.get(props.productIdToUpdate);
+                const initialProductState = await ProductDataService.get(props.productIdToUpdate); //I get a warning here that I don't understand very well. Maybe change it later.
                 setProduct(initialProductState.data);
             } else {
                 setProduct({
