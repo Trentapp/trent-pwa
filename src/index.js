@@ -4,6 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import dotenv from "dotenv";
+
+dotenv.config();
+console.log("API key: ", process.env.GOOGLE_MAPS_API_KEY);
+
 
 ReactDOM.render(
   <BrowserRouter>

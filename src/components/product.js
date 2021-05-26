@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import ProductDataService from "../services/product-data";
 import {Link, useHistory} from "react-router-dom";
+import SimpleMap from "../components/map.js";
 
 const Product = props => {
     const [product, setProduct] = useState({}); //maybe add better initial state
@@ -30,20 +31,25 @@ const Product = props => {
 
     return(
         <div>
-            <h2>{product.name}</h2>
-            <p>Price: {product.pricePerHour}€/hour, {product.pricePerDay}€/day</p>
-            <p><span>Description: </span>{product.desc}</p>
-            <p>more features and better style to be added.</p>
-            {product.address ? (
-                <>
-                <span>Location</span>
-                <p>{product.address.street} {product.address.houseNumber}</p>
-                <p>...</p>
-                <p>{product.address.country}</p>
-                </>
-            ) : (<></>)}
-            <p><Link to={`/products/update/${product._id}`}>Edit product</Link></p>
-            <button type="button" className="btn btn-danger" onClick={deleteProduct}>Delete</button>
+            <div className="mb-4">
+                <h2>{product.name}</h2>
+                <p>Price: {product.pricePerHour}€/hour, {product.pricePerDay}€/day</p>
+                <p><span>Description: </span>{product.desc}</p>
+                <p>more features and better style to be added.</p>
+                {product.address ? (
+                    <>
+                    <span>Location</span>
+                    <p>{product.address.street} {product.address.houseNumber}</p>
+                    <p>...</p>
+                    <p>{product.address.country}</p>
+                    </>
+                ) : (<></>)}
+                <p><Link to={`/products/update/${product._id}`}>Edit product</Link></p>
+                <button type="button" className="btn btn-danger" onClick={deleteProduct}>Delete</button>
+            </div>
+            <div>
+                <SimpleMap />
+            </div>
         </div>
     )
 }
