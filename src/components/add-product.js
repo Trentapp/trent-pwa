@@ -59,6 +59,31 @@ const AddProduct = props => {
         setProduct(product => ({...product, pricePerDay: e.target.value}));
     };
 
+    const onChangeStreet = e => {
+        e.persist();
+        setProduct(product => ({...product, address: {...product.address, street: e.target.value}}));
+    };
+
+    const onChangeHouseNumber = e => {
+        e.persist();
+        setProduct(product => ({...product, address: {...product.address, houseNumber: e.target.value}}));
+    };
+
+    const onChangeZipcode = e => {
+        e.persist();
+        setProduct(product => ({...product, address: {...product.address, zipcode: e.target.value}}));
+    };
+
+    const onChangeCity = e => {
+        e.persist();
+        setProduct(product => ({...product, address: {...product.address, city: e.target.value}}));
+    };
+
+    const onChangeCountry = e => {
+        e.persist();
+        setProduct(product => ({...product, address: {...product.address, country: e.target.value}}));
+    }; //later modify the country form so we get a dropdown choice
+
     const saveProduct = async () => {
         try {
             let response;
@@ -103,25 +128,72 @@ const AddProduct = props => {
                         onChange={onChangeDesc}
                     />
                     </div>
-                <label>Prices</label>
-                <div className="row input-group col-lg-4">
-                    <input
-                        type="number"
-                        className="form-control"
-                        required
-                        placeholder="3"
-                        value={product.pricePerHour}
-                        onChange={onChangeHourPrice}
-                    />
-                    <input
-                        type="number"
-                        className="form-control"
-                        required
-                        placeholder="12"
-                        value={product.pricePerDay}
-                        onChange={onChangeDayPrice}
-                    />
-                </div>
+                    <label>Prices</label>
+                    <div className="row input-group col-lg-4 mb-2">
+                        <input
+                            type="number"
+                            className="form-control"
+                            required
+                            placeholder="3"
+                            value={product.pricePerHour}
+                            onChange={onChangeHourPrice}
+                        />
+                        <input
+                            type="number"
+                            className="form-control"
+                            required
+                            placeholder="12"
+                            value={product.pricePerDay}
+                            onChange={onChangeDayPrice}
+                        />
+                    </div>
+                    <label>Address</label>
+                    <div className="row input-group col-lg-4">
+                        <input
+                            type="text"
+                            className="form-control"
+                            required
+                            placeholder="Streetname"
+                            value={product.address ? product.address.street : ""}
+                            onChange={onChangeStreet}
+                        />
+                        <input
+                            type="text"
+                            className="form-control"
+                            required
+                            placeholder="House Number"
+                            value={product.address ? product.address.houseNumber : ""}
+                            onChange={onChangeHouseNumber}
+                        />
+                    </div>
+                    <div className="row input-group col-lg-4">
+                        <input
+                            type="text"
+                            className="form-control"
+                            required
+                            placeholder="Zipcode"
+                            value={product.address ? product.address.zipcode : ""}
+                            onChange={onChangeZipcode}
+                        />
+                        <input
+                            type="text"
+                            className="form-control"
+                            required
+                            placeholder="City"
+                            value={product.address ? product.address.city : ""}
+                            onChange={onChangeCity}
+                        />
+                    </div>
+                    <div className="row input-group col-lg-4">
+                        <input
+                            type="text"
+                            className="form-control"
+                            required
+                            placeholder="Country"
+                            value={product.address ? product.address.country : ""}
+                            onChange={onChangeCountry}
+                        />
+                    </div>
                 </div>
                 <button onClick={saveProduct} className="btn btn-success">
                 Submit
