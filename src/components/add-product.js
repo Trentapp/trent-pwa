@@ -1,10 +1,15 @@
 import React, {useState, useMemo} from "react";
 import ProductDataService from "../services/product-data";
 import {Redirect} from "react-router-dom";
+import Geocode from "react-geocode";
+import dotenv from "dotenv";
+
+dotenv.config();
+Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 
 
 //later: make location of product the location of the user by default
-const AddProduct = props => {
+const AddProduct = props => { //when props.productIdToUpdate is passed, it does not create a new Product but update an existing one
         
     const [product, setProduct] = useState({});
     const [submittedID, setSubmittedID] = useState(null);
@@ -86,12 +91,18 @@ const AddProduct = props => {
 
     const saveProduct = async () => {
         try {
-            let response;
+            //extract the geocoordinates from address and add it to product
+            const responseLoc = await Geocode.fromAddress(`${product.address.street} ${product.address.houseNumber}, ${product.address.zipcode} ${product.address.city}, ${product.address.country}`); //may not need to be that detailed
+            const {lat,lng} = responseLoc.results[0].geomentry.location;
+            console.log(lat,lng);
+            setProduct(product => ({...product, location: {lat: lat, lng: lng}})); //should I add await here so the request is send after that, or does it work like that? (Or can you only add await for promise-like functions?)
             if (props.productIdToUpdate){
-                response = await ProductDataService.updateProduct(props.productIdToUpdate, product);
+                const response = await ProductDataService.updateProduct(props.productIdToUpdate, product);
+                console.log(response);
                 setSubmittedID(props.productIdToUpdate);
             } else {
-                response = await ProductDataService.createProduct(product);
+                const response = await ProductDataService.createProduct(product);
+                console.log(response);
                 setSubmittedID(response.data._id);
             }
         } catch(e) {
