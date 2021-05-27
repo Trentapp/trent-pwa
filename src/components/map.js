@@ -1,36 +1,47 @@
-import React, {Component} from "react";
-import GoogleMapReact from "google-map-react";
+import React, {useState} from "react";
+import {GoogleMap, useLoadScript, Marker, InfoWindow} from "@react-google-maps/api";
+import dotenv from "dotenv";
 
-const AnyReactComponent = ({text}) => <div>text</div>;
+dotenv.config();
 
-class SimpleMap extends Component {
-    static defaultProps = {
-        center: {
-            lat: 59.95,
-            lng: 30.33
-        },
-        zoom: 11
-    };
-
-    render() {
-        return (
-            // Important! Always set the container height explicitly
-            <div style={{ height: '100vh', width: '100%' }}>
-                <GoogleMapReact
-                    bootstrapURLKeys={{ key: process.env.GOOGLE_MAPS_API_KEY }}
-                    defaultCenter={this.props.center}
-                    defaultZoom={this.props.zoom}
-                >
-                <AnyReactComponent
-                    lat={59.955413}
-                    lng={30.337844}
-                    text="My Marker"
-                />
-                </GoogleMapReact>
-            </div>
-            );
-      }
+const libraries = ["places"];
+const mapContainerStyle = {
+    width: "100%",
+    height: "100vh",
+};
+const center = {
+    lat: 49.3988,
+    lng: 8.6724,
+};
+const options = {
+    disableDefaultUI: false, // I actually want to set it to true, but it does not work
 }
 
+export default function Map() {
+    const {isLoaded, loadError} = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+        libraries: libraries,
+    });
 
-export default SimpleMap;
+    const [markers, setMarkers] = useState([]);
+
+    if (loadError) return "Error loading maps";
+    if (!isLoaded) return "Loading Maps";
+
+    return(
+        <div>
+            <GoogleMap mapContainerStyle={mapContainerStyle}
+                zoom={13} center={center} option={options}
+                onClick={(event) => {
+                    setMarkers((current) => [
+                        ...current,
+                        {lat: event.latLng.lat(), lng: event.latLng.lng(), time: new Date()}
+                    ]);
+                }}>
+                {markers.map((marker) => (
+                    <Marker key={marker.time.toISOString()} position={{lat: marker.lat, lng: marker.lng}} />
+                ))}
+            </GoogleMap>
+        </div>
+    )
+};
