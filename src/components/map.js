@@ -24,6 +24,19 @@ export default function Map() {
     });
 
     const [markers, setMarkers] = useState([]);
+    const [selected, setSelected] = useState({});
+
+    const onMapClick = React.useCallback((event) => {
+        setMarkers((current) => [
+            ...current,
+            {lat: event.latLng.lat(), lng: event.latLng.lng(), time: new Date().toISOString()}
+        ]);
+    }, []);
+
+    const mapRef = React.useRef();
+    const onMapLoad = React.useCallback((map) => {
+        mapRef.current = map;
+    }, []);
 
     if (loadError) return "Error loading maps";
     if (!isLoaded) return "Loading Maps";
@@ -32,15 +45,24 @@ export default function Map() {
         <div>
             <GoogleMap mapContainerStyle={mapContainerStyle}
                 zoom={13} center={center} option={options}
-                onClick={(event) => {
-                    setMarkers((current) => [
-                        ...current,
-                        {lat: event.latLng.lat(), lng: event.latLng.lng(), time: new Date()}
-                    ]);
-                }}>
+                onClick={onMapClick}
+                onLoad={onMapLoad}>
                 {markers.map((marker) => (
-                    <Marker key={marker.time.toISOString()} position={{lat: marker.lat, lng: marker.lng}} />
-                ))}
+                    <Marker key={marker.time}
+                        position={{lat: marker.lat, lng: marker.lng}}
+                        onClick={() => {
+                            setSelected(marker);
+                        }} />
+                ))} {/* maybe set another icon later */ }
+
+                {selected.lat ? (
+                <InfoWindow position={{lat: selected.lat, lng: selected.lng}}
+                    onCloseClick={() => setSelected({})}>
+                    <div>
+                        <h2>You clicked here</h2>
+                        <p>Time created: {selected.time}</p>
+                    </div>
+                </InfoWindow>) : null}
             </GoogleMap>
         </div>
     )
