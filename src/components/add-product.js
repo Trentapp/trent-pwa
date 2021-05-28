@@ -1,4 +1,4 @@
-import React, {useState, useMemo} from "react";
+import React, {useState, useEffect} from "react";
 import ProductDataService from "../services/product-data";
 import {Redirect} from "react-router-dom";
 import Geocode from "react-geocode";
@@ -13,34 +13,34 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
         
     const [product, setProduct] = useState({});
     const [submittedID, setSubmittedID] = useState(null);
-
-    const getOldProduct = async () => {
-        try {
-            if (props.productIdToUpdate){
-                const initialProductState = await ProductDataService.get(props.productIdToUpdate); //I get a warning here that I don't understand very well. Maybe change it later.
-                setProduct(initialProductState.data);
-            } else {
-                setProduct({
-                    name: "",
-                    desc: "",
-                    pricePerHour: "",
-                    pricePerDay: "",
-                    address: {
-                        street: "",
-                        houseNumber: "",
-                        zipcode: "",
-                        city: "",
-                        country: "",
-                    }
-                });
-            }
-            
-        } catch(e) {
-            console.log("Error trying to retrieve old product state: ", e);
-        }
-    }
     
-    useMemo(getOldProduct, [props.productIdToUpdate]);
+    useEffect(() => {
+        async function getOldProduct() {
+            try {
+                if (props.productIdToUpdate){
+                    const initialProductState = await ProductDataService.get(props.productIdToUpdate); //I get a warning here that I don't understand very well. Maybe change it later.
+                    setProduct(initialProductState.data);
+                } else {
+                    setProduct({
+                        name: "",
+                        desc: "",
+                        pricePerHour: "",
+                        pricePerDay: "",
+                        address: {
+                            street: "",
+                            houseNumber: "",
+                            zipcode: "",
+                            city: "",
+                            country: "",
+                        }
+                    });
+                }
+            } catch(e) {
+                console.log("Error trying to retrieve old product state: ", e);
+            }
+        }
+        getOldProduct(); 
+    }, [props.productIdToUpdate]);
 
     //should those onChange functions be async?
 
@@ -89,26 +89,32 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
         setProduct(product => ({...product, address: {...product.address, country: e.target.value}}));
     }; //later modify the country form so we get a dropdown choice
 
+    const getCoordinates = async () => {
+        //extract the geocoordinates from address and add it to product
+        const responseLoc = await Geocode.fromAddress(`${product.address.street} ${product.address.houseNumber}, ${product.address.zipcode} ${product.address.city}, ${product.address.country}`); //may not need to be that detailed
+        const loc = responseLoc.results[0].geometry.location;
+        setProduct(product => ({...product, location: {lat: loc.lat, lng: loc.lng}})); //should I add await here so the request is send after that, or does it work like that? (Or can you only add await for promise-like functions?)
+    }
+
     const saveProduct = async () => {
         try {
-            //extract the geocoordinates from address and add it to product
-            const responseLoc = await Geocode.fromAddress(`${product.address.street} ${product.address.houseNumber}, ${product.address.zipcode} ${product.address.city}, ${product.address.country}`); //may not need to be that detailed
-            const {lat,lng} = responseLoc.results[0].geomentry.location;
-            console.log(lat,lng);
-            setProduct(product => ({...product, location: {lat: lat, lng: lng}})); //should I add await here so the request is send after that, or does it work like that? (Or can you only add await for promise-like functions?)
             if (props.productIdToUpdate){
-                const response = await ProductDataService.updateProduct(props.productIdToUpdate, product);
-                console.log(response);
+                await ProductDataService.updateProduct(props.productIdToUpdate, product);
                 setSubmittedID(props.productIdToUpdate);
             } else {
                 const response = await ProductDataService.createProduct(product);
-                console.log(response);
                 setSubmittedID(response.data._id);
             }
         } catch(e) {
             console.log(`Error in saving new product: ${e}`);
         }
     };
+
+    useEffect(() => {
+        if (product.location){
+            saveProduct();
+        }
+    }, [product.location]);
 
     return(
         <div>
@@ -206,7 +212,7 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
                         />
                     </div>
                 </div>
-                <button onClick={saveProduct} className="btn btn-success">
+                <button onClick={getCoordinates} className="btn btn-success">
                 Submit
                 </button>
             </div>

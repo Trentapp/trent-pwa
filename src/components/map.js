@@ -17,21 +17,13 @@ const options = {
     disableDefaultUI: false, // I actually want to set it to true, but it does not work
 }
 
-export default function Map() {
+const Map = props => {
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries: libraries,
     });
 
-    const [markers, setMarkers] = useState([]);
     const [selected, setSelected] = useState({});
-
-    const onMapClick = React.useCallback((event) => {
-        setMarkers((current) => [
-            ...current,
-            {lat: event.latLng.lat(), lng: event.latLng.lng(), time: new Date().toISOString()}
-        ]);
-    }, []);
 
     const mapRef = React.useRef();
     const onMapLoad = React.useCallback((map) => {
@@ -45,25 +37,26 @@ export default function Map() {
         <div>
             <GoogleMap mapContainerStyle={mapContainerStyle}
                 zoom={13} center={center} option={options}
-                onClick={onMapClick}
                 onLoad={onMapLoad}>
-                {markers.map((marker) => (
-                    <Marker key={marker.time}
-                        position={{lat: marker.lat, lng: marker.lng}}
+                {props.products.map((product) => (
+                    <Marker key={product._id}
+                        position={{lat: product.location.lat, lng: product.location.lng}}
                         onClick={() => {
-                            setSelected(marker);
+                            setSelected(product);
                         }} />
                 ))} {/* maybe set another icon later */ }
 
-                {selected.lat ? (
-                <InfoWindow position={{lat: selected.lat, lng: selected.lng}}
+                {selected.location ? (
+                <InfoWindow position={{lat: selected.location.lat, lng: selected.location.lng}}
                     onCloseClick={() => setSelected({})}>
                     <div>
-                        <h2>You clicked here</h2>
-                        <p>Time created: {selected.time}</p>
+                        <h4>{selected.name}</h4>
+                        <p>{selected.desc}</p>
                     </div>
                 </InfoWindow>) : null}
             </GoogleMap>
         </div>
     )
 };
+
+export default Map;

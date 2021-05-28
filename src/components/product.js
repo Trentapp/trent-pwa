@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import ProductDataService from "../services/product-data";
 import {Link, useHistory} from "react-router-dom";
-import SimpleMap from "../components/map.js";
+import Map from "../components/map.js";
 
 const Product = props => {
     const [product, setProduct] = useState({}); //maybe add better initial state
@@ -44,11 +44,16 @@ const Product = props => {
                     <p>{product.address.country}</p>
                     </>
                 ) : (<></>)}
+                {product.location ? (
+                    <>
+                    <p>Lat, lng: {product.location.lat} {product.location.lng}</p>
+                    </>
+                ) : (<></>)}
                 <p><Link to={`/products/update/${product._id}`}>Edit product</Link></p>
                 <button type="button" className="btn btn-danger" onClick={deleteProduct}>Delete</button>
             </div>
             <div>
-                <SimpleMap />
+                <Map {...props} products={[product]}/>
             </div>
         </div>
     )
