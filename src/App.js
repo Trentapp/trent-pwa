@@ -1,14 +1,30 @@
 import React from "react";
 import {Switch, Route, Link} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import {Button} from "react-bootstrap";
 
 import HomePage from "./components/home";
 import ProductsList from "./components/products-list";
 import Product from "./components/product";
 import AddProduct from "./components/add-product";
 import SignUp from "./components/signup";
+import LogIn from "./components/login";
+import ForgotPassword from "./components/ForgotPassword";
+
+import PrivateRoute from "./components/PrivateRoute"; // not used or tested yet, but useful for when we create a profile page later
+import { useAuth } from "./context/AuthContext";
 
 function App() {
+  const {logout} = useAuth();
+
+  async function handleLogout() {
+    try {
+      await logout();
+    } catch(e) {
+      console.log("Failed to log out");
+    }
+  }
+
   return (
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
@@ -27,9 +43,19 @@ function App() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to={"/sign-up"} className="nav-link">
+            <Link to={"/signup"} className="nav-link">
               Sign Up
             </Link>
+          </li>
+          <li className="nav-item">
+            <Link to={"/login"} className="nav-link">
+              Log In
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Button variant="link" className="nav-link" onClick={handleLogout}>
+              Log Out
+            </Button>
           </li>
         </div>
       </nav>
@@ -45,7 +71,9 @@ function App() {
             render={(props) => (<AddProduct {...props} />)} />
           <Route exact path="/products/update/:id"
             render={(props) => (<AddProduct {...props} productIdToUpdate={props.match.params.id} />)} />
-          <Route exact path="/sign-up" component={SignUp} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/login" component={LogIn} />
+          <Route path="/forgot-password" component={ForgotPassword} />
         </Switch>
       </div>
     </div>
