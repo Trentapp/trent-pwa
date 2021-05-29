@@ -53,7 +53,7 @@ const Product = props => {
                 <button type="button" className="btn btn-danger" onClick={deleteProduct}>Delete</button>
             </div>
             <div>
-                <Map {...props} products={[product]}/>
+                {product.location && <Map {...props} products={[product]}/>}
             </div>
         </div>
     )

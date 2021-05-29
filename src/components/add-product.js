@@ -10,8 +10,22 @@ Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 
 //later: make location of product the location of the user by default
 const AddProduct = props => { //when props.productIdToUpdate is passed, it does not create a new Product but update an existing one
-        
-    const [product, setProduct] = useState({});
+    const initialProductState = {
+        name: "",
+        desc: "",
+        prices: {
+            perHour: "",
+            perDay: "",
+        },
+        address: {
+            street: "",
+            houseNumber: "",
+            zipcode: "",
+            city: "",
+            country: "",
+        }
+    };
+    const [product, setProduct] = useState(initialProductState);
     const [submittedID, setSubmittedID] = useState(null);
     
     useEffect(() => {
@@ -20,21 +34,7 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
                 if (props.productIdToUpdate){
                     const initialProductState = await ProductDataService.get(props.productIdToUpdate); //I get a warning here that I don't understand very well. Maybe change it later.
                     setProduct(initialProductState.data);
-                } else {
-                    setProduct({
-                        name: "",
-                        desc: "",
-                        pricePerHour: "",
-                        pricePerDay: "",
-                        address: {
-                            street: "",
-                            houseNumber: "",
-                            zipcode: "",
-                            city: "",
-                            country: "",
-                        }
-                    });
-                }
+                } 
             } catch(e) {
                 console.log("Error trying to retrieve old product state: ", e);
             }
@@ -56,12 +56,12 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
 
     const onChangeHourPrice = e => {
         e.persist();
-        setProduct(product => ({...product, pricePerHour: e.target.value}));
+        setProduct(product => ({...product, prices: {...product.prices, perHour: e.target.value}}));
     };
 
     const onChangeDayPrice = e => {
         e.persist();
-        setProduct(product => ({...product, pricePerDay: e.target.value}));
+        setProduct(product => ({...product, prices: {...product.prices, perDay: e.target.value}}));
     };
 
     const onChangeStreet = e => {
@@ -151,16 +151,16 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
                             type="number"
                             className="form-control"
                             required
-                            placeholder="3"
-                            value={product.pricePerHour}
+                            placeholder="per Hour"
+                            value={product.prices.perHour}
                             onChange={onChangeHourPrice}
                         />
                         <input
                             type="number"
                             className="form-control"
                             required
-                            placeholder="12"
-                            value={product.pricePerDay}
+                            placeholder="per Day"
+                            value={product.prices.perDay}
                             onChange={onChangeDayPrice}
                         />
                     </div>
