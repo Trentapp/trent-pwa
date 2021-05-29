@@ -6,6 +6,7 @@ import HomePage from "./components/home";
 import ProductsList from "./components/products-list";
 import Product from "./components/product";
 import AddProduct from "./components/add-product";
+import SignUp from "./components/signup";
 
 function App() {
   return (
@@ -20,11 +21,14 @@ function App() {
               Search Products
             </Link>
           </li>
-        </div>
-        <div className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link to={"/products/create"} className="nav-link">
               Add a product
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to={"/sign-up"} className="nav-link">
+              Sign Up
             </Link>
           </li>
         </div>
@@ -41,6 +45,7 @@ function App() {
             render={(props) => (<AddProduct {...props} />)} />
           <Route exact path="/products/update/:id"
             render={(props) => (<AddProduct {...props} productIdToUpdate={props.match.params.id} />)} />
+          <Route exact path="/sign-up" component={SignUp} />
         </Switch>
       </div>
     </div>
