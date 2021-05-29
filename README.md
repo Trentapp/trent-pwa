@@ -1,3 +1,9 @@
+# fairleih-pwa
+
+This is just a private repo, containing the code for the web frontend for fairleih (though the name is to be changed).
+
+I just left the content of the standard readme here for lookup purposes.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
