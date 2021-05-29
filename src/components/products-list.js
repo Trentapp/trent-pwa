@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import ProductDataService from "../services/product-data";
 import {Link} from "react-router-dom";
+import Map from "../components/map.js";
 
 // TODO: connect to backend to return products (setup axios, create service folder and file to connect to backend, update this component)
 // later add filtering
@@ -71,7 +72,7 @@ const ProductsList = props => {
             {products.map((product) => {
               //TODO: add address here and include view map
               return (
-                <div className="col-lg-4 pb-1" key={product._id}>
+                <div className="col-lg-4 pb-3" key={product._id}>
                   <div className="card">
                     <div className="card-body">
                       <h5 className="card-title">{product.name}</h5>
@@ -84,18 +85,21 @@ const ProductsList = props => {
                         <Link to={`/products/product/${product._id}`} className="btn btn-primary col-lg-5 mx-1 mb-1">
                           View details
                         </Link>
-                        { product.address ? (
+                        { product.address && (
                         <a className="btn btn-primary col-lg-5 mx-1 mb-1" href={"https://www.google.com/maps/place/" + 
                           `${product.address.street} ${product.address.houseNumber}, ${product.address.city}`}>
                           View Map
                         </a>
-                        ) : (<></>)}
+                        )}
                       </div>
                     </div>
                   </div>
                 </div>
               );
             })}
+            </div>
+            <div>
+              <Map {...props} products={products.filter(product => product.location)}/>
             </div>
         </div>
     );

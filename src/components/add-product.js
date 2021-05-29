@@ -27,6 +27,7 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
     };
     const [product, setProduct] = useState(initialProductState);
     const [submittedID, setSubmittedID] = useState(null);
+    const [submitted, setSubmitted] = useState(false);
     
     useEffect(() => {
         async function getOldProduct() {
@@ -90,11 +91,16 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
     }; //later modify the country form so we get a dropdown choice
 
     const getCoordinates = async () => {
+        setSubmitted(true);
         //extract the geocoordinates from address and add it to product
-        const responseLoc = await Geocode.fromAddress(`${product.address.street} ${product.address.houseNumber}, ${product.address.zipcode} ${product.address.city}, ${product.address.country}`); //may not need to be that detailed
-        const loc = responseLoc.results[0].geometry.location;
-        setProduct(product => ({...product, location: {lat: loc.lat, lng: loc.lng}})); //should I add await here so the request is send after that, or does it work like that? (Or can you only add await for promise-like functions?)
-    }
+        try {
+            const responseLoc = await Geocode.fromAddress(`${product.address.street} ${product.address.houseNumber}, ${product.address.zipcode} ${product.address.city}, ${product.address.country}`); //may not need to be that detailed
+            const loc = responseLoc.results[0].geometry.location;
+            setProduct(product => ({...product, location: {lat: loc.lat, lng: loc.lng}})); //should I add await here so the request is send after that, or does it work like that? (Or can you only add await for promise-like functions?)
+        } catch (e) {
+            console.log("Failed to find coordinates of address: ", e);
+        }
+    };
 
     const saveProduct = async () => {
         try {
@@ -111,7 +117,7 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
     };
 
     useEffect(() => {
-        if (product.location){
+        if (submitted){
             saveProduct();
         }
     }, [product.location]);
