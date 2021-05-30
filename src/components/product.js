@@ -5,7 +5,7 @@ import Map from "../components/map.js";
 
 const Product = props => {
     const [product, setProduct] = useState({}); //maybe add better initial state
-    const [error, setError] = useState("");
+    const [error, setError] = useState(""); //Later: replace error to redirect to 404 page
     let history = useHistory();
 
     const getProduct = async id => {

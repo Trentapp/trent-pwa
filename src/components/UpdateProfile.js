@@ -5,28 +5,29 @@ import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
 
 export default function UpdateProfile() {
-    const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
-    const {currentUser} = useAuth();
+    const {currentUser, updatePassword} = useAuth();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const history = useHistory();
 
     async function handleSubmit(e) {
-        // e.preventDefault();
-        // if (passwordRef.current.value !== passwordConfirmRef.current.value){
-        //     return setError("Passwords do not match");
-        // }
-        // try {
-        //     setError("");
-        //     setLoading(true);
-        //     await signup(emailRef.current.value, passwordRef.current.value);
-        //     history.push("/");
-        // } catch(err) {
-        //     setError("Failed to create an account");
-        // }
-        // setLoading(false);
+        e.preventDefault();
+        if (passwordRef.current.value !== passwordConfirmRef.current.value){
+            return setError("Passwords do not match");
+        }
+        try {
+            setError("");
+            setLoading(true);
+            if (passwordRef.current.value){
+                await updatePassword(passwordRef.current.value);
+            } // Note: Later when there are multiple update options I should use Promises and only update if they all succeed (?)
+            history.push("/");
+        } catch(err) {
+            setError("Failed to update profile."); //TODO: sometimes you get bad request 400: credentials too old. Handle it better.
+        }
+        setLoading(false);
     }
 
     return(
@@ -36,24 +37,20 @@ export default function UpdateProfile() {
                     <Card.Body>
                         <h2 className="text-center mb-4">Update Profile</h2>
                         {error && <Alert variant="danger">{error}</Alert>}
+                        <p>Your email: {currentUser.email}</p>
                         <Form onSubmit={handleSubmit}>
-                            <Form.Group id="email">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control type="email" ref={emailRef} required 
-                                defaultValue={currentUser.email}/>
-                            </Form.Group>
                             <Form.Group id="password">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" ref={passwordRef} required 
+                                <Form.Control type="password" ref={passwordRef} 
                                 placeholder="Leave blank to leave the same"/>
                             </Form.Group>
                             <Form.Group id="password-confirm">
                                 <Form.Label>Confirm Password</Form.Label>
-                                <Form.Control type="password" ref={passwordConfirmRef} required 
+                                <Form.Control type="password" ref={passwordConfirmRef} 
                                 placeholder="Leave blank to leave the same"/>
                             </Form.Group>
                             <Button disabled={loading} className="w-100 mt-3" type="submit">
-                                Sign Up
+                                Update Profile
                             </Button>
                         </Form>
                     </Card.Body>

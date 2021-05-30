@@ -33,7 +33,7 @@ function App() {
         <Link to={"/"} className="navbar-brand">
           FairLeih
         </Link> 
-        <ul className="navbar-nav mr-auto">
+        <div className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link to={"/products"} className="nav-link">
               Search Products
@@ -44,14 +44,21 @@ function App() {
               Add a product
             </Link>
           </li>
-        </ul>
-        <ul className="navbar-nav ml-auto"> {/*somehow not aligning to the right, but I will care for that later*/}
+        </div>
+        <div className="navbar-nav ml-auto"> {/*somehow not aligning to the right, but I will care for that later*/}
           {currentUser ? (
-            <li className="nav-item">
-              <Button variant="link" className="nav-link" onClick={handleLogout}>
-                Log Out
-              </Button>
-            </li>
+            <>
+              <li className="nav-item">
+                <Link to={`/profile/${currentUser.id}`} className="nav-link">
+                  Profile
+                </Link> {/* Somehow this does not align correctly, but I should not care about it now, because I will probably change it anyway*/}
+              </li>
+              <li className="nav-item">
+                <Button variant="link" className="nav-link" onClick={handleLogout}>
+                  Log Out
+                </Button>
+              </li>
+            </>
           ) : (
             <>
               <li className="nav-item">
@@ -66,7 +73,7 @@ function App() {
               </li>
             </>
           )}
-        </ul>
+        </div>
       </nav>
 
       <div className="container mt-3">
