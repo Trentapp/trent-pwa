@@ -10,6 +10,8 @@ import AddProduct from "./components/add-product";
 import SignUp from "./components/signup";
 import LogIn from "./components/login";
 import ForgotPassword from "./components/ForgotPassword";
+import UpdateProfile from "./components/UpdateProfile";
+import Profile from "./components/Profile";
 
 import PrivateRoute from "./components/PrivateRoute"; // not used or tested yet, but useful for when we create a profile page later
 import { useAuth } from "./context/AuthContext";
@@ -81,6 +83,9 @@ function App() {
           <Route path="/signup" component={SignUp} />
           <Route path="/login" component={LogIn} />
           <Route path="/forgot-password" component={ForgotPassword} />
+          <Route path="/profile/:id"
+            render={(props) => (<Profile {...props} />)} />
+          <PrivateRoute path="/update-profile" component={UpdateProfile} />
         </Switch>
       </div>
     </div>
