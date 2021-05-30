@@ -15,7 +15,7 @@ import PrivateRoute from "./components/PrivateRoute"; // not used or tested yet,
 import { useAuth } from "./context/AuthContext";
 
 function App() {
-  const {logout} = useAuth();
+  const {currentUser, logout} = useAuth();
 
   async function handleLogout() {
     try {
@@ -31,7 +31,7 @@ function App() {
         <Link to={"/"} className="navbar-brand">
           FairLeih
         </Link> 
-        <div className="navbar-nav mr-auto">
+        <ul className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link to={"/products"} className="nav-link">
               Search Products
@@ -42,22 +42,29 @@ function App() {
               Add a product
             </Link>
           </li>
-          <li className="nav-item">
-            <Link to={"/signup"} className="nav-link">
-              Sign Up
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to={"/login"} className="nav-link">
-              Log In
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Button variant="link" className="nav-link" onClick={handleLogout}>
-              Log Out
-            </Button>
-          </li>
-        </div>
+        </ul>
+        <ul className="navbar-nav ml-auto"> {/*somehow not aligning to the right, but I will care for that later*/}
+          {currentUser ? (
+            <li className="nav-item">
+              <Button variant="link" className="nav-link" onClick={handleLogout}>
+                Log Out
+              </Button>
+            </li>
+          ) : (
+            <>
+              <li className="nav-item">
+                <Link to={"/signup"} className="nav-link">
+                  Sign Up
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to={"/login"} className="nav-link">
+                  Log In
+                </Link>
+              </li>
+            </>
+          )}
+        </ul>
       </nav>
 
       <div className="container mt-3">
