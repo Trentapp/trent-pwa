@@ -1,12 +1,6 @@
 import React, {useState, useEffect} from "react";
 import ProductDataService from "../services/product-data";
 import {Redirect} from "react-router-dom";
-import Geocode from "react-geocode";
-import dotenv from "dotenv";
-
-dotenv.config();
-Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
-
 
 //later: make location of product the location of the user by default
 const AddProduct = props => { //when props.productIdToUpdate is passed, it does not create a new Product but update an existing one
@@ -27,7 +21,6 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
     };
     const [product, setProduct] = useState(initialProductState);
     const [submittedID, setSubmittedID] = useState(null);
-    const [submitted, setSubmitted] = useState(false);
     
     useEffect(() => {
         async function getOldProduct() {
@@ -90,18 +83,6 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
         setProduct(product => ({...product, address: {...product.address, country: e.target.value}}));
     }; //later modify the country form so we get a dropdown choice
 
-    const getCoordinates = async () => {
-        setSubmitted(true);
-        //extract the geocoordinates from address and add it to product
-        try {
-            const responseLoc = await Geocode.fromAddress(`${product.address.street} ${product.address.houseNumber}, ${product.address.zipcode} ${product.address.city}, ${product.address.country}`); //may not need to be that detailed
-            const loc = responseLoc.results[0].geometry.location;
-            setProduct(product => ({...product, location: {lat: loc.lat, lng: loc.lng}})); //should I add await here so the request is send after that, or does it work like that? (Or can you only add await for promise-like functions?)
-        } catch (e) {
-            console.log("Failed to find coordinates of address: ", e);
-        }
-    };
-
     const saveProduct = async () => {
         try {
             if (props.productIdToUpdate){
@@ -115,12 +96,6 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
             console.log(`Error in saving new product: ${e}`);
         }
     };
-
-    useEffect(() => {
-        if (submitted){
-            saveProduct();
-        }
-    }, [product.location]);
 
     return(
         <div>
@@ -218,7 +193,7 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
                         />
                     </div>
                 </div>
-                <button onClick={getCoordinates} className="btn btn-success">
+                <button onClick={saveProduct} className="btn btn-success">
                 Submit
                 </button>
             </div>
