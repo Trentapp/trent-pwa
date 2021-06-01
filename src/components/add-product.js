@@ -21,6 +21,7 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
     };
     const [product, setProduct] = useState(initialProductState);
     const [submittedID, setSubmittedID] = useState(null);
+    const [files, setFiles] = useState(null);
     
     useEffect(() => {
         async function getOldProduct() {
@@ -83,13 +84,28 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
         setProduct(product => ({...product, address: {...product.address, country: e.target.value}}));
     }; //later modify the country form so we get a dropdown choice
 
+    const onChangePictures = e => {
+        setFiles(e.target.files);
+    }
+    //TODO: add a validity check to only upload .jpg and .png images
+    const fileUploadHandler = () => {
+        const fd = new FormData();
+        for (const file of files){
+            fd.append("image", file);
+        }
+        return fd;
+    }
+
     const saveProduct = async () => {
         try {
+            const fd = fileUploadHandler();//hopefully I don't run into update problems
+            const blob = new Blob([JSON.stringify(product)], {type: "application/json"});
+            fd.append("product", blob);//probably change product to blob
             if (props.productIdToUpdate){
-                await ProductDataService.updateProduct(props.productIdToUpdate, product);
+                await ProductDataService.updateProduct(props.productIdToUpdate, fd);
                 setSubmittedID(props.productIdToUpdate);
             } else {
-                const response = await ProductDataService.createProduct(product);
+                const response = await ProductDataService.createProduct(fd);
                 setSubmittedID(response.data._id);
             }
         } catch(e) {
@@ -193,6 +209,8 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
                         />
                     </div>
                 </div>
+                <label for="files">Upload pictures:</label><br/>
+                <input type="file" id="files" name="files" multiple onChange={onChangePictures}/><br/><br/>
                 <button onClick={saveProduct} className="btn btn-success">
                 Submit
                 </button>
