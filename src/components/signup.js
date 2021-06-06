@@ -4,7 +4,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
 
+import UserDataService from "../services/user-data";
+
 export default function SignUp() {
+    const nameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
@@ -19,12 +22,14 @@ export default function SignUp() {
             return setError("Passwords do not match");
         }
         try {
-            setError("");
+            setError(""); // I somehow get a warning "state update on unmounted component not possible". Maybe fix later.
             setLoading(true);
-            await signup(emailRef.current.value, passwordRef.current.value);
+            const signupResponse = await signup(emailRef.current.value, passwordRef.current.value);
+            await UserDataService.createUser({user: {name: nameRef.current.value, mail: emailRef.current.value, uid: signupResponse.user.uid}}) //use Promise.all() or so so that the firebase entry is not created if createUser fails (is that possible?)
             history.push("/");
         } catch(err) {
             setError("Failed to create an account");
+            console.log("Failed to create account: ", err);
         }
         setLoading(false);
     }
@@ -37,6 +42,10 @@ export default function SignUp() {
                         <h2 className="text-center mb-4">Sign Up</h2>
                         {error && <Alert variant="danger">{error}</Alert>}
                         <Form onSubmit={handleSubmit}>
+                            <Form.Group id="name">
+                                <Form.Label>Full Name</Form.Label>
+                                <Form.Control type="text" ref={nameRef} required />
+                            </Form.Group>
                             <Form.Group id="email">
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control type="email" ref={emailRef} required />

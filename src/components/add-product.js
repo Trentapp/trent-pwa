@@ -90,7 +90,7 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
                 setSubmittedID(props.productIdToUpdate);
             } else {
                 const response = await ProductDataService.createProduct(product);
-                setSubmittedID(response.data._id);
+                setSubmittedID(response.data.productId);
             }
         } catch(e) {
             console.log(`Error in saving new product: ${e}`);
