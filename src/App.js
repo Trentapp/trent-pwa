@@ -49,8 +49,8 @@ function App() {
           {currentUser ? (
             <>
               <li className="nav-item">
-                <Link to={`/profile/${currentUser.id}`} className="nav-link">
-                  Profile
+                <Link to={`/profile/${currentUser.uid}`} className="nav-link">
+                  Your Profile
                 </Link> {/* Somehow this does not align correctly, but I should not care about it now, because I will probably change it anyway*/}
               </li>
               <li className="nav-item">
