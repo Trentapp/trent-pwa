@@ -37,7 +37,7 @@ const Product = props => {
             <>
                 <div className="mb-4">
                     <h2>{product.name}</h2>
-                    <p>Price: {product.pricePerHour}€/hour, {product.pricePerDay}€/day</p>
+                    <p>Price: {product.prices.perHour}€/hour, {product.prices.perDay}€/day</p>
                     <p><span>Description: </span>{product.desc}</p>
                     <p>more features and better style to be added.</p>
                     {product.address ? (

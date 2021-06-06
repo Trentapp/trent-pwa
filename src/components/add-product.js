@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import ProductDataService from "../services/product-data";
 import {Redirect} from "react-router-dom";
+import {useAuth} from "../context/AuthContext";
 
 //later: make location of product the location of the user by default
 const AddProduct = props => { //when props.productIdToUpdate is passed, it does not create a new Product but update an existing one
@@ -21,6 +22,7 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
     };
     const [product, setProduct] = useState(initialProductState);
     const [submittedID, setSubmittedID] = useState(null);
+    const {currentUser} = useAuth();
     
     useEffect(() => {
         async function getOldProduct() {
@@ -89,7 +91,7 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
                 await ProductDataService.updateProduct(props.productIdToUpdate, product);
                 setSubmittedID(props.productIdToUpdate);
             } else {
-                const response = await ProductDataService.createProduct(product);
+                const response = await ProductDataService.createProduct({product: product, uid: currentUser.uid});//probably change again later
                 setSubmittedID(response.data.productId);
             }
         } catch(e) {

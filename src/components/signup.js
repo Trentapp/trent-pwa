@@ -25,6 +25,7 @@ export default function SignUp() {
             setError(""); // I somehow get a warning "state update on unmounted component not possible". Maybe fix later.
             setLoading(true);
             const signupResponse = await signup(emailRef.current.value, passwordRef.current.value);
+            //firebase user.uid is correct, right? // probably change that below later (pass user directly as body)
             await UserDataService.createUser({user: {name: nameRef.current.value, mail: emailRef.current.value, uid: signupResponse.user.uid}}) //use Promise.all() or so so that the firebase entry is not created if createUser fails (is that possible?)
             history.push("/");
         } catch(err) {
