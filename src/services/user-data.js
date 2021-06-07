@@ -1,12 +1,16 @@
 import http from "../http-common";
 
 class UserDataService {
-    get(id) {
-        return http.get(`/users/user/${id}`);
+    get(uid) {
+        return http.get(`/users/user/${uid}`);
     }
 
     createUser(data) {
         return http.post("/users/create", data);
+    }
+
+    updateUser(data, uid) {
+        return http.put(`/users/update/${uid}`, data); // still to be implemented in the backend
     }
 };
 

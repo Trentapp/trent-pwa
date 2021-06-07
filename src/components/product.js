@@ -4,7 +4,8 @@ import {Link, useHistory} from "react-router-dom";
 import Map from "../components/map.js";
 
 const Product = props => {
-    const [product, setProduct] = useState({}); //maybe add better initial state
+    const initialProductState = {prices: {}, address: {}, location: {}};
+    const [product, setProduct] = useState(initialProductState); //maybe add better initial state
     const [error, setError] = useState(""); //Later: replace error to redirect to 404 page
     let history = useHistory();
 

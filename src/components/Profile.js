@@ -22,7 +22,7 @@ const Profile = props => {
     }
 
     useEffect(() => {
-        getUser(props.match.params.id);//user id in route
+        getUser(props.match.params.id);//user id (uid) in route
     }, [props.match.params.id]);
 
     return (

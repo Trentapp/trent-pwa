@@ -3,6 +3,8 @@ import ProductDataService from "../services/product-data";
 import {Redirect} from "react-router-dom";
 import {useAuth} from "../context/AuthContext";
 
+//TODO: change redirect to history.push()
+
 //later: make location of product the location of the user by default
 const AddProduct = props => { //when props.productIdToUpdate is passed, it does not create a new Product but update an existing one
     const initialProductState = {
