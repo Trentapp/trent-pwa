@@ -9,7 +9,7 @@ class UserDataService {
         return http.post("/users/create", data);
     }
 
-    updateUser(data, uid) {
+    updateUser(uid, data) {
         return http.put(`/users/update/${uid}`, data); // still to be implemented in the backend
     }
 };

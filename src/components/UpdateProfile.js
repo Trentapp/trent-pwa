@@ -7,10 +7,11 @@ import {Link, useHistory} from "react-router-dom";
 import UserDataService from "../services/user-data";
 
 export default function UpdateProfile() {
-    const [user, setUser] = useState({name: ""});
+    const [user, setUser] = useState({name: "", address: {street: "", houseNumber: "", zipcode: "", city: "", country: ""}});
     const nameRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
+    const [streetRef, houseNrRef, zipRef, cityRef, countryRef] = [useRef(), useRef(), useRef(), useRef(), useRef()];
     const {currentUser, updatePassword} = useAuth();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
@@ -27,13 +28,24 @@ export default function UpdateProfile() {
             if (passwordRef.current.value){
                 await updatePassword(passwordRef.current.value);
             } // Note: Later when there are multiple update options I should use Promises and only update if they all succeed (?)
+            let change = false;
             if (nameRef.current.value && nameRef.current.value !== user.name) {
-                // update user is to be implemented in the backend
-                console.log("that functionality does not work yet. You want to change your name to: ", nameRef.current.value);
+                user.name = nameRef.current.value;
+                change = true;
+            }
+            const userAddress = {street: streetRef.current.value, houseNumber: houseNrRef.current.value, zipcode: zipRef.current.value, city: cityRef.current.value, country: countryRef.current.value};
+            if (userAddress !== user.address){
+                user.address = userAddress;
+                change = true;
+            }
+            if (change) {
+                console.log(user);
+                await UserDataService.updateUser(user.uid, user);
             }
             history.push(`/profile/${currentUser.uid}`);
         } catch(err) {
             setError("Failed to update profile."); //TODO: sometimes you get bad request 400: credentials too old. Handle it better.
+            console.log("Failed to update profile: ", err)
         }
         setLoading(false);
     }
@@ -74,6 +86,25 @@ export default function UpdateProfile() {
                                 <Form.Label>Confirm Password</Form.Label>
                                 <Form.Control type="password" ref={passwordConfirmRef} 
                                 placeholder="Leave blank to leave the same"/>
+                            </Form.Group>
+                            <br/>
+                            <Form.Label>Address</Form.Label>
+                            <Form.Group id="address">
+                                <Form.Label>Street</Form.Label>
+                                <Form.Control type="text" ref={streetRef} 
+                                defaultValue={user.address ? user.address.street : ""}/>
+                                <Form.Label>House Number</Form.Label>
+                                <Form.Control type="text" ref={houseNrRef} 
+                                defaultValue={user.address ? user.address.houseNumber : ""}/>
+                                <Form.Label>Zipcode</Form.Label>
+                                <Form.Control type="text" ref={zipRef} 
+                                defaultValue={user.address ? user.address.zipcode : ""}/>
+                                <Form.Label>City</Form.Label>
+                                <Form.Control type="text" ref={cityRef} 
+                                defaultValue={user.address ? user.address.city : ""}/>
+                                <Form.Label>Country</Form.Label>
+                                <Form.Control type="text" ref={countryRef} 
+                                defaultValue={user.address ? user.address.country : ""}/>
                             </Form.Group>
                             <Button disabled={loading} className="w-100 mt-3" type="submit">
                                 Update Profile
