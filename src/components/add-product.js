@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
-import ProductDataService from "../services/product-data";
 import {Redirect} from "react-router-dom";
+
+import ProductDataService from "../services/product-data";
+import UserDataService from "../services/user-data";
 import {useAuth} from "../context/AuthContext";
 
 //TODO: change redirect to history.push()
@@ -24,21 +26,41 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
     };
     const [product, setProduct] = useState(initialProductState);
     const [submittedID, setSubmittedID] = useState(null);
+    const [user, setUser] = useState({name: "", address: {street: "", houseNumber: "", zipcode: "", city: "", country: ""}});//actually not currently used
     const {currentUser} = useAuth();
     
     useEffect(() => {
         async function getOldProduct() {
             try {
                 if (props.productIdToUpdate){
-                    const initialProductState = await ProductDataService.get(props.productIdToUpdate); //I get a warning here that I don't understand very well. Maybe change it later.
-                    setProduct(initialProductState.data);
-                } 
+                    const response = await ProductDataService.get(props.productIdToUpdate); //I get a warning here that I don't understand very well. Maybe change it later.
+                    setProduct(response.data);
+                }
             } catch(e) {
                 console.log("Error trying to retrieve old product state: ", e);
             }
         }
-        getOldProduct(); 
-    }, [props.productIdToUpdate]);
+        async function getUser() {
+            try {
+                const response = await UserDataService.get(currentUser.uid);
+                setUser(response.data);
+                if (response.data.address) {
+                    setProduct(product => ({...product, address: response.data.address}));
+                }
+            } catch (err) {
+                console.log("error trying to get user: ", err);
+            }
+        }
+        async function getData() {
+            try {
+                await getOldProduct();
+                await getUser();
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        getData();
+    }, [props.productIdToUpdate, currentUser.uid]);
 
     //should those onChange functions be async?
 
@@ -156,7 +178,7 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
                             className="form-control"
                             required
                             placeholder="Streetname"
-                            value={product.address ? product.address.street : ""}
+                            value={product.address.street}
                             onChange={onChangeStreet}
                         />
                         <input
@@ -164,7 +186,7 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
                             className="form-control"
                             required
                             placeholder="House Number"
-                            value={product.address ? product.address.houseNumber : ""}
+                            value={product.address.houseNumber}
                             onChange={onChangeHouseNumber}
                         />
                     </div>
@@ -174,7 +196,7 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
                             className="form-control"
                             required
                             placeholder="Zipcode"
-                            value={product.address ? product.address.zipcode : ""}
+                            value={product.address.zipcode}
                             onChange={onChangeZipcode}
                         />
                         <input
@@ -182,7 +204,7 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
                             className="form-control"
                             required
                             placeholder="City"
-                            value={product.address ? product.address.city : ""}
+                            value={product.address.city}
                             onChange={onChangeCity}
                         />
                     </div>
@@ -192,7 +214,7 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
                             className="form-control"
                             required
                             placeholder="Country"
-                            value={product.address ? product.address.country : ""}
+                            value={product.address.country}
                             onChange={onChangeCountry}
                         />
                     </div>
