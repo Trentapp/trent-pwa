@@ -44,8 +44,10 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
             try {
                 const response = await UserDataService.get(currentUser.uid);
                 setUser(response.data);
-                if (response.data.address) {
-                    setProduct(product => ({...product, address: response.data.address}));
+                if (response.data.address && product.address === undefined) {
+                    setProduct(product => ({...product, address: response.data.address, uid: response.data.uid}));
+                } else {
+                    setProduct(product => ({...product, uid: response.data.uid}));
                 }
             } catch (err) {
                 console.log("error trying to get user: ", err);
@@ -53,7 +55,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
         }
         async function getData() {
             try {
-                await getOldProduct();
+                await getOldProduct();//attention: I think getUser can still be triggered before getOldProduct, in which case it does not work --> research how to do it
                 await getUser();
             } catch (err) {
                 console.log(err);
@@ -112,6 +114,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
     const saveProduct = async () => {
         try {
             if (props.match.params.id){
+                console.log(product);
                 await ProductDataService.updateProduct(props.match.params.id, product);
                 setSubmittedID(props.match.params.id);
             } else {
