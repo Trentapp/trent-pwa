@@ -13,7 +13,7 @@ import ForgotPassword from "./components/ForgotPassword";
 import UpdateProfile from "./components/UpdateProfile";
 import Profile from "./components/Profile";
 
-import PrivateRoute from "./components/PrivateRoute"; // not used or tested yet, but useful for when we create a profile page later
+import PrivateRoute from "./components/PrivateRoute";
 import { useAuth } from "./context/AuthContext";
 
 function App() {
@@ -39,15 +39,15 @@ function App() {
               Search Products
             </Link>
           </li>
-          <li className="nav-item">
-            <Link to={"/products/create"} className="nav-link">
-              Add a product
-            </Link>
-          </li>
         </div>
         <div className="navbar-nav ml-auto"> {/*somehow not aligning to the right, but I will care for that later*/}
           {currentUser ? (
             <>
+              <li className="nav-item">
+                <Link to={"/products/create"} className="nav-link">
+                  Add a product
+                </Link>
+              </li>
               <li className="nav-item">
                 <Link to={`/profile/${currentUser.uid}`} className="nav-link">
                   Your Profile
@@ -83,10 +83,10 @@ function App() {
             render={(props) => (<ProductsList {...props}/>)} /> {/* I think it actually should not be rendered (just included as component), but it is just a test for now */}
           <Route path="/products/product/:id"
             render={(props) => (<Product {...props} />)} />
-          <Route exact path="/products/create"
-            render={(props) => (<AddProduct {...props} />)} />
-          <Route exact path="/products/update/:id"
-            render={(props) => (<AddProduct {...props} productIdToUpdate={props.match.params.id} />)} />
+          <PrivateRoute exact path="/products/create"
+            component={AddProduct} />
+          <PrivateRoute exact path="/products/update/:id"
+            component={AddProduct} />
           <Route path="/signup" component={SignUp} />
           <Route path="/login" component={LogIn} />
           <Route path="/forgot-password" component={ForgotPassword} />

@@ -8,7 +8,7 @@ import {useAuth} from "../context/AuthContext";
 //TODO: change redirect to history.push()
 
 //later: make location of product the location of the user by default
-const AddProduct = props => { //when props.productIdToUpdate is passed, it does not create a new Product but update an existing one
+const AddProduct = props => { //when props.match.params.id exists (meaning the function must be called over the route /products/update/:id), it does not create a new Product but update an existing one
     const initialProductState = {
         name: "",
         desc: "",
@@ -32,8 +32,8 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
     useEffect(() => {
         async function getOldProduct() {
             try {
-                if (props.productIdToUpdate){
-                    const response = await ProductDataService.get(props.productIdToUpdate); //I get a warning here that I don't understand very well. Maybe change it later.
+                if (props.match.params.id){
+                    const response = await ProductDataService.get(props.match.params.id); //I get a warning here that I don't understand very well. Maybe change it later.
                     setProduct(response.data);
                 }
             } catch(e) {
@@ -60,7 +60,7 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
             }
         }
         getData();
-    }, [props.productIdToUpdate, currentUser.uid]);
+    }, [props.match.params.id, currentUser.uid]);
 
     //should those onChange functions be async?
 
@@ -111,9 +111,9 @@ const AddProduct = props => { //when props.productIdToUpdate is passed, it does 
 
     const saveProduct = async () => {
         try {
-            if (props.productIdToUpdate){
-                await ProductDataService.updateProduct(props.productIdToUpdate, product);
-                setSubmittedID(props.productIdToUpdate);
+            if (props.match.params.id){
+                await ProductDataService.updateProduct(props.match.params.id, product);
+                setSubmittedID(props.match.params.id);
             } else {
                 const response = await ProductDataService.createProduct({product: product, uid: currentUser.uid});//probably change again later
                 setSubmittedID(response.data.productId);
