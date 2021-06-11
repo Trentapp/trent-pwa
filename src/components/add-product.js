@@ -32,6 +32,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
     useEffect(() => {
         async function getOldProduct() {
             try {
+                console.log("getoldproduct");
                 if (props.match.params.id){
                     const response = await ProductDataService.get(props.match.params.id); //I get a warning here that I don't understand very well. Maybe change it later.
                     setProduct(response.data);
@@ -42,9 +43,10 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
         }
         async function getUser() {
             try {
+                console.log("getUser");
                 const response = await UserDataService.get(currentUser.uid);
                 setUser(response.data);
-                if (response.data.address && product.address === undefined) {
+                if (response.data.address) {//attention: if the product has a different address than the user, the address will be set to the address of the user!
                     setProduct(product => ({...product, address: response.data.address, uid: response.data.uid}));
                 } else {
                     setProduct(product => ({...product, uid: response.data.uid}));
@@ -53,15 +55,8 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
                 console.log("error trying to get user: ", err);
             }
         }
-        async function getData() {
-            try {
-                await getOldProduct();//attention: I think getUser can still be triggered before getOldProduct, in which case it does not work --> research how to do it
-                await getUser();
-            } catch (err) {
-                console.log(err);
-            }
-        }
-        getData();
+        getOldProduct();
+        getUser();
     }, [props.match.params.id, currentUser.uid]);
 
     //should those onChange functions be async?
@@ -114,7 +109,6 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
     const saveProduct = async () => {
         try {
             if (props.match.params.id){
-                console.log(product);
                 await ProductDataService.updateProduct(props.match.params.id, product);
                 setSubmittedID(props.match.params.id);
             } else {
