@@ -4,8 +4,7 @@ import {Link, useHistory} from "react-router-dom";
 import Map from "../components/map.js";
 
 const Product = props => {
-    const initialProductState = {prices: {}, address: {}, location: {}};
-    const [product, setProduct] = useState(initialProductState); //maybe add better initial state
+    const [product, setProduct] = useState({prices: {}}); //maybe add better initial state
     const [error, setError] = useState(""); //Later: replace error to redirect to 404 page
     let history = useHistory();
 
@@ -41,19 +40,17 @@ const Product = props => {
                     <p>Price: {product.prices.perHour}€/hour, {product.prices.perDay}€/day</p>
                     <p><span>Description: </span>{product.desc}</p>
                     <p>more features and better style to be added.</p>
-                    {product.address ? (
+                    {product.address && (
                         <>
                         <span>Location</span>
                         <p>{product.address.street} {product.address.houseNumber}</p>
                         <p>...</p>
                         <p>{product.address.country}</p>
                         </>
-                    ) : (<></>)}
-                    {product.location ? (
-                        <>
+                    )}
+                    {product.location && (
                         <p>Lat, lng: {product.location.lat} {product.location.lng}</p>
-                        </>
-                    ) : (<></>)}
+                    )}
                     <p><Link to={`/products/update/${product._id}`}>Edit product</Link></p>
                     <button type="button" className="btn btn-danger" onClick={deleteProduct}>Delete</button>
                 </div>

@@ -32,7 +32,6 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
     useEffect(() => {
         async function getOldProduct() {
             try {
-                console.log("getoldproduct");
                 if (props.match.params.id){
                     const response = await ProductDataService.get(props.match.params.id); //I get a warning here that I don't understand very well. Maybe change it later.
                     setProduct(response.data);
@@ -43,7 +42,6 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
         }
         async function getUser() {
             try {
-                console.log("getUser");
                 const response = await UserDataService.get(currentUser.uid);
                 setUser(response.data);
                 if (response.data.address) {//attention: if the product has a different address than the user, the address will be set to the address of the user!
