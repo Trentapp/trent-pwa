@@ -35,6 +35,9 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
                 if (props.match.params.id){
                     const response = await ProductDataService.get(props.match.params.id); //I get a warning here that I don't understand very well. Maybe change it later.
                     setProduct(response.data);
+                    if (currentUser.uid !== response.data.uid){
+                        console.log("Forbidden! (To be implemented)");
+                    }
                 }
             } catch(e) {
                 console.log("Error trying to retrieve old product state: ", e);

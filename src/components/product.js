@@ -1,22 +1,15 @@
 import React, {useState, useEffect} from "react";
-import ProductDataService from "../services/product-data";
 import {Link, useHistory} from "react-router-dom";
+
+import ProductDataService from "../services/product-data";
 import Map from "../components/map.js";
+import {useAuth} from "../context/AuthContext";
 
 const Product = props => {
-    const [product, setProduct] = useState({prices: {}}); //maybe add better initial state
-    const [error, setError] = useState(""); //Later: replace error to redirect to 404 page
+    const [product, setProduct] = useState({prices: {}}); //maybe add better initial state, though currently the information is shown conditionally
+    const [error, setError] = useState(""); //can get rid of that if redirect works
     let history = useHistory();
-
-    const getProduct = async id => {
-        try {
-            const response = await ProductDataService.get(id);
-            setProduct(response.data);
-        } catch(e) {
-            setError("Could not find that product.");
-            console.log("Error in product.js - getProduct: ", e);
-        }
-    };
+    const {currentUser} = useAuth();
 
     const deleteProduct = async () => {
         try {
@@ -28,6 +21,16 @@ const Product = props => {
     };
 
     useEffect(() => {
+        const getProduct = async id => {
+            try {
+                const response = await ProductDataService.get(id);
+                setProduct(response.data);
+            } catch(e) {
+                setError("Could not find that product.");
+                console.log("Error in product.js - getProduct: ", e);
+                // history.push("/404"); //now working yet
+            }
+        };
         getProduct(props.match.params.id);
     }, [props.match.params.id]);
 
@@ -51,9 +54,11 @@ const Product = props => {
                     {product.location && (
                         <p>Lat, lng: {product.location.lat} {product.location.lng}</p>
                     )}
-                    <p><Link to={`/products/update/${product._id}`}>Edit product</Link></p>
-                    <button type="button" className="btn btn-danger" onClick={deleteProduct}>Delete</button>
-                </div>
+                    {currentUser.uid === product.uid && (<>
+                        <p><Link to={`/products/update/${product._id}`}>Edit product</Link></p>
+                        <button type="button" className="btn btn-danger" onClick={deleteProduct}>Delete</button>
+                    </>)}
+                    </div>
                 <div>
                     {product.location && <Map {...props} products={[product]}/>}
                 </div>
