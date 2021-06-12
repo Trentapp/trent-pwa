@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Redirect} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 
 import ProductDataService from "../services/product-data";
 import UserDataService from "../services/user-data";
@@ -28,6 +28,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
     const [submittedID, setSubmittedID] = useState(null);
     const [user, setUser] = useState({name: "", address: {street: "", houseNumber: "", zipcode: "", city: "", country: ""}});//actually not currently used
     const {currentUser} = useAuth();
+    const history = useHistory();
     
     useEffect(() => {
         async function getOldProduct() {
@@ -36,11 +37,13 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
                     const response = await ProductDataService.get(props.match.params.id); //I get a warning here that I don't understand very well. Maybe change it later.
                     setProduct(response.data);
                     if (currentUser.uid !== response.data.uid){
-                        console.log("Forbidden! (To be implemented)");
+                        history.push("/404");//"Not found" if a wrong user wants to update the product // maybe replace 404 with forbidden route or so later
                     }
                 }
             } catch(e) {
+                //this catch normally should only be triggered when the productID does not exist
                 console.log("Error trying to retrieve old product state: ", e);
+                history.push("/404");//not perfect, because it still shows content for a short second (maybe add sth like loading until the first useEffect is completed)
             }
         }
         async function getUser() {

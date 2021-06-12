@@ -28,7 +28,7 @@ const Product = props => {
             } catch(e) {
                 setError("Could not find that product.");
                 console.log("Error in product.js - getProduct: ", e);
-                // history.push("/404"); //now working yet
+                history.push("/404");
             }
         };
         getProduct(props.match.params.id);

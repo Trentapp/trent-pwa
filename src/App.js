@@ -12,6 +12,7 @@ import LogIn from "./components/login";
 import ForgotPassword from "./components/ForgotPassword";
 import UpdateProfile from "./components/UpdateProfile";
 import Profile from "./components/Profile";
+import NotFound from "./components/NotFound";
 
 import PrivateRoute from "./components/PrivateRoute";
 import { useAuth } from "./context/AuthContext";
@@ -93,6 +94,7 @@ function App() {
           <Route path="/profile/:id"
             render={(props) => (<Profile {...props} />)} />
           <PrivateRoute path="/update-profile" component={UpdateProfile} />
+          <Route path="*" component={NotFound} />
         </Switch>
       </div>
     </div>
