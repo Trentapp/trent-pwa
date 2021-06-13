@@ -85,6 +85,7 @@ const ProductsList = props => {
                   <div className="card">
                     <div className="card-body">
                       <h5 className="card-title">{product.name}</h5>
+                      {product.thumbnail && <img src={`data:image/png;base64,${product.thumbnail}`}/>}{/*not tested yet, probably looks very shitty*/}
                       <p className="card-text">
                         <strong>Description: </strong>{product.desc}<br/>
                         <strong>Price per Hour: </strong>{product.prices.perHour}€<br/>

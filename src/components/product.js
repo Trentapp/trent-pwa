@@ -42,10 +42,11 @@ const Product = props => {
                     <h2>{product.name}</h2>
                     <p>Price: {product.prices.perHour}€/hour, {product.prices.perDay}€/day</p>
                     <p><span>Description: </span>{product.desc}</p>
-                    <p>more features and better style to be added.</p>
+                    {product.pictures && product.pictures[0] && <img src={`data:image/png;base64,${product.pictures[0]}`}/>}
+                    <br/><br/>
                     {product.address && (
                         <>
-                        <span>Location</span>
+                        <span>Address</span>
                         <p>{product.address.street} {product.address.houseNumber}</p>
                         <p>...</p>
                         <p>{product.address.country}</p>
