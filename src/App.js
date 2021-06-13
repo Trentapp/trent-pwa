@@ -45,6 +45,11 @@ function App() {
           {currentUser ? (
             <>
               <li className="nav-item">
+                <Link to={"/inventory"} className="nav-link">
+                  Inventory
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link to={"/products/create"} className="nav-link">
                   Add a product
                 </Link>
@@ -82,6 +87,8 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/products"
             render={(props) => (<ProductsList {...props}/>)} /> {/* I think it actually should not be rendered (just included as component), but it is just a test for now */}
+          <PrivateRoute exact path="/inventory"
+            component={ProductsList} inventory={true} />
           <Route path="/products/product/:id"
             render={(props) => (<Product {...props} />)} />
           <PrivateRoute exact path="/products/create"
