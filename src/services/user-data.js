@@ -12,6 +12,10 @@ class UserDataService {
     updateUser(uid, data) {
         return http.put(`/users/update/${uid}`, data); // still to be implemented in the backend
     }
+
+    deleteUser(uid) {
+        return http.delete(`/users/delete/${uid}`);
+    }
 };
 
 export default new UserDataService();

@@ -1,5 +1,5 @@
 import React from "react";
-import {Switch, Route, Link} from "react-router-dom";
+import {Switch, Route, Link, useHistory} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Button} from "react-bootstrap";
 
@@ -19,10 +19,12 @@ import { useAuth } from "./context/AuthContext";
 
 function App() {
   const {currentUser, logout} = useAuth();
+  const history = useHistory();
 
   async function handleLogout() {
     try {
       await logout();
+      history.push("/");
     } catch(e) {
       console.log("Failed to log out");
     }

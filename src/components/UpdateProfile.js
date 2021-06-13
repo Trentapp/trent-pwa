@@ -17,6 +17,19 @@ export default function UpdateProfile() {
     const [loading, setLoading] = useState(false);
     const history = useHistory();
 
+    async function deleteAccount() {
+        let result = window.confirm("Are you sure you want to delete this account?");
+        if (result) {
+            try {
+                await UserDataService.deleteUser(currentUser.uid);
+                await currentUser.delete();
+                history.push("/");
+            } catch (e) {
+                console.log("Failed to delete user: ", e);
+            }
+        }
+    }
+
     async function handleSubmit(e) {
         e.preventDefault();
         if (passwordRef.current.value !== passwordConfirmRef.current.value){
@@ -112,7 +125,10 @@ export default function UpdateProfile() {
                         </Form>
                     </Card.Body>
                 </Card>
-                <div className="w-100 text-center mt-2">
+                <div className="d-flex justify-content-center align-items-center">
+                    <button type="button" className="btn btn-danger text-center mt-2" onClick={deleteAccount}>Delete this account</button>
+                </div>
+                <div className="w-100 text-center mt-2 mb-5">
                     <Link to="/">Cancel</Link>
                 </div> 
             </div>
