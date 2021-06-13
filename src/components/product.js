@@ -42,7 +42,8 @@ const Product = props => {
                     <h2>{product.name}</h2>
                     <p>Price: {product.prices.perHour}€/hour, {product.prices.perDay}€/day</p>
                     <p><span>Description: </span>{product.desc}</p>
-                    {product.pictures && product.pictures[0] && <img src={`data:image/png;base64,${product.pictures[0]}`}/>}
+                    {/*only shows first picture for now; the hard coded width and height is bad.*/}
+                    {product.pictures && product.pictures[0] && <img height="300" width="550" src={`${product.pictures[0]}`}/>} {/*attention! for fynns pictures I would need that prefix: data:image/png;base64, // Can I use png for jpeg images when I converted them to base64? (probably not)*/}
                     <br/><br/>
                     {product.address && (
                         <>

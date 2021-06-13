@@ -85,7 +85,7 @@ const ProductsList = props => {
                   <div className="card">
                     <div className="card-body">
                       <h5 className="card-title">{product.name}</h5>
-                      {product.thumbnail && <img src={`data:image/png;base64,${product.thumbnail}`}/>}{/*not tested yet, probably looks very shitty*/}
+                      {product.thumbnail && <img src={`${product.thumbnail}`}/>}{/*attention! for fynns pictures I would need that prefix: data:image/png;base64, // Can I use png for jpeg images when I converted them to base64?*/}
                       <p className="card-text">
                         <strong>Description: </strong>{product.desc}<br/>
                         <strong>Price per Hour: </strong>{product.prices.perHour}€<br/>

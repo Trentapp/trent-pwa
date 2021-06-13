@@ -28,6 +28,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
     const [user, setUser] = useState({name: "", address: {street: "", houseNumber: "", zipcode: "", city: "", country: ""}});//actually not currently used
     const {currentUser} = useAuth();
     const history = useHistory();
+    const [files, setFiles] = useState([]);
     
     useEffect(() => {
         async function getOldProduct() {
@@ -109,8 +110,49 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
         setProduct(product => ({...product, address: {...product.address, country: e.target.value}}));
     }; //later modify the country form so we get a dropdown choice
 
+    const onChangePictures = e => {
+        setFiles(e.target.files);
+    }
+
+    const fileUpload = () => {//has that async an effect if I have no await?
+        try {
+            let base64files = [];
+            let reader = new FileReader();
+            reader.onloadend = () => {
+                base64files.push(reader.result);
+            }
+            for (const file of files) {
+                reader.readAsDataURL(file);
+            }
+            setProduct(product => ({...product, pictures: base64files}));
+        } catch (e) {
+            console.log("Error in fileUpload: ", e);
+        }
+    }
+
+    useEffect(() => {
+        fileUpload();
+    }, [files]);
+
+    /*For later when implementing different file transfer
+    //TODO: add a validity check to only upload .jpg and .png images
+    const fileUploadHandler = () => {
+        const fd = new FormData();
+        for (const file of files){
+            fd.append("image", file);
+        }
+        return fd;
+    }*/
+
     const saveProduct = async () => {
         try {
+            /* for later when implementing better file transfer
+            const fd = fileUploadHandler();//hopefully I don't run into update problems
+            const blob = new Blob([JSON.stringify(product)], {type: "application/json"});
+            fd.append("product", blob);//probably change product to blob
+            */
+            //fileUpload(); //this is currently done in the one useEffect
+            console.log(product.pictures);
             if (props.match.params.id){
                 await ProductDataService.updateProduct(props.match.params.id, product);
                 history.push(`/products/product/${props.match.params.id}`);
@@ -216,6 +258,8 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
                         />
                     </div>
                 </div>
+                <label for="files">Upload pictures:</label><br/>
+                <input type="file" id="files" name="files" multiple onChange={onChangePictures}/><br/><br/>
                 <button onClick={saveProduct} className="btn btn-success">
                 Submit
                 </button>

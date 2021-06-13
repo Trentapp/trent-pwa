@@ -1,4 +1,4 @@
-import http from "../http-common"; //http is our axios instance to make requests
+import http, {axiosFile} from "../http-common"; //http is our axios instance to make requests
 
 
 class ProductDataService {
@@ -15,7 +15,7 @@ class ProductDataService {
     }
 
     createProduct(data){
-        return http.post("/products/create", data);
+        return axiosFile.post("/products/create", data); //not sure if that with headers works
     }
 
     updateProduct(productId, data){
