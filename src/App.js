@@ -86,7 +86,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/products"
-            render={(props) => (<ProductsList {...props}/>)} /> {/* I think it actually should not be rendered (just included as component), but it is just a test for now */}
+            render={(props) => (<ProductsList {...props} inventory={false}/>)} /> {/* I think it actually should not be rendered (just included as component), but it is just a test for now */}
           <PrivateRoute exact path="/inventory"
             component={ProductsList} inventory={true} />
           <Route path="/products/product/:id"

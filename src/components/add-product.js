@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Redirect, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 import ProductDataService from "../services/product-data";
 import UserDataService from "../services/user-data";
@@ -25,7 +25,6 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
         }
     };
     const [product, setProduct] = useState(initialProductState);
-    const [submittedID, setSubmittedID] = useState(null);
     const [user, setUser] = useState({name: "", address: {street: "", houseNumber: "", zipcode: "", city: "", country: ""}});//actually not currently used
     const {currentUser} = useAuth();
     const history = useHistory();
@@ -61,7 +60,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
         }
         getOldProduct();
         getUser();
-    }, [props.match.params.id, currentUser.uid]);
+    }, [props.match.params.id, currentUser.uid, history]);
 
     //should those onChange functions be async?
 
@@ -114,10 +113,10 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
         try {
             if (props.match.params.id){
                 await ProductDataService.updateProduct(props.match.params.id, product);
-                setSubmittedID(props.match.params.id);
+                history.push(`/products/product/${props.match.params.id}`);
             } else {
                 const response = await ProductDataService.createProduct({product: product, uid: currentUser.uid});//probably change again later
-                setSubmittedID(response.data.productId);
+                history.push(`/products/product/${response.data.productId}`);
             }
         } catch(e) {
             console.log(`Error in saving new product: ${e}`);
@@ -126,9 +125,6 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
 
     return(
         <div>
-            { submittedID ? (
-                <Redirect to={`/products/product/${submittedID}`} />
-            ) : (
             <div>
                 <div className="form-group mb-4">
                     <div className="row input-group col-lg-4">
@@ -224,7 +220,6 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
                 Submit
                 </button>
             </div>
-            )}
         </div>
     );
 }

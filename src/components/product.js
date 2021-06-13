@@ -32,7 +32,7 @@ const Product = props => {
             }
         };
         getProduct(props.match.params.id);
-    }, [props.match.params.id]);
+    }, [props.match.params.id, history]);
 
     return(
         <div>
