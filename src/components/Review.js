@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Card} from "react-bootstrap";
 import StarRatings from "react-star-ratings";
 
@@ -10,15 +10,15 @@ const Review = props => {
     useEffect(() => {
         async function getUsername() {
             try {
-                const user = await UserDataService.get(props.review.posterId);
-                setUsername(user.name);
+                const response = await UserDataService.get(props.review.posterId);
+                setUsername(response.data.name);
             } catch(e){
                 console.log("Error in getUsername: ", e);
                 setUsername("<user not found>");
             }
         }
         getUsername();
-    }, []);
+    }, [props.review.posterId]);
 
     return(
         <Card>

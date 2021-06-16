@@ -5,6 +5,10 @@ class ReviewDataService {
         return http.get(`/reviews/review/${id}`);
     }
 
+    findByUser(uid) {
+        return http.get(`/reviews/user/${uid}`);
+    }
+
     createReview(data) {
         return http.post("/reviews/create", data);
     }
