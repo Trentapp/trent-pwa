@@ -4,11 +4,13 @@ import {Link} from "react-router-dom";
 import UserDataService from "../services/user-data";
 //import ProductDataService from "../services/product-data";
 import {useAuth} from "../context/AuthContext";
+import AddReview from "./add-review";
 
 const Profile = props => {
     const initialUserState = {name: "", mail: "", inventory: []}; //later probably replace mail with email
     const [user, setUser] = useState(initialUserState);
     const [error, setError] = useState(""); //Later: replace error to redirect to 404 page
+    const [openReview, setOpenReview] = useState(true); //later set default to false and make check in the beginning if a transaction between the users exist, but no review yet
     const {currentUser} = useAuth();
 
     const getUser = async id => {
@@ -33,6 +35,9 @@ const Profile = props => {
                     <p>{user.mail}</p>
                     <p>This user has {user.inventory.length} items in his inventory.</p> {/*Later show items of inventory*/}
                     {(currentUser.uid === user.uid) && <Link to="/update-profile">Update Profile</Link>}
+                    <br/><br/>
+
+                    {openReview && <AddReview posterId={currentUser.uid} ratedUserId={props.match.params.id}/>}
                 </div>
             )}
         </div>
