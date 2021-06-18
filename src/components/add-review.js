@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useRef, useState, useEffect} from "react";
 import {Card, Form, Button, Alert} from "react-bootstrap";
 import StarRatings from "react-star-ratings";
 
@@ -16,19 +16,32 @@ const AddReview = props => {
         setRating(newRating);
     }
 
+    useEffect(() => {
+        if (props.review){
+            titleRef.current.value = props.review.title;
+            commentRef.current.value = props.review.comment;
+            setRating(props.review.stars);
+        }
+    }, [props.review])
+
     async function handleSubmit(e) {
         e.preventDefault();
         try {
             setError("");
             setLoading(true);
-            const review = {stars: rating, title: titleRef.current.value, comment: commentRef.current.value, posterId: props.posterId, ratedUserId: props.ratedUserId};
-            await ReviewDataService.createReview(review);
+            if (props.review){
+                const review = {...props.review, stars: rating, title: titleRef.current.value, comment: commentRef.current.value};
+                await ReviewDataService.updateReview(review._id, review);
+            } else {
+                const review = {stars: rating, title: titleRef.current.value, comment: commentRef.current.value, posterId: props.posterId, ratedUserId: props.ratedUserId};
+                await ReviewDataService.createReview(review);
+            }
             window.location.reload();
         } catch(err) {
             setError("Failed to add review");
         }
         setLoading(false);
-    }
+    };
 
     return (
         <Card>
