@@ -12,6 +12,10 @@ class ReviewDataService {
     createReview(data) {
         return http.post("/reviews/create", data);
     }
+
+    deleteReview(id) {
+        return http.delete(`/reviews/delete/${id}`);
+    }
 };
 
 export default new ReviewDataService();

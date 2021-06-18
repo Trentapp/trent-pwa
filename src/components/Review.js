@@ -3,9 +3,19 @@ import {Card} from "react-bootstrap";
 import StarRatings from "react-star-ratings";
 
 import UserDataService from "../services/user-data";
+import ReviewDataService from "../services/reviews-data";
 
 const Review = props => {
     const [username, setUsername] = useState("");//maybe later also profile pic
+
+    const deleteReview = async () => {
+        try {
+            await ReviewDataService.deleteReview(props.review._id);
+            window.location.reload();
+        } catch(e) {
+            console.log("Failed to delete review: ", e);
+        }
+    };
 
     useEffect(() => {
         async function getUsername() {
@@ -27,6 +37,10 @@ const Review = props => {
                 <h3>{props.review.title}</h3>
                 {props.review.comment && <p>{props.review.comment}</p>}
                 <span>Posted by {username}</span>
+                {props.currentUser.uid === props.review.posterId && (<>
+                    <p>Edit Review</p>
+                    <button type="button" className="btn btn-danger" onClick={deleteReview}>Delete Review</button>
+                </>)}
             </Card.Body>
         </Card>
     )

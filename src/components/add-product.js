@@ -25,7 +25,6 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
         }
     };
     const [product, setProduct] = useState(initialProductState);
-    const [user, setUser] = useState({name: "", address: {street: "", houseNumber: "", zipcode: "", city: "", country: ""}});//actually not currently used
     const {currentUser} = useAuth();
     const history = useHistory();
     const [files, setFiles] = useState([]);
@@ -49,7 +48,6 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
         async function getUser() {
             try {
                 const response = await UserDataService.get(currentUser.uid);
-                setUser(response.data);
                 if (response.data.address) {//attention: if the product has a different address than the user, the address will be set to the address of the user!
                     setProduct(product => ({...product, address: response.data.address, uid: response.data.uid}));
                 } else {
@@ -114,23 +112,22 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
         setFiles(e.target.files);
     }
 
-    const fileUpload = () => {//has that async an effect if I have no await?
-        try {
-            let base64files = [];
-            let reader = new FileReader();
-            reader.onloadend = () => {
-                base64files.push(reader.result);
-            }
-            for (const file of files) {
-                reader.readAsDataURL(file);
-            }
-            setProduct(product => ({...product, pictures: base64files}));
-        } catch (e) {
-            console.log("Error in fileUpload: ", e);
-        }
-    }
-
     useEffect(() => {
+        const fileUpload = () => {//has that async an effect if I have no await?
+            try {
+                let base64files = [];
+                let reader = new FileReader();
+                reader.onloadend = () => {
+                    base64files.push(reader.result);
+                }
+                for (const file of files) {
+                    reader.readAsDataURL(file);
+                }
+                setProduct(product => ({...product, pictures: base64files}));
+            } catch (e) {
+                console.log("Error in fileUpload: ", e);
+            }
+        }
         fileUpload();
     }, [files]);
 

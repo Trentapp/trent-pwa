@@ -52,7 +52,7 @@ const Profile = props => {
 
                     {openReview && <AddReview posterId={currentUser.uid} ratedUserId={props.match.params.id}/>}
                     <h2>Reviews</h2>
-                    {reviews.map(review => <Review review={review} />)}
+                    {reviews.map(review => <Review review={review} currentUser={currentUser} key={review._id}/>)}
                 </div>
             )}
         </div>

@@ -23,6 +23,7 @@ const AddReview = props => {
             setLoading(true);
             const review = {stars: rating, title: titleRef.current.value, comment: commentRef.current.value, posterId: props.posterId, ratedUserId: props.ratedUserId};
             await ReviewDataService.createReview(review);
+            window.location.reload();
         } catch(err) {
             setError("Failed to add review");
         }

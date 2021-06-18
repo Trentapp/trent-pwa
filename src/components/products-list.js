@@ -79,13 +79,12 @@ const ProductsList = props => {
             </div>
             <div className="row">
             {products.map((product) => {
-              //TODO: add address here and include view map
               return (
                 <div className="col-lg-4 pb-3" key={product._id}>
                   <div className="card">
                     <div className="card-body">
                       <h5 className="card-title">{product.name}</h5>
-                      {product.thumbnail && <img src={`${product.thumbnail}`}/>}{/*attention! for fynns pictures I would need that prefix: data:image/png;base64, // Can I use png for jpeg images when I converted them to base64?*/}
+                      {product.thumbnail && <img alt="" src={`${product.thumbnail}`}/>}{/*attention! for fynns pictures I would need that prefix: data:image/png;base64, // Can I use png for jpeg images when I converted them to base64?*/}
                       <p className="card-text">
                         <strong>Description: </strong>{product.desc}<br/>
                         <strong>Price per Hour: </strong>{product.prices.perHour}€<br/>
@@ -95,12 +94,6 @@ const ProductsList = props => {
                         <Link to={`/products/product/${product._id}`} className="btn btn-primary col-lg-5 mx-1 mb-1">
                           View details
                         </Link>
-                        { product.address && (
-                        <a className="btn btn-primary col-lg-5 mx-1 mb-1" href={"https://www.google.com/maps/place/" + 
-                          `${product.address.street} ${product.address.houseNumber}, ${product.address.city}`}>
-                          View Map
-                        </a>
-                        )}
                       </div>
                     </div>
                   </div>
