@@ -54,7 +54,7 @@ const Product = props => {
                         </>
                     )}
                     {product.location && (
-                        <p>Lat, lng: {product.location.lat} {product.location.lng}</p>
+                        <p>Long, Lat: {product.location.coordinates[0]} {product.location.coordinates[1]}</p>
                     )}
                     {currentUser.uid === product.uid && (<>
                         <p><Link to={`/products/update/${product._id}`}>Edit product</Link></p>

@@ -40,14 +40,14 @@ const Map = props => {
                 onLoad={onMapLoad}>
                 {props.products.map((product) => (
                     <Marker key={product._id}
-                        position={{lat: product.location.lat, lng: product.location.lng}}
+                        position={{lat: product.location.coordinates[1], lng: product.location.coordinates[0]}}
                         onClick={() => {
                             setSelected(product);
                         }} />
                 ))} {/* maybe set another icon later */ }
 
                 {selected.location ? (
-                <InfoWindow position={{lat: selected.location.lat, lng: selected.location.lng}}
+                <InfoWindow position={{lat: selected.location.coordinates[1], lng: selected.location.coordinates[0]}}
                     onCloseClick={() => setSelected({})}>
                     <div>
                         <h4>{selected.name}</h4>
