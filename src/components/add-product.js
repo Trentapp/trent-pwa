@@ -34,7 +34,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
             try {
                 if (props.match.params.id){
                     const response = await ProductDataService.get(props.match.params.id); //I get a warning here that I don't understand very well. Maybe change it later.
-                    setProduct(response.data);
+                    setProduct(response.data);//for updating a product the user_id should be set correctly here
                     if (currentUser.uid !== response.data.uid){
                         history.push("/404");//"Not found" if a wrong user wants to update the product // maybe replace 404 with forbidden route or so later
                     }
@@ -49,9 +49,9 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
             try {
                 const response = await UserDataService.get(currentUser.uid);
                 if (response.data.address) {//attention: if the product has a different address than the user, the address will be set to the address of the user!
-                    setProduct(product => ({...product, address: response.data.address, uid: response.data.uid}));
+                    setProduct(product => ({...product, address: response.data.address}));
                 } else {
-                    setProduct(product => ({...product, uid: response.data.uid}));
+                    setProduct(product => ({...product}));
                 }
             } catch (err) {
                 console.log("error trying to get user: ", err);
@@ -154,7 +154,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
                 await ProductDataService.updateProduct(props.match.params.id, product);
                 history.push(`/products/product/${props.match.params.id}`);
             } else {
-                const response = await ProductDataService.createProduct({product: product, uid: currentUser.uid});//probably change again later
+                const response = await ProductDataService.createProduct({product: product, user_uid: currentUser.uid});//probably change again later
                 history.push(`/products/product/${response.data.productId}`);
             }
         } catch(e) {

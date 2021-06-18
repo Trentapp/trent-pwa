@@ -33,7 +33,7 @@ const ProductsList = props => {
       if (props.inventory){
         setFilters(filters => ({...filters, inventory_uid: currentUser.uid})); //I hope that this strictly triggers after useAuth() (to get current user)
       }
-    }, [props.inventory, currentUser.uid])
+    }, [props.inventory, currentUser])
 
     useEffect(() => {
         const find = async () => {
