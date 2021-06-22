@@ -2,8 +2,6 @@ import React, {useState, useEffect} from "react";
 import {useHistory} from "react-router-dom";
 
 import ProductDataService from "../services/product-data";
-import UserDataService from "../services/user-data";
-import {useAuth} from "../context/AuthContext";
 
 //TODO: change redirect to history.push()
 
@@ -25,7 +23,6 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
         }
     };
     const [product, setProduct] = useState(initialProductState);
-    const {currentUser} = useAuth();
     const history = useHistory();
     const [files, setFiles] = useState([]);
     
@@ -35,7 +32,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
                 if (props.match.params.id){
                     const response = await ProductDataService.get(props.match.params.id); //I get a warning here that I don't understand very well. Maybe change it later.
                     setProduct(response.data);//for updating a product the user_id should be set correctly here
-                    if (currentUser.uid !== response.data.uid){
+                    if (props.user._id !== response.data.user_id){
                         history.push("/404");//"Not found" if a wrong user wants to update the product // maybe replace 404 with forbidden route or so later
                     }
                 }
@@ -45,21 +42,11 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
                 history.push("/404");//not perfect, because it still shows content for a short second (maybe add sth like loading until the first useEffect is completed)
             }
         }
-        async function getUser() {
-            try {
-                const response = await UserDataService.get(currentUser.uid);
-                if (response.data.address) {//attention: if the product has a different address than the user, the address will be set to the address of the user!
-                    setProduct(product => ({...product, address: response.data.address}));
-                } else {
-                    setProduct(product => ({...product}));
-                }
-            } catch (err) {
-                console.log("error trying to get user: ", err);
-            }
-        }
         getOldProduct();
-        getUser();
-    }, [props.match.params.id, currentUser.uid, history]);
+        if (props.user.address) {//attention: if the product has a different address than the user, the address will be set to the address of the user!
+            setProduct(product => ({...product, address: props.user.address}));
+        }
+    }, [props.match.params.id, props.user, history]);
 
     //should those onChange functions be async?
 
@@ -153,7 +140,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
                 await ProductDataService.updateProduct(props.match.params.id, product);
                 history.push(`/products/product/${props.match.params.id}`);
             } else {
-                const response = await ProductDataService.createProduct({product: product, user_uid: currentUser.uid});//probably change again later
+                const response = await ProductDataService.createProduct({product: product, user_uid: props.user.uid});//probably change again later
                 history.push(`/products/product/${response.data.productId}`);
             }
         } catch(e) {

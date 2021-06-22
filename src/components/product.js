@@ -3,13 +3,11 @@ import {Link, useHistory} from "react-router-dom";
 
 import ProductDataService from "../services/product-data";
 import Map from "../components/map.js";
-import {useAuth} from "../context/AuthContext";
 
 const Product = props => {
     const [product, setProduct] = useState({prices: {}}); //maybe add better initial state, though currently the information is shown conditionally
     const [error, setError] = useState(""); //can get rid of that if redirect works
     let history = useHistory();
-    const {currentUser} = useAuth();
 
     const deleteProduct = async () => {
         try {
@@ -53,8 +51,8 @@ const Product = props => {
                         <p>{product.address.country}</p>
                         </>
                     )}
-                    <p>This product belongs to <Link to={`/profile/${currentUser.uid}`}>[Insert Username later]</Link></p>
-                    {currentUser.uid === product.uid && (<>
+                    <p>This product belongs to <Link to={`/profile/${props.user.uid}`}>[Insert Username later]</Link></p>
+                    {props.user._id === product.user_id && (<>
                         <p><Link to={`/products/update/${product._id}`}>Edit product</Link></p>
                         <button type="button" className="btn btn-danger" onClick={deleteProduct}>Delete</button>
                     </>)}

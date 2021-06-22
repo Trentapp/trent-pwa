@@ -47,7 +47,7 @@ const Review = props => {
                     <h3>{props.review.title}</h3>
                     {props.review.comment && <p>{props.review.comment}</p>}
                     <span>Posted by {username}</span>
-                    {props.currentUser.uid === props.review.posterId && (<>
+                    {props.user.uid === props.review.posterId && (<>
                         <br/><br/>
                         <button type="button" className="btn btn-primary" onClick={onEdit}>Edit Review</button><br/><br/>
                         <button type="button" className="btn btn-danger" onClick={deleteReview}>Delete Review</button>

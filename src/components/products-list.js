@@ -2,9 +2,7 @@ import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 
 import ProductDataService from "../services/product-data";
-import UserDataService from "../services/user-data";
 import Map from "../components/map.js";
-import {useAuth} from "../context/AuthContext";
 
 // TODO: connect to backend to return products (setup axios, create service folder and file to connect to backend, update this component)
 // later add filtering
@@ -12,7 +10,6 @@ import {useAuth} from "../context/AuthContext";
 const ProductsList = props => {
     const [products, setProducts] = useState([]);
     const [filters, setFilters] = useState({name: "", day_price_max: "", hour_price_max: ""});//not sure if this is the best way because we often only need to update one filter and not reset the entire filter object
-    const {currentUser} = useAuth();
     //add possibilities for pagination later
 
     const onChangeSearchName = e => {
@@ -31,18 +28,10 @@ const ProductsList = props => {
     }
 
     useEffect(() => {
-      async function addUserFilter() {
-        try {
-          const response = await UserDataService.get(currentUser.uid);//response.data == user
-          setFilters(filters => ({...filters, inventory_user_id: response.data._id})); //I hope that this strictly triggers after useAuth() (to get current user)
-        } catch(e) {
-          console.log("Error preparing user query: ", e);
-        }
-      }
       if (props.inventory){
-        addUserFilter();
+        setFilters(filters => ({...filters, inventory_user_id: props.user._id}));
       }
-    }, [props.inventory, currentUser])
+    }, [props.user, props.inventory]);
 
     useEffect(() => {
         const find = async () => {
