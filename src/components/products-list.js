@@ -4,12 +4,14 @@ import {Link} from "react-router-dom";
 import ProductDataService from "../services/product-data";
 import Map from "../components/map.js";
 
-// TODO: connect to backend to return products (setup axios, create service folder and file to connect to backend, update this component)
-// later add filtering
+const location_HD = {
+  lat: 49.3988,
+  lng: 8.6724,
+};
 
 const ProductsList = props => {
     const [products, setProducts] = useState([]);
-    const [filters, setFilters] = useState({name: "", day_price_max: "", hour_price_max: ""});//not sure if this is the best way because we often only need to update one filter and not reset the entire filter object
+    const [filters, setFilters] = useState({name: "", day_price_max: "", hour_price_max: "", lat: 49.3988, lng: 8.6742});//not sure if this is the best way because we often only need to update one filter and not reset the entire filter object
     //add possibilities for pagination later
 
     const onChangeSearchName = e => {

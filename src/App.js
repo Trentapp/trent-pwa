@@ -14,6 +14,7 @@ import UpdateProfile from "./components/UpdateProfile";
 import Profile from "./components/Profile";
 import NotFound from "./components/NotFound";
 import PrivateRoute from "./components/PrivateRoute";
+import LoggedOutRoute from "./components/LoggedOutRoute";
 
 import { useAuth } from "./context/AuthContext";
 import UserDataService from "./services/user-data";
@@ -111,9 +112,9 @@ function App() {
             component={AddProduct} user={user}/>
           <PrivateRoute exact path="/products/update/:id"
             component={AddProduct} user={user}/>
-          <Route path="/signup" component={SignUp} />
-          <Route path="/login" component={LogIn} />
-          <Route path="/forgot-password" component={ForgotPassword} />
+          <LoggedOutRoute path="/signup" component={SignUp} user={user}/>
+          <LoggedOutRoute path="/login" component={LogIn} user={user}/>
+          <LoggedOutRoute path="/forgot-password" component={ForgotPassword} user={user}/>
           <Route path="/profile/:id"
             render={(props) => (<Profile {...props} user={user}/>)} />
           <PrivateRoute path="/update-profile" component={UpdateProfile} user={user}/>
