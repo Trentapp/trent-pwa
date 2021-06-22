@@ -52,8 +52,7 @@ export default function UpdateProfile() {
                 change = true;
             }
             if (change) {
-                console.log(user);
-                await UserDataService.updateUser(user.uid, user);
+                await UserDataService.updateUser({user: user});//maybe change that later so user gets passed directly in body
             }
             history.push(`/profile/${currentUser.uid}`);
         } catch(err) {

@@ -16,26 +16,24 @@ const Profile = props => {
     const [openReview, setOpenReview] = useState(true); //later set default to false and make check in the beginning if a transaction between the users exist, but no review yet
     const {currentUser} = useAuth();
 
-    const getUser = async id => {
-        try {
-            const response = await UserDataService.get(id);
-            setUser(response.data);
-        } catch(e) {
-            setError("Could not find that user.");
-            console.log("Error in Profile.js - getUser: ", e);
-        }
-    };
-
-    const getReviews = async uid => {
-        try {
-            const response = await ReviewDataService.findByUser(uid);
-            setReviews(response.data);
-        } catch(e) {
-            console.log("Error in Profile.js - getReviews: ", e);
-        }
-    };
-
     useEffect(() => {
+        const getUser = async id => {
+            try {
+                const response = await UserDataService.get(id);
+                setUser(response.data);
+            } catch(e) {
+                setError("Could not find that user.");
+                console.log("Error in Profile.js - getUser: ", e);
+            }
+        };
+        const getReviews = async uid => {
+            try {
+                const response = await ReviewDataService.findByUser(uid);
+                setReviews(response.data);
+            } catch(e) {
+                console.log("Error in Profile.js - getReviews: ", e);
+            }
+        };
         getUser(props.match.params.id);//user id (uid) in route
         getReviews(props.match.params.id);
     }, [props.match.params.id]);

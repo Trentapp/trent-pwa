@@ -149,7 +149,6 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
             fd.append("product", blob);//probably change product to blob
             */
             //fileUpload(); //this is currently done in the one useEffect
-            console.log(product.pictures);
             if (props.match.params.id){
                 await ProductDataService.updateProduct(props.match.params.id, product);
                 history.push(`/products/product/${props.match.params.id}`);
@@ -255,7 +254,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
                         />
                     </div>
                 </div>
-                <label for="files">Upload pictures:</label><br/>
+                <label htmlFor="files">Upload pictures:</label><br/>
                 <input type="file" id="files" name="files" multiple onChange={onChangePictures}/><br/><br/>
                 <button onClick={saveProduct} className="btn btn-success">
                 Submit

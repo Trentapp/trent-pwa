@@ -9,12 +9,12 @@ class UserDataService {
         return http.post("/users/create", data);
     }
 
-    updateUser(uid, data) {
-        return http.put(`/users/update/${uid}`, data); // still to be implemented in the backend
+    updateUser(data) {
+        return http.put(`/users/update`, data); // still to be implemented in the backend
     }
 
     deleteUser(uid) {
-        return http.delete(`/users/delete/${uid}`);
+        return http.delete(`/users/delete`, uid);
     }
 };
 

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 
 import ProductDataService from "../services/product-data";
+import UserDataService from "../services/user-data";
 import Map from "../components/map.js";
 import {useAuth} from "../context/AuthContext";
 
@@ -30,8 +31,16 @@ const ProductsList = props => {
     }
 
     useEffect(() => {
+      async function addUserFilter() {
+        try {
+          const response = await UserDataService.get(currentUser.uid);//response.data == user
+          setFilters(filters => ({...filters, inventory_user_id: response.data._id})); //I hope that this strictly triggers after useAuth() (to get current user)
+        } catch(e) {
+          console.log("Error preparing user query: ", e);
+        }
+      }
       if (props.inventory){
-        setFilters(filters => ({...filters, inventory_uid: currentUser.uid})); //I hope that this strictly triggers after useAuth() (to get current user)
+        addUserFilter();
       }
     }, [props.inventory, currentUser])
 

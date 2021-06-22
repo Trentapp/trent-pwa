@@ -56,11 +56,11 @@ const AddReview = props => {
                     </Form.Group>
                     <Form.Group id="title">
                         <Form.Label>Title</Form.Label>
-                        <Form.Control type="text" ref={titleRef} required />
+                        <Form.Control type="text" ref={titleRef} placeholder="Everything worked well" required />
                     </Form.Group>
                     <Form.Group id="comment">
                         <Form.Label>Comment</Form.Label>
-                        <Form.Control type="text" ref={commentRef} />
+                        <Form.Control type="text" ref={commentRef} placeholder="Leave a comment (optional)"/>
                     </Form.Group>
                     <Button disabled={loading} className="w-100 mt-3" type="submit">
                         Submit
