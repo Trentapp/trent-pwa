@@ -58,7 +58,7 @@ function App() {
           </li>
         </div>
         <div className="navbar-nav ml-auto"> {/*somehow not aligning to the right, but I will care for that later*/}
-          {currentUser ? (
+          {user._id ? (
             <>
               <li className="nav-item">
                 <Link to={"/inventory"} className="nav-link">
@@ -71,7 +71,7 @@ function App() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to={`/profile/${currentUser.uid}`} className="nav-link">
+                <Link to={`/profile/${user._id}`} className="nav-link">
                   Your Profile
                 </Link> {/* Somehow this does not align correctly, but I should not care about it now, because I will probably change it anyway*/}
               </li>

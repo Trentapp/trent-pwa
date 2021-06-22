@@ -5,8 +5,8 @@ class ReviewDataService {
         return http.get(`/reviews/review/${id}`);
     }
 
-    findByUser(uid) {
-        return http.get(`/reviews/user/${uid}`);
+    findByUser(id) {
+        return http.get(`/reviews/user/${id}`);
     }
 
     createReview(data) {

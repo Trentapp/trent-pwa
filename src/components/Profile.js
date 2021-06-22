@@ -16,22 +16,22 @@ const Profile = props => {
     useEffect(() => {
         const getUser = async id => {
             try {
-                const response = await UserDataService.get(id);
+                const response = await UserDataService.getProfile(id);
                 setProfileUser(response.data);
             } catch(e) {
                 setError("Could not find that user.");
                 console.log("Error in Profile.js - getUser: ", e);
             }
         };
-        const getReviews = async uid => {
+        const getReviews = async id => {
             try {
-                const response = await ReviewDataService.findByUser(uid);
+                const response = await ReviewDataService.findByUser(id);
                 setReviews(response.data);
             } catch(e) {
                 console.log("Error in Profile.js - getReviews: ", e);
             }
         };
-        getUser(props.match.params.id);//user id (uid) in route
+        getUser(props.match.params.id);//_id of user in route
         getReviews(props.match.params.id);
     }, [props.match.params.id]);
 
@@ -45,7 +45,7 @@ const Profile = props => {
                     {(props.user.uid === profileUser.uid) && <Link to="/update-profile">Update Profile</Link>}
                     <br/><br/>
 
-                    {openReview && <AddReview posterId={props.user.uid} ratedUserId={props.match.params.id}/>}
+                    {openReview && <AddReview posterId={props.user._id} ratedUserId={props.match.params.id}/>}
                     <h2>Reviews</h2>
                     {reviews.map(review => <Review review={review} user={props.user} key={review._id}/>)}
                 </div>

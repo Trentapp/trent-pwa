@@ -26,7 +26,7 @@ const Review = props => {
     useEffect(() => {
         async function getUsername() {
             try {
-                const response = await UserDataService.get(props.review.posterId);
+                const response = await UserDataService.getProfile(props.review.posterId);
                 setUsername(response.data.name);
             } catch(e){
                 console.log("Error in getUsername: ", e);
@@ -47,7 +47,7 @@ const Review = props => {
                     <h3>{props.review.title}</h3>
                     {props.review.comment && <p>{props.review.comment}</p>}
                     <span>Posted by {username}</span>
-                    {props.user.uid === props.review.posterId && (<>
+                    {props.user._id === props.review.posterId && (<>
                         <br/><br/>
                         <button type="button" className="btn btn-primary" onClick={onEdit}>Edit Review</button><br/><br/>
                         <button type="button" className="btn btn-danger" onClick={deleteReview}>Delete Review</button>

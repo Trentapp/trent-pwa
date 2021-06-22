@@ -5,6 +5,10 @@ class UserDataService {
         return http.get(`/users/user/${uid}`);
     }
 
+    getProfile(id){
+        return http.get(`/users/user-profile/${id}`);
+    }
+
     createUser(data) {
         return http.post("/users/create", data);
     }
