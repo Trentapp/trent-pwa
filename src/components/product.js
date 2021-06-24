@@ -11,7 +11,7 @@ const Product = props => {
 
     const deleteProduct = async () => {
         try {
-            await ProductDataService.deleteProduct(product._id);
+            await ProductDataService.deleteProduct(product._id, props.user.uid);
             history.push("/products");
         } catch(e) {
             console.log("Failed to delete product: ", e);

@@ -25,7 +25,7 @@ class ProductDataService {
     }
 
     deleteProduct(productId, uid){
-        return http.delete(`/products/product/delete/${productId}`, {uid: uid});
+        return http.delete(`/products/product/delete/${productId}`, {data: {uid: uid}});
     }
 };
 

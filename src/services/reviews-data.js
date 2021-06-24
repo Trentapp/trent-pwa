@@ -13,8 +13,9 @@ class ReviewDataService {
         return http.post("/reviews/create", data);
     }
 
-    deleteReview(id, uid) {
-        return http.delete(`/reviews/delete/${id}`, {uid: uid});
+    deleteReview(id, _uid) {
+        console.log(_uid);
+        return http.delete(`/reviews/delete/${id}`, {data: {uid: _uid}});
     }
 
     updateReview(id, data) {//data includes uid of user
