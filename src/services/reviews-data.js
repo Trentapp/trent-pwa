@@ -13,11 +13,11 @@ class ReviewDataService {
         return http.post("/reviews/create", data);
     }
 
-    deleteReview(id) {
-        return http.delete(`/reviews/delete/${id}`);
+    deleteReview(id, uid) {
+        return http.delete(`/reviews/delete/${id}`, {uid: uid});
     }
 
-    updateReview(id, data) {
+    updateReview(id, data) {//data includes uid of user
         return http.put(`/reviews/update/${id}`, data);
     }
 };

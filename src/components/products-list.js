@@ -11,7 +11,7 @@ const location_HD = {
 
 const ProductsList = props => {
     const [products, setProducts] = useState([]);
-    const [filters, setFilters] = useState({name: "", day_price_max: "", hour_price_max: "", lat: 49.3988, lng: 8.6742});//not sure if this is the best way because we often only need to update one filter and not reset the entire filter object
+    const [filters, setFilters] = useState({name: "", day_price_max: "", hour_price_max: "", lat: location_HD.lat, lng: location_HD.lng});
     //add possibilities for pagination later
 
     const onChangeSearchName = e => {
@@ -46,6 +46,14 @@ const ProductsList = props => {
         }
         find();
     }, [filters]);
+
+    /*useEffect(() => { //should actually work, but somehow does not for me xD
+        navigator.geolocation.getCurrentPosition((position) => {
+            //problem: that way of getting the location is super imprecise.
+            setFilters(filters => ({...filters, lat: position.coords.latitude, lng: position.coords.longitude}));
+            console.log("My position: ", position.coords.latitude, " ", position.coords.longitude);
+        }, (err) => console.log("Could not get Geoposition: ", err), {enableHighAccuracy: true, timeout: 3000});
+    }, []);*/
 
     //maybe add later that the results are automatically updated when you change a filter property and you don't need to click on apply
     return(

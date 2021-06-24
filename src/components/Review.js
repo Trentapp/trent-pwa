@@ -12,7 +12,7 @@ const Review = props => {
 
     const deleteReview = async () => {
         try {
-            await ReviewDataService.deleteReview(props.review._id);
+            await ReviewDataService.deleteReview(props.review._id, props.user.uid);
             window.location.reload();
         } catch(e) {
             console.log("Failed to delete review: ", e);
@@ -39,7 +39,7 @@ const Review = props => {
     return(
         <>
         {editMode ? (
-            <AddReview review={props.review} />
+            <AddReview review={props.review} user={props.user}/>
         ) : (
             <Card>
                 <Card.Body>

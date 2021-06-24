@@ -45,7 +45,7 @@ const Profile = props => {
                     {(props.user.uid === profileUser.uid) && <Link to="/update-profile">Update Profile</Link>}
                     <br/><br/>
 
-                    {openReview && <AddReview posterId={props.user._id} ratedUserId={props.match.params.id}/>}
+                    {openReview && <AddReview posterId={props.user._id} ratedUserId={props.match.params.id} user={props.user}/>}
                     <h2>Reviews</h2>
                     {reviews.map(review => <Review review={review} user={props.user} key={review._id}/>)}
                 </div>

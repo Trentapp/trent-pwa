@@ -31,7 +31,7 @@ const AddReview = props => {
             setLoading(true);
             if (props.review){
                 const review = {...props.review, stars: rating, title: titleRef.current.value, comment: commentRef.current.value};
-                await ReviewDataService.updateReview(review._id, review);
+                await ReviewDataService.updateReview(review._id, {review: review, uid: props.user.uid});
             } else {
                 const review = {stars: rating, title: titleRef.current.value, comment: commentRef.current.value, posterId: props.posterId, ratedUserId: props.ratedUserId};
                 await ReviewDataService.createReview(review);

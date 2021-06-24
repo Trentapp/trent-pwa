@@ -137,7 +137,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
             */
             //fileUpload(); //this is currently done in the one useEffect
             if (props.match.params.id){
-                await ProductDataService.updateProduct(props.match.params.id, product);
+                await ProductDataService.updateProduct(props.match.params.id, {product: product, uid: props.user.uid});
                 history.push(`/products/product/${props.match.params.id}`);
             } else {
                 const response = await ProductDataService.createProduct({product: product, user_uid: props.user.uid});//probably change again later
