@@ -42,8 +42,10 @@ function App() {
         console.log("error trying to get user: ", err);
       }
     }
-    getUser();
-  }, [currentUser.uid]);
+    if (currentUser){
+      getUser();
+    }
+  }, [currentUser]);
 
   return (
     <div>
