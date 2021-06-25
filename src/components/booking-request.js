@@ -1,6 +1,6 @@
 import React from "react";
-import {Modal} from "react-bootstrap";
-
+import {Modal, Button} from "react-bootstrap";
+import Datetime from "react-datetime";
 
 const BookingRequest = props => {
 
@@ -18,10 +18,12 @@ const BookingRequest = props => {
             <Modal.Body>
                 <p>Specify time to borrow here</p>
                 <div className="col-md-6">
-                    Start time
+                    <label>Start time</label>
+                    <Datetime value={props.startDate} onChange={props.onChangeStartDate}/>
                 </div>
                 <div className="col-md-6">
-                    End time
+                    <label>End time</label>
+                    <Datetime value={props.endDate} onChange={props.onChangeEndDate}/>
                 </div>
                 <p>probably some more information</p>
                 <p>Calculate price dynamically here</p>

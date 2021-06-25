@@ -1,12 +1,18 @@
 import React, {useState, useEffect} from "react";
 import {Link, useHistory} from "react-router-dom";
+import {Button} from "react-bootstrap";
 
 import ProductDataService from "../services/product-data";
+import TransactionDataService from "../services/transaction-data";
+import BookingRequest from "../components/booking-request";
 import Map from "../components/map.js";
 
 const Product = props => {
     const [product, setProduct] = useState({prices: {}}); //maybe add better initial state, though currently the information is shown conditionally
     const [error, setError] = useState(""); //can get rid of that if redirect works
+    const [showReq, setShowReq] = useState(false);
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
     let history = useHistory();
 
     const deleteProduct = async () => {
@@ -17,6 +23,37 @@ const Product = props => {
             console.log("Failed to delete product: ", e);
         }
     };
+
+    const onHideModal = () => {
+        setShowReq(false);
+    }
+
+    const onRequestButtonClick = () => {
+        setShowReq(true);
+    }
+
+    const onChangeStartDate = (date) => {
+        setStartDate(date._d);
+    }
+
+    const onChangeEndDate = (date) => {
+        setEndDate(date._d);
+    }
+
+    const onSendRequest = async () => {
+        try {
+            const transaction = {
+                user_uid: props.user.uid,
+                product_id: product._id,
+                start_date: startDate,
+                end_date: endDate,
+            };
+            await TransactionDataService.createTransaction(transaction);
+            history.push("/");
+        } catch(e) {
+            console.log("Failed to create transaction: ", e)
+        }
+    }
 
     useEffect(() => {
         const getProduct = async id => {
@@ -36,6 +73,7 @@ const Product = props => {
         <div>
             {error ? <h5>{error}</h5> : (
             <>
+                <BookingRequest user={props.user} onHide={onHideModal} show={showReq} onSendRequest={onSendRequest} startDate={startDate} endDate={endDate} onChangeStartDate={onChangeStartDate} onChangeEndDate={onChangeEndDate}/>
                 <div className="mb-4">
                     <h2>{product.name}</h2>
                     <p>Price: {product.prices.perHour}€/hour, {product.prices.perDay}€/day</p>
@@ -56,7 +94,12 @@ const Product = props => {
                         <p><Link to={`/products/update/${product._id}`}>Edit product</Link></p>
                         <button type="button" className="btn btn-danger" onClick={deleteProduct}>Delete</button>
                     </>)}
-                    </div>
+                </div>
+                <div className="mb-4">
+                    <Button variant="primary" className="float-end" onClick={onRequestButtonClick}>Request product</Button>
+                    <br/>
+                    <br/>
+                </div>
                 <div>
                     {product.location && <Map {...props} products={[product]}/>}
                 </div>
