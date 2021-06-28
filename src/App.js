@@ -3,7 +3,7 @@ import { Switch, Route, Link, useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "react-bootstrap";
 
-import HomePage from "./components/home";
+import Dashboard from "./components/dashboard";
 import ProductsList from "./components/products-list";
 import Product from "./components/product";
 import AddProduct from "./components/add-product";
@@ -28,6 +28,7 @@ function App() {
     try {
       await logout();
       history.push("/");
+      window.location.reload();
     } catch (e) {
       console.log("Failed to log out");
     }
@@ -103,7 +104,8 @@ function App() {
 
       <div className="container mt-3">
         <Switch>
-          <Route exact path="/" component={HomePage} />
+          <Route exact path="/" 
+            render={(props) => (<Dashboard {...props} user={user} />)} />
           <Route exact path="/products"
             render={(props) => (<ProductsList {...props} inventory={false} />)} /> {/* I think it actually should not be rendered (just included as component), but it is just a test for now */}
           <PrivateRoute exact path="/inventory"
