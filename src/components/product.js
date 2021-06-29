@@ -1,10 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import {Link, useHistory} from "react-router-dom";
 import {Button} from "react-bootstrap";
 
 import ProductDataService from "../services/product-data";
 import TransactionDataService from "../services/transaction-data";
+import ChatDataService from "../services/chat-data";
 import BookingRequest from "../components/booking-request";
+import QuestionForm from "../components/ask-question";
 import Map from "../components/map.js";
 
 const Product = props => {
@@ -13,6 +15,9 @@ const Product = props => {
     const [showReq, setShowReq] = useState(false);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
+    const [showQuestionForm, setShowQuestionForm] = useState(false);
+    //const [messageContent, setMessageContent] = useState("");
+    const messageRef = useRef();
     let history = useHistory();
 
     const deleteProduct = async () => {
@@ -26,10 +31,15 @@ const Product = props => {
 
     const onHideModal = () => {
         setShowReq(false);
+        setShowQuestionForm(false); //maybe create extra function for that later
     }
 
     const onRequestButtonClick = () => {
         setShowReq(true);
+    }
+
+    const onAskQuestionButtonClick = () => {
+        setShowQuestionForm(true);
     }
 
     const onChangeStartDate = (date) => {
@@ -55,6 +65,20 @@ const Product = props => {
         }
     }
 
+    const onSendMessage = async () => {
+        try {
+            const chat = {
+                user_uid: props.user.uid,
+                item_id: product._id,
+                content: messageRef.current.value,
+            };
+            await ChatDataService.sendMessage(chat);
+            history.push("/");
+        } catch(e) {
+            console.log("Failed to create transaction: ", e)
+        }
+    }
+
     useEffect(() => {
         const getProduct = async id => {
             try {
@@ -73,6 +97,7 @@ const Product = props => {
         <div>
             {error ? <h5>{error}</h5> : (
             <>
+                <QuestionForm user={props.user} onHide={onHideModal} show={showQuestionForm} onSendMessage={onSendMessage} messageRef={messageRef} />
                 <BookingRequest user={props.user} onHide={onHideModal} show={showReq} onSendRequest={onSendRequest} startDate={startDate} endDate={endDate} onChangeStartDate={onChangeStartDate} onChangeEndDate={onChangeEndDate}/>
                 <div className="mb-4">
                     <h2>{product.name}</h2>
@@ -96,7 +121,13 @@ const Product = props => {
                     </>)}
                 </div>
                 <div className="mb-4">
-                    {props.user._id !== product.user_id && <><Button variant="primary" className="float-end" onClick={onRequestButtonClick}>Request product</Button>
+                    {props.user._id !== product.user_id && 
+                    <>
+                    <div className="row col-2 float-end">
+                        <Button variant="primary" className="float-end" onClick={onAskQuestionButtonClick}>Ask Question</Button>
+                        <Button variant="primary" className="float-end" onClick={onRequestButtonClick}>Request product</Button>
+                    </div>
+                    
                     <br/>
                     <br/></>}
                 </div>
