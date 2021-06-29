@@ -7,6 +7,7 @@ import TransactionsListRow from "./transaction-list-row";
 const Dashboard = props => {
     const [lendTransactions, setLendTransactions] = useState([]);
     const [borrowTransactions, setBorrowTransactions] = useState([]);
+    const [pastTransactions, setPastTransactions] = useState([]);
 
     useEffect(() => {
         const getLendTransactions = async user_id => {
@@ -25,9 +26,18 @@ const Dashboard = props => {
                 console.log("Error in get transactions by lender/borrower: ", e);
             }
         }
+        const getPastTransactions = async user_id => {
+            try {
+                const response = await TransactionDataService.findPastTransactions(user_id);
+                setPastTransactions(response.data);
+            } catch(e) {
+                console.log("Error in get transactions by lender/borrower: ", e);
+            }
+        }
         if (props.user){
             getLendTransactions(props.user._id);
             getBorrowTransactions(props.user._id);
+            getPastTransactions(props.user._id);
         }
     }, [props.user]);
 
@@ -65,6 +75,21 @@ const Dashboard = props => {
                     </thead>
                     <tbody>
                         {borrowTransactions.map(transaction => <TransactionsListRow user={props.user} action="borrower" transaction={transaction} otherUserId={transaction.lender} key={transaction._id}/>)}
+                    </tbody>
+                </Table>
+                <h2>Past Transactions</h2>
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th>Your role</th>
+                            <th>Product</th>
+                            <th>With User</th> 
+                            <th>Time</th>
+                            <th>Verified</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {pastTransactions.map(transaction => <TransactionsListRow role={(transaction.borrower == props.user._id) ? "borrower" : "lender"} user={props.user} transaction={transaction} otherUserId={transaction.borrower == props.user._id ? transaction.lender : transaction.borrower} key={transaction._id}/>)}
                     </tbody>
                 </Table>
             </>)}  

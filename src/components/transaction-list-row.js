@@ -27,7 +27,9 @@ const TransactionsListRow = props => {
             }
         }
         getProductName(props.transaction.item);
-        getUsername(props.otherUserId);
+        if (props.otherUserId){
+            getUsername(props.otherUserId);
+        }
     }, [props.otherUserId, props.transaction]);
 
     const onCancelRequest = async () => {
@@ -59,6 +61,7 @@ const TransactionsListRow = props => {
 
     return(
         <tr>
+            {props.role && <td>{props.role}</td>}
             <td>{productName}</td>
             <td>{username}</td> {/* make a link out of username and productName */}
             <td>{props.transaction.start_date} - {props.transaction.end_date}</td>

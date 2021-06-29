@@ -17,6 +17,10 @@ class TransactionDataService {
         return http.get(`/transactions/findByBorrower/${user_id}`);
     }
 
+    findPastTransactions(user_id) {
+        return http.get(`/transactions/findPastTransactions/${user_id}`);
+    }
+
     setTransactionStatus(id, user_uid, granted){
         return http.patch(`transactions/setTransactionStatus/${id}`, {uid: user_uid, granted: granted});
     }
