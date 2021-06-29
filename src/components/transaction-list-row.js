@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 
 import UserDataService from "../services/user-data";
 import ProductDataService from "../services/product-data";
+import TransactionDataService from "../services/transaction-data";
 
 const TransactionsListRow = props => {
     const [username, setUsername] = useState("");
@@ -31,15 +32,17 @@ const TransactionsListRow = props => {
 
     const onCancelRequest = async () => {
         try {
-            const text = "TODO";
+            await TransactionDataService.setTransactionStatus(props.transaction._id, props.user.uid, 1);
+            window.location.reload();
         } catch(e) {
             console.log("Error in transaction list row: ", e);
         }
     }
 
-    const onRejectRequest = async () => {
+    const onRejectRequest = async () => { // is actually currently identical to onCancelRequest
         try {
-            const text = "TODO";
+            await TransactionDataService.setTransactionStatus(props.transaction._id, props.user.uid, 1);
+            window.location.reload();
         } catch(e) {
             console.log("Error in transaction list row: ", e);
         }
@@ -47,7 +50,8 @@ const TransactionsListRow = props => {
 
     const onAcceptRequest = async () => {
         try {
-            const text = "TODO";
+            await TransactionDataService.setTransactionStatus(props.transaction._id, props.user.uid, 2);
+            window.location.reload();
         } catch(e) {
             console.log("Error in transaction list row: ", e);
         }
@@ -60,9 +64,9 @@ const TransactionsListRow = props => {
             <td>{props.transaction.start_date} - {props.transaction.end_date}</td>
             <td>{(props.transaction.granted === 0) ? <>❔</> : ((props.transaction.granted === 1) ? <>❌</> : <>✔️</>)}</td>
             {props.action && (props.action === "lender" ? 
-                <td><Button>Reject</Button><Button>Accept</Button></td>
+                <td><Button onClick={onRejectRequest}>Reject</Button>{props.transaction.granted === 0 && <Button onClick={onAcceptRequest}>Accept</Button>}</td>
             : 
-                <td><Button>Cancel booking</Button></td>
+                <td><Button onClick={onCancelRequest}>Cancel booking</Button></td>
             )} {/*if props.action exists and is not lender, it is borrower*/}
         </tr>
     );

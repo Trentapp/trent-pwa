@@ -96,9 +96,9 @@ const Product = props => {
                     </>)}
                 </div>
                 <div className="mb-4">
-                    <Button variant="primary" className="float-end" onClick={onRequestButtonClick}>Request product</Button>
+                    {props.user._id !== product.user_id && <><Button variant="primary" className="float-end" onClick={onRequestButtonClick}>Request product</Button>
                     <br/>
-                    <br/>
+                    <br/></>}
                 </div>
                 <div>
                     {product.location && <Map {...props} products={[product]}/>}
