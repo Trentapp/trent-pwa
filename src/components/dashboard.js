@@ -89,7 +89,7 @@ const Dashboard = props => {
                         </tr>
                     </thead>
                     <tbody>
-                        {pastTransactions.map(transaction => <TransactionsListRow role={(transaction.borrower == props.user._id) ? "borrower" : "lender"} user={props.user} transaction={transaction} otherUserId={transaction.borrower == props.user._id ? transaction.lender : transaction.borrower} key={transaction._id}/>)}
+                        {pastTransactions.map(transaction => <TransactionsListRow role={(transaction.borrower === props.user._id) ? "borrower" : "lender"} user={props.user} transaction={transaction} otherUserId={transaction.borrower === props.user._id ? transaction.lender : transaction.borrower} key={transaction._id}/>)}
                     </tbody>
                 </Table>
             </>)}  
