@@ -92,6 +92,8 @@ const Dashboard = props => {
                         {pastTransactions.map(transaction => <TransactionsListRow role={(transaction.borrower === props.user._id) ? "borrower" : "lender"} user={props.user} transaction={transaction} otherUserId={transaction.borrower === props.user._id ? transaction.lender : transaction.borrower} key={transaction._id}/>)}
                     </tbody>
                 </Table>
+                <h2>Your chats</h2>
+                Put a list with "product of user" or "product borrowed by user" here and link it to the connected chat.
             </>)}  
         </div>
     );

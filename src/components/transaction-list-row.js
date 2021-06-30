@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import {Link} from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 import UserDataService from "../services/user-data";
@@ -63,7 +64,7 @@ const TransactionsListRow = props => {
         <tr>
             {props.role && <td>{props.role}</td>}
             <td>{productName}</td>
-            <td>{username}</td> {/* make a link out of username and productName */}
+            <td><Link to="/messages/...">{username}</Link></td> {/* make a link out of username and productName */}
             <td>{props.transaction.start_date} - {props.transaction.end_date}</td>
             <td>{(props.transaction.granted === 0) ? <>❔</> : ((props.transaction.granted === 1) ? <>❌</> : <>✔️</>)}</td>
             {props.action && (props.action === "lender" ? 
