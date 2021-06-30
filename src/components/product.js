@@ -114,7 +114,7 @@ const Product = props => {
                         <p>{product.address.country}</p>
                         </>
                     )}
-                    <p>This product belongs to <Link to={`/profile/${props.user.uid}`}>[Insert Username later]</Link></p>
+                    <p>This product belongs to <Link to={`/profile/${product.user_id}`}>[Insert Username later]</Link></p>
                     {props.user._id === product.user_id && (<>
                         <p><Link to={`/products/update/${product._id}`}>Edit product</Link></p>
                         <button type="button" className="btn btn-danger" onClick={deleteProduct}>Delete</button>

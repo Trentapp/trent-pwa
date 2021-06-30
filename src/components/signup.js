@@ -29,6 +29,7 @@ export default function SignUp() {
             //firebase user.uid is correct, right? // probably change that below later (pass user directly as body)
             await UserDataService.createUser({user: {name: nameRef.current.value, mail: emailRef.current.value, uid: signupResponse.user.uid}}) //use Promise.all() or so so that the firebase entry is not created if createUser fails (is that possible?)
             history.push("/");
+            window.location.reload();
         } catch(err) {
             setError("Failed to create an account");
             console.log("Failed to create account: ", err);

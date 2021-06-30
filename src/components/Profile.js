@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from "react-router-dom";
+import StarRatings from "react-star-ratings";
 
 import UserDataService from "../services/user-data";
 import ReviewDataService from "../services/reviews-data";
+import TransactionDataService from "../services/transaction-data";
 import AddReview from "./add-review";
 import Review from "./Review";
 
@@ -31,9 +33,21 @@ const Profile = props => {
                 console.log("Error in Profile.js - getReviews: ", e);
             }
         };
+        const checkIfOpenReview = async (userId, profileUserId) => {
+            try {
+                console.log("check if open review is not implemented yet");
+                // TODO: get Transactions between users, get reviews between users
+                // if there is a past accepted transaction and no review setOpenreview(true)
+            } catch(e) {
+                console.log("Error in Profile.js - checkOpenReview: ", e);
+            }
+        }
         getUser(props.match.params.id);//_id of user in route
         getReviews(props.match.params.id);
-    }, [props.match.params.id]);
+        if (props.user._id){
+            checkIfOpenReview(props.user._id, props.match.params.id);
+        }
+    }, [props.match.params.id, props.user._id]);
 
     return (
         <div>
@@ -41,6 +55,8 @@ const Profile = props => {
                 <div>
                     <p>{profileUser.name}</p>
                     <p>{profileUser.mail}</p>
+                    {profileUser.rating && <p>Rating: {profileUser.rating}: <StarRatings rating={profileUser.rating} starRatedColor="rgb(250,200,30)" starDimension="28px" />
+                    </p>}
                     <p>This user has {profileUser.inventory.length} items in his inventory.</p> {/*Later show items of inventory*/}
                     {(props.user.uid === profileUser.uid) && <Link to="/update-profile">Update Profile</Link>}
                     <br/><br/>
