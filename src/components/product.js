@@ -75,7 +75,7 @@ const Product = props => {
             await ChatDataService.sendMessage(chat);
             history.push("/");
         } catch(e) {
-            console.log("Failed to create transaction: ", e)
+            console.log("Failed to send message: ", e)
         }
     }
 

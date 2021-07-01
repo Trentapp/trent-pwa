@@ -1,14 +1,16 @@
 import React, {useState, useEffect} from "react";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 import UserDataService from "../services/user-data";
 import ProductDataService from "../services/product-data";
 import TransactionDataService from "../services/transaction-data";
+import ChatDataService from "../services/chat-data";
 
 const TransactionsListRow = props => {
     const [username, setUsername] = useState("");
     const [productName, setProductName] = useState("");
+    const history = useHistory();
 
     useEffect(() => {
         const getProductName = async id => {
@@ -60,11 +62,21 @@ const TransactionsListRow = props => {
         }
     }
 
+    const onContactUser = async () => {
+        try {
+            const response = await ChatDataService.getByLenderBorrowerProduct(props.transaction.lender, props.transaction.borrower, props.transaction.item);
+            history.push(`/chats/${response.data._id}`);
+            window.location.reload();
+        } catch(e) {
+            console.log("Error in transaction list row: ", e);
+        }
+    }
+
     return(
         <tr>
             {props.role && <td>{props.role}</td>}
             <td>{productName}</td>
-            <td><Link to="/messages/...">{username}</Link></td> {/* make a link out of username and productName */}
+            <td>{username} <Button onClick={onContactUser}>Contact</Button></td> {/* make a link out of username and productName */}
             <td>{props.transaction.start_date} - {props.transaction.end_date}</td>
             <td>{(props.transaction.granted === 0) ? <>❔</> : ((props.transaction.granted === 1) ? <>❌</> : <>✔️</>)}</td>
             {props.action && (props.action === "lender" ? 
