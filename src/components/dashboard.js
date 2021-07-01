@@ -2,12 +2,14 @@ import React, {useState, useEffect} from "react";
 import {Table} from "react-bootstrap";
 
 import TransactionDataService from "../services/transaction-data";
+import ChatDataService from "../services/chat-data";
 import TransactionsListRow from "./transaction-list-row";
 
 const Dashboard = props => {
     const [lendTransactions, setLendTransactions] = useState([]);
     const [borrowTransactions, setBorrowTransactions] = useState([]);
     const [pastTransactions, setPastTransactions] = useState([]);
+    const [chats, setChats] = useState([]);
 
     useEffect(() => {
         const getLendTransactions = async user_id => {
@@ -34,10 +36,20 @@ const Dashboard = props => {
                 console.log("Error in get transactions by lender/borrower: ", e);
             }
         }
+        const getChatsOfUser = async user_uid => {
+            try {
+                const response = await ChatDataService.getByUser(user_uid);
+                setChats(response.data);
+            } catch(e) {
+                console.log("Error in get chats: ", e);
+            }
+        }
         if (props.user){
+            console.log(props.user);
             getLendTransactions(props.user._id);
             getBorrowTransactions(props.user._id);
             getPastTransactions(props.user._id);
+            getChatsOfUser(props.user.uid);
         }
     }, [props.user]);
 
@@ -93,7 +105,9 @@ const Dashboard = props => {
                     </tbody>
                 </Table>
                 <h2>Your chats</h2>
-                Put a list with "product of user" or "product borrowed by user" here and link it to the connected chat.
+                <ul className="list-group mb-5">
+                    {chats.map(chat => <li className="list-group-item">{props.user._id === chat.borrower ? <>{chat.lender} lending {chat.product}</> : <>{chat.product} borrowing your {chat.product}</>}</li>)}
+                </ul>
             </>)}  
         </div>
     );

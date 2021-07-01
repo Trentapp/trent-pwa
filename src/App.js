@@ -15,6 +15,7 @@ import Profile from "./components/Profile";
 import NotFound from "./components/NotFound";
 import PrivateRoute from "./components/PrivateRoute";
 import LoggedOutRoute from "./components/LoggedOutRoute";
+import Chat from "./components/chat";
 
 import { useAuth } from "./context/AuthContext";
 import UserDataService from "./services/user-data";
@@ -44,6 +45,7 @@ function App() {
       }
     }
     if (currentUser){
+      console.log("get user is called")
       getUser();
     }
   }, [currentUser]);
@@ -122,6 +124,7 @@ function App() {
           <Route path="/profile/:id"
             render={(props) => (<Profile {...props} user={user}/>)} />
           <PrivateRoute path="/update-profile" component={UpdateProfile} user={user}/>
+          <PrivateRoute path="/chat/:id" component={Chat} user={user} />
           <Route path="*" component={NotFound} />
         </Switch>
       </div>
