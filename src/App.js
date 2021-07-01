@@ -45,7 +45,6 @@ function App() {
       }
     }
     if (currentUser){
-      console.log("get user is called")
       getUser();
     }
   }, [currentUser]);
@@ -124,7 +123,7 @@ function App() {
           <Route path="/profile/:id"
             render={(props) => (<Profile {...props} user={user}/>)} />
           <PrivateRoute path="/update-profile" component={UpdateProfile} user={user}/>
-          <PrivateRoute path="/chat/:id" component={Chat} user={user} />
+          <PrivateRoute path="/chats/:id" component={Chat} user={user} />
           <Route path="*" component={NotFound} />
         </Switch>
       </div>

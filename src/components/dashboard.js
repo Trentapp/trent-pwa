@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import {Link} from "react-router-dom";
 import {Table} from "react-bootstrap";
 
 import TransactionDataService from "../services/transaction-data";
@@ -44,8 +45,7 @@ const Dashboard = props => {
                 console.log("Error in get chats: ", e);
             }
         }
-        if (props.user){
-            console.log(props.user);
+        if (props.user._id){
             getLendTransactions(props.user._id);
             getBorrowTransactions(props.user._id);
             getPastTransactions(props.user._id);
@@ -106,9 +106,9 @@ const Dashboard = props => {
                 </Table>
                 <h2>Your chats</h2>
                 <ul className="list-group mb-5">
-                    {chats.map(chat => <li className="list-group-item">{props.user._id === chat.borrower ? <>{chat.lender} lending {chat.product}</> : <>{chat.product} borrowing your {chat.product}</>}</li>)}
+                    {chats.map(chat => <li className="list-group-item"><Link to={`/chats/${chat._id}`}>{props.user._id === chat.borrower ? <>{chat.lender} lending {chat.product}</> : <>{chat.product} borrowing your {chat.product}</>}</Link></li>)}
                 </ul>
-            </>)}  
+            </>)}
         </div>
     );
 };
