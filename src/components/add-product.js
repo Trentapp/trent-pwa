@@ -99,7 +99,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
         setFiles(e.target.files);
     }
 
-    useEffect(() => {
+    /*useEffect(() => { // I think that was just to parse the files to base64
         const fileUpload = () => {//has that async an effect if I have no await?
             try {
                 let base64files = [];
@@ -116,9 +116,8 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
             }
         }
         fileUpload();
-    }, [files]);
+    }, [files]);*/
 
-    /*For later when implementing different file transfer
     //TODO: add a validity check to only upload .jpg and .png images
     const fileUploadHandler = () => {
         const fd = new FormData();
@@ -126,21 +125,19 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
             fd.append("image", file);
         }
         return fd;
-    }*/
+    }
 
     const saveProduct = async () => {
         try {
-            /* for later when implementing better file transfer
             const fd = fileUploadHandler();//hopefully I don't run into update problems
             const blob = new Blob([JSON.stringify(product)], {type: "application/json"});
             fd.append("product", blob);//probably change product to blob
-            */
-            //fileUpload(); //this is currently done in the one useEffect
-            if (props.match.params.id){
+            if (props.match.params.id){//update probably currently not working
                 await ProductDataService.updateProduct(props.match.params.id, {product: product, uid: props.user.uid});
                 history.push(`/products/product/${props.match.params.id}`);
             } else {
-                const response = await ProductDataService.createProduct({product: product, user_uid: props.user.uid});//probably change again later
+                const response = await ProductDataService.createProduct2(fd);
+                //const response = await ProductDataService.createProduct({product: product, user_uid: props.user.uid});//was from without file transfer
                 history.push(`/products/product/${response.data.productId}`);
             }
         } catch(e) {

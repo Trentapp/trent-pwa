@@ -9,7 +9,7 @@ export default axios.create({
 });
 export const axiosFile = axios.create({
     baseURL: "http://localhost:8000/api",
-    /*headers: {
+    headers: {
         "Content-type": "miltipart/form-data"
-    }*/ // I think this is standard
+    } // I think this is standard
 });
