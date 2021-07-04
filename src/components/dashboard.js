@@ -71,7 +71,7 @@ const Dashboard = props => {
                         </tr>
                     </thead>
                     <tbody>
-                        {lendTransactions.map(transaction => <TransactionsListRow user={props.user} action="lender" transaction={transaction} otherUserId={transaction.borrower} key={transaction._id}/>)}
+                        {lendTransactions.map(transaction => <TransactionsListRow user={props.user} action="lender" transaction={transaction} otherUser={transaction.borrower} key={transaction._id}/>)}
                     </tbody>
                 </Table>
                 <h3>You borrow</h3>
@@ -86,7 +86,7 @@ const Dashboard = props => {
                         </tr>
                     </thead>
                     <tbody>
-                        {borrowTransactions.map(transaction => <TransactionsListRow user={props.user} action="borrower" transaction={transaction} otherUserId={transaction.lender} key={transaction._id}/>)}
+                        {borrowTransactions.map(transaction => <TransactionsListRow user={props.user} action="borrower" transaction={transaction} otherUser={transaction.lender} key={transaction._id}/>)}
                     </tbody>
                 </Table>
                 <h2>Past Transactions</h2>
@@ -101,12 +101,12 @@ const Dashboard = props => {
                         </tr>
                     </thead>
                     <tbody>
-                        {pastTransactions.map(transaction => <TransactionsListRow role={(transaction.borrower === props.user._id) ? "borrower" : "lender"} user={props.user} transaction={transaction} otherUserId={transaction.borrower === props.user._id ? transaction.lender : transaction.borrower} key={transaction._id}/>)}
+                        {pastTransactions.map(transaction => <TransactionsListRow role={(transaction.borrower._id === props.user._id) ? "borrower" : "lender"} user={props.user} transaction={transaction} otherUser={transaction.borrower._id === props.user._id ? transaction.lender : transaction.borrower} key={transaction._id}/>)}
                     </tbody>
                 </Table>
                 <h2>Your chats</h2>
                 <ul className="list-group mb-5">
-                    {chats.map(chat => <li className="list-group-item"><Link to={`/chats/${chat._id}`}>{props.user._id === chat.borrower ? <>{chat.lender} lending {chat.product}</> : <>{chat.product} borrowing your {chat.product}</>}</Link></li>)}
+                    {chats.map(chat => {chat.item && <li className="list-group-item"><Link to={`/chats/${chat._id}`}>{props.user._id === chat.borrower._id ? <>{chat.lender.name} lending {chat.item.name}</> : <>{chat.borrower.name} borrowing your {chat.item.name}</>}</Link></li>} )}
                 </ul>
             </>)}
         </div>

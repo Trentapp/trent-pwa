@@ -9,7 +9,7 @@ import ChatDataService from "../services/chat-data";
 const Message = props => {
     return(
         <div className="col-lg-6 offset-3">
-        {props.message.sender === props.user._id ? (
+        {props.message.sender._id === props.user._id ? (
             <div className="d-flex flex-row justify-content-end mb-4">
               <div className="p-3 me-3 border" style={{borderRadius: "15px", backgroundColor: "#fbfbfb"}}>
                 <p className="small mb-0">{props.message.content}</p>
@@ -39,20 +39,20 @@ const Chat = props => {
         const getChat = async chat_id => {
             try {
                 const response = await ChatDataService.getById(chat_id);
-                setOtherUser(response.data.lender === props.user._id ? response.data.borrower : response.data.lender);
+                setOtherUser(response.data.lender._id === props.user._id ? response.data.borrower : response.data.lender);
                 setChat(response.data);
             } catch(e) {
                 console.log("Error in get transactions by lender/borrower: ", e);
             }
         }
         getChat(props.match.params.id);
-    }, [props.match.params.id, props.user._id])
+    }, [props.match.params.id, props.user._id]);
 
     const onSendMessage = async () => { //this is exactly the same code as in product; maybe connect it somehow so I don't need to change everything twice
         try {
             const chatRequest = {
                 user_uid: props.user.uid,
-                item_id: chat.item_id,
+                item: chat.item._id,
                 content: messageRef.current.value,
             };
             await ChatDataService.sendMessage(chatRequest);
@@ -64,7 +64,7 @@ const Chat = props => {
 
     return(
     <>
-        <h2>Chat with {otherUser} because of product {chat.item_id}</h2>
+        <h2>Chat with {otherUser.name} because of product {chat.item.name}</h2>
         {chat.messages && chat.messages.map(message => <Message user={props.user} message={message} key={message._id}/>)}
         <div className="col-lg-6 offset-3">
             <input type="text" ref={messageRef} />

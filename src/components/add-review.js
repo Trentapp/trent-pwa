@@ -33,7 +33,7 @@ const AddReview = props => {
                 const review = {...props.review, stars: rating, title: titleRef.current.value, comment: commentRef.current.value};
                 await ReviewDataService.updateReview(review._id, {review: review, uid: props.user.uid});
             } else {
-                const review = {stars: rating, title: titleRef.current.value, comment: commentRef.current.value, posterId: props.posterId, ratedUserId: props.ratedUserId};
+                const review = {stars: rating, title: titleRef.current.value, comment: commentRef.current.value, poster: props.user._id, ratedUser: props.ratedUser._id};
                 await ReviewDataService.createReview({review: review, uid: props.user.uid});
             }
             window.location.reload();

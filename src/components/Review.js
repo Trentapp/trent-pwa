@@ -1,13 +1,11 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {Card} from "react-bootstrap";
 import StarRatings from "react-star-ratings";
 
-import UserDataService from "../services/user-data";
 import ReviewDataService from "../services/reviews-data";
 import AddReview from "./add-review";
 
 const Review = props => {
-    const [username, setUsername] = useState("");//maybe later also profile pic
     const [editMode, setEditMode] = useState(false);
 
     const deleteReview = async () => {
@@ -24,19 +22,6 @@ const Review = props => {
         setEditMode(true);
     }
 
-    useEffect(() => {
-        async function getUsername() {
-            try {
-                const response = await UserDataService.getProfile(props.review.posterId);
-                setUsername(response.data.name);
-            } catch(e){
-                console.log("Error in getUsername: ", e);
-                setUsername("<user not found>");
-            }
-        }
-        getUsername();
-    }, [props.review.posterId]);
-
     return(
         <>
         {editMode ? (
@@ -47,8 +32,8 @@ const Review = props => {
                     <StarRatings rating={props.review.stars} starRatedColor="rgb(250,200,30)" starDimension="28px" />
                     <h3>{props.review.title}</h3>
                     {props.review.comment && <p>{props.review.comment}</p>}
-                    <span>Posted by {username}</span>
-                    {props.user._id === props.review.posterId && (<>
+                    <span>Posted by {props.review.poster.name}</span>
+                    {props.user._id === props.review.poster._id && (<>
                         <br/><br/>
                         <button type="button" className="btn btn-primary" onClick={onEdit}>Edit Review</button><br/><br/>
                         <button type="button" className="btn btn-danger" onClick={deleteReview}>Delete Review</button>

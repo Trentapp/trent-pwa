@@ -47,7 +47,7 @@ const ProductsList = props => {
         find();
     }, [filters]);
 
-    /*useEffect(() => { //should actually work, but somehow does not for me xD
+    /*useEffect(() => { //works at my parents, but not in HD
         navigator.geolocation.getCurrentPosition((position) => {
             //problem: that way of getting the location is super imprecise.
             setFilters(filters => ({...filters, lat: position.coords.latitude, lng: position.coords.longitude}));

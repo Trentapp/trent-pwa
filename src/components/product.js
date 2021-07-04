@@ -10,7 +10,7 @@ import QuestionForm from "../components/ask-question";
 import Map from "../components/map.js";
 
 const Product = props => {
-    const [product, setProduct] = useState({prices: {}}); //maybe add better initial state, though currently the information is shown conditionally
+    const [product, setProduct] = useState({prices: {}, user: {}}); //maybe add better initial state, though currently the information is shown conditionally
     const [error, setError] = useState(""); //can get rid of that if redirect works
     const [showReq, setShowReq] = useState(false);
     const [startDate, setStartDate] = useState(new Date());
@@ -68,7 +68,7 @@ const Product = props => {
         try {
             const chat = {
                 user_uid: props.user.uid,
-                item_id: product._id,
+                item: product._id,
                 content: messageRef.current.value,
             };
             await ChatDataService.sendMessage(chat);
@@ -120,14 +120,14 @@ const Product = props => {
                         <p>{product.address.country}</p>
                         </>
                     )}
-                    <p>This product belongs to <Link to={`/profile/${product.user_id}`}>[Insert Username later]</Link></p>
-                    {props.user._id === product.user_id && (<>
+                    <p>This product belongs to <Link to={`/profile/${product.user._id}`}>{product.user.name}</Link></p>
+                    {props.user._id === product.user._id && (<>
                         <p><Link to={`/products/update/${product._id}`}>Edit product</Link></p>
                         <button type="button" className="btn btn-danger" onClick={deleteProduct}>Delete</button>
                     </>)}
                 </div>
                 <div className="mb-4">
-                    {props.user._id !== product.user_id && 
+                    {props.user._id !== product.user._id && 
                     <>
                     <div className="row col-2 float-end">
                         <Button variant="primary" className="float-end" onClick={onAskQuestionButtonClick}>Ask Question</Button>
