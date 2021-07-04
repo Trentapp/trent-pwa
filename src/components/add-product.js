@@ -130,10 +130,10 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
     const saveProduct = async () => {
         try {
             const fd = fileUploadHandler();//hopefully I don't run into update problems
-            const blob = new Blob([JSON.stringify(product)], {type: "application/json"});
+            const blob = new Blob([JSON.stringify({product, user_uid: props.user.uid})], {type: "application/json"});
             fd.append("product", blob);//probably change product to blob
             if (props.match.params.id){//update probably currently not working
-                await ProductDataService.updateProduct(props.match.params.id, {product: product, uid: props.user.uid});
+                await ProductDataService.updateProduct(props.match.params.id, fd);
                 history.push(`/products/product/${props.match.params.id}`);
             } else {
                 const response = await ProductDataService.createProduct2(fd);
