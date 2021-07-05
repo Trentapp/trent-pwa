@@ -85,11 +85,13 @@ const Product = props => {
             try {
                 const response = await ProductDataService.get(id);
                 let newProduct = response.data;
-                for (let i = 0; i < newProduct.pictures.length; i++){
-                     newProduct.pictures[i].base64 = btoa(
-                        new Uint8Array(newProduct.pictures[i].data.data)
-                        .reduce((data, byte) => data + String.fromCharCode(byte), '')
-                    );
+                if (newProduct.pictures){
+                    for (let i = 0; i < newProduct.pictures.length; i++){
+                        newProduct.pictures[i].base64 = btoa(
+                           new Uint8Array(newProduct.pictures[i].data.data)
+                           .reduce((data, byte) => data + String.fromCharCode(byte), '')
+                       );
+                   }
                 }
                 setProduct(newProduct);
             } catch(e) {
