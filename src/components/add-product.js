@@ -142,6 +142,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
             }
         } catch(e) {
             console.log(`Error in saving new product: ${e}`);
+            alert("Failed to save product. Please check that you filled all required fields. If it still does not work, please contact us: info@trentapp.com");
         }
     };
 
@@ -240,7 +241,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
                     </div>
                 </div>
                 <label htmlFor="files">Upload pictures:</label><br/>
-                <input type="file" id="files" name="files" multiple onChange={onChangePictures}/><br/><br/>
+                <input type="file" id="files" name="files" accept="image/*" multiple onChange={onChangePictures}/><br/><br/>
                 <button onClick={saveProduct} className="btn btn-success">
                 Submit
                 </button>

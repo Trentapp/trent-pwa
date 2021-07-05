@@ -5,6 +5,7 @@ import {Table} from "react-bootstrap";
 import TransactionDataService from "../services/transaction-data";
 import ChatDataService from "../services/chat-data";
 import TransactionsListRow from "./transaction-list-row";
+import About from "./about";
 
 const Dashboard = props => {
     const [lendTransactions, setLendTransactions] = useState([]);
@@ -55,8 +56,10 @@ const Dashboard = props => {
 
     return(
         <div>
-            <h1>Dashboard</h1>
-            {props.user._id && (<><h3>You are logged in with email {props.user.mail}!</h3>
+            {props.user._id ? (
+            <>
+                <h1>Dashboard</h1>
+                <h3>You are logged in with email {props.user.mail}!</h3>
                 <br/>
                 <h2>Upcoming transactions</h2>
                 {lendTransactions.length > 0 || borrowTransactions.length > 0 ? <>
@@ -115,7 +118,7 @@ const Dashboard = props => {
                     {chats.map(chat => {chat.item && <li className="list-group-item"><Link to={`/chats/${chat._id}`}>{props.user._id === chat.borrower._id ? <>{chat.lender.name} lending {chat.item.name}</> : <>{chat.borrower.name} borrowing your {chat.item.name}</>}</Link></li>} )}
                 </ul>
                 </>}
-            </>)}
+            </>) : <About/>}
         </div>
     );
 };
