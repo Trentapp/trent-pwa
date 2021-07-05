@@ -62,7 +62,7 @@ const Dashboard = props => {
                 <h3>You are logged in with email {props.user.mail}!</h3>
                 <br/>
                 <h2>Upcoming transactions</h2>
-                {lendTransactions.length > 0 || borrowTransactions.length > 0 ? <>
+                {(lendTransactions.length > 0 || borrowTransactions.length > 0) ? <>
                 {lendTransactions.length > 0 && <><h3>You lend</h3>
                 <Table striped bordered hover>
                     <thead>
@@ -79,7 +79,7 @@ const Dashboard = props => {
                     </tbody>
                 </Table>
                 </>}
-                {lendTransactions.length > 0 && <><h3>You borrow</h3>
+                {borrowTransactions.length > 0 && <><h3>You borrow</h3>
                 <Table striped bordered hover>
                     <thead>
                         <tr>

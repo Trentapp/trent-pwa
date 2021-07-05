@@ -52,8 +52,8 @@ function App() {
   return (
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <Link to={"/"} className="navbar-brand">
-          FairLeih
+        <Link to={"/"} className="navbar-brand" style={{marginLeft: "30px"}}>
+          TRENT
         </Link>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
@@ -65,11 +65,11 @@ function App() {
         <div className="navbar-nav ml-auto"> {/*somehow not aligning to the right, but I will care for that later*/}
           {user._id ? (
             <>
-              <li className="nav-item">
+              {/*<li className="nav-item">
                 <Link to={"/inventory"} className="nav-link">
                   Inventory
                 </Link>
-              </li>
+              </li>*/}
               <li className="nav-item">
                 <Link to={"/products/create"} className="nav-link">
                   Add a product

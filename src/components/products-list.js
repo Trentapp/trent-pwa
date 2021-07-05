@@ -11,7 +11,7 @@ const location_HD = {
 
 const ProductsList = props => {
     const [products, setProducts] = useState([]);
-    const [filters, setFilters] = useState({name: "", day_price_max: "", hour_price_max: "", lat: location_HD.lat, lng: location_HD.lng});
+    const [filters, setFilters] = useState(props.inventory ? {name: "", day_price_max: "", hour_price_max: "", lat: location_HD.lat, lng: location_HD.lng, inventory_user_id: props.user._id} : {name: "", day_price_max: "", hour_price_max: "", lat: location_HD.lat, lng: location_HD.lng});
     //add possibilities for pagination later
 
     const onChangeSearchName = e => {
