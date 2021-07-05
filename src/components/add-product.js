@@ -148,6 +148,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
     return(
         <div>
             <div>
+                <h2>{props.match.params.id ? <>Update Product</> : <>Add a new product</>}</h2>
                 <div className="form-group mb-4">
                     <div className="row input-group col-lg-4">
                     <label>Name of Product</label>
@@ -177,17 +178,17 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
                             type="number"
                             className="form-control"
                             required
-                            placeholder="per Hour"
-                            value={product.prices.perHour}
-                            onChange={onChangeHourPrice}
+                            placeholder="per Day"
+                            value={product.prices.perDay}
+                            onChange={onChangeDayPrice}
                         />
                         <input
                             type="number"
                             className="form-control"
                             required
-                            placeholder="per Day"
-                            value={product.prices.perDay}
-                            onChange={onChangeDayPrice}
+                            placeholder="per Hour (optional)"
+                            value={product.prices.perHour}
+                            onChange={onChangeHourPrice}
                         />
                     </div>
                     <label>Address</label>

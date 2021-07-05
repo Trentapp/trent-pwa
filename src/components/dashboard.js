@@ -59,7 +59,8 @@ const Dashboard = props => {
             {props.user._id && (<><h3>You are logged in with email {props.user.mail}!</h3>
                 <br/>
                 <h2>Upcoming transactions</h2>
-                <h3>You lend</h3>
+                {lendTransactions.length > 0 || borrowTransactions.length > 0 ? <>
+                {lendTransactions.length > 0 && <><h3>You lend</h3>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
@@ -74,7 +75,8 @@ const Dashboard = props => {
                         {lendTransactions.map(transaction => <TransactionsListRow user={props.user} action="lender" transaction={transaction} otherUser={transaction.borrower} key={transaction._id}/>)}
                     </tbody>
                 </Table>
-                <h3>You borrow</h3>
+                </>}
+                {lendTransactions.length > 0 && <><h3>You borrow</h3>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
@@ -89,7 +91,10 @@ const Dashboard = props => {
                         {borrowTransactions.map(transaction => <TransactionsListRow user={props.user} action="borrower" transaction={transaction} otherUser={transaction.lender} key={transaction._id}/>)}
                     </tbody>
                 </Table>
+                </>}
+                </> : <p>You don't have any upcoming transactions.</p> }
                 <h2>Past Transactions</h2>
+                {pastTransactions.length > 0 ? <>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
@@ -104,10 +109,12 @@ const Dashboard = props => {
                         {pastTransactions.map(transaction => <TransactionsListRow role={(transaction.borrower._id === props.user._id) ? "borrower" : "lender"} user={props.user} transaction={transaction} otherUser={transaction.borrower._id === props.user._id ? transaction.lender : transaction.borrower} key={transaction._id}/>)}
                     </tbody>
                 </Table>
-                <h2>Your chats</h2>
+                </> : <p>You don't have any past transactions</p> }
+                {chats.length > 0 && <><h2>Your chats</h2>
                 <ul className="list-group mb-5">
                     {chats.map(chat => {chat.item && <li className="list-group-item"><Link to={`/chats/${chat._id}`}>{props.user._id === chat.borrower._id ? <>{chat.lender.name} lending {chat.item.name}</> : <>{chat.borrower.name} borrowing your {chat.item.name}</>}</Link></li>} )}
                 </ul>
+                </>}
             </>)}
         </div>
     );

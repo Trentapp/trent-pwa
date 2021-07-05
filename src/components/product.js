@@ -42,11 +42,13 @@ const Product = props => {
     }
 
     const onChangeStartDate = (date) => {
-        setStartDate(date._d);
+        setStartDate(date);
+        //for Datetime (not Datepicker): setStartDate(date._d);
     }
 
     const onChangeEndDate = (date) => {
-        setEndDate(date._d);
+        setEndDate(date);
+        //for Datetime (not Datepicker): setEndDate(date._d);
     }
 
     const onSendRequest = async () => {
@@ -104,22 +106,14 @@ const Product = props => {
             {error ? <h5>{error}</h5> : (
             <>
                 <QuestionForm user={props.user} onHide={onHideModal} show={showQuestionForm} onSendMessage={onSendMessage} messageRef={messageRef} />
-                <BookingRequest user={props.user} onHide={onHideModal} show={showReq} onSendRequest={onSendRequest} startDate={startDate} endDate={endDate} onChangeStartDate={onChangeStartDate} onChangeEndDate={onChangeEndDate}/>
+                <BookingRequest user={props.user} product={product} onHide={onHideModal} show={showReq} onSendRequest={onSendRequest} startDate={startDate} endDate={endDate} onChangeStartDate={onChangeStartDate} onChangeEndDate={onChangeEndDate}/>
                 <div className="mb-4">
                     <h2>{product.name}</h2>
-                    <p>Price: {product.prices.perHour}€/hour, {product.prices.perDay}€/day</p>
+                    <p><b>Price:</b> {product.prices.perDay}€/day {product.prices.perHour && <>or {product.prices.perHour}</>}€/hour</p>
                     <p><span>Description: </span>{product.desc}</p>
                     {/*only shows first picture for now; the hard coded width and height is bad.*/}
                     {product.pictures && product.pictures.map(picture => <img height="300" width="550" alt="" src={`data:image/png;base64,${picture.base64}`}/> )} {/*attention! for fynns pictures I would need that prefix: data:image/png;base64, // Can I use png for jpeg images when I converted them to base64? (probably not)*/}
                     <br/><br/>
-                    {product.address && (
-                        <>
-                        <span>Address</span>
-                        <p>{product.address.street} {product.address.houseNumber}</p>
-                        <p>...</p>
-                        <p>{product.address.country}</p>
-                        </>
-                    )}
                     <p>This product belongs to <Link to={`/profile/${product.user._id}`}>{product.user.name}</Link></p>
                     {props.user._id === product.user._id && (<>
                         <p><Link to={`/products/update/${product._id}`}>Edit product</Link></p>
@@ -129,13 +123,16 @@ const Product = props => {
                 <div className="mb-4">
                     {props.user._id !== product.user._id && 
                     <>
-                    <div className="row col-2 float-end">
-                        <Button variant="primary" className="float-end" onClick={onAskQuestionButtonClick}>Ask Question</Button>
+                    <div className="float-end">
                         <Button variant="primary" className="float-end" onClick={onRequestButtonClick}>Request product</Button>
                     </div>
-                    
                     <br/>
-                    <br/></>}
+                    <br/>
+                    <div className="float-end">
+                        <Button variant="primary" className="float-end" onClick={onAskQuestionButtonClick}>Ask Question</Button>
+                    </div>                    
+                    <br/>
+                    </>}
                 </div>
                 <div>
                     {product.location && <Map {...props} products={[product]}/>}

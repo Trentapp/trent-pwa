@@ -60,17 +60,14 @@ const Profile = props => {
         <div>
             {error ? error : (
                 <div>
-                    <p>{profileUser.name}</p>
-                    <p>{profileUser.mail}</p>
-                    {profileUser.rating && <p>Rating: {profileUser.rating}: <StarRatings rating={profileUser.rating} starRatedColor="rgb(250,200,30)" starDimension="28px" />
+                    <h2>{profileUser.name}</h2>
+                    {profileUser.rating > 0 && <p>Rating: {profileUser.rating}: <StarRatings rating={profileUser.rating} starRatedColor="rgb(250,200,30)" starDimension="28px" />
                     </p>}
-                    <p>This user has {profileUser.inventory.length} items in his inventory.</p> {/*Later show items of inventory*/}
-                    {(props.user._id === profileUser._id) && <Link to="/update-profile">Update Profile</Link>}
-                    <br/><br/>
-
+                    {(props.user._id === profileUser._id) && <p><Link to="/update-profile">Update Profile</Link></p>}
+                    <br/>
                     {openReview && <AddReview ratedUserId={props.match.params.id} user={props.user}/>}
                     <h2>Reviews</h2>
-                    {reviews.map(review => <Review review={review} user={props.user} key={review._id}/>)}
+                    {reviews.length > 0 ? reviews.map(review => <Review review={review} user={props.user} key={review._id}/>) : <p>This user has not received any reviews yet.</p>}
                 </div>
             )}
         </div>

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import { Button, Card, Form, Container, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -6,8 +6,7 @@ import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
 import UserDataService from "../services/user-data";
 
-export default function UpdateProfile() {
-    const [user, setUser] = useState({name: "", address: {street: "", houseNumber: "", zipcode: "", city: "", country: ""}});
+export default function UpdateProfile(props) {
     const nameRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
@@ -21,7 +20,7 @@ export default function UpdateProfile() {
         let result = window.confirm("Are you sure you want to delete this account?");
         if (result) {
             try {
-                await UserDataService.deleteUser(currentUser.uid);
+                await UserDataService.deleteUser(props.user.uid);
                 await currentUser.delete();
                 history.push("/");
             } catch (e) {
@@ -42,38 +41,26 @@ export default function UpdateProfile() {
                 await updatePassword(passwordRef.current.value);
             } // Note: Later when there are multiple update options I should use Promises and only update if they all succeed (?)
             let change = false;
+            const user = props.user;
             if (nameRef.current.value && nameRef.current.value !== user.name) {
                 user.name = nameRef.current.value;
                 change = true;
             }
             const userAddress = {street: streetRef.current.value, houseNumber: houseNrRef.current.value, zipcode: zipRef.current.value, city: cityRef.current.value, country: countryRef.current.value};
-            if (userAddress !== user.address){
+            if (userAddress !== props.user.address){
                 user.address = userAddress;
                 change = true;
             }
             if (change) {
                 await UserDataService.updateUser({user: user});//maybe change that later so user gets passed directly in body
             }
-            history.push(`/profile/${currentUser.uid}`);
+            history.push(`/profile/${props.user._id}`);
         } catch(err) {
             setError("Failed to update profile."); //TODO: sometimes you get bad request 400: credentials too old. Handle it better.
             console.log("Failed to update profile: ", err)
         }
         setLoading(false);
     }
-
-    useEffect(() => {
-        async function getUser() {
-            try {
-                const response = await UserDataService.get(currentUser.uid);
-                setUser(response.data);
-            } catch (err) {
-                setError("Could not get current user data.");
-                console.log("error trying to get user: ", err);
-            }            
-        }
-        getUser();
-    }, [currentUser.uid]);
 
     return(
         <Container className="d-flex align-items-center justify-content-center" style={{minHeight: "100vh"}}>
@@ -82,12 +69,12 @@ export default function UpdateProfile() {
                     <Card.Body>
                         <h2 className="text-center mb-4">Update Profile</h2>
                         {error && <Alert variant="danger">{error}</Alert>}
-                        <p>Your email: {currentUser.email}</p>
+                        <p>Your email: {props.user.mail}</p>
                         <Form onSubmit={handleSubmit}>
                             <Form.Group id="name">
                                 <Form.Label>Name</Form.Label>
                                 <Form.Control type="text" ref={nameRef} 
-                                defaultValue={user.name}/>
+                                defaultValue={props.user.name}/>
                             </Form.Group>
                             <Form.Group id="password">
                                 <Form.Label>Password</Form.Label>
@@ -104,19 +91,19 @@ export default function UpdateProfile() {
                             <Form.Group id="address">
                                 <Form.Label>Street</Form.Label>
                                 <Form.Control type="text" ref={streetRef} 
-                                defaultValue={user.address ? user.address.street : ""}/>
+                                defaultValue={props.user.address ? props.user.address.street : ""}/>
                                 <Form.Label>House Number</Form.Label>
                                 <Form.Control type="text" ref={houseNrRef} 
-                                defaultValue={user.address ? user.address.houseNumber : ""}/>
+                                defaultValue={props.user.address ? props.user.address.houseNumber : ""}/>
                                 <Form.Label>Zipcode</Form.Label>
                                 <Form.Control type="text" ref={zipRef} 
-                                defaultValue={user.address ? user.address.zipcode : ""}/>
+                                defaultValue={props.user.address ? props.user.address.zipcode : ""}/>
                                 <Form.Label>City</Form.Label>
                                 <Form.Control type="text" ref={cityRef} 
-                                defaultValue={user.address ? user.address.city : ""}/>
+                                defaultValue={props.user.address ? props.user.address.city : ""}/>
                                 <Form.Label>Country</Form.Label>
                                 <Form.Control type="text" ref={countryRef} 
-                                defaultValue={user.address ? user.address.country : ""}/>
+                                defaultValue={props.user.address ? props.user.address.country : ""}/>
                             </Form.Group>
                             <Button disabled={loading} className="w-100 mt-3" type="submit">
                                 Update Profile
