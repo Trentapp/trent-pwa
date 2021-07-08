@@ -32,7 +32,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
                 if (props.match.params.id){
                     const response = await ProductDataService.get(props.match.params.id); //I get a warning here that I don't understand very well. Maybe change it later.
                     setProduct(response.data);//for updating a product the user_id should be set correctly here
-                    if (props.user._id !== response.data.user_id){
+                    if (props.user._id !== response.data.user._id){
                         history.push("/404");//"Not found" if a wrong user wants to update the product // maybe replace 404 with forbidden route or so later
                     }
                 }

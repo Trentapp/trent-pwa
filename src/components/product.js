@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef} from "react";
 import {Link, useHistory} from "react-router-dom";
 import {Button} from "react-bootstrap";
+//import ImageGallery from 'react-image-gallery';
 
 import ProductDataService from "../services/product-data";
 import TransactionDataService from "../services/transaction-data";
@@ -8,6 +9,7 @@ import ChatDataService from "../services/chat-data";
 import BookingRequest from "../components/booking-request";
 import QuestionForm from "../components/ask-question";
 import Map from "../components/map.js";
+
 
 const Product = props => {
     const [product, setProduct] = useState({prices: {}, user: {}}); //maybe add better initial state, though currently the information is shown conditionally
@@ -97,7 +99,6 @@ const Product = props => {
             } catch(e) {
                 setError("Could not find that product.");
                 console.log("Error in product.js - getProduct: ", e);
-                history.push("/404");
             }
         };
         getProduct(props.match.params.id);
@@ -113,8 +114,8 @@ const Product = props => {
                     <h2>{product.name}</h2>
                     <p><b>Price:</b> {product.prices.perDay}€/day {product.prices.perHour && <>or {product.prices.perHour}</>}€/hour</p>
                     <p><span>Description: </span>{product.desc}</p>
-                    {/*only shows first picture for now; the hard coded width and height is bad.*/}
-                    {product.pictures && product.pictures.map(picture => <img height="300" width="550" alt="" src={`data:image/png;base64,${picture.base64}`}/> )} {/*attention! for fynns pictures I would need that prefix: data:image/png;base64, // Can I use png for jpeg images when I converted them to base64? (probably not)*/}
+                    {/*product.pictures && <ImageGallery items={product.pictures.map(picture => {thumbnail})}/> */ /*Maybe use ImageGallery later*/ }
+                    {product.pictures && product.pictures.map(picture => <img height="300" width="auto" alt="" src={`data:image/png;base64,${picture.base64}`}/> )} {/*attention! for fynns pictures I would need that prefix: data:image/png;base64, // Can I use png for jpeg images when I converted them to base64? (probably not)*/}
                     <br/><br/>
                     <p>This product belongs to <Link to={`/profile/${product.user._id}`}>{product.user.name}</Link></p>
                     {props.user._id === product.user._id && (<>
@@ -123,7 +124,7 @@ const Product = props => {
                     </>)}
                 </div>
                 <div className="mb-4">
-                    {props.user._id !== product.user._id && 
+                    {props.user._id !== product.user._id && props.user._id &&
                     <>
                     <div className="float-end">
                         <Button variant="primary" className="float-end" onClick={onRequestButtonClick}>Request product</Button>
