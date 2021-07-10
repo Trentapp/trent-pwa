@@ -1,14 +1,18 @@
 import axios from "axios";
+import dotenv from "dotenv";
 
-//just returning an axios instance with basic configurations
+dotenv.config();
+
+const baseURL = (process.env.REACT_APP_ENV === "dev") ? "http://localhost:8000/api" : "https://trent.uber.space/api";
+
 export default axios.create({
-    baseURL: "http://localhost:8000/api",//baseURL: "https://trent.uber.space/api",
+    baseURL: baseURL,
     headers: {
         "Content-type": "application/json"
     }
 });
 export const axiosFile = axios.create({
-    baseURL: "http://localhost:8000/api",//baseURL: "https://trent.uber.space/api",
+    baseURL: baseURL,
     headers: {
         "Content-type": "miltipart/form-data"
     } // I think this is standard

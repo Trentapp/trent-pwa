@@ -31,7 +31,7 @@ const Message = props => {
 }
 
 const Chat = props => {
-    const [chat, setChat] = useState([]);
+    const [chat, setChat] = useState({item: ""});
     const [otherUser, setOtherUser] = useState([]);
     const messageRef = useRef();
 
@@ -52,7 +52,7 @@ const Chat = props => {
         try {
             const chatRequest = {
                 user_uid: props.user.uid,
-                item: chat.item._id,
+                item_id: chat.item._id,
                 content: messageRef.current.value,
             };
             await ChatDataService.sendMessage(chatRequest);
