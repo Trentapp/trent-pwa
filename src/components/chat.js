@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 import {Button} from "react-bootstrap";
+import {useHistory} from "react-router-dom";
 
 import ChatDataService from "../services/chat-data";
 
@@ -34,6 +35,7 @@ const Chat = props => {
     const [chat, setChat] = useState({item: ""});
     const [otherUser, setOtherUser] = useState([]);
     const messageRef = useRef();
+    const history = useHistory();
 
     useEffect(() => {
         const getChat = async chat_id => {
@@ -43,10 +45,12 @@ const Chat = props => {
                 setChat(response.data);
             } catch(e) {
                 console.log("Error in get transactions by lender/borrower: ", e);
+                alert("This chat does not exist.");
+                history.push("/");
             }
         }
         getChat(props.match.params.id);
-    }, [props.match.params.id, props.user._id]);
+    }, [props.match.params.id, props.user._id, history]);
 
     const onSendMessage = async () => { //this is exactly the same code as in product; maybe connect it somehow so I don't need to change everything twice
         try {

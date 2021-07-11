@@ -72,7 +72,7 @@ const Product = props => {
         try {
             const chat = {
                 user_uid: props.user.uid,
-                item: product._id,
+                item_id: product._id,
                 content: messageRef.current.value,
             };
             await ChatDataService.sendMessage(chat);
