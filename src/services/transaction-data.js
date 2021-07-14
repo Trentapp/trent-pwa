@@ -5,20 +5,20 @@ class TransactionDataService {
         return http.post("/transactions/createTransaction", data);
     }
 
-    getById(id) {
-        return http.get(`/transactions/transaction/${id}`);
+    getById(id, uid) {
+        return http.post(`/transactions/transaction/${id}`, uid);
     }
 
-    findByLender(userId) {
-        return http.get(`/transactions/findByLender/${userId}`);
+    findByLender(uid) {
+        return http.post(`/transactions/findByLender`, uid);
     }
 
-    findByBorrower(userId) {
-        return http.get(`/transactions/findByBorrower/${userId}`);
+    findByBorrower(uid) {
+        return http.post(`/transactions/findByBorrower`, uid);
     }
 
-    findPastTransactions(userId) {
-        return http.get(`/transactions/findPastTransactions/${userId}`);
+    findPastTransactions(uid) {
+        return http.post(`/transactions/findPastTransactions`, uid);
     }
 
     setTransactionStatus(id, uid, status){

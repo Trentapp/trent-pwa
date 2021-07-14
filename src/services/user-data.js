@@ -2,7 +2,7 @@ import http from "../http-common";
 
 class UserDataService {
     get(uid) {
-        return http.get(`/users/user/${uid}`);
+        return http.post(`/users/user`, uid);
     }
 
     getProfile(id){
