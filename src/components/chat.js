@@ -32,15 +32,15 @@ const Message = props => {
 }
 
 const Chat = props => {
-    const [chat, setChat] = useState({item: ""});
+    const [chat, setChat] = useState({product: ""});
     const [otherUser, setOtherUser] = useState([]);
     const messageRef = useRef();
     const history = useHistory();
 
     useEffect(() => {
-        const getChat = async chat_id => {
+        const getChat = async chatId => {
             try {
-                const response = await ChatDataService.getById(chat_id);
+                const response = await ChatDataService.getById(chatId);
                 setOtherUser(response.data.lender._id === props.user._id ? response.data.borrower : response.data.lender);
                 setChat(response.data);
             } catch(e) {
@@ -55,8 +55,8 @@ const Chat = props => {
     const onSendMessage = async () => { //this is exactly the same code as in product; maybe connect it somehow so I don't need to change everything twice
         try {
             const chatRequest = {
-                user_uid: props.user.uid,
-                item_id: chat.item._id,
+                uid: props.user.uid,
+                chatId: chat._id,
                 content: messageRef.current.value,
             };
             await ChatDataService.sendMessage(chatRequest);
@@ -68,7 +68,7 @@ const Chat = props => {
 
     return(
     <>
-        <h2>Chat with {otherUser.name} because of product {chat.item.name}</h2>
+        <h2>Chat with {otherUser.name} because of product {chat.product.name}</h2>
         {chat.messages && chat.messages.map(message => <Message user={props.user} message={message} key={message._id}/>)}
         <div className="col-lg-6 offset-3">
             <input type="text" ref={messageRef} />

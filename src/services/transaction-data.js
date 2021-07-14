@@ -2,27 +2,27 @@ import http from "../http-common";
 
 class TransactionDataService {
     createTransaction(data) {
-        return http.post("/transactions/sendRequest", data);
+        return http.post("/transactions/createTransaction", data);
     }
 
     getById(id) {
         return http.get(`/transactions/transaction/${id}`);
     }
 
-    findByLender(user_id) {
-        return http.get(`/transactions/findByLender/${user_id}`);
+    findByLender(userId) {
+        return http.get(`/transactions/findByLender/${userId}`);
     }
 
-    findByBorrower(user_id) {
-        return http.get(`/transactions/findByBorrower/${user_id}`);
+    findByBorrower(userId) {
+        return http.get(`/transactions/findByBorrower/${userId}`);
     }
 
-    findPastTransactions(user_id) {
-        return http.get(`/transactions/findPastTransactions/${user_id}`);
+    findPastTransactions(userId) {
+        return http.get(`/transactions/findPastTransactions/${userId}`);
     }
 
-    setTransactionStatus(id, user_uid, granted){
-        return http.patch(`transactions/setTransactionStatus/${id}`, {uid: user_uid, granted: granted});
+    setTransactionStatus(id, uid, status){
+        return http.patch(`transactions/setTransactionStatus/${id}`, {uid: uid, status: status});
     }
 };
 

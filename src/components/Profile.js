@@ -40,7 +40,7 @@ const Profile = props => {
                 const revsOfUser = revs.filter(rev => rev.posterId === props.user._id);
                 if (revsOfUser.length === 0){
                     const pastTransactions = await TransactionDataService.findPastTransactions(profileUserId);
-                    const acceptedTransactionsWithUser = pastTransactions.filter(transaction => (transaction.granted === 2 && (transaction.borrower._id === props.user._id || transaction.lender._id === props.user._id)));
+                    const acceptedTransactionsWithUser = pastTransactions.filter(transaction => (transaction.status === 2 && (transaction.borrower._id === props.user._id || transaction.lender._id === props.user._id)));
                     if (acceptedTransactionsWithUser.length >= 1) {
                         setOpenReview(true);
                     }

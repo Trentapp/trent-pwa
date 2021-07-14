@@ -56,10 +56,10 @@ const Product = props => {
     const onSendRequest = async () => {
         try {
             const transaction = {
-                user_uid: props.user.uid,
-                product_id: product._id,
-                start_date: startDate,
-                end_date: endDate,
+                uid: props.user.uid,
+                productId: product._id,
+                startDate: startDate,
+                endDate: endDate,
             };
             await TransactionDataService.createTransaction(transaction);
             history.push("/");
@@ -71,8 +71,8 @@ const Product = props => {
     const onSendMessage = async () => {
         try {
             const chat = {
-                user_uid: props.user.uid,
-                item_id: product._id,
+                uid: props.user.uid,
+                productId: product._id,
                 content: messageRef.current.value,
             };
             await ChatDataService.sendMessage(chat);

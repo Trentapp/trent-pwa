@@ -4,14 +4,14 @@ import {Link} from "react-router-dom";
 import ProductDataService from "../services/product-data";
 import Map from "../components/map.js";
 
-const location_HD = {
+const locationHD = {
   lat: 49.3988,
   lng: 8.6724,
 };
 
 const ProductsList = props => {
     const [products, setProducts] = useState([]);
-    const [filters, setFilters] = useState(props.inventory ? {name: "", day_price_max: "", hour_price_max: "", lat: location_HD.lat, lng: location_HD.lng, inventory_user_id: props.user._id} : {name: "", day_price_max: "", hour_price_max: "", lat: location_HD.lat, lng: location_HD.lng});
+    const [filters, setFilters] = useState(props.inventory ? {name: "", dayPriceMax: "", hourPriceMax: "", lat: locationHD.lat, lng: locationHD.lng, inventoryUserId: props.user._id} : {name: "", dayPriceMax: "", hourPriceMax: "", lat: locationHD.lat, lng: locationHD.lng});
     //add possibilities for pagination later
 
     const onChangeSearchName = e => {
@@ -21,17 +21,17 @@ const ProductsList = props => {
 
     const onChangeDayPriceFilter = e => {
       e.persist();
-      setFilters(filters => ({...filters, day_price_max: e.target.value}));
+      setFilters(filters => ({...filters, dayPriceMax: e.target.value}));
     }
 
     const onChangeHourPriceFilter = e => {
       e.persist();
-      setFilters(filters => ({...filters, hour_price_max: e.target.value}));
+      setFilters(filters => ({...filters, hourPriceMax: e.target.value}));
     }
 
     useEffect(() => {
       if (props.inventory){
-        setFilters(filters => ({...filters, inventory_user_id: props.user._id}));
+        setFilters(filters => ({...filters, inventoryUserId: props.user._id}));
       }
     }, [props.user, props.inventory]);
 
@@ -73,14 +73,14 @@ const ProductsList = props => {
                   type="number"
                   className="form-control"
                   placeholder="Maximum day price (in €)"
-                  value={filters.day_price_max}
+                  value={filters.dayPriceMax}
                   onChange={onChangeDayPriceFilter}
                 />
                 <input
                   type="number"
                   className="form-control"
                   placeholder="Maximum hour price (in €)"
-                  value={filters.hour_price_max}
+                  value={filters.hourPriceMax}
                   onChange={onChangeHourPriceFilter}
                 />
               </div>

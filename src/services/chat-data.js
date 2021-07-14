@@ -5,8 +5,8 @@ class ChatDataService {
         return http.get(`/chats/chat/${id}`);
     }
 
-    getByUser(user_uid) {
-        return http.get(`/chats/chatsOfUser/${user_uid}`);
+    getByUser(uid) {
+        return http.get(`/chats/chatsOfUser/${uid}`);
     }
 
     sendMessage(data) {

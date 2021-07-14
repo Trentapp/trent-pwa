@@ -14,33 +14,34 @@ const Dashboard = props => {
     const [chats, setChats] = useState([]);
 
     useEffect(() => {
-        const getLendTransactions = async user_id => {
+        const getLendTransactions = async userId => {
             try {
-                const response = await TransactionDataService.findByLender(user_id);
+                const response = await TransactionDataService.findByLender(userId);
                 setLendTransactions(response.data);
             } catch(e) {
                 console.log("Error in get transactions by lender/borrower: ", e);
             }
         }
-        const getBorrowTransactions = async user_id => {
+        const getBorrowTransactions = async userId => {
             try {
-                const response = await TransactionDataService.findByBorrower(user_id);
+                const response = await TransactionDataService.findByBorrower(userId);
                 setBorrowTransactions(response.data);
             } catch(e) {
                 console.log("Error in get transactions by lender/borrower: ", e);
             }
         }
-        const getPastTransactions = async user_id => {
+        const getPastTransactions = async userId => {
             try {
-                const response = await TransactionDataService.findPastTransactions(user_id);
+                const response = await TransactionDataService.findPastTransactions(userId);
                 setPastTransactions(response.data);
             } catch(e) {
                 console.log("Error in get transactions by lender/borrower: ", e);
             }
         }
-        const getChatsOfUser = async user_uid => {
+        const getChatsOfUser = async uid => {
             try {
-                const response = await ChatDataService.getByUser(user_uid);
+                const response = await ChatDataService.getByUser(uid);
+                console.log(response.data);
                 setChats(response.data);
             } catch(e) {
                 console.log("Error in get chats: ", e);
@@ -115,7 +116,7 @@ const Dashboard = props => {
                 </> : <p>You don't have any past transactions</p> }
                 {chats.length > 0 && <><h2>Your chats</h2>
                 <ul className="list-group mb-5">
-                    {chats.map(chat => {chat.item && <li className="list-group-item"><Link to={`/chats/${chat._id}`}>{props.user._id === chat.borrower._id ? <>{chat.lender.name} lending {chat.item.name}</> : <>{chat.borrower.name} borrowing your {chat.item.name}</>}</Link></li>} )}
+                    {chats.map(chat => <li className="list-group-item"><Link to={`/chats/${chat._id}`}>{props.user._id === chat.borrower._id ? <>{chat.lender.name} lending {chat.product.name}</> : <>{chat.borrower.name} borrowing your {chat.product.name}</>}</Link></li> )}
                 </ul>
                 </>}
             </>) : <About/>}

@@ -7,13 +7,13 @@ class ProductDataService {
     }
 
     find(filters, page=0){
-        let req_str = `/products?page=${page}`;
+        let reqStr = `/products?page=${page}`;
         for (const [key,value] of Object.entries(filters)){
             if (value){
-                req_str += `&${key}=${value}`;
+                reqStr += `&${key}=${value}`;
             }
         }
-        return http.get(req_str);
+        return http.get(reqStr);
     }
 
     createProduct(data){
