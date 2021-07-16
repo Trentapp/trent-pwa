@@ -136,7 +136,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
                 await ProductDataService.updateProduct(props.match.params.id, fd);
                 history.push(`/products/product/${props.match.params.id}`);
             } else {
-                const response = await ProductDataService.createProduct2(fd);
+                const response = await ProductDataService.createProduct(fd);
                 //const response = await ProductDataService.createProduct({product: product, uid: props.user.uid});//was from without file transfer
                 history.push(`/products/product/${response.data.productId}`);
             }

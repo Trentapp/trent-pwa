@@ -6,19 +6,19 @@ class TransactionDataService {
     }
 
     getById(id, uid) {
-        return http.post(`/transactions/transaction/${id}`, uid);
+        return http.post(`/transactions/transaction/${id}`, {uid: uid});
     }
 
     findByLender(uid) {
-        return http.post(`/transactions/findByLender`, uid);
+        return http.post(`/transactions/findByLender`, {uid: uid});
     }
 
     findByBorrower(uid) {
-        return http.post(`/transactions/findByBorrower`, uid);
+        return http.post(`/transactions/findByBorrower`, {uid: uid});
     }
 
     findPastTransactions(uid) {
-        return http.post(`/transactions/findPastTransactions`, uid);
+        return http.post(`/transactions/findPastTransactions`, {uid: uid});
     }
 
     setTransactionStatus(id, uid, status){

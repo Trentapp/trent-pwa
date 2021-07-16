@@ -2,11 +2,11 @@ import http from "../http-common";
 
 class ChatDataService {
     getById(id, uid) {
-        return http.post(`/chats/chat/${id}`, uid);
+        return http.post(`/chats/chat/${id}`, {uid: uid});
     }
 
     getByUser(uid) {
-        return http.post(`/chats/getChatsOfUser`, uid);
+        return http.post(`/chats/getChatsOfUser`, {uid: uid});
     }
 
     sendMessage(data) {

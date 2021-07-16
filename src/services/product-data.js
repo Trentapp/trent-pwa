@@ -17,11 +17,7 @@ class ProductDataService {
     }
 
     createProduct(data){
-        return http.post("/products/create", data); 
-    }
-
-    createProduct2(data){
-        return axiosFile.post("/products/create2", data); //not sure if that with headers works
+        return axiosFile.post("/products/create", data); //not sure if that with headers works
 
     }
 

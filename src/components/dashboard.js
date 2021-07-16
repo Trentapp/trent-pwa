@@ -14,25 +14,25 @@ const Dashboard = props => {
     const [chats, setChats] = useState([]);
 
     useEffect(() => {
-        const getLendTransactions = async userId => {
+        const getLendTransactions = async uid => {
             try {
-                const response = await TransactionDataService.findByLender(userId);
+                const response = await TransactionDataService.findByLender(uid);
                 setLendTransactions(response.data);
             } catch(e) {
                 console.log("Error in get transactions by lender/borrower: ", e);
             }
         }
-        const getBorrowTransactions = async userId => {
+        const getBorrowTransactions = async uid => {
             try {
-                const response = await TransactionDataService.findByBorrower(userId);
+                const response = await TransactionDataService.findByBorrower(uid);
                 setBorrowTransactions(response.data);
             } catch(e) {
                 console.log("Error in get transactions by lender/borrower: ", e);
             }
         }
-        const getPastTransactions = async userId => {
+        const getPastTransactions = async uid => {
             try {
-                const response = await TransactionDataService.findPastTransactions(userId);
+                const response = await TransactionDataService.findPastTransactions(uid);
                 setPastTransactions(response.data);
             } catch(e) {
                 console.log("Error in get transactions by lender/borrower: ", e);
@@ -41,16 +41,15 @@ const Dashboard = props => {
         const getChatsOfUser = async uid => {
             try {
                 const response = await ChatDataService.getByUser(uid);
-                console.log(response.data);
                 setChats(response.data);
             } catch(e) {
                 console.log("Error in get chats: ", e);
             }
         }
         if (props.user._id){
-            getLendTransactions(props.user._id);
-            getBorrowTransactions(props.user._id);
-            getPastTransactions(props.user._id);
+            getLendTransactions(props.user.uid);
+            getBorrowTransactions(props.user.uid);
+            getPastTransactions(props.user.uid);
             getChatsOfUser(props.user.uid);
         }
     }, [props.user]);
