@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route, Link, useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./css/styles.css";
 import { Button } from "react-bootstrap";
 
 import Dashboard from "./components/dashboard";
@@ -16,6 +17,8 @@ import NotFound from "./components/NotFound";
 import PrivateRoute from "./components/PrivateRoute";
 import LoggedOutRoute from "./components/LoggedOutRoute";
 import Chat from "./components/chat";
+import Footer from "./components/footer";
+import About from "./components/about";
 
 import { useAuth } from "./context/AuthContext";
 import UserDataService from "./services/user-data";
@@ -50,7 +53,8 @@ function App() {
   }, [currentUser]);
 
   return (
-    <div>
+    <>
+    <div className="wrapper">
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <Link to={"/"} className="navbar-brand" style={{marginLeft: "30px"}}>
           TRENT
@@ -105,8 +109,9 @@ function App() {
 
       <div className="container mt-3">
         <Switch>
-          <Route exact path="/" 
+          <Route exact path={["/","/dashboard"]} 
             render={(props) => (<Dashboard {...props} user={user} />)} />
+          <Route exact path="/about" component={About} />
           <Route exact path="/products"
             render={(props) => (<ProductsList {...props} inventory={false} />)} /> {/* I think it actually should not be rendered (just included as component), but it is just a test for now */}
           <PrivateRoute exact path="/inventory"
@@ -127,7 +132,10 @@ function App() {
           <Route path="*" component={NotFound} />
         </Switch>
       </div>
+      <div class="push"></div>
     </div>
+    <div className="footer"><Footer /></div>
+    </>
   );
 }
 
