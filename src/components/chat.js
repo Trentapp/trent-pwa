@@ -38,19 +38,17 @@ const Chat = props => {
     const history = useHistory();
 
     useEffect(() => {
-        const getChat = async chatId => {
+        const getChat = async (chatId, uid) => {
             try {
-                const response = await ChatDataService.getById(chatId);
+                const response = await ChatDataService.getById(chatId, uid);
                 setOtherUser(response.data.lender._id === props.user._id ? response.data.borrower : response.data.lender);
                 setChat(response.data);
             } catch(e) {
                 console.log("Error in get transactions by lender/borrower: ", e);
-                alert("This chat does not exist.");
-                history.push("/");
             }
         }
-        getChat(props.match.params.id);
-    }, [props.match.params.id, props.user._id, history]);
+        getChat(props.match.params.id, props.user.uid);
+    }, [props.match.params.id, props.user._id, props.user.uid, history]);
 
     const onSendMessage = async () => { //this is exactly the same code as in product; maybe connect it somehow so I don't need to change everything twice
         try {
