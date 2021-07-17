@@ -37,7 +37,7 @@ const TransactionsListRow = props => {
 
     const onContactUser = async () => {
         try {
-            const response = await ChatDataService.getByLenderBorrowerProduct(props.transaction.lender._id, props.transaction.borrower._id, props.transaction.product._id);
+            const response = await ChatDataService.getByLenderBorrowerProduct(props.transaction.lender._id, props.transaction.borrower._id, props.transaction.product._id, props.user.uid);
             history.push(`/chats/${response.data._id}`);
         } catch(e) {
             console.log("Error in transaction list row: ", e);

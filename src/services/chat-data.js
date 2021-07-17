@@ -13,8 +13,8 @@ class ChatDataService {
         return http.post(`/chats/sendMessage`, data);
     }
 
-    getByLenderBorrowerProduct(lenderId, borrowerId, productId) {
-        return http.get(`/chats/getByLenderBorrowerProduct/${lenderId}/${borrowerId}/${productId}`);
+    getByLenderBorrowerProduct(lenderId, borrowerId, productId, uid) {
+        return http.post(`/chats/getByLenderBorrowerProduct/${lenderId}/${borrowerId}/${productId}`, {uid: uid});
     }
 };
 
