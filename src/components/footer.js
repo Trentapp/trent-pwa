@@ -5,7 +5,7 @@ import "../css/footer.css";
 const Footer = props => {
     return(
         <div className="footer-basic">
-            {/*<div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>*/}
+            {/*<div className="social"><a href="#"><i className="icon ion-social-instagram"></i></a><a href="#"><i className="icon ion-social-snapchat"></i></a><a href="#"><i className="icon ion-social-twitter"></i></a><a href="#"><i className="icon ion-social-facebook"></i></a></div>*/}
             <ul className="list-inline">
                 <li className="list-inline-item"><Link to="/">Home</Link></li>
                 <li className="list-inline-item"><Link to="/dashboard">Dashboard</Link></li>

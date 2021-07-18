@@ -115,7 +115,7 @@ const Dashboard = props => {
                 </> : <p>You don't have any past transactions</p> }
                 {chats.length > 0 && <><h2>Your chats</h2>
                 <ul className="list-group mb-5">
-                    {chats.map(chat => <li className="list-group-item"><Link to={`/chats/${chat._id}`}>{props.user._id === chat.borrower._id ? <>{chat.lender.name} lending {chat.product.name}</> : <>{chat.borrower.name} borrowing your {chat.product.name}</>}</Link></li> )}
+                    {chats.map(chat => <li className="list-group-item" key={chat._id}><Link to={`/chats/${chat._id}`}>{props.user._id === chat.borrower._id ? <>{chat.lender.name} lending {chat.product.name}</> : <>{chat.borrower.name} borrowing your {chat.product.name}</>}</Link></li> )}
                 </ul>
                 </>}
             </>) : <About/>}

@@ -136,7 +136,7 @@ function App() {
           <Route path="*" component={NotFound} />
         </Switch>
       </div>
-      <div class="push"></div>
+      <div className="push"></div>
     </div>
     <footer className="footer"><Footer /></footer>
     </>

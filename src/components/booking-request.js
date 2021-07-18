@@ -3,6 +3,7 @@ import {Modal, Button} from "react-bootstrap";
 import Datetime from "react-datetime";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
+import setMinutes from "date-fns/setMinutes";
 
 const BookingRequest = props => {
     return(
@@ -21,6 +22,7 @@ const BookingRequest = props => {
                     <label>Start time: </label>
                     <DatePicker selected={props.startDate}
                         onChange={props.onChangeStartDate}
+                        minDate={new Date()}
                         showTimeSelect
                         dateFormat="MMMM d, yyyy h:mm aa"/> {/*Note: later we can easily add exclude_times and exclude_dates for times-available*/}
                 </div>
@@ -28,12 +30,13 @@ const BookingRequest = props => {
                     <label>End time: </label>
                     <DatePicker selected={props.endDate}
                         onChange={props.onChangeEndDate}
+                        minDate={new Date()}
                         showTimeSelect
                         dateFormat="MMMM d, yyyy h:mm aa"/>
                 </div>
                 {/*change price: so that it does not get 0 if pricePerHour is 0*/}
                 <br/>
-                <p><b>Preis: {props.product.pricePerHour ? Math.min(Math.ceil((props.endDate - props.startDate)/(1000*60*60*24)) * props.product.prices.perDay, Math.ceil((props.endDate - props.startDate)/(1000*60*60)) * props.product.prices.perHour) : Math.ceil((props.endDate - props.startDate)/(1000*60*60*24)) * props.product.prices.perDay}€</b></p>
+                <p><b>Preis: {props.product.prices.perHour ? Math.min(Math.ceil((props.endDate - props.startDate)/(1000*60*60*24)) * props.product.prices.perDay, Math.ceil((props.endDate - props.startDate)/(1000*60*60)) * props.product.prices.perHour) : Math.ceil((props.endDate - props.startDate)/(1000*60*60*24)) * props.product.prices.perDay}€</b></p>
                 <b>Achtung: Die Option für Online-Payment ist noch nicht vorhanden, kommt aber bald. Mit dem Click auf Send Request stimmen sie zu den angezeigten Preis an <em>{props.product.user.name}</em> zu zahlen. Standardmäßig mit Bar. (Sie können die Transaktion vor dem Termin noch abbrechen)</b>
             </Modal.Body>
             <Modal.Footer>
