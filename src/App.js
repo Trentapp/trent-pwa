@@ -19,6 +19,8 @@ import LoggedOutRoute from "./components/LoggedOutRoute";
 import Chat from "./components/chat";
 import Footer from "./components/footer";
 import About from "./components/about";
+import Impressum from "./components/impressum";
+import Datenschutz from "./components/datenschutz";
 
 import { useAuth } from "./context/AuthContext";
 import UserDataService from "./services/user-data";
@@ -129,6 +131,8 @@ function App() {
             render={(props) => (<Profile {...props} user={user}/>)} />
           <PrivateRoute path="/update-profile" component={UpdateProfile} user={user}/>
           <PrivateRoute path="/chats/:id" component={Chat} user={user} />
+          <Route path="/impressum" component={Impressum} />
+          <Route path="/datenschutz" component={Datenschutz} />
           <Route path="*" component={NotFound} />
         </Switch>
       </div>
