@@ -56,7 +56,7 @@ function App() {
 
   return (
     <>
-    <div className="wrapper">
+    <div className="wrapper flex-shrink-0">
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <Link to={"/"} className="navbar-brand" style={{marginLeft: "30px"}}>
           TRENT
@@ -138,7 +138,7 @@ function App() {
       </div>
       <div class="push"></div>
     </div>
-    <div className="footer"><Footer /></div>
+    <footer className="footer"><Footer /></footer>
     </>
   );
 }
