@@ -1,5 +1,5 @@
 import React from "react";
-import {useHistory} from "react-router-dom";
+import {useHistory, Link} from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 import TransactionDataService from "../services/transaction-data";
@@ -48,7 +48,7 @@ const TransactionsListRow = props => {
         <tr>
             {props.role && <td>{props.role}</td>}
             <td>{props.transaction.product.name}</td>
-            <td>{props.otherUser.name} <Button onClick={onContactUser}>Contact</Button></td> {/* make a link out of username and productName */}
+            <td><Link to={`/profile/${props.otherUser._id}`}>{props.otherUser.name}</Link> <Button onClick={onContactUser}>Contact</Button></td> {/* make a link out of username and productName */}
             <td>{props.transaction.startDate} - {props.transaction.endDate}</td>
             <td>{(props.transaction.status === 0) ? <>❔</> : ((props.transaction.status === 1) ? <>❌</> : <>✔️</>)}</td>
             {props.action && (props.action === "lender" ? 

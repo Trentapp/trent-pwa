@@ -112,7 +112,7 @@ const Product = props => {
                 <BookingRequest user={props.user} product={product} onHide={onHideModal} show={showReq} onSendRequest={onSendRequest} startDate={startDate} endDate={endDate} onChangeStartDate={onChangeStartDate} onChangeEndDate={onChangeEndDate}/>
                 <div className="mb-4">
                     <h2>{product.name}</h2>
-                    <p><b>Price:</b> {product.prices.perDay}€/day {product.prices.perHour && <>or {product.prices.perHour}</>}€/hour</p>
+                    <p><b>Price:</b> {product.prices.perDay}€/day {product.prices.perHour && <>or {product.prices.perHour}€/hour</>}</p>
                     <p><span>Description: </span>{product.desc}</p>
                     {/*product.pictures && <ImageGallery items={product.pictures.map(picture => {thumbnail})}/> */ /*Maybe use ImageGallery later*/ }
                     {product.pictures && product.pictures.map(picture => <img height="300" width="auto" alt="" src={`data:image/png;base64,${picture.base64}`}/> )} {/*attention! for fynns pictures I would need that prefix: data:image/png;base64, // Can I use png for jpeg images when I converted them to base64? (probably not)*/}

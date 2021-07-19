@@ -148,104 +148,102 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
 
     return(
         <div>
-            <div>
-                <h2>{props.match.params.id ? <>Update Product</> : <>Add a new product</>}</h2>
-                <div className="form-group mb-4">
-                    <div className="row input-group col-lg-4">
-                    <label>Name of Product</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        required
-                        placeholder="e.g. portable camping table"
-                        value={product.name}
-                        onChange={onChangeName}
-                    />
-                    </div>
-                    <div className="row input-group col-lg-4">
-                    <label>Description of Product</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        required
-                        placeholder="e.g.: Very practical for camping tours. Up to six persons fit around the table. Very quickly put up."
-                        value={product.desc}
-                        onChange={onChangeDesc}
-                    />
-                    </div>
-                    <label>Prices</label>
-                    <div className="row input-group col-lg-4 mb-2">
-                        <input
-                            type="number"
-                            className="form-control"
-                            required
-                            placeholder="per Day"
-                            value={product.prices.perDay}
-                            onChange={onChangeDayPrice}
-                        />
-                        <input
-                            type="number"
-                            className="form-control"
-                            required
-                            placeholder="per Hour (optional)"
-                            value={product.prices.perHour}
-                            onChange={onChangeHourPrice}
-                        />
-                    </div>
-                    <label>Address</label>
-                    <div className="row input-group col-lg-4">
-                        <input
-                            type="text"
-                            className="form-control"
-                            required
-                            placeholder="Streetname"
-                            value={product.address.street}
-                            onChange={onChangeStreet}
-                        />
-                        <input
-                            type="text"
-                            className="form-control"
-                            required
-                            placeholder="House Number"
-                            value={product.address.houseNumber}
-                            onChange={onChangeHouseNumber}
-                        />
-                    </div>
-                    <div className="row input-group col-lg-4">
-                        <input
-                            type="text"
-                            className="form-control"
-                            required
-                            placeholder="Zipcode"
-                            value={product.address.zipcode}
-                            onChange={onChangeZipcode}
-                        />
-                        <input
-                            type="text"
-                            className="form-control"
-                            required
-                            placeholder="City"
-                            value={product.address.city}
-                            onChange={onChangeCity}
-                        />
-                    </div>
-                    <div className="row input-group col-lg-4">
-                        <input
-                            type="text"
-                            className="form-control"
-                            required
-                            placeholder="Country"
-                            value={product.address.country}
-                            onChange={onChangeCountry}
-                        />
-                    </div>
+            <h2>{props.match.params.id ? <>Update Product</> : <>Add a new product</>}</h2>
+            <div className="form-group">
+                <div className="row input-group">
+                <label>Name of Product</label>
+                <input
+                    type="text"
+                    className="form-control"
+                    required
+                    placeholder="e.g. portable camping table"
+                    value={product.name}
+                    onChange={onChangeName}
+                />
                 </div>
-                <label htmlFor="files">Upload pictures:</label><br/>
-                <input type="file" id="files" name="files" accept="image/*" multiple onChange={onChangePictures}/><br/><br/>
-                <button onClick={saveProduct} className="btn btn-success">
-                Submit
-                </button>
+                <div className="row input-group">
+                <label>Description of Product</label>
+                <input
+                    type="text"
+                    className="form-control"
+                    required
+                    placeholder="e.g.: Very practical for camping tours. Up to six persons fit around the table. Very quickly put up."
+                    value={product.desc}
+                    onChange={onChangeDesc}
+                />
+                </div>
+                <label>Prices</label>
+                <div className="row input-group mb-2">
+                    <input
+                        type="number"
+                        className="form-control"
+                        required
+                        placeholder="per Day"
+                        value={product.prices.perDay}
+                        onChange={onChangeDayPrice}
+                    />
+                    <input
+                        type="number"
+                        className="form-control"
+                        required
+                        placeholder="per Hour (optional)"
+                        value={product.prices.perHour}
+                        onChange={onChangeHourPrice}
+                    />
+                </div>
+                <label>Address</label>
+                <div className="row input-group">
+                    <input
+                        type="text"
+                        className="form-control"
+                        required
+                        placeholder="Streetname"
+                        value={product.address.street}
+                        onChange={onChangeStreet}
+                    />
+                    <input
+                        type="text"
+                        className="form-control"
+                        required
+                        placeholder="House Number"
+                        value={product.address.houseNumber}
+                        onChange={onChangeHouseNumber}
+                    />
+                </div>
+                <div className="row input-group">
+                    <input
+                        type="text"
+                        className="form-control"
+                        required
+                        placeholder="Zipcode"
+                        value={product.address.zipcode}
+                        onChange={onChangeZipcode}
+                    />
+                    <input
+                        type="text"
+                        className="form-control"
+                        required
+                        placeholder="City"
+                        value={product.address.city}
+                        onChange={onChangeCity}
+                    />
+                </div>
+                <div className="row input-group">
+                    <input
+                        type="text"
+                        className="form-control"
+                        required
+                        placeholder="Country"
+                        value={product.address.country}
+                        onChange={onChangeCountry}
+                    />
+                </div>
             </div>
+            <label htmlFor="files">Upload pictures:</label><br/>
+            <input type="file" id="files" name="files" accept="image/*" multiple onChange={onChangePictures}/><br/><br/>
+            <button onClick={saveProduct} className="btn btn-success">
+            Submit
+            </button>
         </div>
     );
 }

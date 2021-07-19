@@ -30,15 +30,16 @@ const AddReview = props => {
             setError("");
             setLoading(true);
             if (props.review){
-                const review = {...props.review, stars: rating, title: titleRef.current.value, comment: commentRef.current.value};
-                await ReviewDataService.updateReview(review._id, {review: review, uid: props.user.uid});
+                const review = {stars: rating, title: titleRef.current.value, comment: commentRef.current.value, poster: props.user._id, ratedUser: props.review.ratedUser._id};
+                await ReviewDataService.updateReview(props.review._id, {review: review, uid: props.user.uid});
             } else {
-                const review = {stars: rating, title: titleRef.current.value, comment: commentRef.current.value, poster: props.user._id, ratedUser: props.ratedUser._id};
+                const review = {stars: rating, title: titleRef.current.value, comment: commentRef.current.value, poster: props.user._id, ratedUser: props.ratedUserId};
                 await ReviewDataService.createReview({review: review, uid: props.user.uid});
             }
             window.location.reload();
         } catch(err) {
             setError("Failed to add review");
+            console.log("Failed to add review: ", err);
         }
         setLoading(false);
     };

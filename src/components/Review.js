@@ -10,7 +10,6 @@ const Review = props => {
 
     const deleteReview = async () => {
         try {
-            console.log(props.user.uid);
             await ReviewDataService.deleteReview(props.review._id, props.user.uid);
             window.location.reload();
         } catch(e) {
