@@ -1,4 +1,4 @@
-import http from "../http-common";
+import http, {axiosFile} from "../http-common";
 
 class UserDataService {
     get(uid) {
@@ -19,6 +19,14 @@ class UserDataService {
 
     deleteUser(uid) {
         return http.delete(`/users/delete`, uid);
+    }
+
+    uploadPicture(data) {
+        return axiosFile.post(`/users/uploadPicture`, data);
+    }
+
+    deletePicture(uid) {
+        return http.post(`/users/deleteProfilePicture`, uid);
     }
 };
 

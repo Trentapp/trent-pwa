@@ -55,7 +55,7 @@ const Profile = props => {
         if (props.user._id){
             checkIfOpenReview(props.user._id, props.match.params.id);
         }
-    }, [props.match.params.id, props.user._id]);
+    }, [props.match.params.id, props.user._id, props.user.uid]);
 
     return (
         <div>
@@ -64,6 +64,7 @@ const Profile = props => {
                     <h2>{profileUser.name}</h2>
                     {profileUser.rating > 0 && <p>Rating: {profileUser.rating}: <StarRatings rating={profileUser.rating} starRatedColor="rgb(250,200,30)" starDimension="28px" />
                     </p>}
+                    {profileUser.picture && <img alt="ups" src={`data:${profileUser.picture.contentType};base64,${Buffer.from(profileUser.picture.data.data).toString('base64')}`}/>}
                     {(props.user._id === profileUser._id) && <p><Link to="/update-profile">Update Profile</Link></p>}
                     <br/>
                     {openReview && <AddReview ratedUserId={props.match.params.id} user={props.user}/>}

@@ -39,7 +39,6 @@ const ProductsList = props => {
         const find = async () => {
             try {
                 const response = await ProductDataService.find(filters);
-                console.log(response.data[7]);
                 setProducts(response.data);
             } catch(e) {
                 console.log("Error in products-list find: ", e);
@@ -93,7 +92,7 @@ const ProductsList = props => {
                   <div className="card">
                     <div className="card-body">
                       <h5 className="card-title">{product.name}</h5>
-                      {product.thumbnail && <img alt="ups" src={`data:${product.thumbnail.contentType};base64,${Buffer.from(product.thumbnail.data.data).toString('base64')}`}/>}{/*attention! for fynns pictures I would need that prefix: data:image/png;base64, // Can I use png for jpeg images when I converted them to base64?*/}
+                      {product.thumbnail && <img alt="ups" src={`data:${product.thumbnail.contentType};base64,${Buffer.from(product.thumbnail.data.data).toString('base64')}`}/>}
                       <p className="card-text">
                         <strong>Description: </strong>{product.desc}<br/>
                         <strong>Price per Hour: </strong>{product.prices.perHour}€<br/>

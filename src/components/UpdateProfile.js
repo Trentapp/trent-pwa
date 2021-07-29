@@ -14,6 +14,7 @@ export default function UpdateProfile(props) {
     const {currentUser, updatePassword} = useAuth();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const [file, setFile] = useState();
     const history = useHistory();
 
     async function deleteAccount() {
@@ -27,6 +28,17 @@ export default function UpdateProfile(props) {
                 console.log("Failed to delete user: ", e);
             }
         }
+    }
+
+    const onChangePicture = e => {
+        setFile(e.target.files[0]);
+    }
+
+    //TODO: add a validity check to only upload .jpg and .png images
+    const fileUploadHandler = () => {
+        let fd = new FormData();
+        fd.append("image", file);
+        return fd;
     }
 
     async function handleSubmit(e) {
@@ -53,6 +65,13 @@ export default function UpdateProfile(props) {
             }
             if (change) {
                 await UserDataService.updateUser({user: user});//maybe change that later so user gets passed directly in body
+            }
+            if (file){
+                const fd = fileUploadHandler();
+                const blob = new Blob([JSON.stringify({uid: props.user.uid})], {type: "application/json"});
+                fd.append("parameters", blob);
+                console.log(file, fd);
+                await UserDataService.uploadPicture(fd);
             }
             history.push(`/profile/${props.user._id}`);
         } catch(err) {
@@ -105,6 +124,8 @@ export default function UpdateProfile(props) {
                                 <Form.Control type="text" ref={countryRef} 
                                 defaultValue={props.user.address ? props.user.address.country : ""}/>
                             </Form.Group>
+                            <label htmlFor="files">Upload pictures:</label><br/>
+                            <input type="file" id="files" name="files" accept="image/*" onChange={onChangePicture}/><br/>
                             <Button disabled={loading} className="w-100 mt-3" type="submit">
                                 Update Profile
                             </Button>
