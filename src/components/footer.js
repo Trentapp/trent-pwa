@@ -14,7 +14,7 @@ const Footer = props => {
                 <li className="list-inline-item"><Link to="/impressum">Impressum</Link></li>
                 <li className="list-inline-item"><Link to="/datenschutz">Datenschutz</Link></li>
             </ul>
-            <p className="copyright">Trent © 2021</p>
+            <p className="copyright">Trentapp UG © 2021</p>
         </div>
     )
 }

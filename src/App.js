@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route, Link, useHistory } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/styles.css";
-import { Button } from "react-bootstrap";
 
+import LandingPage from "./components/landing-page";
+import Header from "./components/Header";
 import Dashboard from "./components/dashboard";
 import ProductsList from "./components/products-list";
 import Product from "./components/product";
@@ -57,61 +58,12 @@ function App() {
   return (
     <>
     <div className="wrapper flex-shrink-0">
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <Link to={"/"} className="navbar-brand" style={{marginLeft: "30px"}}>
-          TRENT
-        </Link>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/products"} className="nav-link">
-              Search Products
-            </Link>
-          </li>
-        </div>
-        <div className="navbar-nav ml-auto"> {/*somehow not aligning to the right, but I will care for that later*/}
-          {user._id ? (
-            <>
-              {/*<li className="nav-item">
-                <Link to={"/inventory"} className="nav-link">
-                  Inventory
-                </Link>
-              </li>*/}
-              <li className="nav-item">
-                <Link to={"/products/create"} className="nav-link">
-                  Add a product
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to={`/profile/${user._id}`} className="nav-link">
-                  Your Profile
-                </Link> {/* Somehow this does not align correctly, but I should not care about it now, because I will probably change it anyway*/}
-              </li>
-              <li className="nav-item">
-                <Button variant="link" className="nav-link" onClick={handleLogout}>
-                  Log Out
-                </Button>
-              </li>
-            </>
-          ) : (
-            <>
-              <li className="nav-item">
-                <Link to={"/signup"} className="nav-link">
-                  Sign Up
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to={"/login"} className="nav-link">
-                  Log In
-                </Link>
-              </li>
-            </>
-          )}
-        </div>
-      </nav>
-
-      <div className="container mt-3">
+    {window.location.pathname !== '/landing-page' && window.location.pathname !== '/' && <Header user={user} handleLogout={handleLogout}/>}
+      <div className="container">
         <Switch>
-          <Route exact path={["/","/dashboard"]} 
+          <Route exact path={["/", "/landing-page"]} 
+            render={(props) => (<LandingPage {...props} user={user} />)} />
+          <Route exact path={["/dashboard"]} 
             render={(props) => (<Dashboard {...props} user={user} />)} />
           <Route exact path="/about" component={About} />
           <Route exact path="/products"
