@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
 import "../css/styles.css";
-import {Redirect, Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 import anitaDenunzioQa8Bs887Id8Unsplash1 from "../assets/anita-denunzio-qa8bs887id8-unsplash-1-1@1x.png";
 import rectangle19 from "../assets/rectangle-19-1@1x.svg";
@@ -17,8 +17,10 @@ import rectangle37 from "../assets/rectangle-37@1x.png";
 
 
 function App(props) {
-  if (window.location.pathname === "/" && props.user._id){
-    return <Redirect to="/dashboard" />
+  const history = useHistory();
+  console.log(window.location.pathname, props.user._id);
+  if (window.location.pathname == "/" && props.user._id){
+    history.push("/dashboard");
   }
   //return <NewConcept2 {...newConcept2Data} />;
   return <NewConcept2 />

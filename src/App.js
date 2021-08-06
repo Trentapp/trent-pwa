@@ -58,7 +58,7 @@ function App() {
   return (
     <>
     <div className="wrapper flex-shrink-0">
-    {window.location.pathname !== '/landing-page' && window.location.pathname !== '/' && <Header user={user} handleLogout={handleLogout}/>}
+    {window.location.pathname !== '/landing-page' && (window.location.pathname !== '/' || user._id) && <Header user={user} handleLogout={handleLogout}/>}
       <div className="container">
         <Switch>
           <Route exact path={["/", "/landing-page"]} 
