@@ -7,6 +7,11 @@ import {
   InputGroup,
   Input,
   InputRightElement,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Avatar,
   Heading,
   Flex,
   Spacer,
@@ -14,7 +19,7 @@ import {
   Button,
   useDisclosure
 } from "@chakra-ui/react";
-import { HamburgerIcon, Search2Icon } from "@chakra-ui/icons";
+import { HamburgerIcon, Search2Icon, ChevronDownIcon } from "@chakra-ui/icons";
 
 import {LogoSmall} from "./landing-page";
 
@@ -25,7 +30,7 @@ export default function Header (props) {
         <HStack justify="space-between">
           <HStack spacing={8} flex={1}>
             <LogoSmall />
-            <InputGroup size="sm" maxW="400px" bg="gray.100" rounded="lg">
+            <InputGroup size="sm" maxW="400px" bg="gray.100" borderRadius="lg">
               <Input
                 pr="4.5rem"
                 type="text"
@@ -33,14 +38,34 @@ export default function Header (props) {
               />
               <InputRightElement width="4.5rem">
                 <Button h="1.75rem" size="sm" onClick={()=>{}}>
-                  <Search2Icon />
+                  <Search2Icon />            
                 </Button>
               </InputRightElement>
             </InputGroup>
           </HStack>
           <Stack direction="row" align="center" spacing={8}>
-
-            <HamburgerIcon />
+            {props.user._id ? 
+            <Menu>
+              <MenuButton rightIcon={<ChevronDownIcon />}>
+                <Avatar src={`data:${props.user.picture.contentType};base64,${Buffer.from(props.user.picture.data.data).toString('base64')}`} />
+              </MenuButton>
+              <MenuList>
+                <MenuItem><Link to={`/profile/${props.user._id}`}>Your Profile</Link></MenuItem>
+                <MenuItem><Link to="/chats">Chats</Link></MenuItem>
+                <MenuItem><Link to="/transactions">Transactions</Link></MenuItem>
+                <MenuItem>
+                  <Button variant="link" onClick={props.handleLogout}>
+                    <Link>Log Out</Link>
+                  </Button>
+                </MenuItem>
+              </MenuList>
+            </Menu>
+            :
+            
+            <Link to={"/signup"}>
+              <Text color="white">Sign In</Text>
+            </Link>
+            }
           </Stack>
         </HStack>
       </Box>
@@ -51,6 +76,14 @@ export default function Header (props) {
 // import React from 'react';
 // import {Link} from "react-router-dom";
 // import {Button} from "react-bootstrap";
+
+//try to make a box around signup link
+// {/*<Box border="2px" borderRadius="lg" borderColor="white" w="100px" h="50px" justifyContent="flex-end" alignContent="flex-start">
+//                 <Link to={"/signup"}>
+//                   <Text color="white">Sign In</Text>
+//                 </Link>
+//             </Box>*/}
+
 
 // export default function OldHeader(props) {
 //     return (
