@@ -25,7 +25,7 @@ import {LogoSmall} from "./landing-page";
 
 export default function Header (props) {
   return (
-    <Box px={8} bg="green.400">
+    <Box px={8} bg="cyan.800">
       <Box w="100%" py={2} as="nav" align="center" wrap="wrap">
         <HStack justify="space-between">
           <HStack spacing={8} flex={1}>
@@ -50,12 +50,12 @@ export default function Header (props) {
                 <Avatar src={`data:${props.user.picture.contentType};base64,${Buffer.from(props.user.picture.data.data).toString('base64')}`} />
               </MenuButton>
               <MenuList>
-                <MenuItem><Link to={`/profile/${props.user._id}`}>Your Profile</Link></MenuItem>
-                <MenuItem><Link to="/chats">Chats</Link></MenuItem>
-                <MenuItem><Link to="/transactions">Transactions</Link></MenuItem>
+                <Link to={`/profile/${props.user._id}`}><MenuItem>Your Profile</MenuItem></Link>
+                <Link to="/chats"><MenuItem>Chats</MenuItem></Link>
+                <Link to="/transactions"><MenuItem>Transactions</MenuItem></Link>
                 <MenuItem>
                   <Button variant="link" onClick={props.handleLogout}>
-                    <Link>Log Out</Link>
+                    Log Out
                   </Button>
                 </MenuItem>
               </MenuList>

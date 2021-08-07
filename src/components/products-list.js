@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 
 import ProductDataService from "../services/product-data";
+import ProductCard from "./product-list-item";
 import Map from "../components/map.js";
 
 const locationHD = {
@@ -86,28 +87,7 @@ const ProductsList = props => {
               </div>
             </div>
             <div className="row">
-            {products.map((product) => {
-              return (
-                <div className="col-lg-4 pb-3" key={product._id}>
-                  <div className="card">
-                    <div className="card-body">
-                      <h5 className="card-title">{product.name}</h5>
-                      {product.thumbnail && <img alt="ups" src={`data:${product.thumbnail.contentType};base64,${Buffer.from(product.thumbnail.data.data).toString('base64')}`}/>}
-                      <p className="card-text">
-                        <strong>Description: </strong>{product.desc}<br/>
-                        <strong>Price per Hour: </strong>{product.prices.perHour}€<br/>
-                        <strong>Price per Day: </strong>{product.prices.perDay}€
-                      </p>
-                      <div>
-                        <Link to={`/products/product/${product._id}`} className="btn btn-primary col-lg-5 mx-1 mb-1">
-                          View details
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+            {products.map((product) => <ProductCard product={product} />)}
             </div>
             <div>
               <Map {...props} products={products.filter(product => product.location)}/>
@@ -117,3 +97,23 @@ const ProductsList = props => {
 };
 
 export default ProductsList;
+
+
+/* <div className="col-lg-4 pb-3" key={product._id}>
+  <div className="card">
+    <div className="card-body">
+      <h5 className="card-title">{product.name}</h5>
+      {product.thumbnail && <img alt="ups" src={`data:${product.thumbnail.contentType};base64,${Buffer.from(product.thumbnail.data.data).toString('base64')}`}/>}
+      <p className="card-text">
+        <strong>Description: </strong>{product.desc}<br/>
+        <strong>Price per Hour: </strong>{product.prices.perHour}€<br/>
+        <strong>Price per Day: </strong>{product.prices.perDay}€
+      </p>
+      <div>
+        <Link to={`/products/product/${product._id}`} className="btn btn-primary col-lg-5 mx-1 mb-1">
+          View details
+        </Link>
+      </div>
+    </div>
+  </div>
+</div> */
