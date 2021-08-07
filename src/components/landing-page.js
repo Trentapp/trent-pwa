@@ -13,6 +13,7 @@ import overlapGroup1 from "../assets/rectangle-20@1x.png"
 import polygon1 from "../assets/polygon-1@1x.png";
 import polygon2 from "../assets/polygon-2@1x.png";
 import rectangle37 from "../assets/rectangle-37@1x.png";
+import { Box, Center, Text, Heading as Heading2 } from '@chakra-ui/react';
 //import nav4 from "../assets/nav-4-1@1x.png"; // image of nice footer
 
 
@@ -21,6 +22,18 @@ function App(props) {
   console.log(window.location.pathname, props.user._id);
   if (window.location.pathname === "/" && props.user._id){
     history.push("/dashboard");
+  }
+  const mql = window.matchMedia('(max-width:1220px)');
+  if (mql.matches){
+    return <><Box h="100%"><Center w="100%" h={`${120}px`}>
+      <Heading2 as="h1" size="3xl">GET THE APP!</Heading2>
+      <Box h="30px" />
+      {/*Buttons here*/}
+    </Center></Box>
+    <Center>
+      <img src={rectangle37} />
+    </Center>
+    </>
   }
   //return <NewConcept2 {...newConcept2Data} />;
   return <NewConcept2 />
