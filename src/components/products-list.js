@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import ProductDataService from "../services/product-data";
 import ProductCard from "./product-list-item";
 import Map from "../components/map.js";
+import { SimpleGrid } from "@chakra-ui/react";
 
 const locationHD = {
   lat: 49.3988,
@@ -86,9 +87,9 @@ const ProductsList = props => {
                 />
               </div>
             </div>
-            <div className="row">
+            <SimpleGrid columns={2} spacingX={6} spacingY={4} paddingBottom={3}>
             {products.map((product) => <ProductCard product={product} />)}
-            </div>
+            </SimpleGrid>
             <div>
               <Map {...props} products={products.filter(product => product.location)}/>
             </div>
