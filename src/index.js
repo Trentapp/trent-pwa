@@ -3,12 +3,23 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from "./context/AuthContext";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react"
+
+const colors = {
+  brand: {
+    primary: "#e80909",
+    orange: "#ea9f0e"
+  }
+};
+const extendedTheme = extendTheme({ colors })
 
 ReactDOM.render(
   <BrowserRouter>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <ChakraProvider theme={extendedTheme}>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </ChakraProvider>
   </BrowserRouter>,
   document.getElementById('root')
 );

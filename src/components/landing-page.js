@@ -26,19 +26,29 @@ function App(props) {
   return <NewConcept2 />
 }
 
-function Logo1(props) {
+ export const Logo = (props) => {
   return(
     <Link to="/">
-      <Trent>
+      <TrentStyle>
         <Span0>trent</Span0>
         <Span1>.</Span1>
-      </Trent>
+      </TrentStyle>
+    </Link>
+  )
+}
+
+export const LogoSmall = (props) => {
+  return(
+    <Link to="/">
+      <TrentStyleSmall>
+        <Span0>trent</Span0>
+        <Span1>.</Span1>
+      </TrentStyleSmall>
     </Link>
   )
 }
 
 export default App;
-export const Logo = Logo1;
 
 function NewConcept2(props) {
   return (
@@ -49,7 +59,7 @@ function NewConcept2(props) {
           <AnitaDenunzioQA8bs887iD8Unsplash1 src={anitaDenunzioQa8Bs887Id8Unsplash1} />
           <AnitaDenunzioQA8bs887iD8Unsplash1 src={rectangle19} />
           <Link to="/login"><LogIn>{logIn}</LogIn></Link>
-          <Logo/>
+          <TrentPos><Logo/></TrentPos>
           <Group1>
             <Text1>
               <Span01>{spanText3}</Span01>
@@ -176,15 +186,26 @@ const LogIn = styled.div`
   letter-spacing: 0;
 `;
 
-const Trent = styled.div`
+const TrentPos = styled.div`
   position: absolute;
   width: 149px;
   top: 15px;
   left: 37px;
+`;
+
+const TrentStyle = styled.div`
   font-family: var(--font-family-rubik);
   font-weight: 700;
   color: transparent;
   font-size: var(--font-size-l);
+  letter-spacing: 0;
+`;
+
+const TrentStyleSmall = styled.div`
+  font-family: var(--font-family-rubik);
+  font-weight: 700;
+  color: transparent;
+  font-size: var(--font-size-s);
   letter-spacing: 0;
 `;
 
@@ -636,7 +657,7 @@ const text2 = "Get anything quickly and cheaply with a few clicks.";
 // const text3 = "Browse hundreds of products";
 const signUp = "Sign Up";
 const text4 = "We’ve got you covered";
-const text5 = "Rent tools; drones; camping equipment and much more as you need it";
+const text5 = "Rent tools, drones, camping equipment and much more as you need it";
 const text6 = "Get ready for new experiences";
 const text7 = "Explore new activities and get the gear using trent.";
 const becomeALender = "Become a lender";
