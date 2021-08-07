@@ -1,5 +1,5 @@
-import React from 'react';
-import {Link} from "react-router-dom";
+import React, {useRef} from 'react';
+import {Link, useHistory} from "react-router-dom";
 import {
   Box,
   Stack,
@@ -12,20 +12,23 @@ import {
   MenuList,
   MenuItem,
   Avatar,
-  Heading,
-  Flex,
-  Spacer,
   Text,
   Button,
-  useDisclosure
 } from "@chakra-ui/react";
-import { HamburgerIcon, Search2Icon, ChevronDownIcon } from "@chakra-ui/icons";
+import { Search2Icon, ChevronDownIcon } from "@chakra-ui/icons";
 
 import {LogoSmall} from "./landing-page";
 
 export default function Header (props) {
+  const searchRef = useRef();
+  const history = useHistory();
+
+  const onSearch = () => {
+    history.push(`/products?search=${searchRef.current.value}`)
+  }
+
   return (
-    <Box px={8} bg="cyan.800">
+    <Box px={8} bg="cyan.800" marginBottom={3}>
       <Box w="100%" py={2} as="nav" align="center" wrap="wrap">
         <HStack justify="space-between">
           <HStack spacing={8} flex={1}>
@@ -35,9 +38,10 @@ export default function Header (props) {
                 pr="4.5rem"
                 type="text"
                 placeholder="Search products"
+                ref={searchRef}
               />
               <InputRightElement width="4.5rem">
-                <Button h="1.75rem" size="sm" onClick={()=>{}}>
+                <Button h="1.75rem" size="sm" onClick={onSearch}>
                   <Search2Icon />            
                 </Button>
               </InputRightElement>
