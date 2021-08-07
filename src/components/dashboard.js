@@ -5,7 +5,6 @@ import {Table} from "react-bootstrap";
 import TransactionDataService from "../services/transaction-data";
 import ChatDataService from "../services/chat-data";
 import TransactionsListRow from "./transaction-list-row";
-import LandingPage from "./landing-page";
 
 const Dashboard = props => {
     const [lendTransactions, setLendTransactions] = useState([]);

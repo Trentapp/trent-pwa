@@ -5,11 +5,11 @@ import {Link, useHistory} from "react-router-dom";
 
 import anitaDenunzioQa8Bs887Id8Unsplash1 from "../assets/anita-denunzio-qa8bs887id8-unsplash-1-1@1x.png";
 import rectangle19 from "../assets/rectangle-19-1@1x.svg";
-import signup from "../assets/signup@2x.svg";
-import vector from "../assets/vector@2x.svg";
-import vector1 from "../assets/vector-1@2x.svg";
+// import signup from "../assets/signup@2x.svg";
+// import vector from "../assets/vector@2x.svg";
+// import vector1 from "../assets/vector-1@2x.svg";
 import overlapGroup1 from "../assets/rectangle-20@1x.png"
-import overlapGroup2 from "../assets/searchbar-base@1x.svg";
+// import overlapGroup2 from "../assets/searchbar-base@1x.svg";
 import polygon1 from "../assets/polygon-1@1x.png";
 import polygon2 from "../assets/polygon-2@1x.png";
 import rectangle37 from "../assets/rectangle-37@1x.png";
@@ -19,7 +19,7 @@ import rectangle37 from "../assets/rectangle-37@1x.png";
 function App(props) {
   const history = useHistory();
   console.log(window.location.pathname, props.user._id);
-  if (window.location.pathname == "/" && props.user._id){
+  if (window.location.pathname === "/" && props.user._id){
     history.push("/dashboard");
   }
   //return <NewConcept2 {...newConcept2Data} />;
@@ -233,40 +233,40 @@ const Text2 = styled.div`
   color: var(--white);
 `;
 
-const FlexRow = styled.div`
-  display: flex;
-  align-items: flex-start;
-  min-width: 254px;
-  margin-top: 23px;
-`;
+// const FlexRow = styled.div`
+//   display: flex;
+//   align-items: flex-start;
+//   min-width: 254px;
+//   margin-top: 23px;
+// `;
 
-const Login = styled.div`
-  height: 47px;
-  margin-top: 1px;
-  display: flex;
-  padding: 8px 5.1px;
-  justify-content: flex-end;
-  align-items: flex-start;
-  min-width: 117px;
-  border-radius: 10px;
-  border: 2px solid var(--white);
-`;
+// const Login = styled.div`
+//   height: 47px;
+//   margin-top: 1px;
+//   display: flex;
+//   padding: 8px 5.1px;
+//   justify-content: flex-end;
+//   align-items: flex-start;
+//   min-width: 117px;
+//   border-radius: 10px;
+//   border: 2px solid var(--white);
+// `;
 
-const LogIn1 = styled.div`
-  width: 104px;
-  min-height: 30px;
-  font-family: var(--font-family-baloo_tamma_2);
-  color: var(--white);
-  font-size: var(--font-size-xxs);
-  text-align: center;
-  letter-spacing: 0;
-`;
+// const LogIn1 = styled.div`
+//   width: 104px;
+//   min-height: 30px;
+//   font-family: var(--font-family-baloo_tamma_2);
+//   color: var(--white);
+//   font-size: var(--font-size-xxs);
+//   text-align: center;
+//   letter-spacing: 0;
+// `;
 
-const Signup = styled.img`
-  width: 126px;
-  height: 55px;
-  margin-left: 11px;
-`;
+// const Signup = styled.img`
+//   width: 126px;
+//   height: 55px;
+//   margin-left: 11px;
+// `;
 
 const Rectangle7 = styled.div`
   position: absolute;
@@ -277,67 +277,67 @@ const Rectangle7 = styled.div`
   background-color: #eeeeee;
 `;
 
-const SearchBar = styled.div`
-  position: absolute;
-  height: 63px;
-  top: 153px;
-  left: 240px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-`;
+// const SearchBar = styled.div`
+//   position: absolute;
+//   height: 63px;
+//   top: 153px;
+//   left: 240px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: flex-end;
+// `;
 
-const OverlapGroup2 = styled.div`
-  height: 71px;
-  margin-bottom: -8px;
-  display: flex;
-  padding: 17px 17.2px;
-  justify-content: flex-end;
-  align-items: flex-start;
-  min-width: 1239px;
-  background-image: url(searchbar-base.svg);
-  background-size: 100% 100%;
-`;
+// const OverlapGroup2 = styled.div`
+//   height: 71px;
+//   margin-bottom: -8px;
+//   display: flex;
+//   padding: 17px 17.2px;
+//   justify-content: flex-end;
+//   align-items: flex-start;
+//   min-width: 1239px;
+//   background-image: url(searchbar-base.svg);
+//   background-size: 100% 100%;
+// `;
 
-const Location = styled.div`
-  display: flex;
-  align-items: center;
-  min-width: 155px;
-`;
+// const Location = styled.div`
+//   display: flex;
+//   align-items: center;
+//   min-width: 155px;
+// `;
 
-const Vector = styled.img`
-  width: 16px;
-  height: 16px;
-  margin-left: -1px;
-  margin-top: 1px;
-`;
+// const Vector = styled.img`
+//   width: 16px;
+//   height: 16px;
+//   margin-left: -1px;
+//   margin-top: 1px;
+// `;
 
-const OverlapGroup3 = styled.div`
-  width: 121px;
-  height: 29px;
-  position: relative;
-  margin-left: 18px;
-`;
+// const OverlapGroup3 = styled.div`
+//   width: 121px;
+//   height: 29px;
+//   position: relative;
+//   margin-left: 18px;
+// `;
 
-const Place = styled.div`
-  position: absolute;
-  width: 109px;
-  top: 0;
-  left: 0;
-  opacity: 0.8;
-  font-family: var(--font-family-baloo_2);
-  color: var(--black);
-  font-size: var(--font-size-xxs);
-  letter-spacing: 0;
-`;
+// const Place = styled.div`
+//   position: absolute;
+//   width: 109px;
+//   top: 0;
+//   left: 0;
+//   opacity: 0.8;
+//   font-family: var(--font-family-baloo_2);
+//   color: var(--black);
+//   font-size: var(--font-size-xxs);
+//   letter-spacing: 0;
+// `;
 
-const Vector1 = styled.img`
-  position: absolute;
-  width: 12px;
-  height: 7px;
-  top: 14px;
-  left: 109px;
-`;
+// const Vector1 = styled.img`
+//   position: absolute;
+//   width: 12px;
+//   height: 7px;
+//   top: 14px;
+//   left: 109px;
+// `;
 
 const Rectangle10 = styled.div`
   position: absolute;
@@ -369,133 +369,133 @@ const Text3 = styled.div`
   color: var(--black);
 `;
 
-const Group = styled.div`
-  position: absolute;
-  height: 86px;
-  top: 3036px;
-  left: 233px;
-  display: flex;
-  align-items: flex-start;
-  min-width: 275px;
-  background-image: url(vector-2.svg);
-  background-size: 100% 100%;
-`;
+// const Group = styled.div`
+//   position: absolute;
+//   height: 86px;
+//   top: 3036px;
+//   left: 233px;
+//   display: flex;
+//   align-items: flex-start;
+//   min-width: 275px;
+//   background-image: url(vector-2.svg);
+//   background-size: 100% 100%;
+// `;
 
-const OverlapGroup4 = styled.div`
-  width: 274px;
-  height: 85px;
-  position: relative;
-  margin-top: -0.49px;
-`;
+// const OverlapGroup4 = styled.div`
+//   width: 274px;
+//   height: 85px;
+//   position: relative;
+//   margin-top: -0.49px;
+// `;
 
-const Vector2 = styled.img`
-  position: absolute;
-  width: 273px;
-  height: 84px;
-  top: 1px;
-  left: 1px;
-`;
+// const Vector2 = styled.img`
+//   position: absolute;
+//   width: 273px;
+//   height: 84px;
+//   top: 1px;
+//   left: 1px;
+// `;
 
-const Group2 = styled.div`
-  position: absolute;
-  height: 55px;
-  top: 14px;
-  left: 27px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-`;
+// const Group2 = styled.div`
+//   position: absolute;
+//   height: 55px;
+//   top: 14px;
+//   left: 27px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: flex-start;
+// `;
 
-const OverlapGroup21 = styled.div`
-  width: 43px;
-  height: 56px;
-  position: relative;
-  margin-top: -0.67px;
-`;
+// const OverlapGroup21 = styled.div`
+//   width: 43px;
+//   height: 56px;
+//   position: relative;
+//   margin-top: -0.67px;
+// `;
 
-const Vector3 = styled.img`
-  position: absolute;
-  width: 43px;
-  height: 43px;
-  top: 13px;
-  left: 0;
-`;
+// const Vector3 = styled.img`
+//   position: absolute;
+//   width: 43px;
+//   height: 43px;
+//   top: 13px;
+//   left: 0;
+// `;
 
-const Vector4 = styled.img`
-  position: absolute;
-  width: 11px;
-  height: 14px;
-  top: 0;
-  left: 21px;
-`;
+// const Vector4 = styled.img`
+//   position: absolute;
+//   width: 11px;
+//   height: 14px;
+//   top: 0;
+//   left: 21px;
+// `;
 
-const Group3 = styled.div`
-  position: absolute;
-  height: 37px;
-  top: 39px;
-  left: 87px;
-  display: flex;
-  align-items: flex-start;
-`;
+// const Group3 = styled.div`
+//   position: absolute;
+//   height: 37px;
+//   top: 39px;
+//   left: 87px;
+//   display: flex;
+//   align-items: flex-start;
+// `;
 
-const Vector5 = styled.img`
-  width: 24px;
-  height: 29px;
-  margin-top: 0.24px;
-`;
+// const Vector5 = styled.img`
+//   width: 24px;
+//   height: 29px;
+//   margin-top: 0.24px;
+// `;
 
-const Vector6 = styled.img`
-  width: 20px;
-  height: 31px;
-  align-self: flex-end;
-  margin-left: 2px;
-  margin-bottom: -0.77px;
-`;
+// const Vector6 = styled.img`
+//   width: 20px;
+//   height: 31px;
+//   align-self: flex-end;
+//   margin-left: 2px;
+//   margin-bottom: -0.77px;
+// `;
 
-const Vector7 = styled.img`
-  width: 18px;
-  height: 31px;
-  margin-left: 7px;
-  margin-top: -0.77px;
-`;
+// const Vector7 = styled.img`
+//   width: 18px;
+//   height: 31px;
+//   margin-left: 7px;
+//   margin-top: -0.77px;
+// `;
 
-const Vector8 = styled.img`
-  width: 13px;
-  height: 28px;
-  margin-left: 1px;
-  margin-top: 2.36px;
-`;
+// const Vector8 = styled.img`
+//   width: 13px;
+//   height: 28px;
+//   margin-left: 1px;
+//   margin-top: 2.36px;
+// `;
 
-const Vector9 = styled.img`
-  width: 20px;
-  height: 23px;
-  align-self: center;
-  margin-left: 1px;
-  margin-top: 0.04px;
-`;
+// const Vector9 = styled.img`
+//   width: 20px;
+//   height: 23px;
+//   align-self: center;
+//   margin-left: 1px;
+//   margin-top: 0.04px;
+// `;
 
-const Vector10 = styled.img`
-  width: 12px;
-  height: 22px;
-  align-self: center;
-  margin-left: 2px;
-  margin-bottom: 0.43px;
-`;
+// const Vector10 = styled.img`
+//   width: 12px;
+//   height: 22px;
+//   align-self: center;
+//   margin-left: 2px;
+//   margin-bottom: 0.43px;
+// `;
 
-const Vector11 = styled.img`
-  width: 18px;
-  height: 23px;
-  align-self: center;
-  margin-bottom: 0.09px;
-`;
+// const Vector11 = styled.img`
+//   width: 18px;
+//   height: 23px;
+//   align-self: center;
+//   margin-bottom: 0.09px;
+// `;
 
-const Group4 = styled.img`
-  position: absolute;
-  width: 159px;
-  height: 16px;
-  top: 14px;
-  left: 89px;
-`;
+// const Group4 = styled.img`
+//   position: absolute;
+//   width: 159px;
+//   height: 16px;
+//   top: 14px;
+//   left: 89px;
+// `;
 
 const SignUp = styled.div`
   ${Baloo2NormalWhite24px}
@@ -620,20 +620,20 @@ const Text8 = styled.div`
   color: var(--white);
 `;
 
-const Nav4 = styled.img`
-  width: 1709px;
-  height: 278px;
-`;
+// const Nav4 = styled.img`
+//   width: 1709px;
+//   height: 278px;
+// `;
 
 const logIn = "Log In";
-const spanText = "trent";
-const spanText2 = ".";
+// const spanText = "trent";
+// const spanText2 = ".";
 const spanText3 = "Renting made ";
 const spanText4 = "awesome.";
 const text2 = "Get anything quickly and cheaply with a few clicks.";
-const logIn2 = "Log in";
-const place = "Heidelberg";
-const text3 = "Browse hundreds of products";
+// const logIn2 = "Log in";
+// const place = "Heidelberg";
+// const text3 = "Browse hundreds of products";
 const signUp = "Sign Up";
 const text4 = "We’ve got you covered";
 const text5 = "Rent tools; drones; camping equipment and much more as you need it";

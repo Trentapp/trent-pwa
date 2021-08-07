@@ -1,9 +1,7 @@
 import React from "react";
 import {Modal, Button} from "react-bootstrap";
-import Datetime from "react-datetime";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
-import setMinutes from "date-fns/setMinutes";
 
 const BookingRequest = props => {
     return(
