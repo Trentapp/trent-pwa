@@ -39,6 +39,7 @@ export default function Header (props) {
                 type="text"
                 placeholder="Search products"
                 ref={searchRef}
+                onKeyDown={e => {if (e.key === "Enter") {onSearch()}}}
               />
               <InputRightElement width="4.5rem">
                 <Button h="1.75rem" size="sm" onClick={onSearch}>
