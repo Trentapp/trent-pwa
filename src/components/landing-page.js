@@ -13,7 +13,7 @@ import overlapGroup1 from "../assets/rectangle-20@1x.png"
 import polygon1 from "../assets/polygon-1@1x.png";
 import polygon2 from "../assets/polygon-2@1x.png";
 import rectangle37 from "../assets/rectangle-37@1x.png";
-import { Box, Center, Text, Heading as Heading2 } from '@chakra-ui/react';
+import { Box, Center, Heading as Heading2 } from '@chakra-ui/react';
 //import nav4 from "../assets/nav-4-1@1x.png"; // image of nice footer
 
 
@@ -31,7 +31,7 @@ function App(props) {
       {/*Buttons here*/}
     </Center></Box>
     <Center>
-      <img src={rectangle37} />
+      <img src={rectangle37} alt=""/>
     </Center>
     </>
   }

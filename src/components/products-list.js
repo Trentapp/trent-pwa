@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from "react";
-import {Link} from "react-router-dom";
 import qs from "qs";
 
 import ProductDataService from "../services/product-data";
-import ProductCard, { ProductCard2 } from "./product-list-item";
+import { ProductCard2 } from "./product-list-item";
 import Map from "../components/map.js";
-import { Box, HStack, SimpleGrid, VStack, StackDivider } from "@chakra-ui/react";
+import { Box, HStack, VStack, StackDivider } from "@chakra-ui/react";
 
 const locationHD = {
   lat: 49.3988,

@@ -1,4 +1,4 @@
-import { HStack, Image, VStack, Text, Heading, Box, Flex, Center } from '@chakra-ui/react'
+import { HStack, Image, VStack, Text, Heading, Box, Center } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 

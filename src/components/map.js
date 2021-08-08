@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import {GoogleMap, useLoadScript, Marker, InfoWindow} from "@react-google-maps/api";
+import {GoogleMap, useLoadScript, Marker} from "@react-google-maps/api";
 import dotenv from "dotenv";
-import { AspectRatio, Box } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 import mapIcon2 from "../assets/marker2.png";
 import mapIcon1 from "../assets/marker1.png";
-import ProductCard, { ProductCardSmall, ProductCardFixed } from "./product-list-item";
+import { ProductCardFixed } from "./product-list-item";
 
 dotenv.config();
 
@@ -52,7 +52,7 @@ const Map = props => {
                         onClick={() => {
                             setSelected(product);
                         }}
-                        icon={(props.enhanced == product || selected == product) ? mapIcon2 : mapIcon1}
+                        icon={(props.enhanced === product || selected === product) ? mapIcon2 : mapIcon1}
                         />
                 ))} {/* maybe set another icon later */ }
 
