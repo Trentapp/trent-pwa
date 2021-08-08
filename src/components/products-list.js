@@ -5,7 +5,7 @@ import qs from "qs";
 import ProductDataService from "../services/product-data";
 import ProductCard, { ProductCard2 } from "./product-list-item";
 import Map from "../components/map.js";
-import { Box, HStack, SimpleGrid, VStack } from "@chakra-ui/react";
+import { Box, HStack, SimpleGrid, VStack, StackDivider } from "@chakra-ui/react";
 
 const locationHD = {
   lat: 49.3988,
@@ -55,9 +55,11 @@ const ProductsList = props => {
               <Box w="50%" h="100%">
                 <Map {...props} products={products.filter(product => product.location)}/>
               </Box>
-              <VStack w="50%">
-                {products.map((product) => <ProductCard2 product={product} />)}
-              </VStack>
+              <Box w="50%">
+                <VStack divider={<StackDivider borderColor="gray.200" />}>
+                  {products.map((product) => <ProductCard2 product={product} />)}
+                </VStack>
+              </Box>
             </HStack>
         </Box>
     );

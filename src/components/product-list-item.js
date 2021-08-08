@@ -1,4 +1,4 @@
-import { HStack, Image, VStack, Text, Heading, Box, Flex } from '@chakra-ui/react'
+import { HStack, Image, VStack, Text, Heading, Box, Flex, Center } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -37,19 +37,21 @@ export default function ProductCard(props) {
 
 export const ProductCard2 = (props) => {
     return (
-        <Box w="100%" h="220px">
+        <Box w="100%" h="240px">
             <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/product/${props.product._id}`}>
                 <HStack
-                    bgColor="gray.50"
                     overflow="hidden"
                     w="100%"
+                    h="100%"
                     align="stretch"
                 >
-                    <Box marginLeft={3} borderRadius="2xl" overflow="hidden">
+                    <Center>
+                    <Box marginLeft={3} borderRadius="2xl" overflow="hidden" h="200px" w="200px">
                         {props.product.thumbnail ? <Image src={`data:${props.product.thumbnail.contentType};base64,${Buffer.from(props.product.thumbnail.data.data).toString('base64')}`} />
-                            : <Image src="https://via.placeholder.com/200x200?text=No+Image+Available" />}
+                            : <Image src="https://via.placeholder.com/350x350?text=No+Image+Available" />}
                     </Box>
-                    <VStack w="100%" py={3}>
+                    </Center>
+                    <VStack w="100%" py={6}>
                         <Box w="100%">
                             <HStack justify="space-between" paddingLeft={2} paddingRight={4}>
                                 <Heading as="h3" size="md">{props.product.name}</Heading>
