@@ -8,7 +8,6 @@ import TransactionDataService from "../services/transaction-data";
 import ChatDataService from "../services/chat-data";
 import BookingRequest from "../components/booking-request";
 import QuestionForm from "../components/ask-question";
-import Map from "../components/map.js";
 
 
 const Product = props => {
@@ -136,9 +135,6 @@ const Product = props => {
                     </div>                    
                     <br/>
                     </>}
-                </div>
-                <div>
-                    {product.location && <Map {...props} products={[product]}/>}
                 </div>
             </>
             )}
