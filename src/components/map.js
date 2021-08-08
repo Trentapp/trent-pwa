@@ -5,6 +5,7 @@ import { AspectRatio, Box } from "@chakra-ui/react";
 
 import mapIcon2 from "../assets/marker2.png";
 import mapIcon1 from "../assets/marker1.png";
+import ProductCard, { ProductCardSmall, ProductCardFixed } from "./product-list-item";
 
 dotenv.config();
 
@@ -44,28 +45,29 @@ const Map = props => {
         <Box style={mapContainerStyle}>
             <GoogleMap mapContainerStyle={{width: "100%", height: "100%"}}
                 zoom={13} center={center} option={options}
-                onLoad={onMapLoad}>
+                onLoad={onMapLoad} onClick={() => setSelected({})}>
                 {props.products.map((product) => (
                     <Marker key={product._id}
                         position={{lat: product.location.coordinates[1], lng: product.location.coordinates[0]}}
                         onClick={() => {
                             setSelected(product);
                         }}
-                        icon={props.enhanced == product ? mapIcon2 : mapIcon1}
+                        icon={(props.enhanced == product || selected == product) ? mapIcon2 : mapIcon1}
                         />
                 ))} {/* maybe set another icon later */ }
 
                 {selected.location ? (
-                <InfoWindow position={{lat: selected.location.coordinates[1], lng: selected.location.coordinates[0]}}
-                    onCloseClick={() => setSelected({})}>
-                    <Box>
-                        <h4>{selected.name}</h4>
-                        <p>{selected.desc}</p>
-                    </Box>
-                </InfoWindow>) : null}
+                    <ProductCardFixed product={selected} />
+                ) : null}
             </GoogleMap>
         </Box>
     )
 };
 
 export default Map;
+
+
+                // <InfoWindow position={{lat: selected.location.coordinates[1], lng: selected.location.coordinates[0]}}
+                //     onCloseClick={() => setSelected({})}>
+                //     {/*<ProductCardSmall product={selected} />*/}
+                // </InfoWindow>
