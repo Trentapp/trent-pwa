@@ -37,13 +37,15 @@ export default function ProductCard(props) {
 
 export const ProductCard2 = (props) => {
     return (
-        <Box w="100%" h="240px">
+        <Box w="100%" h="240px" onMouseOver={() => {console.log(props.product.name); props.setEnhanced(props.product)}}>
+            <Box _hover={{bg:"gray.100"}} h="100%">
             <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/product/${props.product._id}`}>
                 <HStack
                     overflow="hidden"
                     w="100%"
                     h="100%"
                     align="stretch"
+                    
                 >
                     <Center>
                     <Box marginLeft={3} borderRadius="2xl" overflow="hidden" h="200px" w="200px">
@@ -65,6 +67,7 @@ export const ProductCard2 = (props) => {
                     </VStack>
                 </HStack>
             </Link>
+            </Box>
         </Box>
     )
 }

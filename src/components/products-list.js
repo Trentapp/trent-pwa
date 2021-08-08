@@ -16,6 +16,7 @@ const ProductsList = props => {
     const [products, setProducts] = useState([]);
     const searchString = props.location.search ? qs.parse(props.location.search, {ignoreQueryPrefix: true, delimiter: "&"}).search : "";
     const [filters, setFilters] = useState(props.inventory ? {name: searchString, dayPriceMax: "", hourPriceMax: "", lat: locationHD.lat, lng: locationHD.lng, inventoryUserId: props.user._id} : {name: searchString, dayPriceMax: "", hourPriceMax: "", lat: locationHD.lat, lng: locationHD.lng});
+    const [enhanced, setEnhanced] = useState();
     //add possibilities for pagination later
 
     useEffect(() => {
@@ -53,11 +54,11 @@ const ProductsList = props => {
         <Box w="100%">
             <HStack w="100%">
               <Box w="50%" h="100%">
-                <Map {...props} products={products.filter(product => product.location)}/>
+                <Map {...props} products={products.filter(product => product.location)} enhanced={enhanced}/>
               </Box>
               <Box w="50%">
                 <VStack divider={<StackDivider borderColor="gray.200" />}>
-                  {products.map((product) => <ProductCard2 product={product} />)}
+                  {products.map((product) => <ProductCard2 product={product} setEnhanced={setEnhanced}/>)}
                 </VStack>
               </Box>
             </HStack>

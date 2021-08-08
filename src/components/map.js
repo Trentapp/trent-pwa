@@ -3,6 +3,9 @@ import {GoogleMap, useLoadScript, Marker, InfoWindow} from "@react-google-maps/a
 import dotenv from "dotenv";
 import { AspectRatio, Box } from "@chakra-ui/react";
 
+import mapIcon2 from "../assets/marker2.png";
+import mapIcon1 from "../assets/marker1.png";
+
 dotenv.config();
 
 const libraries = ["places"];
@@ -47,7 +50,9 @@ const Map = props => {
                         position={{lat: product.location.coordinates[1], lng: product.location.coordinates[0]}}
                         onClick={() => {
                             setSelected(product);
-                        }} />
+                        }}
+                        icon={props.enhanced == product ? mapIcon2 : mapIcon1}
+                        />
                 ))} {/* maybe set another icon later */ }
 
                 {selected.location ? (
