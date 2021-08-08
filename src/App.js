@@ -18,7 +18,7 @@ import NotFound from "./components/NotFound";
 import PrivateRoute from "./components/PrivateRoute";
 import LoggedOutRoute from "./components/LoggedOutRoute";
 import Chat from "./components/chat";
-import Footer from "./components/footer";
+import Footer, { ProductsListFooter } from "./components/footer";
 import About from "./components/about";
 import Impressum from "./components/impressum";
 import Datenschutz from "./components/datenschutz";
@@ -59,15 +59,15 @@ function App() {
     <>
     <div className="wrapper flex-shrink-0">
     {window.location.pathname !== '/landing-page' && (window.location.pathname !== '/' || user._id) && <Header user={user} handleLogout={handleLogout}/>}
-      <div className="container">
-        <Switch>
+      <Switch>
+        <Route exact path="/products"
+          render={(props) => (<ProductsList {...props} inventory={false} />)} /> {/* I think it actually should not be rendered (just included as component), but it is just a test for now */}
+        <div className="container">
           <Route exact path={["/", "/landing-page"]} 
             render={(props) => (<LandingPage {...props} user={user} />)} />
           <Route exact path={["/dashboard"]} 
             render={(props) => (<Dashboard {...props} user={user} />)} />
           <Route exact path="/about" component={About} />
-          <Route exact path="/products"
-            render={(props) => (<ProductsList {...props} inventory={false} />)} /> {/* I think it actually should not be rendered (just included as component), but it is just a test for now */}
           <PrivateRoute exact path="/inventory"
             component={ProductsList} inventory={true} user={user}/>
           <Route path="/products/product/:id"
@@ -86,11 +86,11 @@ function App() {
           <Route path="/impressum" component={Impressum} />
           <Route path="/datenschutz" component={Datenschutz} />
           <Route path="*" component={NotFound} />
-        </Switch>
-      </div>
+        </div>
+      </Switch>
       <div className="push"></div>
     </div>
-    <footer className="footer"><Footer /></footer>
+    <footer className="footer">{window.location.pathname === "/products" ? <ProductsListFooter/> : <Footer />}</footer>
     </>
   );
 }

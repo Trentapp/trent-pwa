@@ -28,8 +28,8 @@ export default function Header (props) {
   }
 
   return (
-    <Box px={8} bg="cyan.800" marginBottom={3}>
-      <Box w="100%" py={2} as="nav" align="center" wrap="wrap">
+    <Box h="75px">
+      <Box px={8} w="100%" py={2} bg="cyan.800" as="nav" align="center" wrap="wrap" position="fixed">
         <HStack justify="space-between">
           <HStack spacing={8} flex={1}>
             <LogoSmall />

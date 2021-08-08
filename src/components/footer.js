@@ -1,3 +1,4 @@
+import { Box, HStack } from "@chakra-ui/react";
 import React from "react";
 import {Link} from "react-router-dom";
 import "../css/footer.css";
@@ -20,3 +21,27 @@ const Footer = props => {
 }
 
 export default Footer;
+
+export const ProductsListFooter = props => {
+    return(
+        <Box w="100%">
+            <HStack>
+            <Box w="50%"></Box>
+            <Box w="50%" className="footer-basic">
+                {/*<Box className="social"><a href="#"><i className="icon ion-social-instagram"></i></a><a href="#"><i className="icon ion-social-snapchat"></i></a><a href="#"><i className="icon ion-social-twitter"></i></a><a href="#"><i className="icon ion-social-facebook"></i></a></Box>*/}
+                <ul className="list-inline">
+                    <li className="list-inline-item"><Link to="/">Home</Link></li>
+                    <li className="list-inline-item"><Link to="/dashboard">Dashboard</Link></li>
+                    <li className="list-inline-item"><Link to="/about">Über uns</Link></li>
+                    <li className="list-inline-item"><Link to="/terms">AGB</Link></li>
+                    <li className="list-inline-item"><Link to="/impressum">Impressum</Link></li>
+                    <li className="list-inline-item"><Link to="/datenschutz">Datenschutz</Link></li>
+                </ul>
+                <p className="copyright">Trentapp UG © 2021</p>
+            </Box>
+            </HStack>
+        </Box>
+    )
+}
+
+

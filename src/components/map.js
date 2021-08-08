@@ -1,13 +1,17 @@
 import React, {useState} from "react";
 import {GoogleMap, useLoadScript, Marker, InfoWindow} from "@react-google-maps/api";
 import dotenv from "dotenv";
+import { AspectRatio, Box } from "@chakra-ui/react";
 
 dotenv.config();
 
 const libraries = ["places"];
 const mapContainerStyle = {
-    width: "100%",
-    height: "100vh",
+    width: "50%",
+    height: `${window.innerHeight - 75}px`,
+    position: "fixed",
+    display: "block",
+    top: "75px",
 };
 const center = {
     lat: 49.3988,
@@ -34,8 +38,8 @@ const Map = props => {
     if (!isLoaded) return "Loading Maps";
 
     return(
-        <div>
-            <GoogleMap mapContainerStyle={mapContainerStyle}
+        <Box style={mapContainerStyle}>
+            <GoogleMap mapContainerStyle={{width: "100%", height: "100%"}}
                 zoom={13} center={center} option={options}
                 onLoad={onMapLoad}>
                 {props.products.map((product) => (
@@ -49,13 +53,13 @@ const Map = props => {
                 {selected.location ? (
                 <InfoWindow position={{lat: selected.location.coordinates[1], lng: selected.location.coordinates[0]}}
                     onCloseClick={() => setSelected({})}>
-                    <div>
+                    <Box>
                         <h4>{selected.name}</h4>
                         <p>{selected.desc}</p>
-                    </div>
+                    </Box>
                 </InfoWindow>) : null}
             </GoogleMap>
-        </div>
+        </Box>
     )
 };
 
