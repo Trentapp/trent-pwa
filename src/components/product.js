@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from "react";
 import {Link, useHistory} from "react-router-dom";
 import {Button} from "react-bootstrap";
 import ImageGallery from 'react-image-gallery';
-// import sharp from "sharp";
+import "react-image-gallery/styles/css/image-gallery.css";
 
 import ProductDataService from "../services/product-data";
 import TransactionDataService from "../services/transaction-data";
@@ -19,6 +19,20 @@ const Product = props => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [showQuestionForm, setShowQuestionForm] = useState(false);
+    const [images, setImages] = useState([
+        {
+          original: 'https://picsum.photos/id/1018/1000/600/',
+          thumbnail: 'https://picsum.photos/id/1018/250/150/',
+        },
+        {
+          original: 'https://picsum.photos/id/1015/1000/600/',
+          thumbnail: 'https://picsum.photos/id/1015/250/150/',
+        },
+        {
+          original: 'https://picsum.photos/id/1019/1000/600/',
+          thumbnail: 'https://picsum.photos/id/1019/250/150/',
+        },
+      ]);
     const messageRef = useRef();
     let history = useHistory();
 
@@ -108,25 +122,14 @@ const Product = props => {
     useEffect(() => {
         try {
             let imgs = [];
-            if (product.pictures){
-                for (let picture of product.pictures) {
-                    // const base64 = `data:${picture.contentType};base64,${Buffer.from(picture.data.data).toString('base64')}`;
-                    // const image = sharp(Buffer.from(picture.data.data))
-                    //     .resize({height: 500})
-                    //     .toBuffer();
-                    // const imageSm = sharp(Buffer.from(picture))
-                    //     .resize({height: 100})
-                    //     .toBuffer();
-                    // imgs.push({
-                    //     original: `data:${picture.contentType};base64,${image.toString('base64')}`,
-                    //     thumbnail: `data:${picture.contentType};base64,${imageSm.toString('base64')}`
-                    // });
+            if (product.picturesFitted){
+                for (let i = 0; i < product.picturesFitted.length; i++) {
                     imgs.push({
-                        original: `data:${picture.contentType};base64,${picture.data.data.toString('base64')}`,
-                        thumbnail: `data:${picture.contentType};base64,${picture.data.data.toString('base64')}`
+                        original: `data:${product.picturesFitted[i].contentType};base64,${Buffer.from(product.picturesFitted[i].data.data).toString('base64')}`,
+                        thumbnail: `data:${product.thumbnails[i].contentType};base64,${Buffer.from(product.thumbnails[i].data.data).toString('base64')}`
                     })
                 }
-                //setImages(imgs)
+                setImages(imgs)
             }
         } catch(e) {
             setError("Could not make images work");
@@ -137,9 +140,10 @@ const Product = props => {
 
     return(
         <Box>
-            <Box>
+            <Box w="600px" h="400px">
                 {product.name}
-                {product.picturesFitted && <Image src={`data:${product.picturesFitted[2].contentType};base64,${Buffer.from(product.picturesFitted[2].data.data).toString('base64')}`} />}
+                {/* {product.picturesFitted && <Image src={`data:${product.picturesFitted[0].contentType};base64,${Buffer.from(product.picturesFitted[0].data.data).toString('base64')}`} />} */}
+                {product.picturesFitted && <ImageGallery items={images} />}
             </Box>
         </Box>
     )

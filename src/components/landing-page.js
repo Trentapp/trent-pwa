@@ -19,7 +19,6 @@ import { Box, Center, Heading as Heading2 } from '@chakra-ui/react';
 
 function App(props) {
   const history = useHistory();
-  console.log(window.location.pathname, props.user._id);
   if (window.location.pathname === "/" && props.user._id){
     history.push("/dashboard");
   }
