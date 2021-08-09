@@ -5,15 +5,17 @@ import StarRatings from "react-star-ratings";
 import UserDataService from "../services/user-data";
 import ReviewDataService from "../services/reviews-data";
 import TransactionDataService from "../services/transaction-data";
+import AddProduct from './add-product';
 // import AddReview from "./add-review";
 // import Review from "./Review";
-import { Box, HStack, Container, Heading, VStack, Text, Divider, Avatar, IconButton } from '@chakra-ui/react';
+import { Box, HStack, Container, Heading, VStack, Text, Divider, Avatar, IconButton, Flex, Button } from '@chakra-ui/react';
 import ProductCard from './product-list-item';
-import { EditIcon } from '@chakra-ui/icons';
+import { AddIcon, EditIcon } from '@chakra-ui/icons';
 
 const Profile = props => {
     const initialUserState = {name: "", mail: "", inventory: []}; //later probably replace mail with email
     const [profileUser, setProfileUser] = useState(initialUserState);
+    const [showAddProduct, setShowAddProduct] = useState(false);
     const [reviews, setReviews] = useState([]);
     const [error, setError] = useState(""); //Later: replace error to redirect to 404 page
     const [openReview, setOpenReview] = useState(false); //later set default to false and make check in the beginning if a transaction between the users exist, but no review yet
@@ -62,6 +64,7 @@ const Profile = props => {
 
     return (
         <Container maxW="container.lg" marginTop={2}>
+            {profileUser._id === props.user._id && <AddProduct user={props.user} isOpen={showAddProduct} setIsOpen={setShowAddProduct}/>}
             <Box>
                 <HStack align="flex-start" spacing="70px">
                     <VStack w="200px">
@@ -84,7 +87,12 @@ const Profile = props => {
                             <Heading size="lg">Inventory of {profileUser.name}</Heading>
                             <Divider />
                         </Box>
-                        <VStack spacing="15px">
+                        {profileUser._id === props.user._id && 
+                            <Button width="100%" colorScheme="green" onClick={() => setShowAddProduct(true)}>
+                                Add new item
+                            </Button>
+                        }
+                        <VStack spacing="15px" paddingTop={4}>
                             {profileUser.inventory.map((product) => <ProductCard product={product} />)}
                         </VStack>
                     </VStack>

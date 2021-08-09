@@ -1,3 +1,4 @@
+import { Button, Center, FormControl, FormLabel, HStack, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text } from "@chakra-ui/react";
 import React, {useState, useEffect} from "react";
 import {useHistory} from "react-router-dom";
 
@@ -17,6 +18,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
         address: {
             street: "",
             houseNumber: "",
+            streetWithNr: "",
             zipcode: "",
             city: "",
             country: "",
@@ -29,7 +31,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
     useEffect(() => {
         async function getOldProduct() {
             try {
-                if (props.match.params.id){
+                if (props.updateProductId){
                     const response = await ProductDataService.get(props.match.params.id); //I get a warning here that I don't understand very well. Maybe change it later.
                     setProduct(response.data);//for updating a product the userId should be set correctly here
                     if (props.user._id !== response.data.user._id){
@@ -46,7 +48,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
         if (props.user.address) {//attention: if the product has a different address than the user, the address will be set to the address of the user!
             setProduct(product => ({...product, address: props.user.address}));
         }
-    }, [props.match.params.id, props.user, history]);
+    }, [props.updateProductId, props.user, history]);
 
     //should those onChange functions be async?
 
@@ -80,6 +82,11 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
         setProduct(product => ({...product, address: {...product.address, houseNumber: e.target.value}}));
     };
 
+    const onChangeStreetWithNr = e => {
+        e.persist();
+        setProduct(product => ({...product, address: {...product.address, streetWithNr: e.target.value}}));
+    };
+
     const onChangeZipcode = e => {
         e.persist();
         setProduct(product => ({...product, address: {...product.address, zipcode: e.target.value}}));
@@ -98,25 +105,6 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
     const onChangePictures = e => {
         setFiles(e.target.files);
     }
-
-    /*useEffect(() => { // I think that was just to parse the files to base64
-        const fileUpload = () => {//has that async an effect if I have no await?
-            try {
-                let base64files = [];
-                let reader = new FileReader();
-                reader.onloadend = () => {
-                    base64files.push(reader.result);
-                }
-                for (const file of files) {
-                    reader.readAsDataURL(file);
-                }
-                setProduct(product => ({...product, pictures: base64files}));
-            } catch (e) {
-                console.log("Error in fileUpload: ", e);
-            }
-        }
-        fileUpload();
-    }, [files]);*/
 
     //TODO: add a validity check to only upload .jpg and .png images
     const fileUploadHandler = () => {
@@ -147,104 +135,55 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
     };
 
     return(
-        <div>
-            <h2>{props.match.params.id ? <>Update Product</> : <>Add a new product</>}</h2>
-            <div className="form-group">
-                <div className="row input-group">
-                <label>Name of Product</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    required
-                    placeholder="e.g. portable camping table"
-                    value={product.name}
-                    onChange={onChangeName}
-                />
-                </div>
-                <div className="row input-group">
-                <label>Description of Product</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    required
-                    placeholder="e.g.: Very practical for camping tours. Up to six persons fit around the table. Very quickly put up."
-                    value={product.desc}
-                    onChange={onChangeDesc}
-                />
-                </div>
-                <label>Prices</label>
-                <div className="row input-group mb-2">
-                    <input
-                        type="number"
-                        className="form-control"
-                        required
-                        placeholder="per Day"
-                        value={product.prices.perDay}
-                        onChange={onChangeDayPrice}
-                    />
-                    <input
-                        type="number"
-                        className="form-control"
-                        required
-                        placeholder="per Hour (optional)"
-                        value={product.prices.perHour}
-                        onChange={onChangeHourPrice}
-                    />
-                </div>
-                <label>Address</label>
-                <div className="row input-group">
-                    <input
-                        type="text"
-                        className="form-control"
-                        required
-                        placeholder="Streetname"
-                        value={product.address.street}
-                        onChange={onChangeStreet}
-                    />
-                    <input
-                        type="text"
-                        className="form-control"
-                        required
-                        placeholder="House Number"
-                        value={product.address.houseNumber}
-                        onChange={onChangeHouseNumber}
-                    />
-                </div>
-                <div className="row input-group">
-                    <input
-                        type="text"
-                        className="form-control"
-                        required
-                        placeholder="Zipcode"
-                        value={product.address.zipcode}
-                        onChange={onChangeZipcode}
-                    />
-                    <input
-                        type="text"
-                        className="form-control"
-                        required
-                        placeholder="City"
-                        value={product.address.city}
-                        onChange={onChangeCity}
-                    />
-                </div>
-                <div className="row input-group">
-                    <input
-                        type="text"
-                        className="form-control"
-                        required
-                        placeholder="Country"
-                        value={product.address.country}
-                        onChange={onChangeCountry}
-                    />
-                </div>
-            </div>
-            <label htmlFor="files">Upload pictures:</label><br/>
-            <input type="file" id="files" name="files" accept="image/*" multiple onChange={onChangePictures}/><br/><br/>
-            <button onClick={saveProduct} className="btn btn-success">
-            Submit
-            </button>
-        </div>
+        <Modal isOpen={props.isOpen} onClose={() => props.setIsOpen(false)} size="lg">
+            <ModalOverlay />
+            <ModalContent>
+                <ModalHeader>{props.updateProductId ? <>Update Product</> : <>Add a new product</>}</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody pb={6}>
+                    <FormControl>
+                        <FormLabel>Item name</FormLabel>
+                        <Input placeholder="Item name" onChange={onChangeName} value={product.name}/>
+                    </FormControl>
+                    <FormControl mt={4}>
+                        <FormLabel>Description</FormLabel>
+                        <Input placeholder="Description" onChange={onChangeDesc} value={product.desc}/>
+                    </FormControl>
+                    <FormControl mt={4}>
+                        <FormLabel>Price</FormLabel>
+                        <HStack>
+                            <Input placeholder="per Hour" onChange={onChangeHourPrice} value={product.prices.hour}/>
+                            <Input placeholder="per Day" onChange={onChangeDayPrice} value={product.prices.day}/>
+                        </HStack>
+                    </FormControl>
+                    <Text mt={5}>Address</Text>
+                    <FormControl mt={4}>
+                        <Input placeholder="Street and house number" onChange={onChangeStreetWithNr} value={product.address.streetWithNr}/>
+                    </FormControl>
+                    <FormControl mt={4}>
+                        <HStack>
+                            <Input placeholder="Zipcode" onChange={onChangeZipcode} value={product.address.zipcode}/>
+                            <Input placeholder="City" onChange={onChangeCity} value={product.address.city}/>
+                        </HStack>
+                    </FormControl>
+                    <FormControl mt={4}>
+                        <Input type="country" placeholder="Country" onChange={onChangeCountry} value={product.address.country}/>
+                    </FormControl>
+                    <FormControl mt={4}>
+                        <FormLabel htmlFor="files">Upload pictures</FormLabel>
+                        <input type="file" id="files" name="files" accept="image/*" multiple onChange={onChangePictures}/>
+                    </FormControl>
+                </ModalBody>
+                <ModalFooter>
+                    <Center w="100%">
+                        <Button onClick={saveProduct} colorScheme="green" w="100%">
+                            Submit
+                        </Button>
+                    </Center>
+                    {/* <Button onClick={() => props.setIsOpen(false)}>Cancel</Button> */}
+                </ModalFooter>
+            </ModalContent>
+        </Modal>
     );
 }
 
