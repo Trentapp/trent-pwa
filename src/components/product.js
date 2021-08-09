@@ -11,6 +11,7 @@ import BookingRequest from "../components/booking-request";
 import QuestionForm from "../components/ask-question";
 import { Box, Grid, GridItem, Image, Container, Heading, HStack, Divider, VStack, Text } from "@chakra-ui/react";
 import ProfileCard from "./profileCard";
+import BookingCard from "./BookingCard";
 
 
 const Product = props => {
@@ -142,7 +143,7 @@ const Product = props => {
     return(
         <Container maxW="container.xl" marginTop={2}>
             <Box>
-                <HStack>
+                <HStack spacing="20px">
                     <Box w="700px" h="470px" marginTop={2}>
                         {product.picturesFitted && <ImageGallery items={images} showPlayButton={false} thumbnailPosition="right"/>}
                         <Box my={2}>
@@ -161,7 +162,8 @@ const Product = props => {
                         </Text>
                     </Box>
                     <Box>
-
+                        <BookingCard />
+                        <Button my={2}>Send Message</Button>
                     </Box>
                 </HStack>
             </Box>
