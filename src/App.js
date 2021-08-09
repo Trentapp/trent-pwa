@@ -57,8 +57,8 @@ function App() {
 
   return (
     <>
-    <div className="wrapper flex-shrink-0">
     {window.location.pathname !== '/landing-page' && (window.location.pathname !== '/' || user._id) && <Header user={user} handleLogout={handleLogout}/>}
+    <div className="wrapper flex-shrink-0">
       <Switch>
         <Route exact path="/products"
           render={(props) => (<ProductsList {...props} inventory={false} />)} /> {/* I think it actually should not be rendered (just included as component), but it is just a test for now */}
