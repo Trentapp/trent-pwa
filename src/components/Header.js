@@ -55,8 +55,9 @@ export default function Header (props) {
                 <Avatar src={props.user.picture && `data:${props.user.picture.contentType};base64,${Buffer.from(props.user.picture.data.data).toString('base64')}`} />
               </MenuButton>
               <MenuList>
-                <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/chats"><MenuItem>Chats</MenuItem></Link>
                 <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/profile/${props.user._id}`}><MenuItem>Your Profile</MenuItem></Link>
+                <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/account-settings"><MenuItem>Account Settings</MenuItem></Link>
+                <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/chats"><MenuItem>Chats</MenuItem></Link>
                 <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/transactions"><MenuItem>Transactions</MenuItem></Link>
                 <MenuItem>
                   <Button w="100%" style={{ color: 'inherit', textDecoration: 'none' }} variant="link" onClick={props.handleLogout}>

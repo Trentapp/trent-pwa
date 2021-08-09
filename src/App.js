@@ -80,7 +80,7 @@ function App() {
         <LoggedOutRoute path="/forgot-password" component={ForgotPassword} user={user}/>
         <Route path="/profile/:id"
           render={(props) => (<Profile {...props} user={user}/>)} />
-        <PrivateRoute path="/update-profile" component={UpdateProfile} user={user}/>
+        <PrivateRoute path="/account-settings" component={UpdateProfile} user={user}/>
         <PrivateRoute path="/chats/:id" component={Chat} user={user} />
         <Route path="/impressum" component={Impressum} />
         <Route path="/datenschutz" component={Datenschutz} />
