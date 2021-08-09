@@ -65,8 +65,8 @@ const Profile = props => {
             <Box>
                 <HStack align="flex-start" spacing="70px">
                     <VStack w="200px">
-                        <Box w="200px" h="200px" align="flex-end">
-                            {profileUser.picture && <Avatar size="4xl" src={`data:${profileUser.picture.contentType};base64,${Buffer.from(profileUser.picture.data.data).toString('base64')}`} />}
+                        <Box w="200px" h="200px">
+                            <Avatar size="4xl" src={profileUser.picture && `data:${profileUser.picture.contentType};base64,${Buffer.from(profileUser.picture.data.data).toString('base64')}`} />
                         </Box>
                         <Box px={3}>
                             <Heading size="md" paddingTop={2}>{profileUser.name}</Heading>
@@ -75,7 +75,7 @@ const Profile = props => {
                                 <Text fontWeight="bold">({profileUser.numberOfRatings})</Text>
                             </HStack>
                         </Box>
-                        <Link to="/account-settings"><IconButton icon={<EditIcon/>} /></Link>
+                        {profileUser._id === props.user._id && <Link to="/account-settings"><IconButton icon={<EditIcon/>} /></Link>}
                         {/* {profileUser._id === props.user._id && <Button>Upload profile picture</Button>} */}
                         {/*later add description (about me): <Text></Text> */}
                     </VStack>
