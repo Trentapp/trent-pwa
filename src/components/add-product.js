@@ -7,7 +7,7 @@ import ProductDataService from "../services/product-data";
 //TODO: change redirect to history.push()
 
 //later: make location of product the location of the user by default
-const AddProduct = props => { //when props.match.params.id exists (meaning the function must be called over the route /products/update/:id), it does not create a new Product but update an existing one
+const AddProduct = props => { 
     const initialProductState = {
         name: "",
         desc: "",
@@ -32,7 +32,7 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
         async function getOldProduct() {
             try {
                 if (props.updateProductId){
-                    const response = await ProductDataService.get(props.match.params.id); //I get a warning here that I don't understand very well. Maybe change it later.
+                    const response = await ProductDataService.get(props.updateProductId); //I get a warning here that I don't understand very well. Maybe change it later.
                     setProduct(response.data);//for updating a product the userId should be set correctly here
                     if (props.user._id !== response.data.user._id){
                         history.push("/404");//"Not found" if a wrong user wants to update the product // maybe replace 404 with forbidden route or so later
@@ -120,9 +120,9 @@ const AddProduct = props => { //when props.match.params.id exists (meaning the f
             const fd = fileUploadHandler();//hopefully I don't run into update problems
             const blob = new Blob([JSON.stringify({product, uid: props.user.uid})], {type: "application/json"});
             fd.append("product", blob);//probably change product to blob
-            if (props.match.params.id){//update probably currently not working
-                await ProductDataService.updateProduct(props.match.params.id, fd);
-                history.push(`/products/product/${props.match.params.id}`);
+            if (props.updateProductId){//update probably currently not working
+                await ProductDataService.updateProduct(props.updateProductId, fd);
+                history.push(`/products/product/${props.updateProductId}`);
             } else {
                 const response = await ProductDataService.createProduct(fd);
                 //const response = await ProductDataService.createProduct({product: product, uid: props.user.uid});//was from without file transfer
