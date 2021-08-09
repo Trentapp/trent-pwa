@@ -52,7 +52,7 @@ export default function Header (props) {
             {props.user._id ? 
             <Menu>
               <MenuButton rightIcon={<ChevronDownIcon />}>
-                <Avatar src={`data:${props.user.picture.contentType};base64,${Buffer.from(props.user.picture.data.data).toString('base64')}`} />
+                <Avatar src={props.user.picture && `data:${props.user.picture.contentType};base64,${Buffer.from(props.user.picture.data.data).toString('base64')}`} />
               </MenuButton>
               <MenuList>
                 <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/chats"><MenuItem>Chats</MenuItem></Link>
