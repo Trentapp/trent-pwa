@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useRef} from "react";
 import {Link, useHistory} from "react-router-dom";
-import {Button} from "react-bootstrap";
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 
@@ -9,7 +8,7 @@ import TransactionDataService from "../services/transaction-data";
 import ChatDataService from "../services/chat-data";
 import BookingRequest from "../components/booking-request";
 import QuestionForm from "../components/ask-question";
-import { Box, Grid, GridItem, Image, Container, Heading, HStack, Divider, VStack, Text } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Image, Container, Heading, HStack, Divider, VStack, Text, Button, Center } from "@chakra-ui/react";
 import ProfileCard from "./profileCard";
 import BookingCard from "./BookingCard";
 
@@ -17,26 +16,24 @@ import BookingCard from "./BookingCard";
 const Product = props => {
     const [product, setProduct] = useState({prices: {}, user: {}}); //maybe add better initial state, though currently the information is shown conditionally
     const [error, setError] = useState(""); //can get rid of that if redirect works
-    const [showReq, setShowReq] = useState(false);
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
     const [showQuestionForm, setShowQuestionForm] = useState(false);
-    const [images, setImages] = useState([
-        {
-          original: 'https://picsum.photos/id/1018/1000/600/',
-          thumbnail: 'https://picsum.photos/id/1018/250/150/',
-        },
-        {
-          original: 'https://picsum.photos/id/1015/1000/600/',
-          thumbnail: 'https://picsum.photos/id/1015/250/150/',
-        },
-        {
-          original: 'https://picsum.photos/id/1019/1000/600/',
-          thumbnail: 'https://picsum.photos/id/1019/250/150/',
-        },
-      ]);
+    const [images, setImages] = useState([]);
     const messageRef = useRef();
     let history = useHistory();
+
+    const onSendMessage = async () => {
+        try {
+            const chat = {
+                uid: props.user.uid,
+                productId: props.product._id,
+                content: messageRef.current.value,
+            };
+            await ChatDataService.sendMessage(chat);
+            history.push("/");
+        } catch(e) {
+            console.log("Failed to send message: ", e)
+        }
+    }
 
     const deleteProduct = async () => {
         try {
@@ -47,56 +44,8 @@ const Product = props => {
         }
     };
 
-    const onHideModal = () => {
-        setShowReq(false);
-        setShowQuestionForm(false); //maybe create extra function for that later
-    }
-
-    const onRequestButtonClick = () => {
-        setShowReq(true);
-    }
-
     const onAskQuestionButtonClick = () => {
         setShowQuestionForm(true);
-    }
-
-    const onChangeStartDate = (date) => {
-        setStartDate(date);
-        //for Datetime (not Datepicker): setStartDate(date._d);
-    }
-
-    const onChangeEndDate = (date) => {
-        setEndDate(date);
-        //for Datetime (not Datepicker): setEndDate(date._d);
-    }
-
-    const onSendRequest = async () => {
-        try {
-            const transaction = {
-                uid: props.user.uid,
-                productId: product._id,
-                startDate: startDate,
-                endDate: endDate,
-            };
-            await TransactionDataService.createTransaction(transaction);
-            history.push("/");
-        } catch(e) {
-            console.log("Failed to create transaction: ", e)
-        }
-    }
-
-    const onSendMessage = async () => {
-        try {
-            const chat = {
-                uid: props.user.uid,
-                productId: product._id,
-                content: messageRef.current.value,
-            };
-            await ChatDataService.sendMessage(chat);
-            history.push("/");
-        } catch(e) {
-            console.log("Failed to send message: ", e)
-        }
     }
 
     useEffect(() => {
@@ -143,7 +92,7 @@ const Product = props => {
     return(
         <Container maxW="container.xl" marginTop={2}>
             <Box>
-                <HStack spacing="20px">
+                <HStack spacing="40px">
                     <Box w="700px" h="470px" marginTop={2}>
                         {product.picturesFitted && <ImageGallery items={images} showPlayButton={false} thumbnailPosition="right"/>}
                         <Box my={2}>
@@ -162,8 +111,12 @@ const Product = props => {
                         </Text>
                     </Box>
                     <Box>
-                        <BookingCard />
-                        <Button my={2}>Send Message</Button>
+                        <Center>
+                            <VStack spacing="20px">
+                                <BookingCard user={props.user} product={product} />
+                                <Button width="100%">Send Message</Button>
+                            </VStack>
+                        </Center>
                     </Box>
                 </HStack>
             </Box>
