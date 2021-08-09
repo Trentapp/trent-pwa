@@ -5,9 +5,10 @@ import "react-image-gallery/styles/css/image-gallery.css";
 
 import ProductDataService from "../services/product-data";
 // import ChatDataService from "../services/chat-data";
-import { Box, Container, Heading, HStack, Divider, VStack, Text, Button, Center } from "@chakra-ui/react";
+import { Box, Container, Heading, HStack, Divider, VStack, Text, Button, Center, Flex, IconButton } from "@chakra-ui/react";
 import ProfileCard from "./profileCard";
 import BookingCard from "./BookingCard";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 
 
 const Product = props => {
@@ -32,14 +33,17 @@ const Product = props => {
     //     }
     // }
 
-    // const deleteProduct = async () => {
-    //     try {
-    //         await ProductDataService.deleteProduct(product._id, props.user.uid);
-    //         history.push("/products");
-    //     } catch(e) {
-    //         console.log("Failed to delete product: ", e);
-    //     }
-    // };
+    const deleteProduct = async () => {
+        let result = window.confirm("Are you sure you want to delete this product?");
+        if (result){
+            try {
+                await ProductDataService.deleteProduct(product._id, props.user.uid);
+                history.push("/products");
+            } catch(e) {
+                console.log("Failed to delete product: ", e);
+            }
+        }
+    };
 
     // const onAskQuestionButtonClick = () => {
     //     setShowQuestionForm(true);
@@ -87,7 +91,7 @@ const Product = props => {
     return(
         <Container maxW="container.xl" marginTop={2}>
             <Box>
-                <HStack spacing="40px">
+                <HStack spacing="40px" align="flex-start">
                     <Box w="700px" h="470px" marginTop={2}>
                         {product.picturesFitted && <ImageGallery items={images} showPlayButton={false} thumbnailPosition="right"/>}
                         <Box my={2}>
@@ -105,14 +109,22 @@ const Product = props => {
                             {product.desc}
                         </Text>
                     </Box>
-                    <Box>
-                        <Center>
-                            <VStack spacing="20px">
-                                <BookingCard user={props.user} product={product} />
-                                <Button borderRadius="lg" width="100%">Send Message</Button>
-                            </VStack>
-                        </Center>
-                    </Box>
+                    <Flex>
+                        {props.user._id !== product.user._id ? <>
+                            <Center>
+                                <VStack spacing="20px">
+                                        <BookingCard user={props.user} product={product} />
+                                        <Button borderRadius="lg" width="100%">Send Message</Button>
+                                </VStack>
+                            </Center>
+                            </> : 
+                            <Box py={2}>
+                                <HStack spacing="10px">
+                                    <IconButton title="Edit product" colorScheme="teal" size="lg" icon={<EditIcon />}/>
+                                    <IconButton title="Delete product" colorScheme="red" size="lg" icon={<DeleteIcon />} onClick={deleteProduct}/>
+                                </HStack>
+                            </Box>}
+                    </Flex>
                 </HStack>
             </Box>
         </Container>
