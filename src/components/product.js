@@ -9,7 +9,8 @@ import TransactionDataService from "../services/transaction-data";
 import ChatDataService from "../services/chat-data";
 import BookingRequest from "../components/booking-request";
 import QuestionForm from "../components/ask-question";
-import { Box, Grid, GridItem, Image } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Image, Container, Heading, HStack, Divider, VStack, Text } from "@chakra-ui/react";
+import ProfileCard from "./profileCard";
 
 
 const Product = props => {
@@ -139,13 +140,30 @@ const Product = props => {
 
 
     return(
-        <Box>
-            <Box w="600px" h="400px">
-                {product.name}
-                {/* {product.picturesFitted && <Image src={`data:${product.picturesFitted[0].contentType};base64,${Buffer.from(product.picturesFitted[0].data.data).toString('base64')}`} />} */}
-                {product.picturesFitted && <ImageGallery items={images} />}
+        <Container maxW="container.xl" marginTop={2}>
+            <Box>
+                <HStack>
+                    <Box w="700px" h="470px" marginTop={2}>
+                        {product.picturesFitted && <ImageGallery items={images} showPlayButton={false} thumbnailPosition="right"/>}
+                    </Box>
+                </HStack>
             </Box>
-        </Box>
+            <Box w="700px">
+                <Box>
+                    <HStack justify="space-between">
+                        <Heading>{product.name}</Heading>
+                        {product.user && <ProfileCard product={product} />}
+                    </HStack>
+                </Box>
+                <Divider my={3} color="gray.300"/>
+                <Heading as={"h5"} size="md">Description</Heading>
+                <Text marginTop={2}>
+                    {product.desc}
+                </Text>
+            </Box>
+            
+            
+        </Container>
     )
 }
 
