@@ -1,52 +1,49 @@
-import React, {useState, useEffect, useRef} from "react";
-import {Link, useHistory} from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {useHistory} from "react-router-dom";
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 
 import ProductDataService from "../services/product-data";
-import TransactionDataService from "../services/transaction-data";
-import ChatDataService from "../services/chat-data";
-import BookingRequest from "../components/booking-request";
-import QuestionForm from "../components/ask-question";
-import { Box, Grid, GridItem, Image, Container, Heading, HStack, Divider, VStack, Text, Button, Center } from "@chakra-ui/react";
+// import ChatDataService from "../services/chat-data";
+import { Box, Container, Heading, HStack, Divider, VStack, Text, Button, Center } from "@chakra-ui/react";
 import ProfileCard from "./profileCard";
 import BookingCard from "./BookingCard";
 
 
 const Product = props => {
     const [product, setProduct] = useState({prices: {}, user: {}}); //maybe add better initial state, though currently the information is shown conditionally
-    const [error, setError] = useState(""); //can get rid of that if redirect works
-    const [showQuestionForm, setShowQuestionForm] = useState(false);
+    // const [error, setError] = useState(""); //can get rid of that if redirect works
+    // const [showQuestionForm, setShowQuestionForm] = useState(false);
     const [images, setImages] = useState([]);
-    const messageRef = useRef();
+    // const messageRef = useRef();
     let history = useHistory();
 
-    const onSendMessage = async () => {
-        try {
-            const chat = {
-                uid: props.user.uid,
-                productId: props.product._id,
-                content: messageRef.current.value,
-            };
-            await ChatDataService.sendMessage(chat);
-            history.push("/");
-        } catch(e) {
-            console.log("Failed to send message: ", e)
-        }
-    }
+    // const onSendMessage = async () => {
+    //     try {
+    //         const chat = {
+    //             uid: props.user.uid,
+    //             productId: props.product._id,
+    //             content: messageRef.current.value,
+    //         };
+    //         await ChatDataService.sendMessage(chat);
+    //         history.push("/");
+    //     } catch(e) {
+    //         console.log("Failed to send message: ", e)
+    //     }
+    // }
 
-    const deleteProduct = async () => {
-        try {
-            await ProductDataService.deleteProduct(product._id, props.user.uid);
-            history.push("/products");
-        } catch(e) {
-            console.log("Failed to delete product: ", e);
-        }
-    };
+    // const deleteProduct = async () => {
+    //     try {
+    //         await ProductDataService.deleteProduct(product._id, props.user.uid);
+    //         history.push("/products");
+    //     } catch(e) {
+    //         console.log("Failed to delete product: ", e);
+    //     }
+    // };
 
-    const onAskQuestionButtonClick = () => {
-        setShowQuestionForm(true);
-    }
+    // const onAskQuestionButtonClick = () => {
+    //     setShowQuestionForm(true);
+    // }
 
     useEffect(() => {
         const getProduct = async id => {
@@ -63,7 +60,6 @@ const Product = props => {
                 }
                 setProduct(newProduct);
             } catch(e) {
-                setError("Could not find that product.");
                 console.log("Error in product.js - getProduct: ", e);
             }
         };
@@ -83,7 +79,6 @@ const Product = props => {
                 setImages(imgs)
             }
         } catch(e) {
-            setError("Could not make images work");
             console.log("Error in product.js - getProduct: ", e);
         }
     }, [product]);

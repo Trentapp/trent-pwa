@@ -1,5 +1,6 @@
 import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import React, {useState} from 'react';
+import {useHistory} from "react-router-dom";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -8,6 +9,7 @@ import TransactionDataService from "../services/transaction-data";
 export default function BookingCard(props) {
     const [startDate, setStartDate] = useState(null);//useState(new Date());
     const [endDate, setEndDate] = useState(null);//useState(new Date());
+    const history = useHistory();
 
     const onChangeStartDate = (date) => {
         setStartDate(date);
@@ -28,6 +30,7 @@ export default function BookingCard(props) {
                 endDate: endDate,
             };
             await TransactionDataService.createTransaction(transaction);
+            history.push("/dashboard");
         } catch(e) {
             console.log("Failed to create transaction: ", e)
         }
