@@ -145,24 +145,26 @@ const Product = props => {
                 <HStack>
                     <Box w="700px" h="470px" marginTop={2}>
                         {product.picturesFitted && <ImageGallery items={images} showPlayButton={false} thumbnailPosition="right"/>}
+                        <Box my={2}>
+                            <HStack justify="space-between">
+                                <VStack align="left">
+                                    <Heading>{product.name}</Heading>
+                                    <Text textAlign="left" fontWeight="bold" color="gray.500">{product.prices.perHour && <>{product.prices.perHour}€/hour </>}{product.prices.perDay && <>{product.prices.perDay}€/day </>}{product.prices.perWeek && <>{product.prices.perWeek}€/week </>}{product.prices.perMonth && <>{product.prices.perMonth}€/month </>}</Text>
+                                </VStack>
+                                {product.user && <ProfileCard product={product} />}
+                            </HStack>
+                        </Box>
+                        <Divider my={3} color="gray.300"/>
+                        <Heading as={"h5"} size="md">Description</Heading>
+                        <Text marginTop={2}>
+                            {product.desc}
+                        </Text>
+                    </Box>
+                    <Box>
+
                     </Box>
                 </HStack>
             </Box>
-            <Box w="700px">
-                <Box>
-                    <HStack justify="space-between">
-                        <Heading>{product.name}</Heading>
-                        {product.user && <ProfileCard product={product} />}
-                    </HStack>
-                </Box>
-                <Divider my={3} color="gray.300"/>
-                <Heading as={"h5"} size="md">Description</Heading>
-                <Text marginTop={2}>
-                    {product.desc}
-                </Text>
-            </Box>
-            
-            
         </Container>
     )
 }
