@@ -7,6 +7,8 @@ import ReviewDataService from "../services/reviews-data";
 import TransactionDataService from "../services/transaction-data";
 import AddReview from "./add-review";
 import Review from "./Review";
+import { Box, Flex, HStack, Container, Image, Heading, VStack, Text, Divider } from '@chakra-ui/react';
+import ProductCard from './product-list-item';
 
 const Profile = props => {
     const initialUserState = {name: "", mail: "", inventory: []}; //later probably replace mail with email
@@ -58,22 +60,53 @@ const Profile = props => {
     }, [props.match.params.id, props.user._id, props.user.uid]);
 
     return (
-        <div>
-            {error ? error : (
-                <div>
-                    <h2>{profileUser.name}</h2>
-                    {profileUser.rating > 0 && <p>Rating: {profileUser.rating}: <StarRatings rating={profileUser.rating} starRatedColor="rgb(250,200,30)" starDimension="28px" />
-                    </p>}
-                    {profileUser.picture && <img alt="ups" src={`data:${profileUser.picture.contentType};base64,${Buffer.from(profileUser.picture.data.data).toString('base64')}`}/>}
-                    {(props.user._id === profileUser._id) && <p><Link to="/update-profile">Update Profile</Link></p>}
-                    <br/>
-                    {openReview && <AddReview ratedUserId={props.match.params.id} user={props.user}/>}
-                    <h2>Reviews</h2>
-                    {reviews.length > 0 ? reviews.map(review => <Review review={review} user={props.user} key={review._id}/>) : <p>This user has not received any reviews yet.</p>}
-                </div>
-            )}
-        </div>
+        <Container maxW="container.lg" marginTop={2}>
+            <Box>
+                <HStack align="flex-start" spacing="40px">
+                    <VStack w="200px" align="flex-start">
+                        <Flex borderRadius="3xl" overflow="hidden">
+                            {profileUser.picture && <Image src={`data:${profileUser.picture.contentType};base64,${Buffer.from(profileUser.picture.data.data).toString('base64')}`} />}
+                        </Flex>
+                        <Box px={3}>
+                            <Heading size="md" paddingTop={2}>{profileUser.name}</Heading>
+                            <HStack>
+                                <StarRatings rating={profileUser.rating} starRatedColor="rgb(250,200,30)" starDimension="16px" starSpacing="2px"/>
+                                <Text fontWeight="bold">({profileUser.numberOfRatings})</Text>
+                            </HStack>
+                        </Box>
+                        {/*later add description (about me): <Text></Text> */}
+                    </VStack>
+                    <VStack>
+                        <Box w="100%" paddingBottom={3}>
+                            <Heading size="lg">Inventory of {profileUser.name}</Heading>
+                            <Divider />
+                        </Box>
+                        <VStack spacing="20px">
+                            {profileUser.inventory.map((product) => <ProductCard product={product} />)}
+                        </VStack>
+                    </VStack>
+                </HStack>
+            </Box>
+        </Container>
     )
 }
 
 export default Profile;
+
+        // <div>
+        //     {error ? error : (
+        //         <div>
+        //             <h2>{profileUser.name}</h2>
+        //             {profileUser.rating > 0 && <p>Rating: {profileUser.rating}: <StarRatings rating={profileUser.rating} starRatedColor="rgb(250,200,30)" starDimension="28px" />
+        //             </p>}
+        //             {profileUser.picture && <img alt="ups" src={`data:${profileUser.picture.contentType};base64,${Buffer.from(profileUser.picture.data.data).toString('base64')}`}/>}
+        //             {(props.user._id === profileUser._id) && <p><Link to="/update-profile">Update Profile</Link></p>}
+        //             <br/>
+        //             {openReview && <AddReview ratedUserId={props.match.params.id} user={props.user}/>}
+        //             <h2>Reviews</h2>
+        //             {reviews.length > 0 ? reviews.map(review => <Review review={review} user={props.user} key={review._id}/>) : <p>This user has not received any reviews yet.</p>}
+        //         </div>
+        //     )}
+        // </div>
+
+
