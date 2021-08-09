@@ -5,10 +5,11 @@ import StarRatings from "react-star-ratings";
 import UserDataService from "../services/user-data";
 import ReviewDataService from "../services/reviews-data";
 import TransactionDataService from "../services/transaction-data";
-import AddReview from "./add-review";
-import Review from "./Review";
-import { Box, Flex, HStack, Container, Image, Heading, VStack, Text, Divider } from '@chakra-ui/react';
+// import AddReview from "./add-review";
+// import Review from "./Review";
+import { Box, HStack, Container, Heading, VStack, Text, Divider, Avatar, IconButton } from '@chakra-ui/react';
 import ProductCard from './product-list-item';
+import { EditIcon } from '@chakra-ui/icons';
 
 const Profile = props => {
     const initialUserState = {name: "", mail: "", inventory: []}; //later probably replace mail with email
@@ -62,11 +63,11 @@ const Profile = props => {
     return (
         <Container maxW="container.lg" marginTop={2}>
             <Box>
-                <HStack align="flex-start" spacing="40px">
-                    <VStack w="200px" align="flex-start">
-                        <Flex borderRadius="3xl" overflow="hidden">
-                            {profileUser.picture && <Image src={`data:${profileUser.picture.contentType};base64,${Buffer.from(profileUser.picture.data.data).toString('base64')}`} />}
-                        </Flex>
+                <HStack align="flex-start" spacing="70px">
+                    <VStack w="200px">
+                        <Box w="200px" h="200px" align="flex-end">
+                            {profileUser.picture && <Avatar size="4xl" src={`data:${profileUser.picture.contentType};base64,${Buffer.from(profileUser.picture.data.data).toString('base64')}`} />}
+                        </Box>
                         <Box px={3}>
                             <Heading size="md" paddingTop={2}>{profileUser.name}</Heading>
                             <HStack>
@@ -74,6 +75,8 @@ const Profile = props => {
                                 <Text fontWeight="bold">({profileUser.numberOfRatings})</Text>
                             </HStack>
                         </Box>
+                        <Link to="/account-settings"><IconButton icon={<EditIcon/>} /></Link>
+                        {/* {profileUser._id === props.user._id && <Button>Upload profile picture</Button>} */}
                         {/*later add description (about me): <Text></Text> */}
                     </VStack>
                     <VStack>
@@ -81,7 +84,7 @@ const Profile = props => {
                             <Heading size="lg">Inventory of {profileUser.name}</Heading>
                             <Divider />
                         </Box>
-                        <VStack spacing="20px">
+                        <VStack spacing="15px">
                             {profileUser.inventory.map((product) => <ProductCard product={product} />)}
                         </VStack>
                     </VStack>
@@ -109,4 +112,6 @@ export default Profile;
         //     )}
         // </div>
 
-
+/* <Flex borderRadius="3xl" overflow="hidden">
+    {profileUser.picture && <Image src={`data:${profileUser.picture.contentType};base64,${Buffer.from(profileUser.picture.data.data).toString('base64')}`} />}
+</Flex> */

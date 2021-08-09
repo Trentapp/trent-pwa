@@ -12,7 +12,7 @@ import AddProduct from "./components/add-product";
 import SignUp from "./components/signup";
 import LogIn from "./components/login";
 import ForgotPassword from "./components/ForgotPassword";
-import UpdateProfile from "./components/UpdateProfile";
+import AccountSettings from "./components/AccountSettings";
 import Profile from "./components/Profile";
 import NotFound from "./components/NotFound";
 import PrivateRoute from "./components/PrivateRoute";
@@ -80,7 +80,7 @@ function App() {
         <LoggedOutRoute path="/forgot-password" component={ForgotPassword} user={user}/>
         <Route path="/profile/:id"
           render={(props) => (<Profile {...props} user={user}/>)} />
-        <PrivateRoute path="/account-settings" component={UpdateProfile} user={user}/>
+        <PrivateRoute path="/account-settings" component={AccountSettings} user={user}/>
         <PrivateRoute path="/chats/:id" component={Chat} user={user} />
         <Route path="/impressum" component={Impressum} />
         <Route path="/datenschutz" component={Datenschutz} />
