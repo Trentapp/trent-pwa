@@ -40,9 +40,9 @@ export default function BookingCard(props) {
             borderRadius="3xl"
             boxShadow="lg"
             p={2}>
-            <Box px={4}>
+            <Box px={4} paddingTop={1}>
                 <Heading size="md">Choose time to book</Heading>
-                <Box marginTop={4} border="1px" borderColor="green.300">
+                <Box marginTop={4} border="1px" borderColor="gray.300">
                     <DatePicker selected={startDate}
                         placeholderText="Start Date"
                         onChange={onChangeStartDate}
@@ -50,7 +50,7 @@ export default function BookingCard(props) {
                         showTimeSelect
                         dateFormat="MMMM d, yyyy h:mm aa"/> {/*Note: later we can easily add exclude_times and exclude_dates for times-available*/}
                 </Box>
-                <Box marginTop={2} border="1px" borderColor="green.300">
+                <Box marginTop={2} border="1px" borderColor="gray.300">
                     <DatePicker selected={endDate}
                         placeholderText="End Date"
                         onChange={onChangeEndDate}
@@ -59,7 +59,7 @@ export default function BookingCard(props) {
                         dateFormat="MMMM d, yyyy h:mm aa"/>
                 </Box>
                 <Text fontWeight="bold" my={3}>Price: {props.product.prices.perHour ? Math.min(Math.ceil((endDate - startDate)/(1000*60*60*24)) * props.product.prices.perDay, Math.ceil((endDate - startDate)/(1000*60*60)) * props.product.prices.perHour) : Math.ceil((endDate - startDate)/(1000*60*60*24)) * props.product.prices.perDay}€</Text>
-                <Button display="flex" onClick={onBookRequest} bgGradient="linear(to-br, pink.500, red.500)" color="white" _hover={{ bgGradient:"linear(to-br, pink.600, red.600)" }}>Send booking request</Button>
+                <Button borderRadius="lg" display="flex" onClick={onBookRequest} bgGradient="linear(to-br, pink.500, red.500)" color="white" _hover={{ bgGradient:"linear(to-br, pink.600, red.600)" }}>Send booking request</Button>
             </Box>
         </Flex>
     )

@@ -114,7 +114,7 @@ const Product = props => {
                         <Center>
                             <VStack spacing="20px">
                                 <BookingCard user={props.user} product={product} />
-                                <Button width="100%">Send Message</Button>
+                                <Button borderRadius="lg" width="100%">Send Message</Button>
                             </VStack>
                         </Center>
                     </Box>
