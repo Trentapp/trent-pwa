@@ -93,7 +93,7 @@ const Product = props => {
             <Box>
                 <HStack spacing="40px" align="flex-start">
                     <Box w="700px" h="470px" marginTop={2}>
-                        {product.picturesFittel && product.picturesFitted.length > 0 && <ImageGallery items={images} showPlayButton={false} thumbnailPosition="right"/>}
+                        {product.picturesFitted && product.picturesFitted.length > 0 && <ImageGallery items={images} showPlayButton={false} thumbnailPosition="right"/>}
                         <Box my={2}>
                             <HStack justify="space-between">
                                 <VStack align="left">
