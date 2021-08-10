@@ -1,5 +1,5 @@
+import { Avatar, Box, Button, Container, Heading, Input } from "@chakra-ui/react";
 import React, {useState, useEffect, useRef} from "react";
-import {Button} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 
 import ChatDataService from "../services/chat-data";
@@ -15,13 +15,11 @@ const Message = props => {
               <div className="p-3 me-3 border" style={{borderRadius: "15px", backgroundColor: "#fbfbfb"}}>
                 <p className="small mb-0">{props.message.content}</p>
               </div>
-              <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-chat/ava2-bg.png" alt="avatar 1" 
-                style={{width: "45px", height: "100%"}} /> {/*replace with profile photo later*/}
+              <Avatar src={props.message.sender.picture && `data:${props.message.sender.picture.contentType};base64,${Buffer.from(props.message.sender.picture.data.data).toString('base64')}`} />
             </div>
         ) : (
             <div className="d-flex flex-row justify-content-start mb-4">
-              <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-chat/ava1-bg.png" alt="avatar 1"
-                style={{width: "45px", height: "100%"}} />
+              <Avatar src={props.message.sender.picture && `data:${props.message.sender.picture.contentType};base64,${Buffer.from(props.message.sender.picture.data.data).toString('base64')}`} />
               <div className="p-3 ms-3" style={{borderRadius: "15px", backgroundColor: "rgba(57, 192, 237,.2)"}}>
                 <p className="small mb-0">{props.message.content}</p>
               </div>
@@ -65,15 +63,29 @@ const Chat = props => {
     }
 
     return(
-    <>
-        <h2>Chat with {otherUser.name} because of product {chat.product.name}</h2>
-        {chat.messages && chat.messages.map(message => <Message user={props.user} message={message} key={message._id}/>)}
-        <div className="col-lg-6 offset-3">
-            <input type="text" ref={messageRef} />
-            <Button onClick={onSendMessage}>Send</Button>
-        </div>
-    </>
+        <Container mawW="container.xl">
+            <Box>
+                <Heading>Chat with {otherUser.name} about {chat.product.name}</Heading>
+                <Box>
+                    {chat.messages && chat.messages.map(message => <Message user={props.user} message={message} key={message._id}/>)}
+                </Box>
+                <Box>
+                    <Input type="text" ref={messageRef} />
+                    <Button onClick={onSendMessage}>Send</Button>
+                </Box>
+            </Box>
+        </Container>
     )
 }
 
 export default Chat;
+
+
+    // <>
+    //     <h2>Chat with {otherUser.name} because of product {chat.product.name}</h2>
+    //     {chat.messages && chat.messages.map(message => <Message user={props.user} message={message} key={message._id}/>)}
+    //     <div className="col-lg-6 offset-3">
+    //         <input type="text" ref={messageRef} />
+    //         <Button onClick={onSendMessage}>Send</Button>
+    //     </div>
+    // </>
