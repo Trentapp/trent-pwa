@@ -1,10 +1,10 @@
 import React, {useRef, useState} from 'react';
-import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, FormHelperText, Alert, AlertIcon, HStack, FormLabel } from '@chakra-ui/react';
+import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, FormLabel } from '@chakra-ui/react';
 // import { Button, Card, Form, Container, Alert } from "react-bootstrap";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 import {useAuth} from "../context/AuthContext";
-import {Link, useHistory} from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import UserDataService from "../services/user-data";
 import { Text } from '@chakra-ui/react';
 
@@ -71,7 +71,6 @@ export default function UpdateProfile(props) {
                 change = true;
             }
             if (change) {
-                console.log({...user, picture: null});
                 await UserDataService.updateUser({user: {...user, picture: null, inventory: []}});//maybe change that later so user gets passed directly in body
             }
             if (file){
@@ -166,6 +165,7 @@ export default function UpdateProfile(props) {
                     <input type="file" id="files" name="files" accept="image/*" onChange={onChangePicture}/>
                 </FormControl>
                 <Button
+                    disabled={loading}
                     borderRadius={0}
                     type="submit"
                     variant="solid"

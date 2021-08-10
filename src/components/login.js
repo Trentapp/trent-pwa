@@ -3,7 +3,7 @@ import React, {useRef, useState} from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
-import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, FormHelperText, Alert, AlertIcon } from '@chakra-ui/react';
+import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon } from '@chakra-ui/react';
 
 export default function Login() {
     const emailRef = useRef();
@@ -74,6 +74,7 @@ export default function Login() {
                     colorScheme="teal"
                     width="full"
                     onClick={handleSubmit}
+                    disabled={loading}
                 >
                     Login
                 </Button>

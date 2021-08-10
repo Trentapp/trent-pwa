@@ -3,7 +3,7 @@ import React, {useRef, useState} from 'react';
 // import "bootstrap/dist/css/bootstrap.min.css";
 import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
-import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, FormHelperText, Alert, AlertIcon, HStack } from '@chakra-ui/react';
+import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack } from '@chakra-ui/react';
 
 
 import UserDataService from "../services/user-data";
@@ -105,6 +105,7 @@ export default function SignUp() {
                     colorScheme="teal"
                     width="full"
                     onClick={handleSubmit}
+                    disabled={loading}
                 >
                     Sign Up
                 </Button>

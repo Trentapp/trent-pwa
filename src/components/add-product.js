@@ -72,16 +72,6 @@ const AddProduct = props => {
         setProduct(product => ({...product, prices: {...product.prices, perDay: e.target.value}}));
     };
 
-    const onChangeStreet = e => {
-        e.persist();
-        setProduct(product => ({...product, address: {...product.address, street: e.target.value}}));
-    };
-
-    const onChangeHouseNumber = e => {
-        e.persist();
-        setProduct(product => ({...product, address: {...product.address, houseNumber: e.target.value}}));
-    };
-
     const onChangeStreetWithNr = e => {
         e.persist();
         setProduct(product => ({...product, address: {...product.address, streetWithNr: e.target.value}}));

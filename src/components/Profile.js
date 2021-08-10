@@ -8,9 +8,9 @@ import TransactionDataService from "../services/transaction-data";
 import AddProduct from './add-product';
 // import AddReview from "./add-review";
 // import Review from "./Review";
-import { Box, HStack, Container, Heading, VStack, Text, Divider, Avatar, IconButton, Flex, Button } from '@chakra-ui/react';
+import { Box, HStack, Container, Heading, VStack, Text, Divider, Avatar, IconButton, Button } from '@chakra-ui/react';
 import ProductCard from './product-list-item';
-import { AddIcon, EditIcon } from '@chakra-ui/icons';
+import { EditIcon } from '@chakra-ui/icons';
 
 const Profile = props => {
     const initialUserState = {name: "", mail: "", inventory: []}; //later probably replace mail with email
