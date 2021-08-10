@@ -1,4 +1,5 @@
-import { Button, Center, FormControl, FormLabel, HStack, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text } from "@chakra-ui/react";
+import { InfoIcon } from "@chakra-ui/icons";
+import { Button, Center, FormControl, FormLabel, HStack, IconButton, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Popover, PopoverArrow, PopoverCloseButton, PopoverContent, PopoverTrigger, Text } from "@chakra-ui/react";
 import React, {useState, useEffect} from "react";
 import {useHistory} from "react-router-dom";
 
@@ -163,7 +164,18 @@ const AddProduct = props => {
                         <Input type="country" placeholder="Country" onChange={onChangeCountry} value={product.address.country}/>
                     </FormControl>
                     <FormControl mt={4}>
-                        <FormLabel htmlFor="files">Upload pictures</FormLabel>
+                        <FormLabel htmlFor="files">
+                            Upload pictures{" "}
+                            <Popover placement="right">
+                                <PopoverTrigger>
+                                    <IconButton icon={<InfoIcon />} size="xs"/>
+                                </PopoverTrigger>
+                                <PopoverContent>
+                                    <PopoverCloseButton />
+                                    <Text>Leave empty to keep current images, or upload all new images.</Text>
+                                </PopoverContent>
+                            </Popover>
+                        </FormLabel>
                         <input type="file" id="files" name="files" accept="image/*" multiple onChange={onChangePictures}/>
                     </FormControl>
                 </ModalBody>
