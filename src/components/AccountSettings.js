@@ -1,16 +1,19 @@
 import React, {useRef, useState} from 'react';
-import { Button, Card, Form, Container, Alert } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, FormHelperText, Alert, AlertIcon, HStack, FormLabel } from '@chakra-ui/react';
+// import { Button, Card, Form, Container, Alert } from "react-bootstrap";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
 import UserDataService from "../services/user-data";
+import { Text } from '@chakra-ui/react';
 
 export default function UpdateProfile(props) {
-    const nameRef = useRef();
+    const firstNameRef = useRef();
+    const lastNameRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
-    const [streetRef, houseNrRef, zipRef, cityRef, countryRef] = [useRef(), useRef(), useRef(), useRef(), useRef()];
+    const [streetWithNrRef, zipRef, cityRef, countryRef] = [useRef(), useRef(), useRef(), useRef()];
     const {currentUser, updatePassword} = useAuth();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
@@ -54,11 +57,15 @@ export default function UpdateProfile(props) {
             } // Note: Later when there are multiple update options I should use Promises and only update if they all succeed (?)
             let change = false;
             const user = props.user;
-            if (nameRef.current.value && nameRef.current.value !== user.name) {
-                user.name = nameRef.current.value;
+            if (firstNameRef.current.value !== props.user.firstName) {
+                user.firstName = firstNameRef.current.value;
                 change = true;
             }
-            const userAddress = {street: streetRef.current.value, houseNumber: houseNrRef.current.value, zipcode: zipRef.current.value, city: cityRef.current.value, country: countryRef.current.value};
+            if (lastNameRef.current.value !== props.user.lastName) {
+                user.lastName = lastNameRef.current.value;
+                change = true;
+            }
+            const userAddress = {streetWithNr: streetWithNrRef.current.value, zipcode: zipRef.current.value, city: cityRef.current.value, country: countryRef.current.value};
             if (userAddress !== props.user.address){
                 user.address = userAddress;
                 change = true;
@@ -82,64 +89,154 @@ export default function UpdateProfile(props) {
     }
 
     return(
-        <Container className="d-flex align-items-center justify-content-center" style={{minHeight: "100vh"}}>
-            <div className="w-100" style={{maxWidth: "400px"}}>
-                <Card>
-                    <Card.Body>
-                        <h2 className="text-center mb-4">Update Profile</h2>
-                        {error && <Alert variant="danger">{error}</Alert>}
-                        <p>Your email: {props.user.mail}</p>
-                        <Form onSubmit={handleSubmit}>
-                            <Form.Group id="name">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" ref={nameRef} 
-                                defaultValue={props.user.name}/>
-                            </Form.Group>
-                            <Form.Group id="password">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" ref={passwordRef} 
-                                placeholder="Leave blank to leave the same"/>
-                            </Form.Group>
-                            <Form.Group id="password-confirm">
-                                <Form.Label>Confirm Password</Form.Label>
-                                <Form.Control type="password" ref={passwordConfirmRef} 
-                                placeholder="Leave blank to leave the same"/>
-                            </Form.Group>
-                            <br/>
-                            <Form.Label>Address</Form.Label>
-                            <Form.Group id="address">
-                                <Form.Label>Street</Form.Label>
-                                <Form.Control type="text" ref={streetRef} 
-                                defaultValue={props.user.address ? props.user.address.street : ""}/>
-                                <Form.Label>House Number</Form.Label>
-                                <Form.Control type="text" ref={houseNrRef} 
-                                defaultValue={props.user.address ? props.user.address.houseNumber : ""}/>
-                                <Form.Label>Zipcode</Form.Label>
-                                <Form.Control type="text" ref={zipRef} 
-                                defaultValue={props.user.address ? props.user.address.zipcode : ""}/>
-                                <Form.Label>City</Form.Label>
-                                <Form.Control type="text" ref={cityRef} 
-                                defaultValue={props.user.address ? props.user.address.city : ""}/>
-                                <Form.Label>Country</Form.Label>
-                                <Form.Control type="text" ref={countryRef} 
-                                defaultValue={props.user.address ? props.user.address.country : ""}/>
-                            </Form.Group>
-                            <label htmlFor="files">Upload pictures:</label><br/>
-                            <input type="file" id="files" name="files" accept="image/*" onChange={onChangePicture}/><br/>
-                            <Button disabled={loading} className="w-100 mt-3" type="submit">
-                                Update Profile
-                            </Button>
-                        </Form>
-                    </Card.Body>
-                </Card>
-                <div className="d-flex justify-content-center align-items-center">
-                    <button type="button" className="btn btn-danger text-center mt-2" onClick={deleteAccount}>Delete this account</button>
-                </div>
-                <div className="w-100 text-center mt-2 mb-5">
-                    <Link to="/">Cancel</Link>
-                </div> 
-            </div>
-        </Container>
+        <Box
+        alignItems="center"
+        paddingTop={3}
+    >
+        <Stack
+            flexDir="column"
+            mb="2"
+            justifyContent="center"
+            alignItems="center"
+            textAlign="center"
+        >
+            <Box minW={{ base: "300px", md: "468px" }} maxW="520px">
+                <Stack
+                spacing={4}
+                p="1rem"
+                backgroundColor="whiteAlpha.900"
+                borderRadius="xl"
+                boxShadow="md"
+                border="1px"
+                borderColor="gray.400"
+                >
+                <Heading size="lg">Account Settings</Heading>
+                {error && <Alert status="error">
+                    <AlertIcon />
+                    {error}
+                </Alert>}
+                <Text>Your Email: {props.user.mail}</Text>
+                <FormControl>
+                    <FormLabel>Name</FormLabel>
+                    <InputGroup>
+                    <HStack>
+                        <Input placeholder="First name" ref={firstNameRef} defaultValue={props.user.firstName}/>
+                        <Input placeholder="Last name" ref={lastNameRef} defaultValue={props.user.lastName}/>
+                    </HStack>
+                    </InputGroup>
+                </FormControl>
+                <FormControl>
+                    <FormLabel>New Password</FormLabel>
+                    <InputGroup>
+                    <Input
+                        type="password"
+                        placeholder="leave empty to leave the same"
+                        ref={passwordRef}
+                    />
+                    </InputGroup>
+                </FormControl>
+                <FormControl>
+                    <FormLabel>Confirm New Password</FormLabel>
+                    <InputGroup>
+                    <Input
+                        type="password"
+                        placeholder="leave empty to leave the same"
+                        ref={passwordConfirmRef}
+                    />
+                    </InputGroup>
+                </FormControl>
+                <Box>
+                    <Text mt={5}>Address</Text>
+                </Box>
+                <FormControl mt={4}>
+                    <Input placeholder="Street and house number" ref={streetWithNrRef} defaultValue={props.user.address?.streetWithNr}/>
+                </FormControl>
+                <FormControl mt={4}>
+                    <HStack>
+                        <Input placeholder="Zipcode" ref={zipRef} defaultValue={props.user.address?.zipcode}/>
+                        <Input placeholder="City" ref={cityRef} defaultValue={props.user.address?.city}/>
+                    </HStack>
+                </FormControl>
+                <FormControl mt={4}>
+                    <Input type="country" placeholder="Country" ref={countryRef} defaultValue={props.user.address?.country}/>
+                </FormControl>
+                <FormControl mt={4}>
+                    <FormLabel htmlFor="files">Upload profile picture</FormLabel>
+                    <input type="file" id="files" name="files" accept="image/*" onChange={onChangePicture}/>
+                </FormControl>
+                <Button
+                    borderRadius={0}
+                    type="submit"
+                    variant="solid"
+                    colorScheme="teal"
+                    width="full"
+                    onClick={handleSubmit}
+                >
+                    Update Profile
+                </Button>
+                </Stack>
+            </Box>
+        </Stack>
+    </Box>
     );
 }
 
+
+        // <Container className="d-flex align-items-center justify-content-center" style={{minHeight: "100vh"}}>
+        //     <div className="w-100" style={{maxWidth: "400px"}}>
+        //         <Card>
+        //             <Card.Body>
+        //                 <h2 className="text-center mb-4">Update Profile</h2>
+        //                 {error && <Alert variant="danger">{error}</Alert>}
+        //                 <p>Your email: {props.user.mail}</p>
+        //                 <Form onSubmit={handleSubmit}>
+        //                     <Form.Group id="name">
+        //                         <Form.Label>Name</Form.Label>
+        //                         <Form.Control type="text" ref={nameRef} 
+        //                         defaultValue={props.user.name}/>
+        //                     </Form.Group>
+        //                     <Form.Group id="password">
+        //                         <Form.Label>Password</Form.Label>
+        //                         <Form.Control type="password" ref={passwordRef} 
+        //                         placeholder="Leave blank to leave the same"/>
+        //                     </Form.Group>
+        //                     <Form.Group id="password-confirm">
+        //                         <Form.Label>Confirm Password</Form.Label>
+        //                         <Form.Control type="password" ref={passwordConfirmRef} 
+        //                         placeholder="Leave blank to leave the same"/>
+        //                     </Form.Group>
+        //                     <br/>
+        //                     <Form.Label>Address</Form.Label>
+        //                     <Form.Group id="address">
+        //                         <Form.Label>Street</Form.Label>
+        //                         <Form.Control type="text" ref={streetRef} 
+        //                         defaultValue={props.user.address ? props.user.address.street : ""}/>
+        //                         <Form.Label>House Number</Form.Label>
+        //                         <Form.Control type="text" ref={houseNrRef} 
+        //                         defaultValue={props.user.address ? props.user.address.houseNumber : ""}/>
+        //                         <Form.Label>Zipcode</Form.Label>
+        //                         <Form.Control type="text" ref={zipRef} 
+        //                         defaultValue={props.user.address ? props.user.address.zipcode : ""}/>
+        //                         <Form.Label>City</Form.Label>
+        //                         <Form.Control type="text" ref={cityRef} 
+        //                         defaultValue={props.user.address ? props.user.address.city : ""}/>
+        //                         <Form.Label>Country</Form.Label>
+        //                         <Form.Control type="text" ref={countryRef} 
+        //                         defaultValue={props.user.address ? props.user.address.country : ""}/>
+        //                     </Form.Group>
+        //                     <label htmlFor="files">Upload profile picture:</label><br/>
+        //                     <input type="file" id="files" name="files" accept="image/*" onChange={onChangePicture}/><br/>
+        //                     <Button disabled={loading} className="w-100 mt-3" type="submit">
+        //                         Update Profile
+        //                     </Button>
+        //                 </Form>
+        //             </Card.Body>
+        //         </Card>
+        //         <div className="d-flex justify-content-center align-items-center">
+        //             <button type="button" className="btn btn-danger text-center mt-2" onClick={deleteAccount}>Delete this account</button>
+        //         </div>
+        //         <div className="w-100 text-center mt-2 mb-5">
+        //             <Link to="/">Cancel</Link>
+        //         </div> 
+        //     </div>
+        // </Container>
