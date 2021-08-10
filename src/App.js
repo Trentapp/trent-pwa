@@ -26,6 +26,7 @@ import Datenschutz from "./components/datenschutz";
 
 import { useAuth } from "./context/AuthContext";
 import UserDataService from "./services/user-data";
+import ChatsList from "./components/ChatsList";
 
 function App() {
   const { currentUser, logout } = useAuth();
@@ -83,6 +84,7 @@ function App() {
           <Route path="/profile/:id"
             render={(props) => (<Profile {...props} user={user}/>)} />
           <PrivateRoute path="/account-settings" component={AccountSettings} user={user}/>
+          <PrivateRoute exact path="/chats" component={ChatsList} user={user}/>
           <PrivateRoute path="/chats/:id" component={Chat} user={user} />
           <Route path="/impressum" component={Impressum} />
           <Route path="/datenschutz" component={Datenschutz} />
