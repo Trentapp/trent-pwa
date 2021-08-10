@@ -1,13 +1,16 @@
 import React, {useRef, useState} from 'react';
-import { Button, Card, Form, Container, Alert } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import { Button, Card, Form, Container, Alert } from "react-bootstrap";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
+import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, FormHelperText, Alert, AlertIcon, HStack } from '@chakra-ui/react';
+
 
 import UserDataService from "../services/user-data";
 
 export default function SignUp() {
-    const nameRef = useRef();
+    const firstNameRef = useRef();
+    const lastNameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
@@ -27,7 +30,7 @@ export default function SignUp() {
             const signupResponse = await signup(emailRef.current.value, passwordRef.current.value);
             console.log("firebase response: ", signupResponse);
             //firebase user.uid is correct, right? // probably change that below later (pass user directly as body)
-            await UserDataService.createUser({user: {name: nameRef.current.value, mail: emailRef.current.value, uid: signupResponse.user.uid}}) //use Promise.all() or so so that the firebase entry is not created if createUser fails (is that possible?)
+            await UserDataService.createUser({user: {firstName: firstNameRef.current.value, lastName: lastNameRef.current.value, mail: emailRef.current.value, uid: signupResponse.user.uid}}) //use Promise.all() or so so that the firebase entry is not created if createUser fails (is that possible?)
             history.push("/");
             window.location.reload();
         } catch(err) {
@@ -38,40 +41,118 @@ export default function SignUp() {
     }
 
     return(
-        <Container className="d-flex align-items-center justify-content-center" style={{minHeight: "100vh"}}>
-            <div className="w-100" style={{maxWidth: "400px"}}>
-                <Card>
-                    <Card.Body>
-                        <h2 className="text-center mb-4">Sign Up</h2>
-                        {error && <Alert variant="danger">{error}</Alert>}
-                        <Form onSubmit={handleSubmit}>
-                            <Form.Group id="name">
-                                <Form.Label>Full Name</Form.Label>
-                                <Form.Control type="text" ref={nameRef} required />
-                            </Form.Group>
-                            <Form.Group id="email">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control type="email" ref={emailRef} required />
-                            </Form.Group>
-                            <Form.Group id="password">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" ref={passwordRef} required />
-                            </Form.Group>
-                            <Form.Group id="password-confirm">
-                                <Form.Label>Confirm Password</Form.Label>
-                                <Form.Control type="password" ref={passwordConfirmRef} required />
-                            </Form.Group>
-                            <Button disabled={loading} className="w-100 mt-3" type="submit">
-                                Sign Up
-                            </Button>
-                        </Form>
-                    </Card.Body>
-                </Card>
-                <div className="w-100 text-center mt-2">
-                    Already have an account? <Link to="/login">Log In</Link>
-                </div>  
-            </div>
-        </Container>
+        <Box
+        alignItems="center"
+        paddingTop={{base: "30px", md: "50px", lg: "80px"}}
+    >
+        <Stack
+            flexDir="column"
+            mb="2"
+            justifyContent="center"
+            alignItems="center"
+            textAlign="center"
+        >
+            <Box minW={{ base: "300px", md: "468px" }} maxW="520px">
+                <Stack
+                spacing={4}
+                p="1rem"
+                backgroundColor="whiteAlpha.900"
+                borderRadius="xl"
+                boxShadow="md"
+                border="1px"
+                borderColor="gray.400"
+                >
+                <Heading size="lg">Sign Up</Heading>
+                {error && <Alert status="error">
+                    <AlertIcon />
+                    {error}
+                </Alert>}
+                <FormControl>
+                    <InputGroup>
+                    <HStack>
+                        <Input placeholder="First name" ref={firstNameRef}/>
+                        <Input placeholder="Last name" ref={lastNameRef}/>
+                    </HStack>
+                    </InputGroup>
+                </FormControl>
+                <FormControl>
+                    <InputGroup>
+                    <Input type="email" placeholder="email address" ref={emailRef} />
+                    </InputGroup>
+                </FormControl>
+                <FormControl>
+                    <InputGroup>
+                    <Input
+                        type="password"
+                        placeholder="password"
+                        ref={passwordRef}
+                    />
+                    </InputGroup>
+                </FormControl>
+                <FormControl>
+                    <InputGroup>
+                    <Input
+                        type="password"
+                        placeholder="confirm password"
+                        ref={passwordConfirmRef}
+                    />
+                    </InputGroup>
+                </FormControl>
+                <Button
+                    borderRadius={0}
+                    type="submit"
+                    variant="solid"
+                    colorScheme="teal"
+                    width="full"
+                    onClick={handleSubmit}
+                >
+                    Sign Up
+                </Button>
+                </Stack>
+            </Box>
+            <Box>
+                Already have an account?{" "}
+                <Link to="/login">
+                    Log In
+                </Link>
+            </Box>
+        </Stack>
+    </Box>
     );
 }
+
+        // <Container className="d-flex align-items-center justify-content-center" style={{minHeight: "100vh"}}>
+        //     <div className="w-100" style={{maxWidth: "400px"}}>
+        //         <Card>
+        //             <Card.Body>
+        //                 <h2 className="text-center mb-4">Sign Up</h2>
+        //                 {error && <Alert variant="danger">{error}</Alert>}
+        //                 <Form onSubmit={handleSubmit}>
+        //                     <Form.Group id="name">
+        //                         <Form.Label>Full Name</Form.Label>
+        //                         <Form.Control type="text" ref={nameRef} required />
+        //                     </Form.Group>
+        //                     <Form.Group id="email">
+        //                         <Form.Label>Email</Form.Label>
+        //                         <Form.Control type="email" ref={emailRef} required />
+        //                     </Form.Group>
+        //                     <Form.Group id="password">
+        //                         <Form.Label>Password</Form.Label>
+        //                         <Form.Control type="password" ref={passwordRef} required />
+        //                     </Form.Group>
+        //                     <Form.Group id="password-confirm">
+        //                         <Form.Label>Confirm Password</Form.Label>
+        //                         <Form.Control type="password" ref={passwordConfirmRef} required />
+        //                     </Form.Group>
+        //                     <Button disabled={loading} className="w-100 mt-3" type="submit">
+        //                         Sign Up
+        //                     </Button>
+        //                 </Form>
+        //             </Card.Body>
+        //         </Card>
+        //         <div className="w-100 text-center mt-2">
+        //             Already have an account? <Link to="/login">Log In</Link>
+        //         </div>  
+        //     </div>
+        // </Container>
 

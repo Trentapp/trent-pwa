@@ -1,10 +1,9 @@
-
 import React, {useRef, useState} from 'react';
 // import { Button, Card, Form, Container, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
-import { Flex, Box, Stack, Heading, FormControl, InputGroup, Input, Button, FormHelperText } from '@chakra-ui/react';
+import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, FormHelperText, Alert, AlertIcon } from '@chakra-ui/react';
 
 export default function Login() {
     const emailRef = useRef();
@@ -30,8 +29,7 @@ export default function Login() {
     return(
     <Box
         alignItems="center"
-        py={32}
-        bg="red"
+        paddingTop={{base: "30px", md: "100px", lg: "150px"}}
     >
         <Stack
             flexDir="column"
@@ -40,7 +38,7 @@ export default function Login() {
             alignItems="center"
             textAlign="center"
         >
-            <Box minW={{ base: "90%", md: "468px" }} maxW="520px">
+            <Box minW={{ base: "300px", md: "468px" }} maxW="520px">
                 <Stack
                 spacing={4}
                 p="1rem"
@@ -51,9 +49,13 @@ export default function Login() {
                 borderColor="gray.400"
                 >
                 <Heading size="lg">Log In</Heading>
+                {error && <Alert status="error">
+                    <AlertIcon />
+                    {error}
+                </Alert>}
                 <FormControl>
                     <InputGroup>
-                    <Input type="email" placeholder="email address" />
+                    <Input type="email" placeholder="email address" ref={emailRef} />
                     </InputGroup>
                 </FormControl>
                 <FormControl>
@@ -61,10 +63,9 @@ export default function Login() {
                     <Input
                         type="password"
                         placeholder="password"
+                        ref={passwordRef}
                     />
                     </InputGroup>
-                    <FormHelperText textAlign="right">
-                    </FormHelperText>
                 </FormControl>
                 <Button
                     borderRadius={0}
@@ -72,6 +73,7 @@ export default function Login() {
                     variant="solid"
                     colorScheme="teal"
                     width="full"
+                    onClick={handleSubmit}
                 >
                     Login
                 </Button>
