@@ -19,7 +19,7 @@ export default function ProfileCard(props) {
                     
                 >
                     <Center>
-                    {props.product.user.picture && <Avatar src={`data:${props.product.user.picture.contentType};base64,${Buffer.from(props.product.user.picture.data.data).toString('base64')}`} />}
+                    <Avatar src={props.product.user.picture && `data:${props.product.user.picture.contentType};base64,${Buffer.from(props.product.user.picture.data.data).toString('base64')}`} />
                     </Center>
                     <VStack>
                         <Text fontWeight="bold">
