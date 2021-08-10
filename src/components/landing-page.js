@@ -16,6 +16,8 @@ import rectangle37 from "../assets/rectangle-37@1x.png";
 import { Box, Center, Heading as Heading2 } from '@chakra-ui/react';
 //import nav4 from "../assets/nav-4-1@1x.png"; // image of nice footer
 
+import logo from "../assets/logo.png"
+
 
 function App(props) {
   const history = useHistory();
@@ -42,8 +44,9 @@ function App(props) {
   return(
     <Link to="/">
       <TrentStyle>
-        <Span0>trent</Span0>
-        <Span1>.</Span1>
+        <img src={logo} />
+        {/* <Span0>trent</Span0>
+        <Span1>.</Span1> */}
       </TrentStyle>
     </Link>
   )
@@ -53,8 +56,9 @@ export const LogoSmall = (props) => {
   return(
     <Link to="/">
       <TrentStyleSmall>
-        <Span0>trent</Span0>
-        <Span1>.</Span1>
+        <img src={logo} />
+        {/* <Span0>trent</Span0>
+        <Span1>.</Span1> */}
       </TrentStyleSmall>
     </Link>
   )
