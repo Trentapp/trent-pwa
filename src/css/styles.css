@@ -3,13 +3,20 @@ html, body {
     margin: 0;
 }
 
+.wrapper2 {
+  margin-top: 75px;
+}
+
 .wrapper {
-    margin-top: 75px;
     min-height: 100% !important;
     margin-bottom: -150px;
 }
-.footer, .push {
+/* .footer, .push {
     height: 150px; 
+} */
+
+.footer {
+  height: 150px;
 }
 
 /* from anima */

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/styles.css";
+import { Box } from "@chakra-ui/react";
 
 import LandingPage from "./components/landing-page";
 import Header from "./components/Header";
@@ -57,37 +58,39 @@ function App() {
 
   return (
     <>
+    <Box className="wrapper flex-shrink-0">
     {window.location.pathname !== '/landing-page' && (window.location.pathname !== '/' || user._id) && <Header user={user} handleLogout={handleLogout}/>}
-    <div className="wrapper flex-shrink-0">
-      <Switch>
-        <Route exact path="/products"
-          render={(props) => (<ProductsList {...props} inventory={false} />)} /> {/* I think it actually should not be rendered (just included as component), but it is just a test for now */}
-        <Route exact path={["/", "/landing-page"]} 
-          render={(props) => (<LandingPage {...props} user={user} />)} />
-        <Route exact path={["/dashboard"]} 
-          render={(props) => (<Dashboard {...props} user={user} />)} />
-        <Route exact path="/about" component={About} />
-        <PrivateRoute exact path="/inventory"
-          component={ProductsList} inventory={true} user={user}/>
-        <Route path={["/products/product/:id", "/product/:id"]}
-          render={(props) => (<Product {...props} user={user}/>)} />
-        <PrivateRoute exact path="/products/create"
-          component={AddProduct} user={user}/>
-        <PrivateRoute exact path="/products/update/:id"
-          component={AddProduct} user={user}/>
-        <LoggedOutRoute path="/signup" component={SignUp} user={user}/>
-        <LoggedOutRoute path="/login" component={LogIn} user={user}/>
-        <LoggedOutRoute path="/forgot-password" component={ForgotPassword} user={user}/>
-        <Route path="/profile/:id"
-          render={(props) => (<Profile {...props} user={user}/>)} />
-        <PrivateRoute path="/account-settings" component={AccountSettings} user={user}/>
-        <PrivateRoute path="/chats/:id" component={Chat} user={user} />
-        <Route path="/impressum" component={Impressum} />
-        <Route path="/datenschutz" component={Datenschutz} />
-        <Route path="*" component={NotFound} />
-      </Switch>
-      <div className="push"></div>
-    </div>
+      <Box>
+        <Switch>
+          <Route exact path="/products"
+            render={(props) => (<ProductsList {...props} inventory={false} />)} /> {/* I think it actually should not be rendered (just included as component), but it is just a test for now */}
+          <Route exact path={["/", "/landing-page"]} 
+            render={(props) => (<LandingPage {...props} user={user} />)} />
+          <Route exact path={["/dashboard"]} 
+            render={(props) => (<Dashboard {...props} user={user} />)} />
+          <Route exact path="/about" component={About} />
+          <PrivateRoute exact path="/inventory"
+            component={ProductsList} inventory={true} user={user}/>
+          <Route path={["/products/product/:id", "/product/:id"]}
+            render={(props) => (<Product {...props} user={user}/>)} />
+          <PrivateRoute exact path="/products/create"
+            component={AddProduct} user={user}/>
+          <PrivateRoute exact path="/products/update/:id"
+            component={AddProduct} user={user}/>
+          <LoggedOutRoute path="/signup" component={SignUp} user={user}/>
+          <LoggedOutRoute path="/login" component={LogIn} user={user}/>
+          <LoggedOutRoute path="/forgot-password" component={ForgotPassword} user={user}/>
+          <Route path="/profile/:id"
+            render={(props) => (<Profile {...props} user={user}/>)} />
+          <PrivateRoute path="/account-settings" component={AccountSettings} user={user}/>
+          <PrivateRoute path="/chats/:id" component={Chat} user={user} />
+          <Route path="/impressum" component={Impressum} />
+          <Route path="/datenschutz" component={Datenschutz} />
+          <Route path="*" component={NotFound} />
+        </Switch>
+        <Box className="push"></Box>
+        </Box>
+    </Box>
     <footer className="footer">{window.location.pathname === "/products" ? <ProductsListFooter/> : <Footer />}</footer>
     </>
   );

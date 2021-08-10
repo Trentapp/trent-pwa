@@ -16,7 +16,6 @@ export default function ProfileCard(props) {
                 <HStack
                     bgColor="white"
                     w="100%"
-                    
                 >
                     <Center>
                     <Avatar src={props.product.user.picture && `data:${props.product.user.picture.contentType};base64,${Buffer.from(props.product.user.picture.data.data).toString('base64')}`} />
