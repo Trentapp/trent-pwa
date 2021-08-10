@@ -9,12 +9,14 @@ import { Box, Container, Heading, HStack, Divider, VStack, Text, Button, Center,
 import ProfileCard from "./profileCard";
 import BookingCard from "./BookingCard";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import AddProduct from "./add-product";
 
 
 const Product = props => {
     const [product, setProduct] = useState({prices: {}, user: {}}); //maybe add better initial state, though currently the information is shown conditionally
     // const [error, setError] = useState(""); //can get rid of that if redirect works
     // const [showQuestionForm, setShowQuestionForm] = useState(false);
+    const [showEdit, setShowEdit] = useState(false);
     const [images, setImages] = useState([]);
     // const messageRef = useRef();
     let history = useHistory();
@@ -120,7 +122,8 @@ const Product = props => {
                             </> : 
                             <Box py={2}>
                                 <HStack spacing="10px">
-                                    <IconButton title="Edit product" colorScheme="teal" size="lg" icon={<EditIcon />}/>
+                                    <IconButton title="Edit product" colorScheme="teal" size="lg" icon={<EditIcon />} onClick={() => setShowEdit(true)}/>
+                                    <AddProduct user={props.user} isOpen={showEdit} setIsOpen={setShowEdit} product={product} />
                                     <IconButton title="Delete product" colorScheme="red" size="lg" icon={<DeleteIcon />} onClick={deleteProduct}/>
                                 </HStack>
                             </Box>}

@@ -29,24 +29,27 @@ const AddProduct = props => {
     const [files, setFiles] = useState([]);
     
     useEffect(() => {
-        async function getOldProduct() {
-            try {
-                if (props.updateProductId){
-                    const response = await ProductDataService.get(props.updateProductId); //I get a warning here that I don't understand very well. Maybe change it later.
-                    setProduct(response.data);//for updating a product the userId should be set correctly here
-                    if (props.user._id !== response.data.user._id){
-                        history.push("/404");//"Not found" if a wrong user wants to update the product // maybe replace 404 with forbidden route or so later
-                    }
-                }
-            } catch(e) {
-                //this catch normally should only be triggered when the productID does not exist
-                console.log("Error trying to retrieve old product state: ", e);
-                history.push("/404");//not perfect, because it still shows content for a short second (maybe add sth like loading until the first useEffect is completed)
-            }
-        }
-        getOldProduct();
-        if (props.user.address) {//attention: if the product has a different address than the user, the address will be set to the address of the user!
+        // async function getOldProduct() {
+        //     try {
+        //         if (props.updateProductId){
+        //             const response = await ProductDataService.get(props.updateProductId); //I get a warning here that I don't understand very well. Maybe change it later.
+        //             setProduct(response.data);//for updating a product the userId should be set correctly here
+        //             if (props.user._id !== response.data.user._id){
+        //                 history.push("/404");//"Not found" if a wrong user wants to update the product // maybe replace 404 with forbidden route or so later
+        //             }
+        //         }
+        //     } catch(e) {
+        //         //this catch normally should only be triggered when the productID does not exist
+        //         console.log("Error trying to retrieve old product state: ", e);
+        //         history.push("/404");//not perfect, because it still shows content for a short second (maybe add sth like loading until the first useEffect is completed)
+        //     }
+        // }
+        // getOldProduct();
+        if (props.user.address) {
             setProduct(product => ({...product, address: props.user.address}));
+        }
+        if (props.product?._id) {
+            setProduct(props.product);
         }
     }, [props.updateProductId, props.user, history]);
 
@@ -110,9 +113,9 @@ const AddProduct = props => {
             const fd = fileUploadHandler();//hopefully I don't run into update problems
             const blob = new Blob([JSON.stringify({product, uid: props.user.uid})], {type: "application/json"});
             fd.append("product", blob);//probably change product to blob
-            if (props.updateProductId){//update probably currently not working
-                await ProductDataService.updateProduct(props.updateProductId, fd);
-                history.push(`/products/product/${props.updateProductId}`);
+            if (props.product?._id){//update probably currently not working
+                await ProductDataService.updateProduct(props.product?._id, fd);
+                props.setIsOpen(false);
             } else {
                 const response = await ProductDataService.createProduct(fd);
                 //const response = await ProductDataService.createProduct({product: product, uid: props.user.uid});//was from without file transfer
@@ -128,7 +131,7 @@ const AddProduct = props => {
         <Modal isOpen={props.isOpen} onClose={() => props.setIsOpen(false)} size="lg">
             <ModalOverlay />
             <ModalContent>
-                <ModalHeader>{props.updateProductId ? <>Update Product</> : <>Add a new product</>}</ModalHeader>
+                <ModalHeader>{props.product?._id ? <>Update Product</> : <>Add a new product</>}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody pb={6}>
                     <FormControl>
@@ -142,8 +145,8 @@ const AddProduct = props => {
                     <FormControl mt={4}>
                         <FormLabel>Price</FormLabel>
                         <HStack>
-                            <Input placeholder="per Hour" onChange={onChangeHourPrice} value={product.prices.hour}/>
-                            <Input placeholder="per Day" onChange={onChangeDayPrice} value={product.prices.day}/>
+                            <Input placeholder="per Hour" onChange={onChangeHourPrice} value={product.prices.perHour}/>
+                            <Input placeholder="per Day" onChange={onChangeDayPrice} value={product.prices.perDay}/>
                         </HStack>
                     </FormControl>
                     <Text mt={5}>Address</Text>
