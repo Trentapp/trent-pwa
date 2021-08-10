@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Container, Heading, Input } from "@chakra-ui/react";
+import { Avatar, Box, Button, Container, Heading, HStack, Input, Flex, Text, VStack, Divider } from "@chakra-ui/react";
 import React, {useState, useEffect, useRef} from "react";
 import {useHistory} from "react-router-dom";
 
@@ -9,23 +9,23 @@ import ChatDataService from "../services/chat-data";
 
 const Message = props => {
     return(
-        <div className="col-lg-6 offset-3">
+        <Box w="100%">
         {props.message.sender._id === props.user._id ? (
-            <div className="d-flex flex-row justify-content-end mb-4">
-              <div className="p-3 me-3 border" style={{borderRadius: "15px", backgroundColor: "#fbfbfb"}}>
-                <p className="small mb-0">{props.message.content}</p>
-              </div>
+            <Flex justify="flex-end">
+              <Flex p={2} mx={3} borderRadius="xl" bg="green.200" textAlign="center" align="center">
+                <Text fontSize="sm">{props.message.content}</Text>
+              </Flex>
               <Avatar src={props.message.sender.picture && `data:${props.message.sender.picture.contentType};base64,${Buffer.from(props.message.sender.picture.data.data).toString('base64')}`} />
-            </div>
+            </Flex>
         ) : (
-            <div className="d-flex flex-row justify-content-start mb-4">
+            <Flex justify="flex-start">
               <Avatar src={props.message.sender.picture && `data:${props.message.sender.picture.contentType};base64,${Buffer.from(props.message.sender.picture.data.data).toString('base64')}`} />
-              <div className="p-3 ms-3" style={{borderRadius: "15px", backgroundColor: "rgba(57, 192, 237,.2)"}}>
-                <p className="small mb-0">{props.message.content}</p>
-              </div>
-            </div>
+              <Flex p={2} mx={3} borderRadius="xl" bg="blue.200" textAlign="center" align="center">
+                <Text fontSize="sm">{props.message.content}</Text>
+              </Flex>
+            </Flex>
         )}
-        </div>
+        </Box>
     )
 }
 
@@ -64,15 +64,20 @@ const Chat = props => {
 
     return(
         <Container mawW="container.xl">
-            <Box>
-                <Heading>Chat with {otherUser.name} about {chat.product.name}</Heading>
-                <Box>
-                    {chat.messages && chat.messages.map(message => <Message user={props.user} message={message} key={message._id}/>)}
-                </Box>
-                <Box>
-                    <Input type="text" ref={messageRef} />
-                    <Button onClick={onSendMessage}>Send</Button>
-                </Box>
+            <Box marginTop={4} borderRadius="xl" border="1px" p={4} borderColor="gray.300">
+                <VStack>
+                    <Heading size="lg">Chat with {otherUser.name} about {chat.product.name}</Heading>
+                    <Divider color="gray.400" />
+                    <Box w="100%">
+                        <VStack spacing={4}>
+                            {chat.messages && chat.messages.map(message => <Message user={props.user} message={message} key={message._id}/>)}
+                        </VStack>
+                    </Box>
+                    <HStack marginTop={4} w="100%">
+                        <Input borderColor="gray.400" type="text" ref={messageRef} />
+                        <Button onClick={onSendMessage}>Send</Button>
+                    </HStack>
+                </VStack>
             </Box>
         </Container>
     )
