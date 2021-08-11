@@ -29,8 +29,8 @@ const Product = props => {
                 productId: product._id,
                 content: messageRef.current.value,
             };
-            await ChatDataService.sendMessage(chat);
-            history.push("/");
+            const response = await ChatDataService.sendMessage(chat);
+            history.push(`/chats/${response.data.chatId}`);
         } catch(e) {
             console.log("Failed to send message: ", e)
         }
