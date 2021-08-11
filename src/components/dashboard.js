@@ -9,7 +9,7 @@ import { Box, Button, Center, Container, Divider, Heading, HStack, VStack } from
 import TransactionCard from "./TransactionCard";
 
 const Dashboard = props => {
-    const [newMessages, setNewMessages] = useState([]);
+    const [newMessagesChats, setNewMessagesChats] = useState([]);
     const [newRequests, setNewRequests] = useState([]);
     const [upcomingTransactions, setUpcomingTransactions] = useState([]);
 
@@ -17,7 +17,7 @@ const Dashboard = props => {
         const getNewMessages = async (uid) => {
             try {
                 const response = await ChatDataService.getNewMessages(uid);
-                setNewMessages(response.data);
+                setNewMessagesChats(response.data);
             } catch(e) {
                 console.log("Error in get transactions by user: ", e);
             }
@@ -38,6 +38,7 @@ const Dashboard = props => {
                 console.log("Error in get transactions by user: ", e);
             }
         }
+        getNewMessages(props.user?.uid);
     }, [props.user]);
 
     return(
@@ -48,8 +49,10 @@ const Dashboard = props => {
                         <Heading>Dashboard</Heading>
                         <Divider color="gray.400"/>
                         <VStack align="flex-start" paddingTop={3}>
-                            <Heading size="lg">New messages</Heading>
-                            {/* get unread messages */}
+                            {newMessagesChats.length && <>
+                                <Heading size="lg">New messages</Heading>
+                                {newMessagesChats.map(chat => <Link to={`/chats/${chat._id}`}><Box w="100%" p={2} border="1px" borderRadius="lg" borderColor="gray.400" key={chat._id}>{props.user._id === chat.borrower._id ? <>{chat.lender.name} lending {chat.product?.name}</> : <>{chat.borrower.name} borrowing your {chat.product?.name}</>}</Box></Link> )}
+                            </>}
                             <Heading size="lg">New Requests</Heading>
                             {/* get new requests (upcoming, lender and open (status=0)) */}
                             <Heading size="lg">Upcoming trents</Heading>
