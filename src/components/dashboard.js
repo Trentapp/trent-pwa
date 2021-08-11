@@ -32,13 +32,14 @@ const Dashboard = props => {
         }
         const getUpcomingTransactions = async (uid) => {
             try {
-                const response = await TransactionDataService.getUpcomingTransactions(uid);
+                const response = await TransactionDataService.getUpcoming(uid);
                 setUpcomingTransactions(response.data);
             } catch(e) {
                 console.log("Error in get transactions by user: ", e);
             }
         }
         getNewMessages(props.user?.uid);
+        getUpcomingTransactions(props.user?.uid);
     }, [props.user]);
 
     return(
