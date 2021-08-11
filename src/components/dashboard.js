@@ -49,20 +49,26 @@ const Dashboard = props => {
                         <Heading>Dashboard</Heading>
                         <Divider color="gray.400"/>
                         <VStack align="flex-start" paddingTop={3}>
-                            {newMessagesChats.length && <>
+                            {newMessagesChats.length && <Box paddingTop={3}>
                                 <Heading size="lg">Chats with new messages</Heading>
+                                <VStack align="flex-start">
                                 {newMessagesChats.map(chat => <Link to={`/chats/${chat._id}`}><Box w="100%" p={2} border="1px" borderRadius="lg" borderColor="gray.400" key={chat._id}>{props.user._id === chat.borrower._id ? <>{chat.lender.name} lending {chat.product?.name}</> : <>{chat.borrower.name} borrowing your {chat.product?.name}</>}</Box></Link> )}
-                            </>}
-                            {newRequests.length && <>
+                                </VStack>
+                            </Box>}
+                            {newRequests.length && <Box paddingTop={3}>
                                 <Heading size="lg">New Requests</Heading>
+                                <VStack align="flex-start">
                                 {newRequests.map(transaction => <TransactionCard user={props.user} transaction={transaction} />)}
-                            </>}
-                            {upcomingTransactions.length && <>
+                                </VStack>
+                            </Box>}
+                            {upcomingTransactions.length && <Box paddingTop={3} paddingBottom={3}>
                                 <Heading size="lg">Upcoming transactions</Heading>
+                                <VStack align="flex-start">
                                 {upcomingTransactions.map(transaction => <TransactionCard user={props.user} transaction={transaction} />)}
-                            </>}
+                                </VStack>
+                            </Box>}
                         </VStack>
-                        <Divider color="gray.400" />
+                        <Divider color="gray.400"/>
                         <Box w="100%" paddingTop={3}>
                             <HStack>
                                 <Link to="/chats"><Button variant="outline">Chats</Button></Link>
