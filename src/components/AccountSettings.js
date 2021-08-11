@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, FormLabel } from '@chakra-ui/react';
+import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, FormLabel, Center } from '@chakra-ui/react';
 // import { Button, Card, Form, Container, Alert } from "react-bootstrap";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -166,7 +166,6 @@ export default function UpdateProfile(props) {
                 </FormControl>
                 <Button
                     disabled={loading}
-                    borderRadius={0}
                     type="submit"
                     variant="solid"
                     colorScheme="teal"
@@ -176,6 +175,7 @@ export default function UpdateProfile(props) {
                     Update Profile
                 </Button>
                 </Stack>
+                <Center><Button w="100%" marginTop={3} mx={4} onClick={deleteAccount} colorScheme="red">Delete Account</Button></Center>
             </Box>
         </Stack>
     </Box>
