@@ -8,7 +8,7 @@ import TransactionDataService from "../services/transaction-data";
 import AddProduct from './add-product';
 // import AddReview from "./add-review";
 // import Review from "./Review";
-import { Box, HStack, Container, Heading, VStack, Text, Divider, Avatar, IconButton, Button } from '@chakra-ui/react';
+import { Box, HStack, Container, Heading, VStack, Text, Divider, Avatar, IconButton, Button, Center } from '@chakra-ui/react';
 import ProductCard from './product-list-item';
 import { EditIcon } from '@chakra-ui/icons';
 
@@ -82,10 +82,10 @@ const Profile = props => {
                         {/* {profileUser._id === props.user._id && <Button>Upload profile picture</Button>} */}
                         {/*later add description (about me): <Text></Text> */}
                     </VStack>
-                    <VStack>
+                    <VStack minW={"300px", "400px", "500px"}>
                         <Box w="100%" paddingBottom={3}>
-                            <Heading size="lg">Inventory of {profileUser.name}</Heading>
-                            <Divider />
+                            <Center><Heading size="lg">Inventory of {profileUser.name}</Heading></Center>
+                            <Divider color="gray.500" />
                         </Box>
                         {profileUser._id === props.user._id && 
                             <Button width="100%" colorScheme="green" onClick={() => setShowAddProduct(true)}>
