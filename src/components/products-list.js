@@ -40,13 +40,13 @@ const ProductsList = props => {
       setFilters(filters => ({...filters, name: props.location.search ? qs.parse(props.location.search, {ignoreQueryPrefix: true, delimiter: "&"}).search : ""}));
     }, [props.location.search]);
 
-    useEffect(() => { //works at my parents, but not in HD
-        navigator.geolocation.getCurrentPosition((position) => {
-            //problem: that way of getting the location is super imprecise.
-            setFilters(filters => ({...filters, lat: position.coords.latitude, lng: position.coords.longitude}));
-            console.log("My position: ", position.coords.latitude, " ", position.coords.longitude);
-        }, (err) => console.log("Could not get Geoposition: ", err), {enableHighAccuracy: true, timeout: 3000});
-    }, []);
+    // useEffect(() => { //works at my parents, but not in HD //attention: possible "error" (actually correct functioning except in the beginning, though it should work)
+    //     navigator.geolocation.getCurrentPosition((position) => {
+    //         //problem: that way of getting the location is super imprecise.
+    //         setFilters(filters => ({...filters, lat: position.coords.latitude, lng: position.coords.longitude}));
+    //         console.log("My position: ", position.coords.latitude, " ", position.coords.longitude);
+    //     }, (err) => console.log("Could not get Geoposition: ", err), {enableHighAccuracy: true, timeout: 3000});
+    // }, [products]);
 
     //maybe add later that the results are automatically updated when you change a filter property and you don't need to click on apply
     return(

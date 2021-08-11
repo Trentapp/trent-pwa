@@ -82,7 +82,7 @@ const Profile = props => {
                         {/* {profileUser._id === props.user._id && <Button>Upload profile picture</Button>} */}
                         {/*later add description (about me): <Text></Text> */}
                     </VStack>
-                    <VStack minW={"300px", "400px", "500px"}>
+                    <VStack minW={["250px", "400px"]}>
                         <Box w="100%" paddingBottom={3}>
                             <Center><Heading size="lg">Inventory of {profileUser.name}</Heading></Center>
                             <Divider color="gray.500" />
