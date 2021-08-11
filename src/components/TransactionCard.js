@@ -2,9 +2,32 @@ import { VStack, Text, IconButton, Box, HStack, Center, Avatar, Tooltip } from '
 import React from 'react'
 import { CheckIcon, QuestionIcon, CloseIcon } from '@chakra-ui/icons'
 
+import TransactionDataService from "../services/transaction-data";
+
 export default function TransactionCard(props) {
+    const onCancelRequest = async () => {
+        try {
+            await TransactionDataService.setTransactionStatus(props.transaction._id, props.user.uid, 1);
+            window.location.reload();
+        } catch(e) {
+            console.log("Error in transaction list row: ", e);
+        }
+    }
+
+    const onAcceptRequest = async () => {
+        try {
+            await TransactionDataService.setTransactionStatus(props.transaction._id, props.user.uid, 2);
+            window.location.reload();
+        } catch(e) {
+            console.log("Error in transaction list row: ", e);
+        }
+    }
+
     return (
+    <HStack>
         <Box
+            border="1px"
+            borderColor="gray.300"
             borderRadius="xl"
             overflow="hidden"
             boxShadow="md"
@@ -29,10 +52,19 @@ export default function TransactionCard(props) {
                 <Box px={3}>
                     {props.transaction.status === 0 ? <Tooltip label="not verified yet"><QuestionIcon boxSize={6}/></Tooltip>
                         : <>{props.transaction.status === 1 ? 
-                            <Tooltip label="rejected"><CloseIcon boxSize={6} /></Tooltip> :
+                            <Tooltip label="rejected/cancelled"><CloseIcon boxSize={6} /></Tooltip> :
                             <Tooltip label="accepted"><CheckIcon boxSize={6} /></Tooltip> }</>}
                 </Box>
             </HStack>
         </Box>
+        {props.transaction.status === 0 && <>
+            {props.transaction.lender?._id === props.user._id ? <>
+                <Tooltip label="accept"><IconButton icon={<CheckIcon boxSize={6} />} size="lg" colorScheme="green" onClick={onAcceptRequest}/></Tooltip>
+                <Tooltip label="reject"><IconButton icon={<CloseIcon boxSize={6} />} size="lg" colorScheme="red" onClick={onCancelRequest}/></Tooltip>
+            </> : <>
+                <Tooltip label="cancel"><IconButton icon={<CloseIcon boxSize={6} />} size="lg" colorScheme="red" onClick={onCancelRequest}/></Tooltip>
+            </>}
+        </>}
+    </HStack>
     )
 }

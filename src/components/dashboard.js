@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
-import {Table} from "react-bootstrap";
 
 import TransactionDataService from "../services/transaction-data";
 import ChatDataService from "../services/chat-data";
-import TransactionsListRow from "./transaction-list-row";
 import { Box, Button, Center, Container, Divider, Heading, HStack, VStack } from "@chakra-ui/react";
 import TransactionCard from "./TransactionCard";
 
