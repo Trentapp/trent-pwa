@@ -5,7 +5,7 @@ import {Table} from "react-bootstrap";
 import TransactionDataService from "../services/transaction-data";
 import ChatDataService from "../services/chat-data";
 import TransactionsListRow from "./transaction-list-row";
-import { Box, Container, VStack } from "@chakra-ui/react";
+import { Box, Center, Container, Heading, VStack } from "@chakra-ui/react";
 import TransactionCard from "./TransactionCard";
 
 const Dashboard = props => {
@@ -57,11 +57,16 @@ const Dashboard = props => {
 
     return(
         <Container maxW="container.lg">
-            <Box>
-                <VStack>
+            <Center>
+                <VStack align="flex-start">
+                    <Heading size="lg">New messages</Heading>
+                    {/* get unread messages */}
+                    <Heading size="lg">New Requests</Heading>
+                    {/* get new requests (upcoming, lender and open (status=0)) */}
+                    <Heading size="lg">Upcoming trents</Heading>
                     {borrowTransactions.map(transaction => <TransactionCard user={props.user} transaction={transaction} />)}
                 </VStack>
-            </Box>
+            </Center>
         </Container>
     );
 };

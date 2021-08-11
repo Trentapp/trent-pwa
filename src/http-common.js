@@ -14,6 +14,6 @@ export default axios.create({
 export const axiosFile = axios.create({
     baseURL: baseURL,
     headers: {
-        "Content-type": "miltipart/form-data"
+        "Content-type": "multipart/form-data"
     } // I think this is standard
 });
