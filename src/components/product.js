@@ -1,39 +1,40 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import {useHistory} from "react-router-dom";
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 
 import ProductDataService from "../services/product-data";
-// import ChatDataService from "../services/chat-data";
+import ChatDataService from "../services/chat-data";
 import { Box, Container, Heading, HStack, Divider, VStack, Text, Button, Center, Flex, IconButton } from "@chakra-ui/react";
 import ProfileCard from "./profileCard";
 import BookingCard from "./BookingCard";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import AddProduct from "./add-product";
-
+import QuestionForm from "./ask-question";
 
 const Product = props => {
     const [product, setProduct] = useState({prices: {}, user: {}}); //maybe add better initial state, though currently the information is shown conditionally
     // const [error, setError] = useState(""); //can get rid of that if redirect works
     // const [showQuestionForm, setShowQuestionForm] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
+    const [showSendMessage, setShowSendMessage] = useState(false);
     const [images, setImages] = useState([]);
-    // const messageRef = useRef();
+    const messageRef = useRef();
     let history = useHistory();
 
-    // const onSendMessage = async () => {
-    //     try {
-    //         const chat = {
-    //             uid: props.user.uid,
-    //             productId: props.product._id,
-    //             content: messageRef.current.value,
-    //         };
-    //         await ChatDataService.sendMessage(chat);
-    //         history.push("/");
-    //     } catch(e) {
-    //         console.log("Failed to send message: ", e)
-    //     }
-    // }
+    const onSendMessage = async () => {
+        try {
+            const chat = {
+                uid: props.user.uid,
+                productId: product._id,
+                content: messageRef.current.value,
+            };
+            await ChatDataService.sendMessage(chat);
+            history.push("/");
+        } catch(e) {
+            console.log("Failed to send message: ", e)
+        }
+    }
 
     const deleteProduct = async () => {
         let result = window.confirm("Are you sure you want to delete this product?");
@@ -87,11 +88,12 @@ const Product = props => {
         } catch(e) {
             console.log("Error in product.js - getProduct: ", e);
         }
-    }, [product]);
+    }, [product?._id]);
 
 
     return(
         <Container maxW="container.xl" marginTop={2}>
+            {showSendMessage && <QuestionForm user={props.user} onSendMessage={onSendMessage} isOpen={showSendMessage} setIsOpen={setShowSendMessage} messageRef={messageRef} lender={product.user} />}
             <Box>
                 <HStack spacing="40px" align="flex-start">
                     <Box w="700px" h="470px" marginTop={2}>
@@ -116,7 +118,7 @@ const Product = props => {
                             <Center>
                                 <VStack spacing="20px">
                                         <BookingCard user={props.user} product={product} />
-                                        <Button borderRadius="lg" width="100%">Send Message</Button>
+                                        <Button borderRadius="lg" width="100%" onClick={() => setShowSendMessage(true)}>Send Message</Button>
                                 </VStack>
                             </Center>
                             </> : 
