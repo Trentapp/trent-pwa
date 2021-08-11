@@ -9,6 +9,10 @@ class TransactionDataService {
         return http.post(`/transactions/transaction/${id}`, {uid: uid});
     }
 
+    getNewRequests(uid) {
+        return http.post(`/transactions/getNewRequests`, {uid: uid});
+    }
+
     getUpcoming(uid) {
         return http.post(`/transactions/getUpcoming`, {uid: uid});
     }
