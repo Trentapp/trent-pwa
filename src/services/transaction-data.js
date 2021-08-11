@@ -9,6 +9,10 @@ class TransactionDataService {
         return http.post(`/transactions/transaction/${id}`, {uid: uid});
     }
 
+    findByUser(uid) {
+        return http.post(`/transactions/findByUser`, {uid: uid});
+    }
+
     findByLender(uid) {
         return http.post(`/transactions/findByLender`, {uid: uid});
     }
