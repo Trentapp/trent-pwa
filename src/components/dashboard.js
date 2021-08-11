@@ -50,7 +50,7 @@ const Dashboard = props => {
                         <Divider color="gray.400"/>
                         <VStack align="flex-start" paddingTop={3}>
                             {newMessagesChats.length && <>
-                                <Heading size="lg">New messages</Heading>
+                                <Heading size="lg">Chats with new messages</Heading>
                                 {newMessagesChats.map(chat => <Link to={`/chats/${chat._id}`}><Box w="100%" p={2} border="1px" borderRadius="lg" borderColor="gray.400" key={chat._id}>{props.user._id === chat.borrower._id ? <>{chat.lender.name} lending {chat.product?.name}</> : <>{chat.borrower.name} borrowing your {chat.product?.name}</>}</Box></Link> )}
                             </>}
                             <Heading size="lg">New Requests</Heading>
