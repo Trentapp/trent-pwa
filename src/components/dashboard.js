@@ -45,8 +45,16 @@ const Dashboard = props => {
         <Container maxW="container.lg">
             <Box p={4}>
                 <Center>
-                    <VStack spacing="2px">
-                        <Heading>Dashboard</Heading>
+                    <VStack spacing="2px" minW={"300px", "400px", "500px"}>
+                        <Heading>Overview</Heading>
+                        <Divider color="gray.400"/>
+                        <Box w="100%" py={3}>
+                            <HStack>
+                                <Link to={`/profile/${props.user._id}`}><Button variant="outline">Your Profile</Button></Link>
+                                <Link to="/chats"><Button variant="outline">Chats</Button></Link>
+                                <Link to="/transactions"><Button variant="outline">Transactions</Button></Link>
+                            </HStack>
+                        </Box>
                         <Divider color="gray.400"/>
                         <VStack align="flex-start" paddingTop={3}>
                             {newMessagesChats.length && <Box paddingTop={3}>
@@ -68,13 +76,6 @@ const Dashboard = props => {
                                 </VStack>
                             </Box>}
                         </VStack>
-                        <Divider color="gray.400"/>
-                        <Box w="100%" paddingTop={3}>
-                            <HStack>
-                                <Link to="/chats"><Button variant="outline">Chats</Button></Link>
-                                <Link to="/transactions"><Button variant="outline">Transactions</Button></Link>
-                            </HStack>
-                        </Box>
                     </VStack>
                 </Center>
             </Box>
