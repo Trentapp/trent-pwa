@@ -10,7 +10,6 @@ const Footer = props => {
             <ul className="list-inline">
                 <li className="list-inline-item"><Link to="/">Home</Link></li>
                 <li className="list-inline-item"><Link to="/dashboard">Dashboard</Link></li>
-                <li className="list-inline-item"><Link to="/about">Über uns</Link></li>
                 <li className="list-inline-item"><Link to="/terms">AGB</Link></li>
                 <li className="list-inline-item"><Link to="/impressum">Impressum</Link></li>
                 <li className="list-inline-item"><Link to="/datenschutz">Datenschutz</Link></li>

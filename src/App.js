@@ -70,7 +70,6 @@ function App() {
             render={(props) => (<LandingPage {...props} user={user} />)} />
           <Route exact path={["/dashboard"]} 
             render={(props) => (<Dashboard {...props} user={user} />)} />
-          <Route exact path="/about" component={About} />
           <PrivateRoute exact path="/inventory"
             component={ProductsList} inventory={true} user={user}/>
           <Route path={["/products/product/:id", "/product/:id"]}
