@@ -5,68 +5,66 @@ import {Table} from "react-bootstrap";
 import TransactionDataService from "../services/transaction-data";
 import ChatDataService from "../services/chat-data";
 import TransactionsListRow from "./transaction-list-row";
-import { Box, Center, Container, Heading, VStack } from "@chakra-ui/react";
+import { Box, Button, Center, Container, Divider, Heading, HStack, VStack } from "@chakra-ui/react";
 import TransactionCard from "./TransactionCard";
 
 const Dashboard = props => {
-    const [lendTransactions, setLendTransactions] = useState([]);
-    const [borrowTransactions, setBorrowTransactions] = useState([]);
-    const [pastTransactions, setPastTransactions] = useState([]);
-    const [chats, setChats] = useState([]);
+    const [newMessages, setNewMessages] = useState([]);
+    const [newRequests, setNewRequests] = useState([]);
+    const [upcomingTransactions, setUpcomingTransactions] = useState([]);
 
     useEffect(() => {
-        const getLendTransactions = async uid => {
+        const getNewMessages = async (uid) => {
             try {
-                const response = await TransactionDataService.findByLender(uid);
-                setLendTransactions(response.data);
+                const response = await ChatDataService.getNewMessages(uid);
+                setNewMessages(response.data);
             } catch(e) {
-                console.log("Error in get transactions by lender/borrower: ", e);
+                console.log("Error in get transactions by user: ", e);
             }
         }
-        const getBorrowTransactions = async uid => {
+        const getNewRequests = async (uid) => {
             try {
-                const response = await TransactionDataService.findByBorrower(uid);
-                setBorrowTransactions(response.data);
+                const response = await TransactionDataService.getNewRequests(uid);
+                setNewRequests(response.data);
             } catch(e) {
-                console.log("Error in get transactions by lender/borrower: ", e);
+                console.log("Error in get transactions by user: ", e);
             }
         }
-        const getPastTransactions = async uid => {
+        const getUpcomingTransactions = async (uid) => {
             try {
-                const response = await TransactionDataService.findPastTransactions(uid);
-                setPastTransactions(response.data);
+                const response = await TransactionDataService.getUpcomingTransactions(uid);
+                setUpcomingTransactions(response.data);
             } catch(e) {
-                console.log("Error in get transactions by lender/borrower: ", e);
+                console.log("Error in get transactions by user: ", e);
             }
-        }
-        const getChatsOfUser = async uid => {
-            try {
-                const response = await ChatDataService.getByUser(uid);
-                setChats(response.data);
-            } catch(e) {
-                console.log("Error in get chats: ", e);
-            }
-        }
-        if (props.user._id){
-            getLendTransactions(props.user.uid);
-            getBorrowTransactions(props.user.uid);
-            getPastTransactions(props.user.uid);
-            getChatsOfUser(props.user.uid);
         }
     }, [props.user]);
 
     return(
         <Container maxW="container.lg">
-            <Center>
-                <VStack align="flex-start">
-                    <Heading size="lg">New messages</Heading>
-                    {/* get unread messages */}
-                    <Heading size="lg">New Requests</Heading>
-                    {/* get new requests (upcoming, lender and open (status=0)) */}
-                    <Heading size="lg">Upcoming trents</Heading>
-                    {borrowTransactions.map(transaction => <TransactionCard user={props.user} transaction={transaction} />)}
-                </VStack>
-            </Center>
+            <Box p={4}>
+                <Center>
+                    <VStack spacing="2px">
+                        <Heading>Dashboard</Heading>
+                        <Divider color="gray.400"/>
+                        <VStack align="flex-start" paddingTop={3}>
+                            <Heading size="lg">New messages</Heading>
+                            {/* get unread messages */}
+                            <Heading size="lg">New Requests</Heading>
+                            {/* get new requests (upcoming, lender and open (status=0)) */}
+                            <Heading size="lg">Upcoming trents</Heading>
+                            {upcomingTransactions.map(transaction => <TransactionCard user={props.user} transaction={transaction} />)}
+                        </VStack>
+                        <Divider color="gray.400" />
+                        <Box w="100%" paddingTop={3}>
+                            <HStack>
+                                <Link to="/chats"><Button variant="outline">Chats</Button></Link>
+                                <Link to="/transactions"><Button variant="outline">Transactions</Button></Link>
+                            </HStack>
+                        </Box>
+                    </VStack>
+                </Center>
+            </Box>
         </Container>
     );
 };
@@ -138,3 +136,43 @@ export default Dashboard;
         //         </>}
         //     </>
         // </div>
+
+
+                // const getLendTransactions = async uid => {
+        //     try {
+        //         const response = await TransactionDataService.findByLender(uid);
+        //         setLendTransactions(response.data);
+        //     } catch(e) {
+        //         console.log("Error in get transactions by lender/borrower: ", e);
+        //     }
+        // }
+        // const getBorrowTransactions = async uid => {
+        //     try {
+        //         const response = await TransactionDataService.findByBorrower(uid);
+        //         setBorrowTransactions(response.data);
+        //     } catch(e) {
+        //         console.log("Error in get transactions by lender/borrower: ", e);
+        //     }
+        // }
+        // const getPastTransactions = async uid => {
+        //     try {
+        //         const response = await TransactionDataService.findPastTransactions(uid);
+        //         setPastTransactions(response.data);
+        //     } catch(e) {
+        //         console.log("Error in get transactions by lender/borrower: ", e);
+        //     }
+        // }
+        // const getChatsOfUser = async uid => {
+        //     try {
+        //         const response = await ChatDataService.getByUser(uid);
+        //         setChats(response.data);
+        //     } catch(e) {
+        //         console.log("Error in get chats: ", e);
+        //     }
+        // }
+        // if (props.user._id){
+        //     getLendTransactions(props.user.uid);
+        //     getBorrowTransactions(props.user.uid);
+        //     getPastTransactions(props.user.uid);
+        //     getChatsOfUser(props.user.uid);
+        // }
