@@ -1,4 +1,4 @@
-import { Box, Container, Divider, Heading, VStack } from '@chakra-ui/react';
+import { Box, Container, Divider, Heading, Text, VStack } from '@chakra-ui/react';
 import React, {useState, useEffect} from 'react';
 
 import TransactionCard from './TransactionCard';
@@ -20,12 +20,19 @@ export default function TransactionList(props) {
     }, [props.user?.uid])
 
     return (
-        <Container maxW="container.lg">
-            <Heading size="lg">Your transactions</Heading>
-            <Divider color="gray.400" />
+    <Container mawW="container.xl">
+        <Box marginTop={4} borderRadius="xl" border="1px" p={4} borderColor="gray.300">
             <VStack>
-                {transactions.map(transaction => <TransactionCard user={props.user} transaction={transaction} />)}
+                <Heading size="lg">Your transactions</Heading>
+                <Divider color="gray.400" />
+                <Box w="100%">
+                    <VStack spacing={4}>
+                    {transactions.length ? transactions.map(transaction => <TransactionCard user={props.user} transaction={transaction} />) :
+                        <Text>You don't have any transactions yet.</Text> }
+                    </VStack>
+                </Box>
             </VStack>
-        </Container>
+        </Box>
+    </Container>
     )
 }
