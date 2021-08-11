@@ -22,8 +22,8 @@ export default function TransactionCard(props) {
                     <Text fontWeight="bold">
                         {props.transaction.borrower.name} borrowing {props.transaction.product.name}
                     </Text>
-                    <Text color="gray.500">
-                        {props.transaction.startDate.toLocaleString()} - {props.transaction.endDate.toLocaleString()}
+                    <Text color="gray.500"> {/* attention: currently only german date format */}
+                        {(new Date(props.transaction.startDate)).toLocaleString("de")} - {(new Date(props.transaction.endDate)).toLocaleString("de")}
                     </Text>
                 </VStack>
                 <Box px={3}>
