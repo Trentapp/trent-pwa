@@ -14,6 +14,7 @@ import {
   Avatar,
   Text,
   Button,
+  Center,
 } from "@chakra-ui/react";
 import { Search2Icon, ChevronDownIcon } from "@chakra-ui/icons";
 
@@ -51,8 +52,11 @@ export default function Header (props) {
           <Stack direction="row" align="center" spacing={8}>
             {props.user._id ? 
             <Menu>
-              <MenuButton rightIcon={<ChevronDownIcon />}>
-                <Avatar src={props.user.picture && `data:${props.user.picture.contentType};base64,${Buffer.from(props.user.picture.data.data).toString('base64')}`} />
+              <MenuButton>
+                <HStack spacing="5px">
+                  <Avatar src={props.user.picture && `data:${props.user.picture.contentType};base64,${Buffer.from(props.user.picture.data.data).toString('base64')}`} />
+                  <Center><ChevronDownIcon color="white"/></Center>
+                </HStack>
               </MenuButton>
               <MenuList>
                 <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/profile/${props.user._id}`}><MenuItem>Your Profile</MenuItem></Link>
