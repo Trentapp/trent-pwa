@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route, useHistory } from "react-router-dom";
+import { Switch, Route, useHistory, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/styles.css";
 import { Box } from "@chakra-ui/react";
@@ -33,6 +33,7 @@ function App() {
   const { currentUser, logout } = useAuth();
   const history = useHistory();
   const [user, setUser] = useState({ name: "", address: { street: "", houseNumber: "", zipcode: "", city: "", country: "" } });
+  const location = useLocation();
 
   async function handleLogout() {
     try {
@@ -94,7 +95,7 @@ function App() {
         <Box className="push"></Box>
         </Box>
     </Box>
-    <footer className="footer">{window.location.pathname === "/products" ? <ProductsListFooter/> : <Footer />}</footer>
+    <footer key={location.pathname} className="footer">{location.pathname === "/products" ? <ProductsListFooter/> : <Footer />}</footer>
     </>
   );
 }

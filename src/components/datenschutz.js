@@ -6,7 +6,7 @@ const Datenschutz = props => {
         <Container maxW="container.xl">
             <Heading>Datenschutzerklärung</Heading>
             <p>Verantwortlicher im Sinne der Datenschutzgesetze, insbesondere der EU-Datenschutzgrundverordnung (DSGVO), ist:</p>
-            <p>Trent UG i. G. (haftungsbeschränkt)
+            <p>Trent UG (haftungsbeschränkt)
             <br/>Fynn Kiwitt und Simon Skade
             <br/>Virchowstraße 16
             <br/>80805 München
