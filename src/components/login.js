@@ -3,7 +3,7 @@ import React, {useRef, useState} from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
-import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon } from '@chakra-ui/react';
+import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, Text, HStack } from '@chakra-ui/react';
 
 import UserDataService from "../services/user-data";
 
@@ -85,12 +85,12 @@ export default function Login() {
                 </Box>
                 </Stack>
             </Box>
-            <Box>
-                New to us?{" "}
+            <HStack>
+                <Text>New to us?{" "}</Text>
                 <Link to="/signup">
-                Sign Up
+                    <Text fontWeight="bold" color="blue.600">Sign Up</Text>
                 </Link>
-            </Box>
+            </HStack>
         </Stack>
     </Box>
     );
