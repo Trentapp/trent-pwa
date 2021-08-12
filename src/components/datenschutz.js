@@ -1,17 +1,18 @@
+import { Container, Heading } from "@chakra-ui/react";
 import React from "react";
 
 const Datenschutz = props => {
     return(
-        <div>
-            <h1>Datenschutzerklärung</h1>
+        <Container maxW="container.xl">
+            <Heading>Datenschutzerklärung</Heading>
             <p>Verantwortlicher im Sinne der Datenschutzgesetze, insbesondere der EU-Datenschutzgrundverordnung (DSGVO), ist:</p>
             <p>Trent UG i. G. (haftungsbeschränkt)
-            <br/>Simon Skade und Fynn Kiwitt
-            <br/>Bergheimer Straße 88 // 4.1
-            <br/>69115 Heidelberg
+            <br/>Fynn Kiwitt und Simon Skade
+            <br/>Virchowstraße 16
+            <br/>80805 München
             <br/>
             <br/>Kontakt: info@trentapp.com</p>
-            <h2>Ihre Betroffenenrechte</h2>
+            <Heading size="lg">Ihre Betroffenenrechte</Heading>
             <p>Unter den angegebenen Kontaktdaten unseres Datenschutzbeauftragten können Sie jederzeit folgende Rechte ausüben:</p>
             <ul>
             <li>Auskunft über Ihre bei uns gespeicherten Daten und deren Verarbeitung (Art. 15 DSGVO),</li>
@@ -24,7 +25,7 @@ const Datenschutz = props => {
             <p>Sofern Sie uns eine Einwilligung erteilt haben, können Sie diese jederzeit mit Wirkung für die Zukunft widerrufen.</p>
             <p>Sie können sich jederzeit mit einer Beschwerde an eine Aufsichtsbehörde wenden, z. B. an die zuständige Aufsichtsbehörde des Bundeslands Ihres Wohnsitzes oder an die für uns als verantwortliche Stelle zuständige Behörde.</p>
             <p>Eine Liste der Aufsichtsbehörden (für den nichtöffentlichen Bereich) mit Anschrift finden Sie unter: <a href="https://www.bfdi.bund.de/DE/Service/Anschriften/Laender/Laender-node.html"  rel="noopener nofollow">https://www.bfdi.bund.de/DE/Service/Anschriften/Laender/Laender-node.html</a>.</p>
-            <p></p><h2>Erfassung allgemeiner Informationen beim Besuch unserer Website</h2>
+            <p></p><Heading size="lg">Erfassung allgemeiner Informationen beim Besuch unserer Website</Heading>
             <h3>Art und Zweck der Verarbeitung:</h3>
             <p>Wenn Sie auf unsere Website zugreifen, d.h., wenn Sie sich nicht registrieren oder anderweitig Informationen übermitteln, werden automatisch Informationen allgemeiner Natur erfasst. Diese Informationen (Server-Logfiles) beinhalten etwa die Art des Webbrowsers, das verwendete Betriebssystem, den Domainnamen Ihres Internet-Service-Providers, Ihre IP-Adresse und ähnliches. </p>
             <p>Sie werden insbesondere zu folgenden Zwecken verarbeitet:</p>
@@ -48,7 +49,7 @@ const Datenschutz = props => {
             <p> Im Falle der Speicherung der Daten in Logfiles ist dies nach spätestens 14 Tagen der Fall. Eine darüberhinausgehende Speicherung ist möglich. In diesem Fall werden die IP-Adressen der Nutzer anonymisiert, sodass eine  Zuordnung  des aufrufenden Clients nicht mehr möglich ist.</p>
             <p></p><h3>Bereitstellung vorgeschrieben oder erforderlich:</h3>
             <p>Die Bereitstellung der vorgenannten personenbezogenen Daten ist weder gesetzlich noch vertraglich vorgeschrieben. Ohne die IP-Adresse ist jedoch der Dienst und die Funktionsfähigkeit unserer Website nicht gewährleistet. Zudem können einzelne Dienste und Services nicht verfügbar oder eingeschränkt sein. Aus diesem Grund ist ein Widerspruch ausgeschlossen. </p>
-            <p></p><h2>Registrierung auf unserer Website</h2>
+            <p></p><Heading size="lg">Registrierung auf unserer Website</Heading>
             <h3>Art und Zweck der Verarbeitung:</h3>
             <p>Für die Registrierung auf unserer Website benötigen wir einige personenbezogene Daten, die über eine Eingabemaske an uns übermittelt werden. </p>
             <p>Zum Zeitpunkt der Registrierung werden zusätzlich folgende Daten erhoben:</p>
@@ -66,7 +67,7 @@ const Datenschutz = props => {
             <p>Daten werden in diesem Zusammenhang nur verarbeitet, solange die entsprechende Einwilligung vorliegt. </p>
             <h3>Bereitstellung vorgeschrieben oder erforderlich:</h3>
             <p>Die Bereitstellung Ihrer personenbezogenen Daten erfolgt freiwillig, allein auf Basis Ihrer Einwilligung. Ohne die Bereitstellung Ihrer personenbezogenen Daten können wir Ihnen keinen Zugang auf unsere angebotenen Inhalte gewähren. </p>
-            <p></p><h2>Erbringung kostenpflichtiger Leistungen</h2>
+            <p></p><Heading size="lg">Erbringung kostenpflichtiger Leistungen</Heading>
             <h3>Art und Zweck der Verarbeitung:</h3>
             <p>Zur Erbringung kostenpflichtiger Leistungen werden von uns zusätzliche Daten erfragt, wie z.B. Zahlungsangaben, um Ihre Bestellung ausführen zu können.</p>
             <h3>Rechtsgrundlage:</h3>
@@ -81,7 +82,7 @@ const Datenschutz = props => {
             <p>Wir speichern diese Daten in unseren Systemen bis die gesetzlichen Aufbewahrungsfristen abgelaufen sind. Diese betragen grundsätzlich 6 oder 10 Jahre aus Gründen der ordnungsmäßigen Buchführung und steuerrechtlichen Anforderungen.</p>
             <h3>Bereitstellung vorgeschrieben oder erforderlich:</h3>
             <p>Die Bereitstellung Ihrer personenbezogenen Daten erfolgt freiwillig. Ohne die Bereitstellung Ihrer personenbezogenen Daten können wir Ihnen keinen Zugang auf unsere angebotenen Inhalte und Leistungen gewähren.</p>
-            <p></p><h2>Kommentarfunktion</h2>
+            <p></p><Heading size="lg">Kommentarfunktion</Heading>
             <h3>Art und Zweck der Verarbeitung:</h3>
             <p>Wenn Nutzer Kommentare auf unserer Website hinterlassen, werden neben diesen Angaben auch der Zeitpunkt ihrer Erstellung und der zuvor durch den Websitebesucher gewählte Nutzername gespeichert. Dies dient unserer Sicherheit, da wir für widerrechtliche Inhalte auf unserer Webseite belangt werden können, auch wenn diese durch Benutzer erstellt wurden.</p>
             <h3>Rechtsgrundlage:</h3>
@@ -98,7 +99,7 @@ const Datenschutz = props => {
             <p>Außerdem können Sie Ihren Kommentar jederzeit durch uns löschen lassen. Schreiben Sie dafür bitte eine E-Mail an den unten aufgeführten Datenschutzbeauftragten bzw. die für den Datenschutz zuständige Person und übermitteln den Link zu Ihrem Kommentar sowie zu Identifikationszwecken die bei der Erstellung des Kommentars verwendete E-Mail-Adresse.</p>
             <h3>Bereitstellung vorgeschrieben oder erforderlich:</h3>
             <p>Die Bereitstellung Ihrer personenbezogenen Daten erfolgt freiwillig. Ohne die Bereitstellung Ihrer personenbezogenen Daten können wir Ihnen keinen Zugang zu unserer Kommentarfunktion gewähren.</p>
-            <p></p><h2>Newsletter</h2>
+            <p></p><Heading size="lg">Newsletter</Heading>
             <h3>Art und Zweck der Verarbeitung:</h3>
             <p>Für die Zustellung unseres Newsletters erheben wir personenbezogene Daten, die über eine Eingabemaske an uns übermittelt werden.</p>
             <p>Für eine wirksame Registrierung benötigen wir eine valide E-Mail-Adresse. Um zu überprüfen, dass eine Anmeldung tatsächlich durch den Inhaber einer E-Mail-Adresse erfolgt, setzen wir das „Double-Opt-in“-Verfahren ein. Hierzu protokollieren wir die Anmeldung zum Newsletter, den Versand einer Bestätigungsmail und den Eingang der hiermit angeforderten Antwort. Weitere Daten werden nicht erhoben. </p>
@@ -117,7 +118,7 @@ const Datenschutz = props => {
             <p>Die Bereitstellung Ihrer personenbezogenen Daten erfolgt freiwillig, allein auf Basis Ihrer Einwilligung. Ohne bestehende Einwilligung können wir Ihnen unseren Newsletter leider nicht zusenden.</p>
             <h3>Widerruf der Einwilligung:</h3>
             <p>Die Einwilligung zur Speicherung Ihrer persönlichen Daten und ihrer Nutzung für den Newsletterversand können Sie jederzeit mit Wirkung für die Zukunft widerrufen. Die Abmeldung kann über den in jeder E-Mail enthaltenen Link oder beim unten aufgeführten Datenschutzbeauftragten bzw. der für den Datenschutz zuständigen Person beantragt werden. </p>
-            <p></p><h2>Kontaktformular</h2>
+            <p></p><Heading size="lg">Kontaktformular</Heading>
             <h3>Art und Zweck der Verarbeitung:</h3>
             <p>Die von Ihnen eingegebenen Daten werden zum Zweck der individuellen Kommunikation mit Ihnen gespeichert. Hierfür ist die Angabe einer validen E-Mail-Adresse sowie Ihres Namens erforderlich. Diese dient der Zuordnung der Anfrage und der anschließenden Beantwortung derselben. Die Angabe weiterer Daten ist optional.</p>
             <h3>Rechtsgrundlage:</h3>
@@ -135,17 +136,17 @@ const Datenschutz = props => {
             <p>Sofern es zu einem Vertragsverhältnis kommt, unterliegen wir den gesetzlichen Aufbewahrungsfristen nach HGB und löschen Ihre Daten nach Ablauf dieser Fristen. </p>
             <h3>Bereitstellung vorgeschrieben oder erforderlich:</h3>
             <p>Die Bereitstellung Ihrer personenbezogenen Daten erfolgt freiwillig. Wir können Ihre Anfrage jedoch nur bearbeiten, sofern Sie uns Ihren Namen, Ihre E-Mail-Adresse und den Grund der Anfrage mitteilen.</p>
-            <p></p><h2>Verwendung von Google Maps</h2>
+            <p></p><Heading size="lg">Verwendung von Google Maps</Heading>
             <p>Auf dieser Website nutzen wir das Angebot von Google Maps. Google Maps wird von Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA (nachfolgend „Google“) betrieben. Dadurch können wir Ihnen interaktive Karten direkt in der Webseite anzeigen und ermöglichen Ihnen die komfortable Nutzung der Karten-Funktion.<br/>Nähere Informationen über die Datenverarbeitung durch Google können Sie den Google-Datenschutzhinweisen entnehmen: <a href="https://policies.google.com/privacy" rel="noopener nofollow" >https://policies.google.com/privacy</a>. Dort können Sie im Datenschutzcenter auch Ihre persönlichen Datenschutz-Einstellungen verändern.</p>
             <p>Ausführliche Anleitungen zur Verwaltung der eigenen Daten im Zusammenhang mit Google-Produkten finden Sie hier: <a href="https://www.dataliberation.org/" rel="noopener nofollow" >https://www.dataliberation.org</a></p>
             <p>Durch den Besuch der Website erhält Google Informationen, dass Sie die entsprechende Unterseite unserer Webseite aufgerufen haben. Dies erfolgt unabhängig davon, ob Google ein Nutzerkonto bereitstellt, über das Sie eingeloggt sind, oder ob keine Nutzerkonto besteht. Wenn Sie bei Google eingeloggt sind, werden Ihre Daten direkt Ihrem Konto zugeordnet. </p>
             <p>Wenn Sie die Zuordnung in Ihrem Profil bei Google nicht wünschen, müssen Sie sich vor Aktivierung des Buttons bei Google ausloggen. Google speichert Ihre Daten als Nutzungsprofile und nutzt sie für Zwecke der Werbung, Marktforschung und/oder bedarfsgerechter Gestaltung seiner Websites. Eine solche Auswertung erfolgt insbesondere (selbst für nicht eingeloggte Nutzer) zur Erbringung bedarfsgerechter Werbung und um andere Nutzer des sozialen Netzwerks über Ihre Aktivitäten auf unserer Website zu informieren. Ihnen steht ein Widerspruchsrecht zu gegen die Bildung dieser Nutzerprofile, wobei Sie sich zur Ausübung dessen an Google richten müssen. </p>
             <h3>Widerruf der Einwilligung:</h3>
             <p>Vom Anbieter wird derzeit keine Möglichkeit für einen einfachen Opt-out oder ein Blockieren der Datenübertragung angeboten. Wenn Sie eine Nachverfolgung Ihrer Aktivitäten auf unserer Website verhindern wollen, widerrufen Sie bitte im Cookie-Consent-Tool Ihre Einwilligung für die entsprechende Cookie-Kategorie oder alle technisch nicht notwendigen Cookies und Datenübertragungen. In diesem Fall können Sie unsere Website jedoch ggfs. nicht oder nur eingeschränkt nutzen.</p>
-            <p></p><h2>SSL-Verschlüsselung</h2>
+            <p></p><Heading size="lg">SSL-Verschlüsselung</Heading>
             <p>Um die Sicherheit Ihrer Daten bei der Übertragung zu schützen, verwenden wir dem aktuellen Stand der Technik entsprechende Verschlüsselungsverfahren (z. B. SSL) über HTTPS.</p>
             <p></p><hr/>
-            <h2>Information über Ihr Widerspruchsrecht nach Art. 21 DSGVO</h2>
+            <Heading size="lg">Information über Ihr Widerspruchsrecht nach Art. 21 DSGVO</Heading>
             <h3>Einzelfallbezogenes Widerspruchsrecht</h3>
             <p>Sie haben das Recht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung Sie betreffender personenbezogener Daten, die aufgrund Art. 6 Abs. 1 lit. f DSGVO (Datenverarbeitung auf der Grundlage einer Interessenabwägung) erfolgt, Widerspruch einzulegen; dies gilt auch für ein auf diese Bestimmung gestütztes Profiling im Sinne von Art. 4 Nr. 4 DSGVO.</p>
             <p>Legen Sie Widerspruch ein, werden wir Ihre personenbezogenen Daten nicht mehr verarbeiten, es sei denn, wir können zwingende schutzwürdige Gründe für die Verarbeitung nachweisen, die Ihre Interessen, Rechte und Freiheiten überwiegen, oder die Verarbeitung dient der Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen.</p>
@@ -153,15 +154,15 @@ const Datenschutz = props => {
             <p>Simon Skade
             <br/>Email: simon.skade@trentapp.com</p>
             <hr/>
-            <h2>Änderung unserer Datenschutzbestimmungen</h2>
+            <Heading size="lg">Änderung unserer Datenschutzbestimmungen</Heading>
             <p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie stets den aktuellen rechtlichen Anforderungen entspricht oder um Änderungen unserer Leistungen in der Datenschutzerklärung umzusetzen, z.B. bei der Einführung neuer Services. Für Ihren erneuten Besuch gilt dann die neue Datenschutzerklärung.</p>
-            <h2>Fragen an den Datenschutzbeauftragten</h2>
+            <Heading size="lg">Fragen an den Datenschutzbeauftragten</Heading>
             <p>Wenn Sie Fragen zum Datenschutz haben, schreiben Sie uns bitte eine E-Mail oder wenden Sie sich direkt an die für den Datenschutz verantwortliche Person in unserer Organisation:</p>
             <p>Simon Skade
             <br/>simon.skade@trentapp.com</p>
             <p><em>Die Datenschutzerklärung wurde mithilfe der activeMind AG erstellt, den Experten für <a href="https://www.activemind.de/datenschutz/datenschutzbeauftragter/"  rel="noopener">externe Datenschutzbeauftragte</a> (Version #2020-09-30).</em></p>
 
-        </div>
+        </Container>
     )
 }
 
