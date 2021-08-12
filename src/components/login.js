@@ -5,6 +5,8 @@ import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
 import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon } from '@chakra-ui/react';
 
+import UserDataService from "../services/user-data";
+
 export default function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -19,7 +21,7 @@ export default function Login() {
             setError("");
             setLoading(true);
             await login(emailRef.current.value, passwordRef.current.value);
-            history.push("/");
+            history.push("/dashboard");
         } catch(err) {
             setError("Failed to sign in");
         }

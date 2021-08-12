@@ -37,7 +37,7 @@ function App() {
   async function handleLogout() {
     try {
       await logout();
-      history.push("/");
+      history.push("/landing-page");
       window.location.reload();
     } catch (e) {
       console.log("Failed to log out");
