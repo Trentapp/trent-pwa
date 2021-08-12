@@ -17,10 +17,6 @@ const mapContainerStyle = {
     display: "block",
     top: "75px",
 };
-const center = {
-    lat: 49.3988,
-    lng: 8.6724,
-};
 const options = {
     disableDefaultUI: false, // I actually want to set it to true, but it does not work
 }
@@ -44,7 +40,7 @@ const Map = props => {
     return(
         <Box style={mapContainerStyle}>
             <GoogleMap mapContainerStyle={{width: "100%", height: "100%"}}
-                zoom={13} center={center} option={options}
+                zoom={13} center={props.center} option={options}
                 onLoad={onMapLoad} onClick={() => setSelected({})}>
                 {props.products.map((product) => (
                     <Marker key={product._id}
