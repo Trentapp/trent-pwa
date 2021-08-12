@@ -45,7 +45,7 @@ const Dashboard = props => {
         <Container maxW="container.lg">
             <Box p={4}>
                 <Center>
-                    <VStack spacing="2px" minW={"300px", "400px", "500px"}>
+                    <VStack spacing="2px">
                         <Heading>Overview</Heading>
                         <Divider color="gray.400"/>
                         <Box w="100%" py={3}>
