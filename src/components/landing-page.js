@@ -19,8 +19,8 @@ import { Box, Center, Heading as Heading2, Image } from '@chakra-ui/react';
 import logo from "../assets/logo.png"
 
 //new landing page with images
-import pageTop from "../assets/landing-page-top.png";
-
+import page from "../assets/landing-page.png";
+// import pageBody from "../assets/landing-page-body.png";
 
 
 function App(props) {
@@ -49,7 +49,9 @@ function App(props) {
 
 const LandingPageLarge = (props) => {
   return (
-    <Image w="100%" src={pageTop} />
+    <>
+    <Image w="100%" src={page} />
+    </>
   )
 }
 
