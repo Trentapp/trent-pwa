@@ -8,7 +8,7 @@ import TransactionDataService from "../services/transaction-data";
 import AddProduct from './add-product';
 // import AddReview from "./add-review";
 // import Review from "./Review";
-import { Box, HStack, Container, Heading, VStack, Text, Divider, Avatar, IconButton, Button, Center } from '@chakra-ui/react';
+import { Box, HStack, Container, Heading, VStack, Text, Divider, Avatar, IconButton, Button, Center, Stack } from '@chakra-ui/react';
 import ProductCard from './ProductCard';
 import { EditIcon } from '@chakra-ui/icons';
 
@@ -66,7 +66,7 @@ const Profile = props => {
         <Container maxW="container.lg" marginTop={2}>
             {profileUser._id === props.user._id && <AddProduct user={props.user} isOpen={showAddProduct} setIsOpen={setShowAddProduct}/>}
             <Box>
-                <HStack align="flex-start" spacing="70px">
+                <Stack align={{base: "center", md: "flex-start"}} spacing={{base: "20px", md: "70px"}} direction={{base: "column", md: "row"}}>
                     <VStack w="200px">
                         <Box w="200px" h="200px">
                             <Avatar size="4xl" src={profileUser.picture && `data:${profileUser.picture.contentType};base64,${Buffer.from(profileUser.picture.data.data).toString('base64')}`} />
@@ -82,7 +82,7 @@ const Profile = props => {
                         {/* {profileUser._id === props.user._id && <Button>Upload profile picture</Button>} */}
                         {/*later add description (about me): <Text></Text> */}
                     </VStack>
-                    <VStack minW={["250px", "400px"]}>
+                    <VStack minW={["250px", "400px"]} pb={3}>
                         <Box w="100%" paddingBottom={3}>
                             <Center><Heading size="lg">Inventory of {profileUser.name}</Heading></Center>
                             <Divider color="gray.500" />
@@ -96,7 +96,7 @@ const Profile = props => {
                             {profileUser.inventory.map((product) => <ProductCard product={product} />)}
                         </VStack>
                     </VStack>
-                </HStack>
+                </Stack>
             </Box>
         </Container>
     )

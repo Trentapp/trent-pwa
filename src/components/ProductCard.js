@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 export default function ProductCard(props) {
     return (
-        <Box w="600px" h="200px">
+        <Box w={{base: "300px", md: "600px"}} h={{base: "100px", md: "200px"}}>
             <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/product/${props.product._id}`}>
                 <HStack
                     bgColor="gray.50"
@@ -14,8 +14,8 @@ export default function ProductCard(props) {
                     w="100%"
                     align="stretch"
                 >
-                    {props.product.thumbnail ? <Image src={`data:${props.product.thumbnail.contentType};base64,${Buffer.from(props.product.thumbnail.data.data).toString('base64')}`} />
-                        : <Image src="https://via.placeholder.com/200x200?text=No+Image+Available" />}
+                    {props.product.thumbnail ? <Image w={{base: "100px", md: "200px"}} h={{base: "100px", md: "200px"}} src={`data:${props.product.thumbnail.contentType};base64,${Buffer.from(props.product.thumbnail.data.data).toString('base64')}`} />
+                        : <Image src={{base: "https://via.placeholder.com/100x100?text=No+Image+Available", md: "https://via.placeholder.com/200x200?text=No+Image+Available"}} />}
                     <VStack w="100%" py={2}>
                         <Box w="100%">
                             <HStack justify="space-between" paddingLeft={2} paddingRight={3}>
@@ -50,7 +50,7 @@ export const ProductCard2 = (props) => {
                     <Center>
                     <Box marginLeft={3} borderRadius="2xl" overflow="hidden" h={{base: "100px", md: "200px"}} w={{base: "100px", md: "200px"}}>
                         {props.product.thumbnail ? <Image src={`data:${props.product.thumbnail.contentType};base64,${Buffer.from(props.product.thumbnail.data.data).toString('base64')}`} />
-                            : <Image src="https://via.placeholder.com/350x350?text=No+Image+Available" />}
+                            : <Image src={{base: "https://via.placeholder.com/100x100?text=No+Image+Available", md: "https://via.placeholder.com/200x200?text=No+Image+Available"}} />}
                     </Box>
                     </Center>
                     <VStack w="100%" py={6}>
@@ -86,7 +86,7 @@ export const ProductCardSmall = (props) => {
                     <Center>
                     <Box marginLeft={3} borderRadius="2xl" overflow="hidden" h="67px" w="67px">
                         {props.product.thumbnail ? <Image src={`data:${props.product.thumbnail.contentType};base64,${Buffer.from(props.product.thumbnail.data.data).toString('base64')}`} />
-                            : <Image src="https://via.placeholder.com/350x350?text=No+Image+Available" />}
+                            : <Image src={{base: "https://via.placeholder.com/100x100?text=No+Image+Available", md: "https://via.placeholder.com/200x200?text=No+Image+Available"}} />}
                     </Box>
                     </Center>
                     <VStack w="100%" py={2}>
