@@ -98,6 +98,7 @@ export default function SignUp() {
                     />
                     </InputGroup>
                 </FormControl>
+                <Text>By signing up you agree to our <a style={{color: "#2b6cb0"}} target="_blank" rel="noopener noreferrer" href="/AllgemeineNutzungsbedingungen.pdf">Terms and Conditions</a>.</Text>
                 <Button
                     borderRadius={0}
                     type="submit"
