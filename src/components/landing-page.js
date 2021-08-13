@@ -70,7 +70,7 @@ const LandingPageSmall = (props) => {
           </Link>
           </Box>
           
-          <a href="#"><Image src={appstore} /></a>
+          {/* <a href="#"><Image src={appstore} /></a> */}
           
           </VStack>
         </Center> 
