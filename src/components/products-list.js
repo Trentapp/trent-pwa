@@ -4,7 +4,8 @@ import qs from "qs";
 import ProductDataService from "../services/product-data";
 import { ProductCard2 } from "./ProductCard";
 import Map from "../components/map.js";
-import { Box, HStack, VStack, StackDivider, Text } from "@chakra-ui/react";
+import { Box, HStack, VStack, StackDivider, Text, Stack } from "@chakra-ui/react";
+
 
 const locationHD = {
   lat: 49.3988,
@@ -28,8 +29,10 @@ const ProductsList = props => {
     useEffect(() => {
         const find = async () => {
             try {
+              console.log("finding")
                 const response = await ProductDataService.find(filters);
                 let newProducts = response.data;
+                console.log(response.data)
                 for (let i = 0; i < newProducts.length; i++){
                   newProducts[i].prices.perHour /= 100.0;
                   newProducts[i].prices.perDay /= 100.0;
@@ -46,28 +49,28 @@ const ProductsList = props => {
       setFilters(filters => ({...filters, name: props.location.search ? qs.parse(props.location.search, {ignoreQueryPrefix: true, delimiter: "&"}).search : ""}));
     }, [props.location.search]);
 
-    useEffect(() => { //works at my parents, but not in HD //attention: possible "error" (actually correct functioning except in the beginning, though it should work)
-        navigator.geolocation.getCurrentPosition((position) => {
-            //problem: that way of getting the location is super imprecise.
-            setFilters(filters => ({...filters, lat: position.coords.latitude, lng: position.coords.longitude}));
-            setMapCenter({lat: position.coords.latitude, lng: position.coords.longitude});
-            console.log("My position: ", position.coords.latitude, " ", position.coords.longitude);
-        }, (err) => console.log("Could not get Geoposition: ", err), {enableHighAccuracy: true, timeout: 3000});
-    }, [products]);
+    // useEffect(() => { //works at my parents, but not in HD //attention: possible "error" (actually correct functioning except in the beginning, though it should work)
+    //     navigator.geolocation.getCurrentPosition((position) => {
+    //         //problem: that way of getting the location is super imprecise.
+    //         setFilters(filters => ({...filters, lat: position.coords.latitude, lng: position.coords.longitude}));
+    //         setMapCenter({lat: position.coords.latitude, lng: position.coords.longitude});
+    //         console.log("My position: ", position.coords.latitude, " ", position.coords.longitude);
+    //     }, (err) => console.log("Could not get Geoposition: ", err), {enableHighAccuracy: true, timeout: 3000});
+    // }, [products]);
 
     //maybe add later that the results are automatically updated when you change a filter property and you don't need to click on apply
     return(
         <Box w="100%">
-            <HStack w="100%">
-              <Box w="50%" h="100%">
+            <Stack w="100%" direction={{base: "column", md: "row"}}>
+              <Box w={{base: "100%", md: "50%"}} h="100%">
                 <Map {...props} products={products.filter(product => product.location)} enhanced={enhanced} center={mapCenter}/>
               </Box>
-              <Box w="50%">
+              <Box  w={{base: "100%", md: "50%"}}>
                 <VStack divider={<StackDivider borderColor="gray.200" />}>
                   {products?.length ? products.map((product) => <ProductCard2 product={product} setEnhanced={setEnhanced}/>) : <Text marginTop={3} fontSize="lg">No items found</Text>}
                 </VStack>
               </Box>
-            </HStack>
+            </Stack>
         </Box>
     );
 };

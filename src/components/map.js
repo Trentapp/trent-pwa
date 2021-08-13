@@ -11,9 +11,9 @@ dotenv.config();
 
 const libraries = ["places"];
 const mapContainerStyle = {
-    width: "50%",
+    width: {base: "100%", md: "50%"},
     height: `${window.innerHeight - 75}px`,
-    position: "fixed",
+    position: {md: "fixed"},
     display: "block",
     top: "75px",
 };

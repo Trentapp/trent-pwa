@@ -4,6 +4,7 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from "./context/AuthContext";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react"
+import { createBreakpoints } from "@chakra-ui/theme-tools"
 
 const colors = {
   brand: {
@@ -11,7 +12,11 @@ const colors = {
     orange: "#ea9f0e"
   }
 };
-const extendedTheme = extendTheme({ colors })
+const breakpoints = createBreakpoints({
+  md: "860px"
+});
+
+const extendedTheme = extendTheme({ colors, breakpoints })
 
 ReactDOM.render(
   <BrowserRouter>
