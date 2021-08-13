@@ -29,10 +29,8 @@ const ProductsList = props => {
     useEffect(() => {
         const find = async () => {
             try {
-              console.log("finding")
                 const response = await ProductDataService.find(filters);
                 let newProducts = response.data;
-                console.log(response.data)
                 for (let i = 0; i < newProducts.length; i++){
                   newProducts[i].prices.perHour /= 100.0;
                   newProducts[i].prices.perDay /= 100.0;

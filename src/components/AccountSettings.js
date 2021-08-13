@@ -77,7 +77,6 @@ export default function UpdateProfile(props) {
                 const fd = fileUploadHandler();
                 const blob = new Blob([JSON.stringify({uid: props.user.uid})], {type: "application/json"});
                 fd.append("parameters", blob);
-                console.log(file, fd);
                 await UserDataService.uploadPicture(fd);
             }
             history.push(`/profile/${props.user._id}`);

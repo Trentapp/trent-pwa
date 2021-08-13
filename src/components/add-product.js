@@ -73,7 +73,6 @@ const AddProduct = props => {
 
     const onChangeDayPrice = e => {
         e.persist();
-        console.log(e.target.value);
         setProduct(product => ({...product, prices: {...product.prices, perDay: e.target.value}}));
     };
 

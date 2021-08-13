@@ -14,7 +14,6 @@ class ReviewDataService {
     }
 
     deleteReview(id, _uid) {
-        console.log(_uid);
         return http.delete(`/reviews/delete/${id}`, {data: {uid: _uid}});
     }
 
