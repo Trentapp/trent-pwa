@@ -5,7 +5,7 @@ import { Box } from "@chakra-ui/react";
 
 import mapIcon2 from "../assets/marker2.png";
 import mapIcon1 from "../assets/marker1.png";
-import { ProductCardFixed } from "./product-list-item";
+import { ProductCardFixed } from "./ProductCard";
 
 dotenv.config();
 

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import qs from "qs";
 
 import ProductDataService from "../services/product-data";
-import { ProductCard2 } from "./product-list-item";
+import { ProductCard2 } from "./ProductCard";
 import Map from "../components/map.js";
 import { Box, HStack, VStack, StackDivider, Text } from "@chakra-ui/react";
 

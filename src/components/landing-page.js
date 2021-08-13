@@ -2,7 +2,7 @@ import React from 'react';
 import styled, {css} from 'styled-components';
 import "../css/styles.css";
 import {Link, useHistory} from "react-router-dom";
-import { Box, Center, Heading as Heading2, Image } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, Heading, Heading as Heading2, Image, Text, VStack } from '@chakra-ui/react';
 
 // import anitaDenunzioQa8Bs887Id8Unsplash1 from "../assets/anita-denunzio-qa8bs887id8-unsplash-1-1@1x.png";
 // import rectangle19 from "../assets/rectangle-19-1@1x.svg";
@@ -24,6 +24,7 @@ import insta1 from "../assets/insta-post/img1.JPEG";
 import insta2 from "../assets/insta-post/img2.jpg";
 import insta3 from "../assets/insta-post/img3.jpg";
 import insta4 from "../assets/insta-post/img4.jpg";
+import appstore from "../assets/appstore.png";
 
 function App(props) {
   const history = useHistory();
@@ -57,11 +58,22 @@ const LandingPageSmall = (props) => {
         <Image w="100%" src={insta2} />
         <Image w="100%" src={insta3} />
         <Image w="100%" src={insta4} />
-        <Center w="100%" h={`${120}px`}>
-          <Heading2 as="h1" size="3xl">GET THE APP!</Heading2>
-          <Box h="30px" />
-          {/*Buttons here*/}
-        </Center>
+        <Center>
+          <VStack spacing={5}>
+          {/* <Heading2 as="h1" size="3xl">GET THE APP!</Heading2>
+          <Box h="30px" /> */}
+          <Box mt={5}>
+          <Link to="/signup" style={{ color: 'inherit', textDecoration: 'none' }}>
+          <Flex size="lg" py={3} pr={8} pl={7} borderRadius="lg" display="flex" bgGradient="linear(to-br, pink.500, red.500)" color="white" _hover={{ bgGradient:"linear(to-br, pink.600, red.600)"}}>
+            <Text as="i" fontSize="4xl" fontWeight="bold">Join the Trent</Text>
+          </Flex>
+          </Link>
+          </Box>
+          
+          <a href="#"><Image src={appstore} /></a>
+          
+          </VStack>
+        </Center> 
       </Box>
     </>
   )

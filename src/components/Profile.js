@@ -9,7 +9,7 @@ import AddProduct from './add-product';
 // import AddReview from "./add-review";
 // import Review from "./Review";
 import { Box, HStack, Container, Heading, VStack, Text, Divider, Avatar, IconButton, Button, Center } from '@chakra-ui/react';
-import ProductCard from './product-list-item';
+import ProductCard from './ProductCard';
 import { EditIcon } from '@chakra-ui/icons';
 
 const Profile = props => {
