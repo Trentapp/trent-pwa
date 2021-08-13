@@ -29,7 +29,12 @@ const ProductsList = props => {
         const find = async () => {
             try {
                 const response = await ProductDataService.find(filters);
-                setProducts(response.data);
+                let newProducts = response.data;
+                for (let i = 0; i < newProducts.length; i++){
+                  newProducts[i].prices.perHour /= 100.0;
+                  newProducts[i].prices.perDay /= 100.0;
+                }                
+                setProducts(newProducts);
             } catch(e) {
                 console.log("Error in products-list find: ", e);
             }

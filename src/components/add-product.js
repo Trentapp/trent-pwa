@@ -73,6 +73,7 @@ const AddProduct = props => {
 
     const onChangeDayPrice = e => {
         e.persist();
+        console.log(e.target.value);
         setProduct(product => ({...product, prices: {...product.prices, perDay: e.target.value}}));
     };
 
@@ -112,7 +113,7 @@ const AddProduct = props => {
     const saveProduct = async () => {
         try {
             const fd = fileUploadHandler();//hopefully I don't run into update problems
-            const blob = new Blob([JSON.stringify({product, uid: props.user.uid})], {type: "application/json"});
+            const blob = new Blob([JSON.stringify({product: {...product, prices: {perDay: product.prices.perDay*100, perHour: product.prices.perHour*100}}, uid: props.user.uid})], {type: "application/json"});
             fd.append("product", blob);//probably change product to blob
             if (props.product?._id){//update probably currently not working
                 await ProductDataService.updateProduct(props.product?._id, fd);
@@ -124,7 +125,7 @@ const AddProduct = props => {
             }
         } catch(e) {
             console.log(`Error in saving new product: ${e}`);
-            alert("Failed to save product. Please check that you filled all required fields. If it still does not work, please contact us: info@trentapp.com");
+            alert("Failed to save product. Please check that you filled all required fields. If it still does not work, please contact us: support@trentapp.com");
         }
     };
 
@@ -144,10 +145,19 @@ const AddProduct = props => {
                         <Input placeholder="Description" onChange={onChangeDesc} value={product.desc}/>
                     </FormControl>
                     <FormControl mt={4}>
-                        <FormLabel>Price</FormLabel>
+                        <FormLabel>Price
+                            <Popover placement="right">
+                                <PopoverTrigger>
+                                    <IconButton icon={<InfoIcon />} size="xs"/>
+                                </PopoverTrigger>
+                                <PopoverContent>
+                                    <Text>Use a point for floating point numbers</Text>
+                                </PopoverContent>
+                            </Popover>
+                        </FormLabel>
                         <HStack>
-                            <Input placeholder="per Hour" onChange={onChangeHourPrice} value={product.prices.perHour}/>
-                            <Input placeholder="per Day" onChange={onChangeDayPrice} value={product.prices.perDay}/>
+                            <Input type="number" step={0.01} placeholder="per Hour" onChange={onChangeHourPrice} value={product.prices.perHour}/>
+                            <Input type="number" step={0.01} placeholder="per Day" onChange={onChangeDayPrice} value={product.prices.perDay}/>
                         </HStack>
                     </FormControl>
                     <Text mt={5}>Address</Text>
@@ -171,7 +181,6 @@ const AddProduct = props => {
                                     <IconButton icon={<InfoIcon />} size="xs"/>
                                 </PopoverTrigger>
                                 <PopoverContent>
-                                    <PopoverCloseButton />
                                     <Text>Leave empty to keep current images, or upload all new images.</Text>
                                 </PopoverContent>
                             </Popover>
