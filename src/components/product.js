@@ -5,7 +5,7 @@ import "react-image-gallery/styles/css/image-gallery.css";
 
 import ProductDataService from "../services/product-data";
 import ChatDataService from "../services/chat-data";
-import { Box, Container, Heading, HStack, Divider, VStack, Text, Button, Center, Flex, IconButton } from "@chakra-ui/react";
+import { Box, Container, Heading, HStack, Divider, VStack, Text, Button, Center, Flex, IconButton, Stack } from "@chakra-ui/react";
 import ProfileCard from "./profileCard";
 import BookingCard from "./BookingCard";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
@@ -97,9 +97,9 @@ const Product = props => {
         <Container maxW="container.xl" marginTop={2}>
             {showSendMessage && <QuestionForm user={props.user} onSendMessage={onSendMessage} isOpen={showSendMessage} setIsOpen={setShowSendMessage} messageRef={messageRef} lender={product.user} />}
             <Box>
-                <HStack spacing="40px" align="flex-start">
-                    <Box w="700px" h="470px" marginTop={2}>
-                        {product.picturesFitted && product.picturesFitted.length > 0 && <ImageGallery items={images} showPlayButton={false} thumbnailPosition="right"/>}
+                <Stack spacing="40px" align="flex-start" direction={{base: "column", md: "row"}}>
+                    <Box w={{base: "100%",md: "700px"}} h={{base: "60%", md: "470px"}} marginTop={2}>
+                        {product.picturesFitted && product.picturesFitted.length > 0 && <ImageGallery items={images} showPlayButton={false} showThumbnails={false} thumbnailPosition="right"/>}
                         <Box my={2}>
                             <HStack justify="space-between">
                                 <VStack align="left">
@@ -115,11 +115,11 @@ const Product = props => {
                             {product.desc}
                         </Text>
                     </Box>
-                    <Flex>
+                    <Box>
                         {props.user._id !== product.user._id ? <>
                             <Center>
                                 <VStack spacing="20px">
-                                        <BookingCard user={props.user} product={product} />
+                                        {/* <BookingCard user={props.user} product={product} /> */}
                                         <Button borderRadius="lg" width="100%" onClick={() => setShowSendMessage(true)}>Send Message</Button>
                                 </VStack>
                             </Center>
@@ -131,8 +131,8 @@ const Product = props => {
                                     <IconButton title="Delete product" colorScheme="red" size="lg" icon={<DeleteIcon />} onClick={deleteProduct}/>
                                 </HStack>
                             </Box>}
-                    </Flex>
-                </HStack>
+                    </Box>
+                </Stack>
             </Box>
         </Container>
     )
