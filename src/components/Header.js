@@ -30,9 +30,9 @@ export default function Header (props) {
 
   return (
     <Box h="75px">
-      <Box px={8} w="100%" py={2} bg="gray.900" as="nav" align="center" wrap="wrap" position="fixed" zIndex={999}>
+      <Box px={8} w="100%" bg="gray.900" as="nav" align="center" wrap="wrap" position="fixed" zIndex={999}>
         <HStack justify="space-between">
-          <HStack spacing={8} flex={1}>
+          <HStack spacing={8} flex={1} h="75px">
             <LogoSmall />
             <InputGroup size="sm" maxW="400px" bg="gray.100" borderRadius="lg">
               <Input

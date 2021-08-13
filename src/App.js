@@ -62,7 +62,8 @@ function App() {
   return (
     <>
     <Box className="wrapper flex-shrink-0">
-    {window.location.pathname !== '/landing-page' && (window.location.pathname !== '/' || user._id) && <Header user={user} handleLogout={handleLogout}/>}
+    {/* {location.pathname !== '/landing-page' && (location.pathname !== '/' || user._id) && <Header user={user} handleLogout={handleLogout}/>} */}
+    <Header user={user} handleLogout={handleLogout}/>
       <Box>
         <Switch>
           <Route exact path="/products"

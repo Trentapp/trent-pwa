@@ -13,10 +13,14 @@ import overlapGroup1 from "../assets/rectangle-20@1x.png"
 import polygon1 from "../assets/polygon-1@1x.png";
 import polygon2 from "../assets/polygon-2@1x.png";
 import rectangle37 from "../assets/rectangle-37@1x.png";
-import { Box, Center, Heading as Heading2 } from '@chakra-ui/react';
+import { Box, Center, Heading as Heading2, Image } from '@chakra-ui/react';
 //import nav4 from "../assets/nav-4-1@1x.png"; // image of nice footer
 
 import logo from "../assets/logo.png"
+
+//new landing page with images
+import pageTop from "../assets/landing-page-top.png";
+
 
 
 function App(props) {
@@ -37,8 +41,18 @@ function App(props) {
     </>
   }
   //return <NewConcept2 {...newConcept2Data} />;
-  return <NewConcept2 />
+  //return <NewConcept2 />
+  return(
+    <LandingPageLarge />
+  );
 }
+
+const LandingPageLarge = (props) => {
+  return (
+    <Image w="100%" src={pageTop} />
+  )
+}
+
 
  export const Logo = (props) => {
   return(
