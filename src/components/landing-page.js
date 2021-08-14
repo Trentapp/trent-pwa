@@ -65,12 +65,12 @@ const LandingPageSmall = (props) => {
           <Box h="30px" /> */}
           <Box mt={5}>
           <Link to="/signup" style={{ color: 'inherit', textDecoration: 'none' }}>
-          <Flex size="lg" py={3} pr={8} pl={7} borderRadius="lg" display="flex" bgGradient="linear(to-br, pink.500, red.500)" color="white" _hover={{ bgGradient:"linear(to-br, pink.600, red.600)"}}>
+          <Flex h="80px" size="lg" py={3} pr={8} pl={7} borderRadius="lg" display="flex" bgGradient="linear(to-br, pink.500, red.500)" color="white" _hover={{ bgGradient:"linear(to-br, pink.600, red.600)"}}>
             <Text as="i" fontSize="4xl" fontWeight="bold">Join the Trent</Text>
           </Flex>
           </Link>
           </Box>
-          <a href="https://www.instagram.com/gettrentapp"><Image src={followInstagram} /></a>
+          <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/gettrentapp"><Image h="80px" src={followInstagram} /></a>
           {/* <a href="#"><Image src={appstore} /></a> */}
           
           </VStack>
