@@ -21,7 +21,6 @@ export default function Login() {
             setError("");
             setLoading(true);
             await login(emailRef.current.value, passwordRef.current.value);
-            alert("Awesome! You are one of the first trent users - whoohoo!! As this is still a beta renting is not available yet. However we would really appreciate if you already posted some products and spread the word about trent. If you have questions or feedback we would love to hear from you at support@trentapp.com")
             history.push("/dashboard");
         } catch(err) {
             setError("Failed to sign in");

@@ -24,6 +24,7 @@ import insta1 from "../assets/insta-post/img1.JPEG";
 import insta2 from "../assets/insta-post/img2.jpg";
 import insta3 from "../assets/insta-post/img3.jpg";
 import insta4 from "../assets/insta-post/img4.jpg";
+import followInstagram from "../assets/follow-us-on-instagram.png";
 import appstore from "../assets/appstore.png";
 
 function App(props) {
@@ -69,7 +70,7 @@ const LandingPageSmall = (props) => {
           </Flex>
           </Link>
           </Box>
-          
+          <a href="https://www.instagram.com/gettrentapp"><Image src={followInstagram} /></a>
           {/* <a href="#"><Image src={appstore} /></a> */}
           
           </VStack>
