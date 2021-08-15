@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from "react";
 import qs from "qs";
+import dotenv from "dotenv";
 
 import ProductDataService from "../services/product-data";
 import { ProductCard2 } from "./ProductCard";
 import Map from "../components/map.js";
 import { Box, HStack, VStack, StackDivider, Text, Stack } from "@chakra-ui/react";
 
+dotenv.config();
 
 const locationHD = {
   lat: 49.3988,
@@ -48,11 +50,13 @@ const ProductsList = props => {
     }, [props.location.search]);
 
     useEffect(() => { //works at my parents, but not in HD //attention: possible "error" (actually correct functioning except in the beginning, though it should work)
+      if (process.env.REACT_APP_DEV_ENV !== "hd"){
         navigator.geolocation.getCurrentPosition((position) => {
             //problem: that way of getting the location is super imprecise.
             setFilters(filters => ({...filters, lat: position.coords.latitude, lng: position.coords.longitude}));
             setMapCenter({lat: position.coords.latitude, lng: position.coords.longitude});
         }, (err) => console.log("Could not get Geoposition: ", err), {enableHighAccuracy: true, timeout: 3000});
+      }
     }, [products]);
 
     //maybe add later that the results are automatically updated when you change a filter property and you don't need to click on apply

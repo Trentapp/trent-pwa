@@ -94,9 +94,10 @@ const Profile = props => {
                         }
                         <VStack spacing="15px" paddingTop={4}>
                             {profileUser.inventory.map((product) => {
-                                product.prices.perDay /= 100.0;
-                                product.prices.perHour /= 100.0;
-                                return (<ProductCard product={product} />)
+                                let newProduct = JSON.parse(JSON.stringify(product));
+                                newProduct.prices.perDay = product.prices.perDay/100.0;
+                                newProduct.prices.perHour /= product.prices.perHour/100.0;
+                                return (<ProductCard product={newProduct} />)
                                 }
                             )}
                         </VStack>
