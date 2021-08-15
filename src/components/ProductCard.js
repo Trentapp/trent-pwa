@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom'
 
 export default function ProductCard(props) {
     return (
-        <Box w={{base: "300px", md: "600px"}} h={{base: "100px", md: "200px"}}>
+        <Box w={{base: "300px", md: "600px"}}>
             <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/product/${props.product._id}`}>
                 <HStack
                     bgColor="gray.50"
                     borderRadius="3xl"
+                    overflow="hidden"
                     boxShadow="lg"
                     w="100%"
                     align="stretch"
