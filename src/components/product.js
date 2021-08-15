@@ -5,9 +5,9 @@ import "react-image-gallery/styles/css/image-gallery.css";
 
 import ProductDataService from "../services/product-data";
 import ChatDataService from "../services/chat-data";
-import { Box, Container, Heading, HStack, Divider, VStack, Text, Button, Center, Flex, IconButton, Stack } from "@chakra-ui/react";
+import { Box, Container, Heading, HStack, Divider, VStack, Text, Button, Center, IconButton, Stack } from "@chakra-ui/react";
 import ProfileCard from "./profileCard";
-import BookingCard from "./BookingCard";
+// import BookingCard from "./BookingCard";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import AddProduct from "./add-product";
 import QuestionForm from "./ask-question";
@@ -90,7 +90,7 @@ const Product = props => {
         } catch(e) {
             console.log("Error in product.js - getProduct: ", e);
         }
-    }, [product?._id]);
+    }, [product?._id, product?.thumbnails, product?.picturesFitted]);
 
 
     return(
@@ -104,7 +104,8 @@ const Product = props => {
                             <HStack justify="space-between">
                                 <VStack align="left">
                                     <Heading>{product.name}</Heading>
-                                    <Text textAlign="left" fontWeight="bold" color="gray.500">{product.prices.perHour && <>{product.prices.perHour}€/hour </>}{product.prices.perDay && <>{product.prices.perDay}€/day </>}{product.prices.perWeek && <>{product.prices.perWeek}€/week </>}{product.prices.perMonth && <>{product.prices.perMonth}€/month </>}</Text>
+                                    {/* replace following with "free" if free, maybe make a button or so that shows that you make it free */}
+                                    <Text textAlign="left" fontWeight="bold" color="gray.500">{product.prices.perHour !== undefined && <>{product.prices.perHour}€/hour </>}{product.prices.perDay !== undefined && <>{product.prices.perDay}€/day </>}{product.prices.perWeek !== undefined && <>{product.prices.perWeek}€/week </>}{product.prices.perMonth !== undefined && <>{product.prices.perMonth}€/month </>}</Text>
                                 </VStack>
                                 {product.user && <ProfileCard product={product} />}
                             </HStack>

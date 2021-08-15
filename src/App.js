@@ -20,7 +20,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import LoggedOutRoute from "./components/LoggedOutRoute";
 import Chat from "./components/chat";
 import Footer, { ProductsListFooter } from "./components/footer";
-import About from "./components/about";
+// import About from "./components/about";
 import Impressum from "./components/impressum";
 import Datenschutz from "./components/datenschutz";
 

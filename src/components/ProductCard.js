@@ -9,7 +9,6 @@ export default function ProductCard(props) {
                 <HStack
                     bgColor="gray.50"
                     borderRadius="3xl"
-                    overflow="hidden"
                     boxShadow="lg"
                     w="100%"
                     align="stretch"
@@ -25,7 +24,7 @@ export default function ProductCard(props) {
                         </Box>
                         <Box w="100%" textAlign="left" px={2}>
                             {/* <Text justifyContent="flex-start" textStyle="label" marginBottom={2} color="gray.500" fontSize="xs">X meters away</Text> */}
-                            <Text isTruncated noOfLines={2}>{props.product.desc}</Text>
+                            <Text noOfLines={2}>{props.product.desc}</Text>
                         </Box>
                     </VStack>
                 </HStack>
@@ -62,7 +61,7 @@ export const ProductCard2 = (props) => {
                         </Box>
                         <Box w="100%" textAlign="left" px={2}>
                             {/* <Text justifyContent="flex-start" textStyle="label" marginBottom={2} color="gray.500" fontSize="xs">X meters away</Text> */}
-                            <Text isTruncated noOfLines={2}>{props.product.desc}</Text>
+                            <Text noOfLines={2}>{props.product.desc}</Text>
                         </Box>
                     </VStack>
                 </HStack>
@@ -98,7 +97,7 @@ export const ProductCardSmall = (props) => {
                         </Box>
                         <Box w="100%" textAlign="left" px={2}>
                             {/* <Text justifyContent="flex-start" textStyle="label" marginBottom={2} color="gray.500" fontSize="xs">X meters away</Text> */}
-                            <Text isTruncated noOfLines={1}>{props.product.desc}</Text>
+                            <Text noOfLines={1}>{props.product.desc}</Text>
                         </Box>
                     </VStack>
                 </HStack>
@@ -137,7 +136,7 @@ export const ProductCardFixed = (props) => {
                         </Box>
                         <Box w="100%" textAlign="left" px={2}>
                             {/* <Text justifyContent="flex-start" textStyle="label" marginBottom={2} color="gray.500" fontSize="xs">X meters away</Text> */}
-                            <Text isTruncated noOfLines={2}>{props.product.desc}</Text>
+                            <Text noOfLines={2}>{props.product.desc}</Text>
                         </Box>
                     </VStack>
                 </HStack>

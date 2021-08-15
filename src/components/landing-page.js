@@ -1,8 +1,8 @@
 import React from 'react';
-import styled, {css} from 'styled-components';
+import styled from 'styled-components'; //import {css} from ...
 import "../css/styles.css";
 import {Link, useHistory} from "react-router-dom";
-import { Box, Button, Center, Flex, Heading, Heading as Heading2, Image, Text, VStack } from '@chakra-ui/react';
+import { Box, Center, Flex, Image, Text, VStack } from '@chakra-ui/react';
 
 // import anitaDenunzioQa8Bs887Id8Unsplash1 from "../assets/anita-denunzio-qa8bs887id8-unsplash-1-1@1x.png";
 // import rectangle19 from "../assets/rectangle-19-1@1x.svg";
@@ -16,7 +16,7 @@ import { Box, Button, Center, Flex, Heading, Heading as Heading2, Image, Text, V
 // import rectangle37 from "../assets/rectangle-37@1x.png";
 // //import nav4 from "../assets/nav-4-1@1x.png"; // image of nice footer
 
-import logo from "../assets/logo.png";
+// import logo from "../assets/logo.png";
 import logoBeta from "../assets/logo_beta.png";
 
 //new landing page with images
@@ -26,7 +26,7 @@ import insta2 from "../assets/insta-post/img2.jpg";
 import insta3 from "../assets/insta-post/img3.jpg";
 import insta4 from "../assets/insta-post/img4.jpg";
 import followInstagram from "../assets/follow-us-on-instagram.png";
-import appstore from "../assets/appstore.png";
+// import appstore from "../assets/appstore.png";
 
 function App(props) {
   const history = useHistory();
@@ -85,7 +85,7 @@ const LandingPageSmall = (props) => {
   return(
     <Link to="/">
       <TrentStyle>
-        <img src={logoBeta} />
+        <img src={logoBeta} alt="trent"/>
         {/* <Span0>trent</Span0>
         <Span1>.</Span1> */}
       </TrentStyle>
@@ -97,7 +97,7 @@ export const LogoSmall = (props) => {
   return(
     <Link to="/">
       <TrentStyleSmall>
-        <img src={logoBeta} />
+        <img src={logoBeta} alt="trent"/>
         {/* <Span0>trent</Span0>
         <Span1>.</Span1> */}
       </TrentStyleSmall>

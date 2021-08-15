@@ -5,8 +5,6 @@ import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
 import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, Text, HStack } from '@chakra-ui/react';
 
-import UserDataService from "../services/user-data";
-
 export default function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();

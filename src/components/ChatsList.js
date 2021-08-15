@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 import React, {useState, useEffect} from 'react';
-import { Box, Container, Divider, Flex, Heading, VStack } from '@chakra-ui/react';
+import { Box, Container, Divider, Heading, VStack } from '@chakra-ui/react';
 
 import ChatDataService from "../services/chat-data";
 

@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import ProductDataService from "../services/product-data";
 import { ProductCard2 } from "./ProductCard";
 import Map from "../components/map.js";
-import { Box, HStack, VStack, StackDivider, Text, Stack } from "@chakra-ui/react";
+import { Box, VStack, StackDivider, Text, Stack } from "@chakra-ui/react";
 
 dotenv.config();
 

@@ -1,5 +1,5 @@
 import { InfoIcon } from "@chakra-ui/icons";
-import { Button, Center, FormControl, FormLabel, HStack, IconButton, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Popover, PopoverArrow, PopoverCloseButton, PopoverContent, PopoverTrigger, Text } from "@chakra-ui/react";
+import { Button, Center, FormControl, FormLabel, HStack, IconButton, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Popover, PopoverContent, PopoverTrigger, Text } from "@chakra-ui/react";
 import React, {useState, useEffect} from "react";
 import {useHistory} from "react-router-dom";
 
@@ -52,7 +52,7 @@ const AddProduct = props => {
         if (props.product?._id) {
             setProduct(props.product);
         }
-    }, [props.updateProductId, props.user, history]);
+    }, [props.updateProductId, props.user, history, props.product]);
 
     //should those onChange functions be async?
 
