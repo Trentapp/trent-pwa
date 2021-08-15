@@ -93,7 +93,12 @@ const Profile = props => {
                             </Button>
                         }
                         <VStack spacing="15px" paddingTop={4}>
-                            {profileUser.inventory.map((product) => <ProductCard product={product} />)}
+                            {profileUser.inventory.map((product) => {
+                                product.prices.perDay /= 100.0;
+                                product.prices.perHour /= 100.0;
+                                <ProductCard product={product} />
+                                }
+                            )}
                         </VStack>
                     </VStack>
                 </Stack>

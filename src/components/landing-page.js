@@ -16,7 +16,8 @@ import { Box, Button, Center, Flex, Heading, Heading as Heading2, Image, Text, V
 // import rectangle37 from "../assets/rectangle-37@1x.png";
 // //import nav4 from "../assets/nav-4-1@1x.png"; // image of nice footer
 
-import logo from "../assets/logo.png"
+import logo from "../assets/logo.png";
+import logoBeta from "../assets/logo_beta.png";
 
 //new landing page with images
 import page from "../assets/landing-page.png";
@@ -84,7 +85,7 @@ const LandingPageSmall = (props) => {
   return(
     <Link to="/">
       <TrentStyle>
-        <img src={logo} />
+        <img src={logoBeta} />
         {/* <Span0>trent</Span0>
         <Span1>.</Span1> */}
       </TrentStyle>
@@ -96,7 +97,7 @@ export const LogoSmall = (props) => {
   return(
     <Link to="/">
       <TrentStyleSmall>
-        <img src={logo} />
+        <img src={logoBeta} />
         {/* <Span0>trent</Span0>
         <Span1>.</Span1> */}
       </TrentStyleSmall>
