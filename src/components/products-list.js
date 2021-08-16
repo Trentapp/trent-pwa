@@ -68,7 +68,7 @@ const ProductsList = props => {
               </Box>
               <Box  w={{base: "100%", md: "50%"}}>
                 <VStack divider={<StackDivider borderColor="gray.200" />}>
-                  {products?.length ? products.map((product) => <ProductCard2 product={product} setEnhanced={setEnhanced}/>) : <Text marginTop={3} fontSize="lg">No items found</Text>}
+                  {products?.length ? products.map((product) => <ProductCard2 product={product} setEnhanced={setEnhanced}/>) : <Text marginTop={3} fontSize="lg">No items found</Text>} {/* try similar products or increase search area (?) */}
                 </VStack>
               </Box>
             </Stack>

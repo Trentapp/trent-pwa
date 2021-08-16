@@ -105,7 +105,9 @@ const Product = props => {
                                 <VStack align="left">
                                     <Heading>{product.name}</Heading>
                                     {/* replace following with "free" if free, maybe make a button or so that shows that you make it free */}
-                                    <Text textAlign="left" fontWeight="bold" color="gray.500">{product.prices.perHour !== undefined && <>{product.prices.perHour}€/hour </>}{product.prices.perDay !== undefined && <>{product.prices.perDay}€/day </>}{product.prices.perWeek !== undefined && <>{product.prices.perWeek}€/week </>}{product.prices.perMonth !== undefined && <>{product.prices.perMonth}€/month </>}</Text>
+                                    { (product.prices.perHour || product.prices.perDay) ? <Text textAlign="left" fontWeight="bold" color="gray.500">{product.prices.perHour !== undefined && product.prices.perHour !== 0 && <>{product.prices.perHour}€/hour </>}{product.prices.perDay !== undefined && product.prices.perDay !== 0 && <>{product.prices.perDay}€/day </>}</Text>
+                                        : <Text textAlign="left" fontWeight="bold" color="gray.500">free</Text>}
+                                    {/*product.prices.perWeek !== undefined && <>{product.prices.perWeek}€/week </>}{product.prices.perMonth !== undefined && <>{product.prices.perMonth}€/month </>*/}
                                 </VStack>
                                 {product.user && <ProfileCard product={product} />}
                             </HStack>
