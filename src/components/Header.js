@@ -71,10 +71,14 @@ export default function Header (props) {
               </MenuList>
             </Menu>
             :
-            
-            <Link style={{ color: 'inherit', textDecoration: 'none' }} to={"/signup"}>
-              <Text color="white">Sign In</Text>
+            <HStack spacing="20px">
+            <Link style={{ color: 'inherit', textDecoration: 'none' }} to={"/login"}>
+              <Text color="white">Log In</Text>
             </Link>
+            <Link style={{ color: 'inherit', textDecoration: 'none' }} to={"/signup"}>
+              <Text color="white">Sign Up</Text>
+            </Link>
+            </HStack>
             }
           </Stack>
         </HStack>
