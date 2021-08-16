@@ -114,8 +114,8 @@ const CardStyle = {
 
 export const ProductCardFixed = (props) => {
     return (
-        <Box w={{base: "300px", md: "600px"}} h={{base: "100px", md: "200px"}} style={CardStyle}
-            top={{base: `${window.innerHeight - 130}px`, md: `${window.innerHeight - 230}px`}}
+        <Box w={{base: "300px", md: "600px"}} style={CardStyle}
+            bottom="35px"
             left={{base: `${(window.innerWidth - 300)/2}px`, md: `${(window.innerWidth/2 - 600)/2}px`}}>
             <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/product/${props.product._id}`}>
                 <HStack
