@@ -66,7 +66,7 @@ const Profile = props => {
         <Container maxW="container.lg" marginTop={2}>
             {profileUser._id === props.user._id && <AddProduct user={props.user} isOpen={showAddProduct} setIsOpen={setShowAddProduct}/>}
             <Box>
-                <Stack align={{base: "center", md: "flex-start"}} spacing={{base: "20px", md: "70px"}} direction={{base: "column", md: "row"}}>
+                <Stack pl={10} align={{base: "center", md: "flex-start"}} spacing={{base: "20px", md: "70px"}} direction={{base: "column", md: "row"}}>
                     <VStack w="200px">
                         <Box w="200px" h="200px">
                             <Avatar size="4xl" src={profileUser.picture && `data:${profileUser.picture.contentType};base64,${Buffer.from(profileUser.picture.data.data).toString('base64')}`} />
