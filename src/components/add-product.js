@@ -156,7 +156,9 @@ const AddProduct = props => {
                         </FormLabel>
                         <HStack>
                             <Input type="number" step={0.01} placeholder="per Hour" onChange={onChangeHourPrice} value={product.prices.perHour}/>
+                            <Text>€/hour</Text>
                             <Input type="number" step={0.01} placeholder="per Day" onChange={onChangeDayPrice} value={product.prices.perDay}/>
+                            <Text>€/day</Text>
                         </HStack>
                     </FormControl>
                     <Text mt={5}>Address</Text>
