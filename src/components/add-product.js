@@ -111,6 +111,9 @@ const AddProduct = props => {
 
     const saveProduct = async () => {
         try {
+            if (product.prices.perDay < 0 || (product.prices.perDay*100)%1 !== 0 || product.prices.perHour < 0 || (product.prices.perHour*100)%1 !== 0) {
+                throw "no negative or non-integer cent prices allowed";
+            }
             const fd = fileUploadHandler();//hopefully I don't run into update problems
             const blob = new Blob([JSON.stringify({product: {...product, prices: {perDay: product.prices.perDay*100, perHour: product.prices.perHour*100}}, uid: props.user.uid})], {type: "application/json"});
             fd.append("product", blob);//probably change product to blob
@@ -124,7 +127,7 @@ const AddProduct = props => {
             }
         } catch(e) {
             console.log(`Error in saving new product: ${e}`);
-            alert("Failed to save product. Please check that you filled all required fields. If it still does not work, please contact us: support@trentapp.com");
+            alert("Failed to save product. Please check that you filled all required fields correctly. If it still does not work, please contact us: support@trentapp.com");
         }
     };
 
@@ -155,9 +158,9 @@ const AddProduct = props => {
                             </Popover>
                         </FormLabel>
                         <HStack>
-                            <Input type="number" step={0.01} placeholder="per Hour" onChange={onChangeHourPrice} value={product.prices.perHour}/>
+                            <Input min={0} type="number" step={0.01} placeholder="per Hour" onChange={onChangeHourPrice} value={product.prices.perHour}/>
                             <Text>€/hour</Text>
-                            <Input type="number" step={0.01} placeholder="per Day" onChange={onChangeDayPrice} value={product.prices.perDay}/>
+                            <Input min={0} type="number" step={0.01} placeholder="per Day" onChange={onChangeDayPrice} value={product.prices.perDay}/>
                             <Text>€/day</Text>
                         </HStack>
                     </FormControl>
@@ -195,7 +198,6 @@ const AddProduct = props => {
                             Submit
                         </Button>
                     </Center>
-                    {/* <Button onClick={() => props.setIsOpen(false)}>Cancel</Button> */}
                 </ModalFooter>
             </ModalContent>
         </Modal>
