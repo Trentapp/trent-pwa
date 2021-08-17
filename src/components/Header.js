@@ -17,10 +17,14 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { Search2Icon, ChevronDownIcon } from "@chakra-ui/icons";
+import { useTranslation } from 'react-i18next';
+import '../i18n';
 
 import {LogoSmall} from "./landing-page";
 
 export default function Header (props) {
+  const {t, i18n} = useTranslation();
+
   const searchRef = useRef();
   const history = useHistory();
 
@@ -38,7 +42,7 @@ export default function Header (props) {
               <Input
                 pr="4.5rem"
                 type="text"
-                placeholder="Search products"
+                placeholder={t("header.search")}
                 ref={searchRef}
                 onKeyDown={e => {if (e.key === "Enter") {onSearch()}}}
               />
