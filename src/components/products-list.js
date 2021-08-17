@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import qs from "qs";
 import dotenv from "dotenv";
 
@@ -15,18 +15,25 @@ const locationHD = {
 };
 
 const ProductsList = props => {
+    const calcMaxDist = (zoom) => window.innerHeight*0.001*2**(16-zoom);
+
     const [products, setProducts] = useState([]);
+    const initialZoom = 14
     const searchString = props.location.search ? qs.parse(props.location.search, {ignoreQueryPrefix: true, delimiter: "&"}).search : "";
-    const [filters, setFilters] = useState(props.inventory ? {name: searchString, dayPriceMax: "", hourPriceMax: "", lat: locationHD.lat, lng: locationHD.lng, inventoryUserId: props.user._id} : {name: searchString, dayPriceMax: "", hourPriceMax: "", lat: locationHD.lat, lng: locationHD.lng});
+    const [filters, setFilters] = useState({name: searchString, dayPriceMax: "", hourPriceMax: "", lat: locationHD.lat, lng: locationHD.lng, maxDistance: calcMaxDist(initialZoom)});
     const [enhanced, setEnhanced] = useState();
     const [mapCenter, setMapCenter] = useState(locationHD);
-    //add possibilities for pagination later
+    const [zoom, setZoom] = useState(initialZoom);
 
     useEffect(() => {
       if (props.inventory){
         setFilters(filters => ({...filters, inventoryUserId: props.user._id}));
       }
     }, [props.user, props.inventory]);
+
+    useEffect(() => {
+      setFilters(filters => ({...filters, lat: mapCenter.lat, lng: mapCenter.lng, maxDistance: calcMaxDist(zoom)}));
+    }, [zoom, mapCenter]);
 
     useEffect(() => {
         const find = async () => {
@@ -57,14 +64,14 @@ const ProductsList = props => {
             setMapCenter({lat: position.coords.latitude, lng: position.coords.longitude});
         }, (err) => console.log("Could not get Geoposition: ", err), {enableHighAccuracy: true, timeout: 3000});
       }
-    }, [products]);
+    }, []);
 
     //maybe add later that the results are automatically updated when you change a filter property and you don't need to click on apply
     return(
         <Box w="100%">
             <Stack w="100%" direction={{base: "column", md: "row"}}>
               <Box w={{base: "100%", md: "50%"}} h="100%">
-                <Map {...props} products={products.filter(product => product.location)} enhanced={enhanced} center={mapCenter}/>
+                <Map {...props} products={products.filter(product => product.location)} enhanced={enhanced} setMapCenter={setMapCenter} mapCenter={mapCenter} zoom={zoom} setZoom={setZoom} calcMaxDist={calcMaxDist}/>
               </Box>
               <Box  w={{base: "100%", md: "50%"}}>
                 <VStack divider={<StackDivider borderColor="gray.200" />}>
