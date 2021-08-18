@@ -110,22 +110,4 @@ const Profile = props => {
 
 export default Profile;
 
-        // <div>
-        //     {error ? error : (
-        //         <div>
-        //             <h2>{profileUser.name}</h2>
-        //             {profileUser.rating > 0 && <p>Rating: {profileUser.rating}: <StarRatings rating={profileUser.rating} starRatedColor="rgb(250,200,30)" starDimension="28px" />
-        //             </p>}
-        //             {profileUser.picture && <img alt="ups" src={`data:${profileUser.picture.contentType};base64,${Buffer.from(profileUser.picture.data.data).toString('base64')}`}/>}
-        //             {(props.user._id === profileUser._id) && <p><Link to="/update-profile">Update Profile</Link></p>}
-        //             <br/>
-        //             {openReview && <AddReview ratedUserId={props.match.params.id} user={props.user}/>}
-        //             <h2>Reviews</h2>
-        //             {reviews.length > 0 ? reviews.map(review => <Review review={review} user={props.user} key={review._id}/>) : <p>This user has not received any reviews yet.</p>}
-        //         </div>
-        //     )}
-        // </div>
-
-/* <Flex borderRadius="3xl" overflow="hidden">
-    {profileUser.picture && <Image src={`data:${profileUser.picture.contentType};base64,${Buffer.from(profileUser.picture.data.data).toString('base64')}`} />}
-</Flex> */
+// todo: map reviews: {reviews.length > 0 ? reviews.map(review => <Review review={review} user={props.user} key={review._id}/>) : <p>This user has not received any reviews yet.</p>}

@@ -85,12 +85,3 @@ const Chat = props => {
 
 export default Chat;
 
-
-    // <>
-    //     <h2>Chat with {otherUser.name} because of product {chat.product.name}</h2>
-    //     {chat.messages && chat.messages.map(message => <Message user={props.user} message={message} key={message._id}/>)}
-    //     <div className="col-lg-6 offset-3">
-    //         <input type="text" ref={messageRef} />
-    //         <Button onClick={onSendMessage}>Send</Button>
-    //     </div>
-    // </>

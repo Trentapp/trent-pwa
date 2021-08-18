@@ -18,7 +18,7 @@ for filename in files:
         parampatt = r'={[\w\.?+-;:=>()!/*]*}'
         objpatt = r'[(]*{[\w\.?]*}[)]*'
         f = re.sub(parampatt, "", f)
-        f = re.sub(objpatt, "</><>", f)
+        f = re.sub(objpatt, "</><>", f)#deleting objects so they are not shown
         pattern = r'<[\w\s{}%"\.=]*>[\w\s{}()!?:;%/€,\."]+</[\w]*>'
         tagpatt = r'<[/]*[\w\s{}%"\.=]*>'
         # did not work :
@@ -29,7 +29,8 @@ for filename in files:
             text = re.sub(tagpatt, "", text)
             text = re.sub("  ", "", text)
             text = re.sub("\n", "", text)
-            obj[filename][text] = text.replace("{", "{{").replace("}", "}}")
+            if text != "":
+                obj[filename][text] = text.replace("{", "{{").replace("}", "}}")
 
 for filename, dic in [("Profile", obj["Profile"])]: #obj.items():
     f = ""
@@ -37,6 +38,7 @@ for filename, dic in [("Profile", obj["Profile"])]: #obj.items():
         f = file.read()
         for key, phrase in dic.items():
             attach = ""
+            # from other option where you populated objects in translation:
             # objpatt = r'{[\w\.]*}'
             # objects = re.findall(objpatt, key)
             # for o in objects:
