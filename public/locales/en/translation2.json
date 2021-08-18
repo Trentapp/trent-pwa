@@ -1,49 +1,4 @@
 {
-    "header": {
-        "search": "Search items",
-        "dropmenu": {
-            "a": "Your Profile",
-            "b": "Account Settings",
-            "c": "Chats",
-            "d": "Transactions"
-        }
-    },
-    "account-settings": {
-        "delete": {
-            "certain": "Are you sure you want to delete this account?"
-        },
-        "error": {
-            "passw-match": "Passwords do not match",
-            "general": "Failed to update profile."
-        },
-        "heading": "Account Settings",
-        "mail": "Your Email: {{mail}}",
-        "firstname": "First Name",
-        "lastname": "Last Name",
-        "new-pw": "New Password",
-        "confirm-pw": "Confirm New Password",
-        "leave-empty": "leave empty to leave the same",
-        "addr": {
-            "head": "Address",
-            "street": "Street and house number",
-            "zip": "Zipcode",
-            "city": "City",
-            "country": "Country"
-        },
-        "upload-prof-pic": "Upload profile picture",
-        "update": "Update Profile"
-    },
-    "product": {
-        "{product.name}": "{product.name}",
-        "{product.prices.perHour}\u20ac/hour ": "{product.prices.perHour}\u20ac/hour ",
-        "{product.prices.perDay}\u20ac/day ": "{product.prices.perDay}\u20ac/day ",
-        "free": "free",
-        "{product.prices.perWeek}\u20ac/week ": "{product.prices.perWeek}\u20ac/week ",
-        "{product.prices.perMonth}\u20ac/month ": "{product.prices.perMonth}\u20ac/month ",
-        "Description": "Description",
-        "{product.desc}": "{product.desc}",
-        "Send Message": "Send Message"
-    },
     "add-product": {
         "Update Product": "Update Product",
         "Add a new product": "Add a new product",

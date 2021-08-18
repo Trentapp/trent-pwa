@@ -2,6 +2,7 @@ import { InfoIcon } from "@chakra-ui/icons";
 import { Button, Center, FormControl, FormLabel, HStack, IconButton, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Popover, PopoverContent, PopoverTrigger, Text } from "@chakra-ui/react";
 import React, {useState, useEffect} from "react";
 import {useHistory} from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 import ProductDataService from "../services/product-data";
 
@@ -9,6 +10,8 @@ import ProductDataService from "../services/product-data";
 
 //later: make location of product the location of the user by default
 const AddProduct = props => { 
+    const {t, i18n} = useTranslation();
+
     const initialProductState = {
         name: "",
         desc: "",
@@ -135,16 +138,16 @@ const AddProduct = props => {
         <Modal isOpen={props.isOpen} onClose={() => props.setIsOpen(false)} size="lg">
             <ModalOverlay />
             <ModalContent>
-                <ModalHeader>{props.product?._id ? <>Update Product</> : <>Add a new product</>}</ModalHeader>
+                <ModalHeader>{props.product?._id ? <>{t("Update Product")}</> : <>{t("Add a new product")}</>}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody pb={6}>
                     <FormControl>
-                        <FormLabel>Item name</FormLabel>
-                        <Input placeholder="Item name" onChange={onChangeName} value={product.name}/>
+                        <FormLabel>{t("Item name")}</FormLabel>
+                        <Input placeholder={t("Item name")} onChange={onChangeName} value={product.name}/>
                     </FormControl>
                     <FormControl mt={4}>
-                        <FormLabel>Description</FormLabel>
-                        <Input placeholder="Description" onChange={onChangeDesc} value={product.desc}/>
+                        <FormLabel>{t("Description")}</FormLabel>
+                        <Input placeholder={t("Description")} onChange={onChangeDesc} value={product.desc}/>
                     </FormControl>
                     <FormControl mt={4}>
                         <FormLabel>Price
@@ -153,18 +156,18 @@ const AddProduct = props => {
                                     <IconButton icon={<InfoIcon />} size="xs"/>
                                 </PopoverTrigger>
                                 <PopoverContent>
-                                    <Text>Use a point for floating point numbers</Text>
+                                    <Text>{t("Use a point for floating point numbers")}</Text>
                                 </PopoverContent>
                             </Popover>
                         </FormLabel>
                         <HStack>
                             <Input min={0} type="number" step={0.01} placeholder="per Hour" onChange={onChangeHourPrice} value={product.prices.perHour}/>
-                            <Text>€/hour</Text>
+                            <Text>{t("€/hour")}</Text>
                             <Input min={0} type="number" step={0.01} placeholder="per Day" onChange={onChangeDayPrice} value={product.prices.perDay}/>
-                            <Text>€/day</Text>
+                            <Text>{t("€/day")}</Text>
                         </HStack>
                     </FormControl>
-                    <Text mt={5}>Address</Text>
+                    <Text mt={5}>{t("Address")}</Text>
                     <FormControl mt={4}>
                         <Input placeholder="Street and house number" onChange={onChangeStreetWithNr} value={product.address.streetWithNr}/>
                     </FormControl>
@@ -185,7 +188,7 @@ const AddProduct = props => {
                                     <IconButton icon={<InfoIcon />} size="xs"/>
                                 </PopoverTrigger>
                                 <PopoverContent>
-                                    <Text>Leave empty to keep current images, or upload all new images.</Text>
+                                    <Text>{t("Leave empty to keep current images, or upload all new images.")}</Text>
                                 </PopoverContent>
                             </Popover>
                         </FormLabel>
@@ -195,7 +198,7 @@ const AddProduct = props => {
                 <ModalFooter>
                     <Center w="100%">
                         <Button onClick={saveProduct} colorScheme="green" w="100%">
-                            Submit
+                            {t("Submit")}
                         </Button>
                     </Center>
                 </ModalFooter>

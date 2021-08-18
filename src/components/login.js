@@ -1,11 +1,14 @@
 import React, {useRef, useState} from 'react';
-// import { Button, Card, Form, Container, Alert } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { useTranslation } from 'react-i18next';
+
 import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
 import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, Text, HStack } from '@chakra-ui/react';
 
+
 export default function Login() {
+    const {t, i18n} = useTranslation();
+
     const emailRef = useRef();
     const passwordRef = useRef();
     const {login} = useAuth();
@@ -48,7 +51,7 @@ export default function Login() {
                 border="1px"
                 borderColor="gray.400"
                 >
-                <Heading size="lg">Log In</Heading>
+                <Heading size="lg">{t("Log In")}</Heading>
                 {error && <Alert status="error">
                     <AlertIcon />
                     {error}
@@ -76,7 +79,7 @@ export default function Login() {
                     onClick={handleSubmit}
                     disabled={loading}
                 >
-                    Login
+                    {t("Login")}
                 </Button>
                 <Box>
                     <Link to="forgot-password">Forgot password?</Link>
@@ -86,7 +89,7 @@ export default function Login() {
             <HStack>
                 <Text>New to us?{" "}</Text>
                 <Link to="/signup">
-                    <Text fontWeight="bold" color="blue.600">Sign Up</Text>
+                    <Text fontWeight="bold" color="blue.600">{t("Sign Up")}</Text>
                 </Link>
             </HStack>
         </Stack>

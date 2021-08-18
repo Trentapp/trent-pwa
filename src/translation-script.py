@@ -32,7 +32,8 @@ for filename in files:
             if text != "":
                 obj[filename][text] = text.replace("{", "{{").replace("}", "}}")
 
-for filename, dic in [("Profile", obj["Profile"])]: #obj.items():
+#problem: the strings may not be unique and may be substrings of other parts of the page that should not be changed (e.g. Send also makes replace onSendMessage)
+for filename, dic in obj.items(): #[("Profile", obj["Profile"])]: 
     f = ""
     with open(prefix+filename+suffix, "r+") as file:
         f = file.read()
@@ -47,13 +48,13 @@ for filename, dic in [("Profile", obj["Profile"])]: #obj.items():
             #     attach = ", {" + attach[:-2] + "}"
             print(key)
             f = re.sub(key, '{t("'+key+'"'+attach+')}', f)
-    print(f)
-    # with open(prefix+filename+suffix, "w") as file:
-    #     file.write(f)
+    # print(f)
+    with open(prefix+filename+suffix, "w") as file:
+        file.write(f)
 
-print(json.dumps(obj, indent=4))
-# with open("../public/locales/en/translation2.json", "w") as file:
-#    file.write(json.dumps(obj, indent=4))
+# print(json.dumps(obj, indent=4))
+with open("../public/locales/en/translation2.json", "w") as file:
+   file.write(json.dumps(obj, indent=4))
         
 
 

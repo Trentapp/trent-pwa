@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from "react-router-dom";
 import StarRatings from "react-star-ratings";
+import { useTranslation } from 'react-i18next';
 
 import UserDataService from "../services/user-data";
 import ReviewDataService from "../services/reviews-data";
@@ -13,6 +14,8 @@ import ProductCard from './ProductCard';
 import { EditIcon } from '@chakra-ui/icons';
 
 const Profile = props => {
+    const {t, i18n} = useTranslation();
+
     const initialUserState = {name: "", mail: "", inventory: []}; //later probably replace mail with email
     const [profileUser, setProfileUser] = useState(initialUserState);
     const [showAddProduct, setShowAddProduct] = useState(false);
@@ -79,12 +82,12 @@ const Profile = props => {
                             </HStack>
                         </Box>
                         {profileUser._id === props.user._id && <Link to="/account-settings"><IconButton icon={<EditIcon/>} /></Link>}
-                        {/* {profileUser._id === props.user._id && <Button>Upload profile picture</Button>} */}
+                        {/* {profileUser._id === props.user._id && <Button>{t("Upload profile picture")}</Button>} */}
                         {/*later add description (about me): <Text></Text> */}
                     </VStack>
                     <VStack minW={["250px", "400px"]} pb={3}>
                         <Box w="100%" paddingBottom={3}>
-                            <Center><Heading size="lg">Inventory of {profileUser.name}</Heading></Center>
+                            <Center><Heading size="lg">{t("Inventory of ")}{profileUser.name}</Heading></Center>
                             <Divider color="gray.500" />
                         </Box>
                         {profileUser._id === props.user._id && 
@@ -110,4 +113,4 @@ const Profile = props => {
 
 export default Profile;
 
-// todo: map reviews: {reviews.length > 0 ? reviews.map(review => <Review review={review} user={props.user} key={review._id}/>) : <p>This user has not received any reviews yet.</p>}
+// todo: map reviews: {reviews.length > 0 ? reviews.map(review => <Review review={review} user={props.user} key={review._id}/>) : <p>{t("This user has not received any reviews yet.")}</p>}

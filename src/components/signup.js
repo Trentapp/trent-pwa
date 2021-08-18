@@ -4,11 +4,13 @@ import React, {useRef, useState} from 'react';
 import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
 import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, Text } from '@chakra-ui/react';
-
+import { useTranslation } from 'react-i18next';
 
 import UserDataService from "../services/user-data";
 
 export default function SignUp() {
+    const {t, i18n} = useTranslation();
+
     const firstNameRef = useRef();
     const lastNameRef = useRef();
     const emailRef = useRef();
@@ -63,7 +65,7 @@ export default function SignUp() {
                 border="1px"
                 borderColor="gray.400"
                 >
-                <Heading size="lg">Sign Up</Heading>
+                <Heading size="lg">{t("Sign Up")}</Heading>
                 {error && <Alert status="error">
                     <AlertIcon />
                     {error}
@@ -109,14 +111,14 @@ export default function SignUp() {
                     onClick={handleSubmit}
                     disabled={loading}
                 >
-                    Sign Up
+                    {t("Sign Up")}
                 </Button>
                 </Stack>
             </Box>
             <HStack>
                 <Text>Already have an account?{" "}</Text>
                 <Link to="/login">
-                    <Text fontWeight="bold" color="blue.600">Log In</Text>
+                    <Text fontWeight="bold" color="blue.600">{t("Log In")}</Text>
                 </Link>
             </HStack>
         </Stack>

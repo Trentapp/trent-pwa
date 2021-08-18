@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef} from "react";
 import qs from "qs";
 import dotenv from "dotenv";
+import { useTranslation } from 'react-i18next';
 
 import ProductDataService from "../services/product-data";
 import { ProductCard2 } from "./ProductCard";
@@ -15,7 +16,9 @@ const locationHD = {
 };
 
 const ProductsList = props => {
-    const calcMaxDist = (zoom) => window.innerHeight*0.001*2**(16-zoom);
+  const {t, i18n} = useTranslation();
+
+  const calcMaxDist = (zoom) => window.innerHeight*0.001*2**(16-zoom);
 
     const [products, setProducts] = useState([]);
     const initialZoom = 14
@@ -75,7 +78,7 @@ const ProductsList = props => {
               </Box>
               <Box  w={{base: "100%", md: "50%"}}>
                 <VStack divider={<StackDivider borderColor="gray.200" />}>
-                  {products?.length ? products.map((product) => <ProductCard2 product={product} setEnhanced={setEnhanced}/>) : <Text marginTop={3} fontSize="lg">No items found</Text>} {/* try similar products or increase search area (?) */}
+                  {products?.length ? products.map((product) => <ProductCard2 product={product} setEnhanced={setEnhanced}/>) : <Text marginTop={3} fontSize="lg">{t("No items found")}</Text>} {/* try similar products or increase search area (?) */}
                 </VStack>
               </Box>
             </Stack>

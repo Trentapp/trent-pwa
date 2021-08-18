@@ -3,8 +3,11 @@ import { Button, Card, Form, Container, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useAuth} from "../context/AuthContext";
 import {Link} from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 export default function ForgotPassword() {
+    const {t, i18n} = useTranslation();
+
     const emailRef = useRef();
     const {resetPassword} = useAuth();
     const [error, setError] = useState("");
@@ -43,12 +46,12 @@ export default function ForgotPassword() {
                             </Button>
                         </Form>
                         <div className="w-100 text-center mt-3">
-                            <Link to="login">Login</Link>
+                            <Link to="login">{t("Login")}</Link>
                         </div>
                     </Card.Body>
                 </Card>
                 <div className="w-100 text-center mt-2">
-                    No account yet? <Link to="/signup">Sign Up</Link> 
+                    No account yet? <Link to="/signup">{t("Sign Up")}</Link> 
                 </div>  
             </div>
         </Container>
