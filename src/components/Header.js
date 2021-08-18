@@ -18,7 +18,6 @@ import {
 } from "@chakra-ui/react";
 import { Search2Icon, ChevronDownIcon } from "@chakra-ui/icons";
 import { useTranslation } from 'react-i18next';
-import '../i18n';
 
 import {LogoSmall} from "./landing-page";
 
@@ -63,10 +62,10 @@ export default function Header (props) {
                 </HStack>
               </MenuButton>
               <MenuList>
-                <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/profile/${props.user._id}`}><MenuItem>Your Profile</MenuItem></Link>
-                <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/account-settings"><MenuItem>Account Settings</MenuItem></Link>
-                <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/chats"><MenuItem>Chats</MenuItem></Link>
-                <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/transactions"><MenuItem>Transactions</MenuItem></Link>
+                <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/profile/${props.user._id}`}><MenuItem>{t("header.dropmenu.a")}</MenuItem></Link>
+                <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/account-settings"><MenuItem>{t("header.dropmenu.b")}</MenuItem></Link>
+                <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/chats"><MenuItem>{t("header.dropmenu.c")}</MenuItem></Link>
+                <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/transactions"><MenuItem>{t("header.dropmenu.d")}</MenuItem></Link>
                 <MenuItem>
                   <Button w="100%" style={{ color: 'inherit', textDecoration: 'none' }} variant="link" onClick={props.handleLogout}>
                     <Box w="100%" textAlign="left">Log Out</Box>
