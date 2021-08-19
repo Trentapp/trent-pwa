@@ -1,6 +1,7 @@
 import { Avatar, Box, Button, Container, Heading, HStack, Input, Flex, Text, VStack, Divider } from "@chakra-ui/react";
 import React, {useState, useEffect, useRef} from "react";
 import {useHistory} from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 import ChatDataService from "../services/chat-data";
 
@@ -30,6 +31,8 @@ const Message = props => {
 }
 
 const Chat = props => {
+    const {t} = useTranslation();
+
     const [chat, setChat] = useState({product: ""});
     const [otherUser, setOtherUser] = useState([]);
     const messageRef = useRef();
@@ -66,7 +69,7 @@ const Chat = props => {
         <Container mawW="container.xl">
             <Box marginTop={4} borderRadius="xl" border="1px" p={4} borderColor="gray.300">
                 <VStack>
-                    <Heading size="lg">Chat with {otherUser.name} about {chat.product.name}</Heading>
+                    <Heading size="lg">{t("chat.Chat with ")}{otherUser.name}{t("chat. about ")}{chat.product.name}</Heading>
                     <Divider color="gray.400" />
                     <Box w="100%">
                         <VStack spacing={4}>
@@ -75,7 +78,7 @@ const Chat = props => {
                     </Box>
                     <HStack marginTop={4} w="100%">
                         <Input borderColor="gray.400" type="text" ref={messageRef} />
-                        <Button onClick={onSendMessage}>Send</Button>
+                        <Button onClick={onSendMessage}>{t("chat.Send")}</Button>
                     </HStack>
                 </VStack>
             </Box>
@@ -85,12 +88,3 @@ const Chat = props => {
 
 export default Chat;
 
-
-    // <>
-    //     <h2>Chat with {otherUser.name} because of product {chat.product.name}</h2>
-    //     {chat.messages && chat.messages.map(message => <Message user={props.user} message={message} key={message._id}/>)}
-    //     <div className="col-lg-6 offset-3">
-    //         <input type="text" ref={messageRef} />
-    //         <Button onClick={onSendMessage}>Send</Button>
-    //     </div>
-    // </>

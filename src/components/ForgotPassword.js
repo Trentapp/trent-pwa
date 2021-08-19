@@ -1,10 +1,12 @@
 import React, {useRef, useState} from 'react';
-import { Button, Card, Form, Container, Alert } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Button, Box, Stack, Heading, FormControl, InputGroup , Input, Text, HStack, Alert, AlertIcon} from '@chakra-ui/react';
 import {useAuth} from "../context/AuthContext";
 import {Link} from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 export default function ForgotPassword() {
+    const {t} = useTranslation();
+
     const emailRef = useRef();
     const {resetPassword} = useAuth();
     const [error, setError] = useState("");
@@ -26,32 +28,65 @@ export default function ForgotPassword() {
     }
 
     return(
-        <Container className="d-flex align-items-center justify-content-center" style={{minHeight: "100vh"}}>
-            <div className="w-100" style={{maxWidth: "400px"}}>
-                <Card>
-                    <Card.Body>
-                        <h2 className="text-center mb-4">Password Reset</h2>
-                        {error && <Alert variant="danger">{error}</Alert>}
-                        {message && <Alert variant="success">{message}</Alert>}
-                        <Form onSubmit={handleSubmit}>
-                            <Form.Group id="email">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control type="email" ref={emailRef} required />
-                            </Form.Group>
-                            <Button disabled={loading} className="w-100 mt-3" type="submit">
-                                Reset Password
-                            </Button>
-                        </Form>
-                        <div className="w-100 text-center mt-3">
-                            <Link to="login">Login</Link>
-                        </div>
-                    </Card.Body>
-                </Card>
-                <div className="w-100 text-center mt-2">
-                    No account yet? <Link to="/signup">Sign Up</Link> 
-                </div>  
-            </div>
-        </Container>
+        <Box
+        alignItems="center"
+        paddingTop={{base: "30px", md: "100px", lg: "150px"}}
+    >
+        <Stack
+            flexDir="column"
+            mb="2"
+            justifyContent="center"
+            alignItems="center"
+            textAlign="center"
+        >
+            <Box minW={{ base: "300px", md: "468px" }} maxW="520px">
+                <Stack
+                spacing={4}
+                p="1rem"
+                backgroundColor="whiteAlpha.900"
+                borderRadius="xl"
+                boxShadow="md"
+                border="1px"
+                borderColor="gray.400"
+                >
+                <Heading size="lg">{t("Reset Password")}</Heading>
+                {error && <Alert status="error">
+                    <AlertIcon />
+                    {error}
+                </Alert>}
+                {message && <Alert status="success">
+                    <AlertIcon />
+                    {message}
+                </Alert>}
+                <FormControl>
+                    <InputGroup>
+                    <Input type="email" placeholder={t("login-placeholders.email address")} ref={emailRef} />
+                    </InputGroup>
+                </FormControl>
+                <Button
+                    borderRadius={0}
+                    type="submit"
+                    variant="solid"
+                    colorScheme="teal"
+                    width="full"
+                    onClick={handleSubmit}
+                    disabled={loading}
+                >
+                    {t("Reset Password")}
+                </Button>
+                <Box>
+                    <Link to="/login"><Text fontWeight="bold" color="blue.600">{t("login.Log In")}</Text></Link>
+                </Box>
+                </Stack>
+            </Box>
+            <HStack>
+                <Text>{t("login.New to us? ")}</Text>
+                <Link to="/signup">
+                    <Text fontWeight="bold" color="blue.600">{t("login.Sign Up")}</Text>
+                </Link>
+            </HStack>
+        </Stack>
+    </Box>
     );
 }
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route, useHistory, useLocation } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/styles.css";
 import { Box } from "@chakra-ui/react";
 
@@ -30,6 +29,7 @@ import ChatsList from "./components/ChatsList";
 import TransactionList from "./components/TransactionList";
 
 function App() {
+
   const { currentUser, logout } = useAuth();
   const history = useHistory();
   const [user, setUser] = useState({ name: "", address: { street: "", houseNumber: "", zipcode: "", city: "", country: "" } });

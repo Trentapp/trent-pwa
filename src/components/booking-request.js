@@ -15,9 +15,9 @@ const BookingRequest = props => {
                 <Modal.Title>Booking Request</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p>Specify time to borrow here</p>
+                <p>{t("booking-request.Specify time to borrow here")}</p>
                 <div className="col-md-6 mb-3">
-                    <label>Start time: </label>
+                    <label>{t("booking-request.Start time: ")}</label>
                     <DatePicker selected={props.startDate}
                         onChange={props.onChangeStartDate}
                         minDate={new Date()}
@@ -25,7 +25,7 @@ const BookingRequest = props => {
                         dateFormat="MMMM d, yyyy h:mm aa"/> {/*Note: later we can easily add exclude_times and exclude_dates for times-available*/}
                 </div>
                 <div className="col-md-6 mb-3">
-                    <label>End time: </label>
+                    <label>{t("booking-request.End time: ")}</label>
                     <DatePicker selected={props.endDate}
                         onChange={props.onChangeEndDate}
                         minDate={new Date()}
@@ -35,10 +35,10 @@ const BookingRequest = props => {
                 {/*change price: so that it does not get 0 if pricePerHour is 0*/}
                 <br/>
                 <p><b>Preis: {props.product.prices.perHour ? Math.min(Math.ceil((props.endDate - props.startDate)/(1000*60*60*24)) * props.product.prices.perDay, Math.ceil((props.endDate - props.startDate)/(1000*60*60)) * props.product.prices.perHour) : Math.ceil((props.endDate - props.startDate)/(1000*60*60*24)) * props.product.prices.perDay}€</b></p>
-                <b>Achtung: Die Option für Online-Payment ist noch nicht vorhanden, kommt aber bald. Mit dem Click auf Send Request stimmen sie zu den angezeigten Preis an <em>{props.product.user.name}</em> zu zahlen. Standardmäßig mit Bar. (Sie können die Transaktion vor dem Termin noch abbrechen)</b>
+                <b>Achtung: Die Option für Online-Payment ist noch nicht vorhanden, kommt aber bald. Mit dem Click auf {t("booking-request.Send Request")} stimmen sie zu den angezeigten Preis an <em>{props.product.user.name}</em> zu zahlen. Standardmäßig mit Bar. (Sie können die Transaktion vor dem Termin noch abbrechen)</b>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={props.onSendRequest}>Send Request</Button>
+                <Button onClick={props.onSendRequest}>{t("booking-request.Send Request")}</Button>
             </Modal.Footer>
         </Modal>
     )

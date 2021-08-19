@@ -1,11 +1,14 @@
 import React, {useRef, useState} from 'react';
-// import { Button, Card, Form, Container, Alert } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { useTranslation } from 'react-i18next';
+
 import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
 import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, Text, HStack } from '@chakra-ui/react';
 
+
 export default function Login() {
+    const {t} = useTranslation();
+
     const emailRef = useRef();
     const passwordRef = useRef();
     const {login} = useAuth();
@@ -48,21 +51,21 @@ export default function Login() {
                 border="1px"
                 borderColor="gray.400"
                 >
-                <Heading size="lg">Log In</Heading>
+                <Heading size="lg">{t("login.Log In")}</Heading>
                 {error && <Alert status="error">
                     <AlertIcon />
                     {error}
                 </Alert>}
                 <FormControl>
                     <InputGroup>
-                    <Input type="email" placeholder="email address" ref={emailRef} />
+                    <Input type="email" placeholder={t("login-placeholders.email address")} ref={emailRef} />
                     </InputGroup>
                 </FormControl>
                 <FormControl>
                     <InputGroup>
                     <Input
                         type="password"
-                        placeholder="password"
+                        placeholder={t("login-placeholders.password")}
                         ref={passwordRef}
                     />
                     </InputGroup>
@@ -76,52 +79,21 @@ export default function Login() {
                     onClick={handleSubmit}
                     disabled={loading}
                 >
-                    Login
+                    {t("login.Login")}
                 </Button>
                 <Box>
-                    <Link to="forgot-password">Forgot password?</Link>
+                    <Link to="/forgot-password"><Text color="blue.600">{t("login.Forgot Password?")}</Text></Link>
                 </Box>
                 </Stack>
             </Box>
             <HStack>
-                <Text>New to us?{" "}</Text>
+                <Text>{t("login.New to us? ")}</Text>
                 <Link to="/signup">
-                    <Text fontWeight="bold" color="blue.600">Sign Up</Text>
+                    <Text fontWeight="bold" color="blue.600">{t("login.Sign Up")}</Text>
                 </Link>
             </HStack>
         </Stack>
     </Box>
     );
 }
-
-
-// <Container className="d-flex align-items-center justify-content-center" style={{minHeight: "100vh"}}>
-        //     <div className="w-100" style={{maxWidth: "400px"}}>
-        //         <Card>
-        //             <Card.Body>
-        //                 <h2 className="text-center mb-4">Log In</h2>
-        //                 {error && <Alert variant="danger">{error}</Alert>}
-        //                 <Form onSubmit={handleSubmit}>
-        //                     <Form.Group id="email">
-        //                         <Form.Label>Email</Form.Label>
-        //                         <Form.Control type="email" ref={emailRef} required />
-        //                     </Form.Group>
-        //                     <Form.Group id="password">
-        //                         <Form.Label>Password</Form.Label>
-        //                         <Form.Control type="password" ref={passwordRef} required />
-        //                     </Form.Group>
-        //                     <Button disabled={loading} className="w-100 mt-3" type="submit">
-        //                         Log In
-        //                     </Button>
-        //                 </Form>
-        //                 <div className="w-100 text-center mt-3">
-        //                     <Link to="forgot-password">Forgot password?</Link>
-        //                 </div>
-        //             </Card.Body>
-        //         </Card>
-        //         <div className="w-100 text-center mt-2">
-        //             No account yet? <Link to="/signup">Sign Up</Link> 
-        //         </div>  
-        //     </div>
-        // </Container>
 

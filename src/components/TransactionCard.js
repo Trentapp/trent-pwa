@@ -1,10 +1,13 @@
 import { VStack, Text, IconButton, Box, HStack, Center, Avatar, Tooltip } from '@chakra-ui/react'
 import React from 'react'
 import { CheckIcon, QuestionIcon, CloseIcon } from '@chakra-ui/icons'
+import { useTranslation } from 'react-i18next';
 
 import TransactionDataService from "../services/transaction-data";
 
 export default function TransactionCard(props) {
+    const {t} = useTranslation();
+
     const onCancelRequest = async () => {
         try {
             await TransactionDataService.setTransactionStatus(props.transaction._id, props.user.uid, 1);
@@ -43,7 +46,7 @@ export default function TransactionCard(props) {
                 </Center>
                 <VStack>
                     <Text fontWeight="bold">
-                        {props.transaction.borrower.name} borrowing {props.transaction.product?.name}
+                        {props.transaction.borrower.name}{t("TransactionCard. borrowing ")}{props.transaction.product?.name}{t("TransactionCard. from ")}{props.transaction.lender.name}
                     </Text>
                     <Text color="gray.500"> {/* attention: currently only german date format */}
                         {(new Date(props.transaction.startDate)).toLocaleString("de")} - {(new Date(props.transaction.endDate)).toLocaleString("de")}

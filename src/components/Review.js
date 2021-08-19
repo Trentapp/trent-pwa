@@ -31,7 +31,7 @@ const Review = props => {
                     <StarRatings rating={props.review.stars} starRatedColor="rgb(250,200,30)" starDimension="28px" />
                     <h3>{props.review.title}</h3>
                     {props.review.comment && <p>{props.review.comment}</p>}
-                    <span>Posted by {props.review.poster.name}</span>
+                    <span>{t("Review.Posted by ")}{props.review.poster.name}</span>
                     {props.user._id === props.review.poster._id && (<>
                         <br/><br/>
                         <button type="button" className="btn btn-primary" onClick={onEdit}>Edit Review</button><br/><br/>

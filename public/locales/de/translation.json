@@ -1,0 +1,174 @@
+{
+    "header": {
+        "search": "Suche Gegenstände",
+        "dropmenu": {
+            "a": "Dein Profil",
+            "b": "Account Einstellungen",
+            "c": "Chats",
+            "d": "Transaktionen"
+        },
+        "Log In": "Einloggen",
+        "Sign Up": "Registrieren",
+        "Sign In": "Anmelden",
+        "Log Out": "Ausloggen"
+    },
+    "account-settings": {
+        "delete": {
+            "certain": "Sicher, dass du diesen Account löschen möchtest?"
+        },
+        "error": {
+            "passw-match": "Passwörter sind nicht gleich",
+            "general": "Konnte Profil nicht Updaten. Bei Problemen kontaktiere bitte support@trentapp.com"
+        },
+        "heading": "Account Einstellungen",
+        "mail": "Deine Email: {{mail}}",
+        "firstname": "Vorname",
+        "lastname": "Nachname",
+        "new-pw": "Neues Passwort",
+        "confirm-pw": "Neues Password bestätigen",
+        "leave-empty": "Leer lassen um Passwort gleich zu lassen",
+        "upload-prof-pic": "Profilbild hochladen",
+        "update": "Profil updaten",
+        "Delete Account": "Account löschen"
+    },
+    "address": {
+        "head": "Adresse",
+        "street": "Straße und Hausnummer",
+        "zip": "Postleitzahl",
+        "city": "Stadt",
+        "country": "Land"
+    },
+    "product": {
+        "{product.name}": "{product.name}",
+        "{product.prices.perHour}\u20ac/hour ": "{product.prices.perHour}\u20ac/Stunde ",
+        "{product.prices.perDay}\u20ac/day ": "{product.prices.perDay}\u20ac/Tag ",
+        "free": "konstenlos",
+        "{product.prices.perWeek}\u20ac/week ": "{product.prices.perWeek}\u20ac/Woche ",
+        "{product.prices.perMonth}\u20ac/month ": "{product.prices.perMonth}\u20ac/Monat ",
+        "Description": "Beschreibung",
+        "{product.desc}": "{product.desc}",
+        "Send Message": "Nachricht schreiben"
+    },
+    "add-product": {
+        "Update Product": "Produkt aktualisieren",
+        "Add a new product": "F\u00fcge ein neues Produkt hinzu",
+        "Item name": "Gegenstand",
+        "Description": "Beschreibung",
+        "Use a point for floating point numbers": "Verwende einen Punkt f\u00fcr Flie\u00dfkommazahlen",
+        "\u20ac/hour": "\u20ac/Stunde",
+        "\u20ac/day": "\u20ac/Tag",
+        "Address": "Adresse",
+        "Leave empty to keep current images, or upload all new images.": "Leer lassen, um aktuelle Bilder zu halten, oder alle neuen Bilder hochladen. Beim hochladen neuer Bilder werden alte Bilder gelöscht.",
+        "Upload Pictures": "Bilder hochladen",
+        "Submit": "Speichern"
+    },
+    "add-review": {},
+    "ask-question": {
+        "Send Message to ": "Semde Nachricht an ",
+        "Send": "Senden"
+    },
+    "booking-request": {
+        "_comment": "deprecated and not used anymore",
+        "Specify time to borrow here": "Geben Sie die Zeit an, um sich hier auszutauschen",
+        "Start time: ": "Startzeit:",
+        "End time: ": "Endzeit: ",
+        "Send Request": "Anfrage senden"
+    },
+    "BookingCard": {
+        "Choose time to borrow": "W\u00e4hle wann du es leihen willst"
+    },
+    "chat": {
+        "Chat with ": "Chat mit ",
+        " about ": " über ",
+        "Send": "Senden"
+    },
+    "ChatsList": {
+        "Your Chats": "Deine Chats",
+        " lending ": " verleiht ",
+        " borrowing your ": " leiht dein(e) "
+    },
+    "dashboard": {
+        "Overview": "Überblick",
+        "Your Profile": "Dein Profil",
+        "Chats": "Chats",
+        "Transactions": "Transaktionen",
+        " lending ": " verleiht ",
+        " borrowing your ": " leiht dein(e) ",
+        "New Requests": "Neue Anfragen",
+        "Upcoming transactions": "Bevorstehende Transaktionen"
+    },
+    "footer": {
+        "Home": "Home",
+        "Dashboard": "Dashboard",
+        "AGB": "AGB",
+        "Impressum": "Impressum",
+        "Datenschutz": "Datenschutz",
+        "\u00dcber uns": "\u00dcber uns"
+    },
+    "ForgotPassword": {
+        "Login": "Einloggen",
+        "Sign Up": "Registrieren"
+    },
+    "login": {
+        "Log In": "Einloggen",
+        "Login": "Einloggen",
+        "Sign Up": "Registrieren",
+        "Forgot Password?": "Passwort vergessen?",
+        "New to us? ": "Noch keinen Account? "
+    },
+    "NotFound": {
+        "404": "404",
+        "Not found": "Nicht gefunden"
+    },
+    "ProductCard": {
+        "\u20ac/day": "\u20ac/Tag"
+    },
+    "products-list": {
+        "No items found": "Keine Elemente gefunden"
+    },
+    "Profile": {
+        "Upload profile picture": "Profilbild hochladen",
+        "Inventory of ": "Gegenstände von ",
+        "This user has not received any reviews yet.": "Dieser Benutzer hat noch keine Bewertungen erhalten.",
+        "Add new item": "Gegenstand hinzufügen"
+    },
+    "profileCard": {},
+    "Review": {
+        "Posted by ": "Geschrieben von "
+    },
+    "signup": {
+        "Sign Up": "Registrieren",
+        "Log In": "Einloggen",
+        "By signing up you agree to our ": "Durch das Registrieren stimmst du unseren ",
+        "Terms and Conditions": "Allgemeinen Nutzungsbedinungen",
+        "T&Cend": "zu",
+        "Already have an account? ": "Schon registriert? "
+    },
+    "TransactionCard": {
+        " borrowing ": " leiht ",
+        " from ": " von "
+    },
+    "TransactionList": {
+        "Your transactions": "Deine Transaktionen"
+    },
+    "login-placeholders": {
+        "email address": "Email",
+        "password": "Passwort"
+    },
+    "signup-placeholders": {
+        "First name": "Vorname",
+        "Last name": "Nachname",
+        "email address": "Email",
+        "password": "Passwort",
+        "confirm password": "Passwort bestätigen"
+    },
+    "add-product-placeholders": {
+        "per Hour": "pro Stunde",
+        "per Day": "pro Tag",
+        "Street and house number": "Straße und Hausnummer",
+        "Zipcode": "Postleitzahl",
+        "City": "Stadt",
+        "Country": "Land"
+    },
+    "Reset Password": "Passwort zurücksetzen"
+}

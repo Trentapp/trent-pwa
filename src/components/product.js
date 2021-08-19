@@ -2,17 +2,19 @@ import React, {useState, useEffect, useRef} from "react";
 import {useHistory} from "react-router-dom";
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
+import { useTranslation } from "react-i18next";
 
 import ProductDataService from "../services/product-data";
 import ChatDataService from "../services/chat-data";
 import { Box, Container, Heading, HStack, Divider, VStack, Text, Button, Center, IconButton, Stack } from "@chakra-ui/react";
 import ProfileCard from "./profileCard";
-// import BookingCard from "./BookingCard";
+import BookingCard from "./BookingCard";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import AddProduct from "./add-product";
 import QuestionForm from "./ask-question";
 
 const Product = props => {
+    const {t} = useTranslation();
     const [product, setProduct] = useState({prices: {}, user: {}}); //maybe add better initial state, though currently the information is shown conditionally
     // const [error, setError] = useState(""); //can get rid of that if redirect works
     // const [showQuestionForm, setShowQuestionForm] = useState(false);
@@ -104,14 +106,16 @@ const Product = props => {
                             <HStack justify="space-between">
                                 <VStack align="left">
                                     <Heading>{product.name}</Heading>
-                                    {/* replace following with "free" if free, maybe make a button or so that shows that you make it free */}
-                                    <Text textAlign="left" fontWeight="bold" color="gray.500">{product.prices.perHour !== undefined && <>{product.prices.perHour}€/hour </>}{product.prices.perDay !== undefined && <>{product.prices.perDay}€/day </>}{product.prices.perWeek !== undefined && <>{product.prices.perWeek}€/week </>}{product.prices.perMonth !== undefined && <>{product.prices.perMonth}€/month </>}</Text>
+                                    {/* replace following with "{t("product.free")}" if {t("product.free")}, maybe make a button or so that shows that you make it {t("product.free")} */}
+                                    { (product.prices.perHour || product.prices.perDay) ? <Text textAlign="left" fontWeight="bold" color="gray.500">{product.prices.perHour !== undefined && product.prices.perHour !== 0 && <>{product.prices.perHour}€/hour </>}{product.prices.perDay !== undefined && product.prices.perDay !== 0 && <>{product.prices.perDay}€/day </>}</Text>
+                                        : <Text textAlign="left" fontWeight="bold" color="gray.500">{t("product.free")}</Text>}
+                                    {/*product.prices.perWeek !== undefined && <>{product.prices.perWeek}€/week </>}{product.prices.perMonth !== undefined && <>{product.prices.perMonth}€/month </>*/}
                                 </VStack>
                                 {product.user && <ProfileCard product={product} />}
                             </HStack>
                         </Box>
                         <Divider my={3} color="gray.300"/>
-                        <Heading as={"h5"} size="md">Description</Heading>
+                        <Heading as={"h5"} size="md">{t("product.Description")}</Heading>
                         <Text marginTop={2}>
                             {product.desc}
                         </Text>
@@ -120,8 +124,8 @@ const Product = props => {
                         {props.user._id !== product.user._id ? <>
                             <Center>
                                 <VStack spacing="20px">
-                                        {/* <BookingCard user={props.user} product={product} /> */}
-                                        <Button borderRadius="lg" width="100%" onClick={() => setShowSendMessage(true)}>Send Message</Button>
+                                        {process.env.REACT_APP_ENV === "dev" && <BookingCard user={props.user} product={product} />}
+                                        <Button borderRadius="lg" width="100%" onClick={() => setShowSendMessage(true)}>{t("product.Send Message")}</Button>
                                 </VStack>
                             </Center>
                             </> : 
@@ -141,111 +145,3 @@ const Product = props => {
 
 export default Product;
 
-// const ImageGrid = ({ photos, overallRating, ...props }: ImageGridProps) => {
-//     const [isCarouselOpen, setIsCarouselOpen] = useState(false);
-  
-//     const onClose = () => {
-//       setIsCarouselOpen(false);
-//     };
-  
-//     return (
-//       <>
-//         <CarouselModal isOpen={isCarouselOpen} onClose={onClose} />
-  
-//         <Grid
-//           templateColumns="repeat(6, 1fr)"
-//           templateRows="repeat(3, 1fr)"
-//           gap={2}
-//           pos="relative"
-//           borderRadius="xl"
-//           overflow="hidden"
-//           {...props}
-//         >
-//           <GridImage colSpan={4} rowSpan={3} photo={photos[0]}>
-//             <HStack pos="absolute" spacing={2} top={3} left={4}>
-//               <IconButtonOpaque
-//                 aria-label="Share listing"
-//                 icon={<Icon as={FiShare} boxSize={5} />}
-//               />
-//               <IconButtonOpaque
-//                 aria-label="Save listing"
-//                 icon={<Icon as={AiOutlineHeart} boxSize={5} />}
-//               />
-//             </HStack>
-  
-//             <ButtonOpaque
-//               pos="absolute"
-//               bottom={3}
-//               left={4}
-//               rightIcon={<Icon as={AiOutlineStar} boxSize={5} />}
-//             >
-//               {overallRating.toFixed(2)}
-//             </ButtonOpaque>
-//           </GridImage>
-  
-//           <GridImage colSpan={2} rowSpan={1} photo={photos[1]} />
-  
-//           {photos
-//             .slice(2, 6)
-//             .concat(Array(Math.abs(4 - photos.length) || 0).fill(null))
-//             .map((photo, idx) => (
-//               <GridImage key={photo?.id ?? idx} photo={photo} />
-//             ))}
-  
-//           <ButtonOpaque
-//             pos="absolute"
-//             bottom={3}
-//             right={4}
-//             leftIcon={<Icon as={HiOutlinePhotograph} boxSize={5} />}
-//             onClick={() => setIsCarouselOpen((prev) => !prev)}
-//           >
-//             {photos.length}
-//           </ButtonOpaque>
-//         </Grid>
-//       </>
-//     );
-//   };
-
-// const GridImage = props => {
-//     return (
-//       <GridItem overflow="hidden" {...props}>
-//         <Image src={`data:${picture.contentType};base64,${Buffer.from(picture.data.data).toString('base64')}`} />
-//       </GridItem>
-//     );
-// };
-
-/* <div>
-{error ? <h5>{error}</h5> : (
-<>
-    <QuestionForm user={props.user} onHide={onHideModal} show={showQuestionForm} onSendMessage={onSendMessage} messageRef={messageRef} />
-    <BookingRequest user={props.user} product={product} onHide={onHideModal} show={showReq} onSendRequest={onSendRequest} startDate={startDate} endDate={endDate} onChangeStartDate={onChangeStartDate} onChangeEndDate={onChangeEndDate}/>
-    <div className="mb-4">
-        <h2>{product.name}</h2>
-        <p><b>Price:</b> {product.prices.perDay}€/day {product.prices.perHour && <>or {product.prices.perHour}€/hour</>}</p>
-        <p><span>Description: </span>{product.desc}</p>
-        {product.pictures && <ImageGallery items={product.pictures.map(picture => {thumbnail})}/>}
-        {product.pictures && product.pictures.map(picture => <img height="300" width="auto" alt="" src={`data:image/png;base64,${picture.base64}`}/> )} 
-        <br/><br/>
-        <p>This product belongs to <Link to={`/profile/${product.user._id}`}>{product.user.name}</Link></p>
-        {props.user._id === product.user._id && (<>
-            <p><Link to={`/products/update/${product._id}`}>Edit product</Link></p>
-            <button type="button" className="btn btn-danger" onClick={deleteProduct}>Delete</button>
-        </>)}
-    </div>
-    <div className="mb-4">
-        {props.user._id !== product.user._id && props.user._id &&
-        <>
-        <div className="float-end">
-            <Button variant="primary" className="float-end" onClick={onRequestButtonClick}>Request product</Button>
-        </div>
-        <br/>
-        <br/>
-        <div className="float-end">
-            <Button variant="primary" className="float-end" onClick={onAskQuestionButtonClick}>Ask Question</Button>
-        </div>                    
-        <br/>
-        </>}
-    </div>
-</>
-)}
-</div> */

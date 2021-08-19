@@ -4,11 +4,13 @@ import React, {useRef, useState} from 'react';
 import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
 import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, Text } from '@chakra-ui/react';
-
+import { useTranslation } from 'react-i18next';
 
 import UserDataService from "../services/user-data";
 
 export default function SignUp() {
+    const {t} = useTranslation();
+
     const firstNameRef = useRef();
     const lastNameRef = useRef();
     const emailRef = useRef();
@@ -63,7 +65,7 @@ export default function SignUp() {
                 border="1px"
                 borderColor="gray.400"
                 >
-                <Heading size="lg">Sign Up</Heading>
+                <Heading size="lg">{t("signup.Sign Up")}</Heading>
                 {error && <Alert status="error">
                     <AlertIcon />
                     {error}
@@ -71,21 +73,21 @@ export default function SignUp() {
                 <FormControl>
                     <InputGroup>
                     <HStack>
-                        <Input placeholder="First name" ref={firstNameRef}/>
-                        <Input placeholder="Last name" ref={lastNameRef}/>
+                        <Input placeholder={t("signup-placeholders.First name")} ref={firstNameRef}/>
+                        <Input placeholder={t("signup-placeholders.Last name")} ref={lastNameRef}/>
                     </HStack>
                     </InputGroup>
                 </FormControl>
                 <FormControl>
                     <InputGroup>
-                    <Input type="email" placeholder="email address" ref={emailRef} />
+                    <Input type="email" placeholder={t("signup-placeholders.email address")} ref={emailRef} />
                     </InputGroup>
                 </FormControl>
                 <FormControl>
                     <InputGroup>
                     <Input
                         type="password"
-                        placeholder="password"
+                        placeholder={t("signup-placeholders.password")}
                         ref={passwordRef}
                     />
                     </InputGroup>
@@ -94,12 +96,12 @@ export default function SignUp() {
                     <InputGroup>
                     <Input
                         type="password"
-                        placeholder="confirm password"
+                        placeholder={t("signup-placeholders.confirm password")}
                         ref={passwordConfirmRef}
                     />
                     </InputGroup>
                 </FormControl>
-                <Text>By signing up you agree to our <a style={{color: "#2b6cb0"}} target="_blank" rel="noopener noreferrer" href="/AllgemeineNutzungsbedingungen.pdf">Terms and Conditions</a>.</Text>
+                <Text>{t("signup.By signing up you agree to our ")}<a style={{color: "#2b6cb0"}} target="_blank" rel="noopener noreferrer" href="/AllgemeineNutzungsbedingungen.pdf">{t("signup.Terms and Conditions")}</a> {t("signup.T&Cend")}.</Text>
                 <Button
                     borderRadius={0}
                     type="submit"
@@ -109,53 +111,17 @@ export default function SignUp() {
                     onClick={handleSubmit}
                     disabled={loading}
                 >
-                    Sign Up
+                    {t("signup.Sign Up")}
                 </Button>
                 </Stack>
             </Box>
             <HStack>
-                <Text>Already have an account?{" "}</Text>
+                <Text>{t("signup.Already have an account? ")}</Text>
                 <Link to="/login">
-                    <Text fontWeight="bold" color="blue.600">Log In</Text>
+                    <Text fontWeight="bold" color="blue.600">{t("signup.Log In")}</Text>
                 </Link>
             </HStack>
         </Stack>
     </Box>
     );
 }
-
-        // <Container className="d-flex align-items-center justify-content-center" style={{minHeight: "100vh"}}>
-        //     <div className="w-100" style={{maxWidth: "400px"}}>
-        //         <Card>
-        //             <Card.Body>
-        //                 <h2 className="text-center mb-4">Sign Up</h2>
-        //                 {error && <Alert variant="danger">{error}</Alert>}
-        //                 <Form onSubmit={handleSubmit}>
-        //                     <Form.Group id="name">
-        //                         <Form.Label>Full Name</Form.Label>
-        //                         <Form.Control type="text" ref={nameRef} required />
-        //                     </Form.Group>
-        //                     <Form.Group id="email">
-        //                         <Form.Label>Email</Form.Label>
-        //                         <Form.Control type="email" ref={emailRef} required />
-        //                     </Form.Group>
-        //                     <Form.Group id="password">
-        //                         <Form.Label>Password</Form.Label>
-        //                         <Form.Control type="password" ref={passwordRef} required />
-        //                     </Form.Group>
-        //                     <Form.Group id="password-confirm">
-        //                         <Form.Label>Confirm Password</Form.Label>
-        //                         <Form.Control type="password" ref={passwordConfirmRef} required />
-        //                     </Form.Group>
-        //                     <Button disabled={loading} className="w-100 mt-3" type="submit">
-        //                         Sign Up
-        //                     </Button>
-        //                 </Form>
-        //             </Card.Body>
-        //         </Card>
-        //         <div className="w-100 text-center mt-2">
-        //             Already have an account? <Link to="/login">Log In</Link>
-        //         </div>  
-        //     </div>
-        // </Container>
-

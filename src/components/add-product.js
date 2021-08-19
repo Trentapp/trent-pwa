@@ -2,6 +2,7 @@ import { InfoIcon } from "@chakra-ui/icons";
 import { Button, Center, FormControl, FormLabel, HStack, IconButton, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Popover, PopoverContent, PopoverTrigger, Text } from "@chakra-ui/react";
 import React, {useState, useEffect} from "react";
 import {useHistory} from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 import ProductDataService from "../services/product-data";
 
@@ -9,6 +10,8 @@ import ProductDataService from "../services/product-data";
 
 //later: make location of product the location of the user by default
 const AddProduct = props => { 
+    const {t} = useTranslation();
+
     const initialProductState = {
         name: "",
         desc: "",
@@ -111,6 +114,9 @@ const AddProduct = props => {
 
     const saveProduct = async () => {
         try {
+            if (product.prices.perDay < 0 || (product.prices.perDay*100)%1 !== 0 || product.prices.perHour < 0 || (product.prices.perHour*100)%1 !== 0) {
+                throw Error("no negative or non-integer cent prices allowed");
+            }
             const fd = fileUploadHandler();//hopefully I don't run into update problems
             const blob = new Blob([JSON.stringify({product: {...product, prices: {perDay: product.prices.perDay*100, perHour: product.prices.perHour*100}}, uid: props.user.uid})], {type: "application/json"});
             fd.append("product", blob);//probably change product to blob
@@ -124,7 +130,7 @@ const AddProduct = props => {
             }
         } catch(e) {
             console.log(`Error in saving new product: ${e}`);
-            alert("Failed to save product. Please check that you filled all required fields. If it still does not work, please contact us: support@trentapp.com");
+            alert("Failed to save product. Please check that you filled all required fields correctly. If it still does not work, please contact us: support@trentapp.com");
         }
     };
 
@@ -132,16 +138,16 @@ const AddProduct = props => {
         <Modal isOpen={props.isOpen} onClose={() => props.setIsOpen(false)} size="lg">
             <ModalOverlay />
             <ModalContent>
-                <ModalHeader>{props.product?._id ? <>Update Product</> : <>Add a new product</>}</ModalHeader>
+                <ModalHeader>{props.product?._id ? <>{t("add-product.Update Product")}</> : <>{t("add-product.Add a new product")}</>}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody pb={6}>
                     <FormControl>
-                        <FormLabel>Item name</FormLabel>
-                        <Input placeholder="Item name" onChange={onChangeName} value={product.name}/>
+                        <FormLabel>{t("add-product.Item name")}</FormLabel>
+                        <Input placeholder={t("add-product.Item name")} onChange={onChangeName} value={product.name}/>
                     </FormControl>
                     <FormControl mt={4}>
-                        <FormLabel>Description</FormLabel>
-                        <Input placeholder="Description" onChange={onChangeDesc} value={product.desc}/>
+                        <FormLabel>{t("add-product.Description")}</FormLabel>
+                        <Input placeholder={t("add-product.Description")} onChange={onChangeDesc} value={product.desc}/>
                     </FormControl>
                     <FormControl mt={4}>
                         <FormLabel>Price
@@ -150,37 +156,39 @@ const AddProduct = props => {
                                     <IconButton icon={<InfoIcon />} size="xs"/>
                                 </PopoverTrigger>
                                 <PopoverContent>
-                                    <Text>Use a point for floating point numbers</Text>
+                                    <Text>{t("add-product.Use a point for floating point numbers")}</Text>
                                 </PopoverContent>
                             </Popover>
                         </FormLabel>
                         <HStack>
-                            <Input type="number" step={0.01} placeholder="per Hour" onChange={onChangeHourPrice} value={product.prices.perHour}/>
-                            <Input type="number" step={0.01} placeholder="per Day" onChange={onChangeDayPrice} value={product.prices.perDay}/>
+                            <Input min={0} type="number" step={0.01} placeholder={t("add-product-placeholders.per Hour")} onChange={onChangeHourPrice} value={product.prices.perHour}/>
+                            <Text>{t("add-product.€/hour")}</Text>
+                            <Input min={0} type="number" step={0.01} placeholder={t("add-product-placeholders.per Day")} onChange={onChangeDayPrice} value={product.prices.perDay}/>
+                            <Text>{t("add-product.€/day")}</Text>
                         </HStack>
                     </FormControl>
-                    <Text mt={5}>Address</Text>
+                    <Text mt={5}>{t("add-product.Address")}</Text>
                     <FormControl mt={4}>
-                        <Input placeholder="Street and house number" onChange={onChangeStreetWithNr} value={product.address.streetWithNr}/>
+                        <Input placeholder={t("add-product-placeholders.Street and house number")} onChange={onChangeStreetWithNr} value={product.address.streetWithNr}/>
                     </FormControl>
                     <FormControl mt={4}>
                         <HStack>
-                            <Input placeholder="Zipcode" onChange={onChangeZipcode} value={product.address.zipcode}/>
-                            <Input placeholder="City" onChange={onChangeCity} value={product.address.city}/>
+                            <Input placeholder={t("add-product-placeholders.Zipcode")} onChange={onChangeZipcode} value={product.address.zipcode}/>
+                            <Input placeholder={t("add-product-placeholders.City")} onChange={onChangeCity} value={product.address.city}/>
                         </HStack>
                     </FormControl>
                     <FormControl mt={4}>
-                        <Input type="country" placeholder="Country" onChange={onChangeCountry} value={product.address.country}/>
+                        <Input type="country" placeholder={t("add-product-placeholders.Country")} onChange={onChangeCountry} value={product.address.country}/>
                     </FormControl>
                     <FormControl mt={4}>
                         <FormLabel htmlFor="files">
-                            Upload pictures{" "}
+                            {t("add-product.Upload Pictures")}
                             <Popover placement="right">
                                 <PopoverTrigger>
                                     <IconButton icon={<InfoIcon />} size="xs"/>
                                 </PopoverTrigger>
                                 <PopoverContent>
-                                    <Text>Leave empty to keep current images, or upload all new images.</Text>
+                                    <Text>{t("add-product.Leave empty to keep current images, or upload all new images.")}</Text>
                                 </PopoverContent>
                             </Popover>
                         </FormLabel>
@@ -190,10 +198,9 @@ const AddProduct = props => {
                 <ModalFooter>
                     <Center w="100%">
                         <Button onClick={saveProduct} colorScheme="green" w="100%">
-                            Submit
+                            {t("add-product.Submit")}
                         </Button>
                     </Center>
-                    {/* <Button onClick={() => props.setIsOpen(false)}>Cancel</Button> */}
                 </ModalFooter>
             </ModalContent>
         </Modal>

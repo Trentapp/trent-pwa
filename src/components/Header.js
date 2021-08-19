@@ -15,12 +15,18 @@ import {
   Text,
   Button,
   Center,
+  useMediaQuery
 } from "@chakra-ui/react";
 import { Search2Icon, ChevronDownIcon } from "@chakra-ui/icons";
+import { useTranslation } from 'react-i18next';
 
 import {LogoSmall} from "./landing-page";
 
 export default function Header (props) {
+  const {t} = useTranslation();
+
+  const [isLargerMd] = useMediaQuery("(min-width: 860px)")
+
   const searchRef = useRef();
   const history = useHistory();
 
@@ -30,15 +36,15 @@ export default function Header (props) {
 
   return (
     <Box h="75px">
-      <Box px={8} w="100%" bg="gray.900" as="nav" align="center" wrap="wrap" position="fixed" zIndex={999}>
+      <Box px={{base: 4, md: 8}} w="100%" bg="gray.900" as="nav" align="center" wrap="wrap" position="fixed" zIndex={999}>
         <HStack justify="space-between">
-          <HStack spacing={8} flex={1} h="75px">
+          <HStack spacing={{base: 4, md: 8}} flex={1} h="75px">
             <LogoSmall />
             <InputGroup size="sm" maxW="400px" bg="gray.100" borderRadius="lg">
               <Input
                 pr="4.5rem"
                 type="text"
-                placeholder="Search products"
+                placeholder={t("header.search")}
                 ref={searchRef}
                 onKeyDown={e => {if (e.key === "Enter") {onSearch()}}}
               />
@@ -59,22 +65,41 @@ export default function Header (props) {
                 </HStack>
               </MenuButton>
               <MenuList>
-                <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/profile/${props.user._id}`}><MenuItem>Your Profile</MenuItem></Link>
-                <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/account-settings"><MenuItem>Account Settings</MenuItem></Link>
-                <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/chats"><MenuItem>Chats</MenuItem></Link>
-                <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/transactions"><MenuItem>Transactions</MenuItem></Link>
+                <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/profile/${props.user._id}`}><MenuItem>{t("header.dropmenu.a")}</MenuItem></Link>
+                <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/account-settings"><MenuItem>{t("header.dropmenu.b")}</MenuItem></Link>
+                <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/chats"><MenuItem>{t("header.dropmenu.c")}</MenuItem></Link>
+                <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/transactions"><MenuItem>{t("header.dropmenu.d")}</MenuItem></Link>
                 <MenuItem>
                   <Button w="100%" style={{ color: 'inherit', textDecoration: 'none' }} variant="link" onClick={props.handleLogout}>
-                    <Box w="100%" textAlign="left">Log Out</Box>
+                    <Box w="100%" textAlign="left">{t("header.Log Out")}</Box>
                   </Button>
                 </MenuItem>
               </MenuList>
             </Menu>
             :
-            
-            <Link style={{ color: 'inherit', textDecoration: 'none' }} to={"/signup"}>
-              <Text color="white">Sign In</Text>
-            </Link>
+            <>{ isLargerMd ? <HStack spacing="20px">
+              <Link style={{ color: 'inherit', textDecoration: 'none' }} to={"/login"}>
+                <Text color="white">{t("header.Log In")}</Text>
+              </Link>
+              <Link style={{ color: 'inherit', textDecoration: 'none' }} to={"/signup"}>
+                <Text color="white">{t("header.Sign Up")}</Text>
+              </Link>
+            </HStack>
+            :
+            <Menu>
+              <MenuButton>
+                <Text color="white">{t("header.Sign In")}</Text>
+              </MenuButton>
+              <MenuList>
+                <Link style={{ color: 'inherit', textDecoration: 'none' }} to={"/login"}>
+                  <MenuItem>{t("header.Log In")}</MenuItem>
+                </Link>
+                <Link style={{ color: 'inherit', textDecoration: 'none' }} to={"/signup"}>
+                  <MenuItem>{t("header.Sign Up")}</MenuItem>
+                </Link>
+              </MenuList>
+            </Menu>
+            }</>
             }
           </Stack>
         </HStack>
@@ -82,71 +107,3 @@ export default function Header (props) {
     </Box>
   )
 }
-
-// import React from 'react';
-// import {Link} from "react-router-dom";
-// import {Button} from "react-bootstrap";
-
-//try to make a box around signup link
-// {/*<Box border="2px" borderRadius="lg" borderColor="white" w="100px" h="50px" justifyContent="flex-end" alignContent="flex-start">
-//                 <Link to={"/signup"}>
-//                   <Text color="white">Sign In</Text>
-//                 </Link>
-//             </Box>*/}
-
-
-// export default function OldHeader(props) {
-//     return (
-//         <nav className="navbar navbar-expand navbar-dark bg-dark">
-//         <Link to={"/"} className="navbar-brand" style={{marginLeft: "30px"}}>
-//           TRENT
-//         </Link>
-//         <div className="navbar-nav mr-auto">
-//           <li className="nav-item">
-//             <Link to={"/products"} className="nav-link">
-//               Search Products
-//             </Link>
-//           </li>
-//         </div>
-//         <div className="navbar-nav ml-auto"> {/*somehow not aligning to the right, but I will care for that later*/}
-//           {props.user._id ? (
-//             <>
-//               {/*<li className="nav-item">
-//                 <Link to={"/inventory"} className="nav-link">
-//                   Inventory
-//                 </Link>
-//               </li>*/}
-//               <li className="nav-item">
-//                 <Link to={"/products/create"} className="nav-link">
-//                   Add a product
-//                 </Link>
-//               </li>
-//               <li className="nav-item">
-//                 <Link to={`/profile/${props.user._id}`} className="nav-link">
-//                   Your Profile
-//                 </Link> {/* Somehow this does not align correctly, but I should not care about it now, because I will probably change it anyway*/}
-//               </li>
-//               <li className="nav-item">
-//                 <Button variant="link" className="nav-link" onClick={props.handleLogout}>
-//                   Log Out
-//                 </Button>
-//               </li>
-//             </>
-//           ) : (
-//             <>
-//               <li className="nav-item">
-//                 <Link to={"/signup"} className="nav-link">
-//                   Sign Up
-//                 </Link>
-//               </li>
-//               <li className="nav-item">
-//                 <Link to={"/login"} className="nav-link">
-//                   Log In
-//                 </Link>
-//               </li>
-//             </>
-//           )}
-//         </div>
-//       </nav>
-//     )
-// }

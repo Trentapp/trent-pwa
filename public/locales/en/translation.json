@@ -1,0 +1,177 @@
+{
+    "header": {
+        "search": "Search items",
+        "dropmenu": {
+            "a": "Your Profile",
+            "b": "Account Settings",
+            "c": "Chats",
+            "d": "Transactions"
+        },
+        "Log In": "Log In",
+        "Sign Up": "Sign Up",
+        "Sign In": "Anmelden",
+        "Log Out": "Log Out"
+    },
+    "account-settings": {
+        "delete": {
+            "certain": "Are you sure you want to delete this account?"
+        },
+        "error": {
+            "passw-match": "Passwords do not match",
+            "general": "Failed to update profile. If you have problems, please conntact: support@trentapp.com"
+        },
+        "heading": "Account Settings",
+        "mail": "Your Email: {{mail}}",
+        "firstname": "First Name",
+        "lastname": "Last Name",
+        "new-pw": "New Password",
+        "confirm-pw": "Confirm New Password",
+        "leave-empty": "leave empty to leave the same",
+        "upload-prof-pic": "Upload profile picture",
+        "update": "Update Profile",
+        "Delete Account": "Delete Account"
+    },
+    "address": {
+        "head": "Address",
+        "street": "Street and house number",
+        "zip": "Zipcode",
+        "city": "City",
+        "country": "Country"
+    },
+    "product": {
+        "{product.name}": "{product.name}",
+        "{product.prices.perHour}\u20ac/hour ": "{product.prices.perHour}\u20ac/hour ",
+        "{product.prices.perDay}\u20ac/day ": "{product.prices.perDay}\u20ac/day ",
+        "free": "free",
+        "{product.prices.perWeek}\u20ac/week ": "{product.prices.perWeek}\u20ac/week ",
+        "{product.prices.perMonth}\u20ac/month ": "{product.prices.perMonth}\u20ac/month ",
+        "Description": "Description",
+        "{product.desc}": "{product.desc}",
+        "Send Message": "Send Message"
+    },
+    "add-product": {
+        "Update Product": "Update Product",
+        "Add a new product": "Add a new product",
+        "Item name": "Item name",
+        "Description": "Description",
+        "Use a point for floating point numbers": "Use a point for floating point numbers",
+        "\u20ac/hour": "\u20ac/hour",
+        "\u20ac/day": "\u20ac/day",
+        "Address": "Address",
+        "Leave empty to keep current images, or upload all new images.": "Leave empty to keep current images, or upload all new images. If you upload something, old images will be deleted.",
+        "Upload Pictures": "Upload Pictures",
+        "Submit": "Submit"
+    },
+    "add-review": {},
+    "ask-question": {
+        "Send Message to ": "Send Message to ",
+        "Send": "Send"
+    },
+    "booking-request": {
+        "Specify time to borrow here": "Specify time to borrow here",
+        "Start time: ": "Start time: ",
+        "End time: ": "End time: ",
+        "Send Request": "Send Request"
+    },
+    "BookingCard": {
+        "Choose time to borrow": "Choose time to borrow"
+    },
+    "chat": {
+        "Chat with ": "Chat with ",
+        " about ": " about ",
+        "Send": "Send"
+    },
+    "ChatsList": {
+        "Your Chats": "Your Chats",
+        " lending ": " lending ",
+        " borrowing your ": " borrowing your "
+    },
+    "dashboard": {
+        "Overview": "Overview",
+        "Your Profile": "Your Profile",
+        "Chats": "Chats",
+        "Transactions": "Transactions",
+        "Chats with new messages": "Chats with new messages",
+        " lending ": " lending ",
+        " borrowing your ": " borrowing your ",
+        "New Requests": "New Requests",
+        "Upcoming transactions": "Upcoming transactions"
+    },
+    "footer": {
+        "Home": "Home",
+        "Dashboard": "Dashboard",
+        "AGB": "T&C",
+        "Impressum": "Impressum",
+        "Datenschutz": "Datenschutz",
+        "\u00dcber uns": "\u00dcber uns"
+    },
+    "ForgotPassword": {
+        " from \"../context/AuthContext\";import ": " from \"../context/AuthContext\";import ",
+        "Login": "Login",
+        "Sign Up": "Sign Up"
+    },
+    "login": {
+        "Log In": "Log In",
+        "Login": "Login",
+        "New to us?{\" \"}": "New to us?{{\" \"}}",
+        "Sign Up": "Sign Up",
+        "Forgot Password?": "Forgot Passowrd?",
+        "New to us? ": "New to us? "
+    },
+    "NotFound": {
+        "404": "404",
+        "Not found": "Not found"
+    },
+    "ProductCard": {
+        "\u20ac/day": "\u20ac/day"
+    },
+    "products-list": {
+        "No items found": "No items found"
+    },
+    "Profile": {
+        "Upload profile picture": "Upload profile picture",
+        "Inventory of ": "Inventory of ",
+        "This user has not received any reviews yet.": "This user has not received any reviews yet.",
+        "Add new item": "Add New Item"
+    },
+    "profileCard": {},
+    "Review": {
+        " from \"react\";import ": " from \"react\";import ",
+        "Posted by ": "Posted by "
+    },
+    "signup": {
+        "Sign Up": "Sign Up",
+        "Log In": "Log In",
+        "By signing up you agree to our ": "By signing up you agree to our ",
+        "Terms and Conditions": "Terms and Conditions",
+        "T&Cend": "",
+        "Already have an account? ": "Already have an account? "
+    },
+    "TransactionCard": {
+        " borrowing ": " borrowing ",
+        " from ": " from "
+    },
+    "TransactionList": {
+        "Your transactions": "Your transactions"
+    },
+    "login-placeholders": {
+        "email address": "email address",
+        "password": "password"
+    },
+    "signup-placeholders": {
+        "First name": "First name",
+        "Last name": "Last name",
+        "email address": "email address",
+        "password": "password",
+        "confirm password": "confirm password"
+    },
+    "add-product-placeholders": {
+        "per Hour": "per Hour",
+        "per Day": "per Day",
+        "Street and house number": "Street and house number",
+        "Zipcode": "Zipcode",
+        "City": "City",
+        "Country": "Country"
+    },
+    "Reset Password": "Reset Password"
+}

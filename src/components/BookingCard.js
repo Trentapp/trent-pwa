@@ -3,10 +3,13 @@ import React, {useState} from 'react';
 import {useHistory} from "react-router-dom";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
+import { useTranslation } from 'react-i18next';
 
 import TransactionDataService from "../services/transaction-data";
 
 export default function BookingCard(props) {
+    const {t} = useTranslation();
+    
     const [startDate, setStartDate] = useState(null);//useState(new Date());
     const [endDate, setEndDate] = useState(null);//useState(new Date());
     const history = useHistory();
@@ -44,7 +47,7 @@ export default function BookingCard(props) {
             boxShadow="lg"
             p={2}>
             <Box px={4} paddingTop={1}>
-                <Heading size="md">Choose time to book</Heading>
+                <Heading size="md">{t("BookingCard.Choose time to borrow")}</Heading>
                 <Box marginTop={4} border="1px" borderColor="gray.300">
                     <DatePicker selected={startDate}
                         placeholderText="Start Date"
