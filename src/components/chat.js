@@ -71,7 +71,7 @@ const Chat = props => {
         <Container mawW="container.xl">
             <Box marginTop={4} borderRadius="xl" border="1px" p={4} borderColor="gray.300">
                 <VStack>
-                    <Heading size="lg">{t("Chat with ")}{otherUser.name}{t(" about ")}{chat.product.name}</Heading>
+                    <Heading size="lg">{t("chat.Chat with ")}{otherUser.name}{t("chat. about ")}{chat.product.name}</Heading>
                     <Divider color="gray.400" />
                     <Box w="100%">
                         <VStack spacing={4}>
@@ -80,7 +80,7 @@ const Chat = props => {
                     </Box>
                     <HStack marginTop={4} w="100%">
                         <Input borderColor="gray.400" type="text" ref={messageRef} />
-                        <Button onClick={onSendMessage}>{t("Send")}</Button>
+                        <Button onClick={onSendMessage}>{t("chat.Send")}</Button>
                     </HStack>
                 </VStack>
             </Box>

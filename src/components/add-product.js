@@ -138,16 +138,16 @@ const AddProduct = props => {
         <Modal isOpen={props.isOpen} onClose={() => props.setIsOpen(false)} size="lg">
             <ModalOverlay />
             <ModalContent>
-                <ModalHeader>{props.product?._id ? <>{t("Update Product")}</> : <>{t("Add a new product")}</>}</ModalHeader>
+                <ModalHeader>{props.product?._id ? <>{t("add-product.Update Product")}</> : <>{t("add-product.Add a new product")}</>}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody pb={6}>
                     <FormControl>
-                        <FormLabel>{t("Item name")}</FormLabel>
-                        <Input placeholder={t("Item name")} onChange={onChangeName} value={product.name}/>
+                        <FormLabel>{t("add-product.Item name")}</FormLabel>
+                        <Input placeholder={t("add-product.Item name")} onChange={onChangeName} value={product.name}/>
                     </FormControl>
                     <FormControl mt={4}>
-                        <FormLabel>{t("Description")}</FormLabel>
-                        <Input placeholder={t("Description")} onChange={onChangeDesc} value={product.desc}/>
+                        <FormLabel>{t("add-product.Description")}</FormLabel>
+                        <Input placeholder={t("add-product.Description")} onChange={onChangeDesc} value={product.desc}/>
                     </FormControl>
                     <FormControl mt={4}>
                         <FormLabel>Price
@@ -156,18 +156,18 @@ const AddProduct = props => {
                                     <IconButton icon={<InfoIcon />} size="xs"/>
                                 </PopoverTrigger>
                                 <PopoverContent>
-                                    <Text>{t("Use a point for floating point numbers")}</Text>
+                                    <Text>{t("add-product.Use a point for floating point numbers")}</Text>
                                 </PopoverContent>
                             </Popover>
                         </FormLabel>
                         <HStack>
                             <Input min={0} type="number" step={0.01} placeholder="per Hour" onChange={onChangeHourPrice} value={product.prices.perHour}/>
-                            <Text>{t("€/hour")}</Text>
+                            <Text>{t("add-product.€/hour")}</Text>
                             <Input min={0} type="number" step={0.01} placeholder="per Day" onChange={onChangeDayPrice} value={product.prices.perDay}/>
-                            <Text>{t("€/day")}</Text>
+                            <Text>{t("add-product.€/day")}</Text>
                         </HStack>
                     </FormControl>
-                    <Text mt={5}>{t("Address")}</Text>
+                    <Text mt={5}>{t("add-product.Address")}</Text>
                     <FormControl mt={4}>
                         <Input placeholder="Street and house number" onChange={onChangeStreetWithNr} value={product.address.streetWithNr}/>
                     </FormControl>
@@ -188,7 +188,7 @@ const AddProduct = props => {
                                     <IconButton icon={<InfoIcon />} size="xs"/>
                                 </PopoverTrigger>
                                 <PopoverContent>
-                                    <Text>{t("Leave empty to keep current images, or upload all new images.")}</Text>
+                                    <Text>{t("add-product.Leave empty to keep current images, or upload all new images.")}</Text>
                                 </PopoverContent>
                             </Popover>
                         </FormLabel>
@@ -198,7 +198,7 @@ const AddProduct = props => {
                 <ModalFooter>
                     <Center w="100%">
                         <Button onClick={saveProduct} colorScheme="green" w="100%">
-                            {t("Submit")}
+                            {t("add-product.Submit")}
                         </Button>
                     </Center>
                 </ModalFooter>

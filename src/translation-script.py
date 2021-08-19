@@ -100,6 +100,7 @@ for filename, dic in obj.items(): #[("Profile", obj["Profile"])]:
 #########################################
 # helper script to add the "file." extensions that I forgot earlier
 files.append("product")
+files.remove("dashboard")#because I tested it before with dashboard
 for filename in files:
     f = ""
     with open(prefix+filename+suffix, "r") as file:
@@ -108,6 +109,7 @@ for filename in files:
         texts = re.findall(pattern, f)
         for text in texts:
             f = f.replace(text, text[:4] + filename + "." + text[4:])
-
+    with open(prefix+filename+suffix, "w") as file:
+        file.write(f)
 
 

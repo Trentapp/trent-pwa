@@ -82,12 +82,12 @@ const Profile = props => {
                             </HStack>
                         </Box>
                         {profileUser._id === props.user._id && <Link to="/account-settings"><IconButton icon={<EditIcon/>} /></Link>}
-                        {/* {profileUser._id === props.user._id && <Button>{t("Upload profile picture")}</Button>} */}
+                        {/* {profileUser._id === props.user._id && <Button>{t("Profile.Upload profile picture")}</Button>} */}
                         {/*later add description (about me): <Text></Text> */}
                     </VStack>
                     <VStack minW={["250px", "400px"]} pb={3}>
                         <Box w="100%" paddingBottom={3}>
-                            <Center><Heading size="lg">{t("Inventory of ")}{profileUser.name}</Heading></Center>
+                            <Center><Heading size="lg">{t("Profile.Inventory of ")}{profileUser.name}</Heading></Center>
                             <Divider color="gray.500" />
                         </Box>
                         {profileUser._id === props.user._id && 
@@ -113,4 +113,4 @@ const Profile = props => {
 
 export default Profile;
 
-// todo: map reviews: {reviews.length > 0 ? reviews.map(review => <Review review={review} user={props.user} key={review._id}/>) : <p>{t("This user has not received any reviews yet.")}</p>}
+// todo: map reviews: {reviews.length > 0 ? reviews.map(review => <Review review={review} user={props.user} key={review._id}/>) : <p>{t("Profile.This user has not received any reviews yet.")}</p>}

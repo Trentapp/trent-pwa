@@ -65,7 +65,7 @@ export default function SignUp() {
                 border="1px"
                 borderColor="gray.400"
                 >
-                <Heading size="lg">{t("Sign Up")}</Heading>
+                <Heading size="lg">{t("signup.Sign Up")}</Heading>
                 {error && <Alert status="error">
                     <AlertIcon />
                     {error}
@@ -111,14 +111,14 @@ export default function SignUp() {
                     onClick={handleSubmit}
                     disabled={loading}
                 >
-                    {t("Sign Up")}
+                    {t("signup.Sign Up")}
                 </Button>
                 </Stack>
             </Box>
             <HStack>
                 <Text>Already have an account?{" "}</Text>
                 <Link to="/login">
-                    <Text fontWeight="bold" color="blue.600">{t("Log In")}</Text>
+                    <Text fontWeight="bold" color="blue.600">{t("signup.Log In")}</Text>
                 </Link>
             </HStack>
         </Stack>

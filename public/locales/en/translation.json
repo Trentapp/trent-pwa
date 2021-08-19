@@ -14,7 +14,7 @@
         },
         "error": {
             "passw-match": "Passwords do not match",
-            "general": "Failed to update profile."
+            "general": "Failed to update profile. If you have problems, please conntact: support@trentapp.com"
         },
         "heading": "Account Settings",
         "mail": "Your Email: {{mail}}",

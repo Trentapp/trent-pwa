@@ -26,7 +26,7 @@ export default function TransactionList(props) {
     <Container mawW="container.xl">
         <Box marginTop={4} borderRadius="xl" border="1px" p={4} borderColor="gray.300">
             <VStack>
-                <Heading size="lg">{t("Your transactions")}</Heading>
+                <Heading size="lg">{t("TransactionList.Your transactions")}</Heading>
                 <Divider color="gray.400" />
                 <Box w="100%">
                     <VStack spacing={4}>

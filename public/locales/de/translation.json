@@ -1,0 +1,139 @@
+{
+    "header": {
+        "search": "Suche Gegenstände",
+        "dropmenu": {
+            "a": "Dein Profil",
+            "b": "Account Einstellungen",
+            "c": "Chats",
+            "d": "Transactionen"
+        }
+    },
+    "account-settings": {
+        "delete": {
+            "certain": "Sicher, dass du diesen Account löschen möchtest?"
+        },
+        "error": {
+            "passw-match": "Passwörter sind nicht gleich.",
+            "general": "Konnte Profil nicht Updaten. Bei Problemen kontaktiere bitte support@trentapp.com"
+        },
+        "heading": "Account Einstellungen",
+        "mail": "Deine Email: {{mail}}",
+        "firstname": "Vorname",
+        "lastname": "Nachname",
+        "new-pw": "Neues Passwort",
+        "confirm-pw": "Neues Password bestätigen",
+        "leave-empty": "Leer lassen um Passwort nicht zu ändern",
+        "addr": {
+            "head": "Adresse",
+            "street": "Straße und Hausnummer",
+            "zip": "Postleitzahl",
+            "city": "Stadt",
+            "country": "Land"
+        },
+        "upload-prof-pic": "Profilbild hochladen",
+        "update": "Profil updaten"
+    },
+    "product": {
+        "{product.name}": "{product.name}",
+        "{product.prices.perHour}\u20ac/hour ": "{product.prices.perHour}\u20ac/Stunde ",
+        "{product.prices.perDay}\u20ac/day ": "{product.prices.perDay}\u20ac/Tag ",
+        "free": "konstenlos",
+        "{product.prices.perWeek}\u20ac/week ": "{product.prices.perWeek}\u20ac/Woche ",
+        "{product.prices.perMonth}\u20ac/month ": "{product.prices.perMonth}\u20ac/Monat ",
+        "Description": "Beschreibung",
+        "{product.desc}": "{product.desc}",
+        "Send Message": "Nachricht schreiben"
+    },
+    "add-product": {
+        "Update Product": "Produkt aktualisieren",
+        "Add a new product": "F\u00fcgen Sie ein neues Produkt hinzu",
+        "Item name": "Artikelname",
+        "Description": "Beschreibung",
+        "Use a point for floating point numbers": "Verwenden Sie einen Punkt f\u00fcr Flie\u00dfkommazahlen",
+        "\u20ac/hour": "\u20ac / Stunde",
+        "\u20ac/day": "\u20ac / Tag",
+        "Address": "Adresse",
+        "Leave empty to keep current images, or upload all new images.": "Lassen Sie leer, um aktuelle Bilder zu halten, oder laden Sie alle neuen Bilder hoch.",
+        "Submit": "einreichen"
+    },
+    "add-review": {},
+    "ask-question": {
+        "Send Message to ": "Nachricht an senden",
+        "Send": "Senden"
+    },
+    "booking-request": {
+        "Specify time to borrow here": "Geben Sie die Zeit an, um sich hier auszutauschen",
+        "Start time: ": "Startzeit:",
+        "End time: ": "Endzeit:",
+        "Send Request": "Anfrage senden"
+    },
+    "BookingCard": {
+        "Choose time to book": "W\u00e4hlen Sie die Zeit, um zu buchen"
+    },
+    "chat": {
+        "Chat with ": "Plaudern mit",
+        " about ": "\u00dcber",
+        "Send": "Senden"
+    },
+    "ChatsList": {
+        "Your Chats": "Deine Chats",
+        " lending ": "Ausleihe",
+        " borrowing your ": "Leihen Sie Ihre"
+    },
+    "dashboard": {
+        "Overview": "Überblick",
+        "Your Profile": "Dein Profil",
+        "Chats": "Chats",
+        "Transactions": "Transaktionen",
+        " lending ": "Ausleihe",
+        " borrowing your ": "Leihen Sie Ihre",
+        "New Requests": "Neue Anfragen",
+        "Upcoming transactions": "Bevorstehende Transaktionen."
+    },
+    "footer": {
+        "Home": "Heim",
+        "Dashboard": "Armaturenbrett",
+        "AGB": "Agb.",
+        "Impressum": "Impressum.",
+        "Datenschutz": "Datenschutz",
+        "\u00dcber uns": "\u00dcber nicht"
+    },
+    "ForgotPassword": {
+        "Login": "Anmeldung",
+        "Sign Up": "Anmeldung"
+    },
+    "login": {
+        "Log In": "Einloggen",
+        "Login": "Anmeldung",
+        "Sign Up": "Anmeldung"
+    },
+    "NotFound": {
+        "404": "404.",
+        "Not found": "Nicht gefunden"
+    },
+    "ProductCard": {
+        "\u20ac/day": "\u20ac / Tag"
+    },
+    "products-list": {
+        "No items found": "Keine Elemente gefunden"
+    },
+    "Profile": {
+        "Upload profile picture": "Profilbild hochladen.",
+        "Inventory of ": "Inventar von",
+        "This user has not received any reviews yet.": "Dieser Benutzer hat noch keine Bewertungen erhalten."
+    },
+    "profileCard": {},
+    "Review": {
+        "Posted by ": "Geschrieben von"
+    },
+    "signup": {
+        "Sign Up": "Anmeldung",
+        "Log In": "Einloggen"
+    },
+    "TransactionCard": {
+        " borrowing ": "Kreditaufnahme"
+    },
+    "TransactionList": {
+        "Your transactions": "Ihre Transaktionen"
+    }
+}

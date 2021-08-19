@@ -51,7 +51,7 @@ export default function Login() {
                 border="1px"
                 borderColor="gray.400"
                 >
-                <Heading size="lg">{t("Log In")}</Heading>
+                <Heading size="lg">{t("login.Log In")}</Heading>
                 {error && <Alert status="error">
                     <AlertIcon />
                     {error}
@@ -79,7 +79,7 @@ export default function Login() {
                     onClick={handleSubmit}
                     disabled={loading}
                 >
-                    {t("Login")}
+                    {t("login.Login")}
                 </Button>
                 <Box>
                     <Link to="forgot-password">Forgot password?</Link>
@@ -89,7 +89,7 @@ export default function Login() {
             <HStack>
                 <Text>New to us?{" "}</Text>
                 <Link to="/signup">
-                    <Text fontWeight="bold" color="blue.600">{t("Sign Up")}</Text>
+                    <Text fontWeight="bold" color="blue.600">{t("login.Sign Up")}</Text>
                 </Link>
             </HStack>
         </Stack>

@@ -106,16 +106,16 @@ const Product = props => {
                             <HStack justify="space-between">
                                 <VStack align="left">
                                     <Heading>{product.name}</Heading>
-                                    {/* replace following with "{t("free")}" if {t("free")}, maybe make a button or so that shows that you make it {t("free")} */}
+                                    {/* replace following with "{t("product.free")}" if {t("product.free")}, maybe make a button or so that shows that you make it {t("product.free")} */}
                                     { (product.prices.perHour || product.prices.perDay) ? <Text textAlign="left" fontWeight="bold" color="gray.500">{product.prices.perHour !== undefined && product.prices.perHour !== 0 && <>{product.prices.perHour}€/hour </>}{product.prices.perDay !== undefined && product.prices.perDay !== 0 && <>{product.prices.perDay}€/day </>}</Text>
-                                        : <Text textAlign="left" fontWeight="bold" color="gray.500">{t("free")}</Text>}
+                                        : <Text textAlign="left" fontWeight="bold" color="gray.500">{t("product.free")}</Text>}
                                     {/*product.prices.perWeek !== undefined && <>{product.prices.perWeek}€/week </>}{product.prices.perMonth !== undefined && <>{product.prices.perMonth}€/month </>*/}
                                 </VStack>
                                 {product.user && <ProfileCard product={product} />}
                             </HStack>
                         </Box>
                         <Divider my={3} color="gray.300"/>
-                        <Heading as={"h5"} size="md">{t("Description")}</Heading>
+                        <Heading as={"h5"} size="md">{t("product.Description")}</Heading>
                         <Text marginTop={2}>
                             {product.desc}
                         </Text>
@@ -125,7 +125,7 @@ const Product = props => {
                             <Center>
                                 <VStack spacing="20px">
                                         {/* <BookingCard user={props.user} product={product} /> */}
-                                        <Button borderRadius="lg" width="100%" onClick={() => setShowSendMessage(true)}>{t("Send Message")}</Button>
+                                        <Button borderRadius="lg" width="100%" onClick={() => setShowSendMessage(true)}>{t("product.Send Message")}</Button>
                                 </VStack>
                             </Center>
                             </> : 

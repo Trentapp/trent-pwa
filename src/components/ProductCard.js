@@ -23,7 +23,7 @@ export default function ProductCard(props) {
                         <Box w="100%">
                             <HStack justify="space-between" paddingLeft={2} paddingRight={3}>
                                 <Heading as="h3" size="md">{props.product.name}</Heading>
-                                <Heading as="h3" size="md">{props.product.prices.perDay}{t("€/day")}</Heading>
+                                <Heading as="h3" size="md">{props.product.prices.perDay}{t("ProductCard.€/day")}</Heading>
                             </HStack>
                         </Box>
                         <Box w="100%" textAlign="left" px={2}>
@@ -62,7 +62,7 @@ export const ProductCard2 = (props) => {
                         <Box w="100%">
                             <HStack justify="space-between" paddingLeft={2} paddingRight={4}>
                                 <Heading as="h3" size="md">{props.product.name}</Heading>
-                                <Heading as="h3" size="md">{props.product.prices.perDay}{t("€/day")}</Heading>
+                                <Heading as="h3" size="md">{props.product.prices.perDay}{t("ProductCard.€/day")}</Heading>
                             </HStack>
                         </Box>
                         <Box w="100%" textAlign="left" px={2}>
@@ -100,7 +100,7 @@ export const ProductCardSmall = (props) => {
                         <Box w="100%">
                             <HStack justify="space-between" paddingLeft={2} paddingRight={3}>
                                 <Heading as="h3" size="md">{props.product.name}</Heading>
-                                <Heading as="h3" size="md">{props.product.prices.perDay}{t("€/day")}</Heading>
+                                <Heading as="h3" size="md">{props.product.prices.perDay}{t("ProductCard.€/day")}</Heading>
                             </HStack>
                         </Box>
                         <Box w="100%" textAlign="left" px={2}>
@@ -141,7 +141,7 @@ export const ProductCardFixed = (props) => {
                         <Box w="100%">
                             <HStack justify="space-between" paddingLeft={2} paddingRight={3}>
                                 <Heading as="h3" size="md">{props.product.name}</Heading>
-                                <Heading as="h3" size="md">{props.product.prices.perDay}{t("€/day")}</Heading>
+                                <Heading as="h3" size="md">{props.product.prices.perDay}{t("ProductCard.€/day")}</Heading>
                             </HStack>
                         </Box>
                         <Box w="100%" textAlign="left" px={2}>

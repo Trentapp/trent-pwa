@@ -6,8 +6,8 @@ const NotFound = props => {
 
     return(
         <div className="not-found">
-            <h1>{t("404")}</h1>
-            <h2>{t("Not found")}</h2>
+            <h1>{t("NotFound.404")}</h1>
+            <h2>{t("NotFound.Not found")}</h2>
         </div>
     )
 }
