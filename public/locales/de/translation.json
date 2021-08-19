@@ -133,7 +133,8 @@
         "Log In": "Einloggen"
     },
     "TransactionCard": {
-        " borrowing ": " leiht "
+        " borrowing ": " leiht ",
+        " from ": " von "
     },
     "TransactionList": {
         "Your transactions": "Deine Transaktionen"

@@ -3,10 +3,13 @@ import React, {useState} from 'react';
 import {useHistory} from "react-router-dom";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
+import { useTranslation } from 'react-i18next';
 
 import TransactionDataService from "../services/transaction-data";
 
 export default function BookingCard(props) {
+    const [t, i18n] = useTranslation();
+    
     const [startDate, setStartDate] = useState(null);//useState(new Date());
     const [endDate, setEndDate] = useState(null);//useState(new Date());
     const history = useHistory();

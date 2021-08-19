@@ -137,7 +137,8 @@
         "Log In": "Log In"
     },
     "TransactionCard": {
-        " borrowing ": " borrowing "
+        " borrowing ": " borrowing ",
+        " from ": " from "
     },
     "TransactionList": {
         "Your transactions": "Your transactions"
