@@ -75,7 +75,7 @@ const Profile = props => {
                             <Avatar size="4xl" src={profileUser.picture && `data:${profileUser.picture.contentType};base64,${Buffer.from(profileUser.picture.data.data).toString('base64')}`} />
                         </Box>
                         <Box px={3}>
-                            <Heading size="md" paddingTop={2}>{profileUser.name}</Heading>
+                            <Heading size="md" paddingTop={2} textAlign="center">{profileUser.name}</Heading>
                             <HStack>
                                 <StarRatings rating={profileUser.rating} starRatedColor="rgb(250,200,30)" starDimension="16px" starSpacing="2px"/>
                                 <Text fontWeight="bold">({profileUser.numberOfRatings})</Text>
@@ -92,7 +92,7 @@ const Profile = props => {
                         </Box>
                         {profileUser._id === props.user._id && 
                             <Button width="100%" colorScheme="green" onClick={() => setShowAddProduct(true)}>
-                                Add new item
+                                {t("Profile.Add new item")}
                             </Button>
                         }
                         <VStack spacing="15px" paddingTop={4}>

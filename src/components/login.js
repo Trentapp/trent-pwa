@@ -82,12 +82,12 @@ export default function Login() {
                     {t("login.Login")}
                 </Button>
                 <Box>
-                    <Link to="forgot-password">Forgot password?</Link>
+                    <Link to="/forgot-password"><Text color="blue.600">{t("login.Forgot Password?")}</Text></Link>
                 </Box>
                 </Stack>
             </Box>
             <HStack>
-                <Text>New to us?{" "}</Text>
+                <Text>{t("login.New to us? ")}</Text>
                 <Link to="/signup">
                     <Text fontWeight="bold" color="blue.600">{t("login.Sign Up")}</Text>
                 </Link>

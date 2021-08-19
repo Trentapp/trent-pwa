@@ -113,7 +113,7 @@ for filename in files:
         file.write(f)
 
 """
-
+"""
 #translating placeholders
 files = ["login", "signup", "add-product"]
 obj = {}
@@ -134,4 +134,4 @@ for filename in files:
 with open("../public/locales/en/translation2.json", "w") as file:
     file.write(json.dumps(obj, indent=4))
 
-
+"""

@@ -182,7 +182,7 @@ const AddProduct = props => {
                     </FormControl>
                     <FormControl mt={4}>
                         <FormLabel htmlFor="files">
-                            Upload pictures{" "}
+                            {t("add-product.Upload Pictures")}
                             <Popover placement="right">
                                 <PopoverTrigger>
                                     <IconButton icon={<InfoIcon />} size="xs"/>

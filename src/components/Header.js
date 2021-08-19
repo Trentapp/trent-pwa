@@ -71,7 +71,7 @@ export default function Header (props) {
                 <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/transactions"><MenuItem>{t("header.dropmenu.d")}</MenuItem></Link>
                 <MenuItem>
                   <Button w="100%" style={{ color: 'inherit', textDecoration: 'none' }} variant="link" onClick={props.handleLogout}>
-                    <Box w="100%" textAlign="left">Log Out</Box>
+                    <Box w="100%" textAlign="left">{t("header.Log Out")}</Box>
                   </Button>
                 </MenuItem>
               </MenuList>

@@ -101,7 +101,7 @@ export default function SignUp() {
                     />
                     </InputGroup>
                 </FormControl>
-                <Text>By signing up you agree to our <a style={{color: "#2b6cb0"}} target="_blank" rel="noopener noreferrer" href="/AllgemeineNutzungsbedingungen.pdf">Terms and Conditions</a>.</Text>
+                <Text>{t("signup.By signing up you agree to our ")}<a style={{color: "#2b6cb0"}} target="_blank" rel="noopener noreferrer" href="/AllgemeineNutzungsbedingungen.pdf">{t("signup.Terms and Conditions")}</a> {t("signup.T&Cend")}.</Text>
                 <Button
                     borderRadius={0}
                     type="submit"
@@ -116,7 +116,7 @@ export default function SignUp() {
                 </Stack>
             </Box>
             <HStack>
-                <Text>Already have an account?{" "}</Text>
+                <Text>{t("signup.Already have an account? ")}</Text>
                 <Link to="/login">
                     <Text fontWeight="bold" color="blue.600">{t("signup.Log In")}</Text>
                 </Link>
