@@ -6,7 +6,10 @@
             "b": "Account Einstellungen",
             "c": "Chats",
             "d": "Transaktionen"
-        }
+        },
+        "Log In": "Einloggen",
+        "Sign Up": "Registrieren",
+        "Sign In": "Anmelden"
     },
     "account-settings": {
         "delete": {
@@ -23,16 +26,16 @@
         "new-pw": "Neues Passwort",
         "confirm-pw": "Neues Password bestätigen",
         "leave-empty": "Leer lassen um Passwort gleich zu lassen",
-        "addr": {
-            "head": "Adresse",
-            "street": "Straße und Hausnummer",
-            "zip": "Postleitzahl",
-            "city": "Stadt",
-            "country": "Land"
-        },
         "upload-prof-pic": "Profilbild hochladen",
         "update": "Profil updaten",
         "Delete Account": "Account löschen"
+    },
+    "address": {
+        "head": "Adresse",
+        "street": "Straße und Hausnummer",
+        "zip": "Postleitzahl",
+        "city": "Stadt",
+        "country": "Land"
     },
     "product": {
         "{product.name}": "{product.name}",
@@ -101,13 +104,13 @@
         "\u00dcber uns": "\u00dcber uns"
     },
     "ForgotPassword": {
-        "Login": "Log In",
-        "Sign Up": "Sign Up"
+        "Login": "Einloggen",
+        "Sign Up": "Registrieren"
     },
     "login": {
         "Log In": "Einloggen",
         "Login": "Einloggen",
-        "Sign Up": "Anmelden"
+        "Sign Up": "Registrieren"
     },
     "NotFound": {
         "404": "404",
@@ -129,7 +132,7 @@
         "Posted by ": "Geschrieben von "
     },
     "signup": {
-        "Sign Up": "Anmelden",
+        "Sign Up": "Registrieren",
         "Log In": "Einloggen"
     },
     "TransactionCard": {

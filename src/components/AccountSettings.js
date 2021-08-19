@@ -148,19 +148,19 @@ export default function UpdateProfile(props) {
                     </InputGroup>
                 </FormControl>
                 <Flex text-align="left">
-                    <Text mt={4}>{t("account-settings.addr.head")}</Text>
+                    <Text mt={4}>{t("address.head")}</Text>
                 </Flex>
                 <FormControl mt={3}>
-                    <Input placeholder={t("account-settings.addr.street")} ref={streetWithNrRef} defaultValue={props.user.address?.streetWithNr}/>
+                    <Input placeholder={t("address.street")} ref={streetWithNrRef} defaultValue={props.user.address?.streetWithNr}/>
                 </FormControl>
                 <FormControl mt={4}>
                     <HStack>
-                        <Input placeholder={t("account-settings.addr.zip")} ref={zipRef} defaultValue={props.user.address?.zipcode}/>
-                        <Input placeholder={t("account-settings.addr.city")} ref={cityRef} defaultValue={props.user.address?.city}/>
+                        <Input placeholder={t("address.zip")} ref={zipRef} defaultValue={props.user.address?.zipcode}/>
+                        <Input placeholder={t("address.city")} ref={cityRef} defaultValue={props.user.address?.city}/>
                     </HStack>
                 </FormControl>
                 <FormControl mt={4}>
-                    <Input type="country" placeholder={t("account-settings.addr.country")} ref={countryRef} defaultValue={props.user.address?.country}/>
+                    <Input type="country" placeholder={t("address.country")} ref={countryRef} defaultValue={props.user.address?.country}/>
                 </FormControl>
                 <FormControl mt={4}>
                     <FormLabel htmlFor="files">{t("account-settings.upload-prof-pic")}</FormLabel>

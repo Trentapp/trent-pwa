@@ -6,7 +6,10 @@
             "b": "Account Settings",
             "c": "Chats",
             "d": "Transactions"
-        }
+        },
+        "Log In": "Log In",
+        "Sign Up": "Sign Up",
+        "Sign In": "Anmelden"
     },
     "account-settings": {
         "delete": {
@@ -23,16 +26,16 @@
         "new-pw": "New Password",
         "confirm-pw": "Confirm New Password",
         "leave-empty": "leave empty to leave the same",
-        "addr": {
-            "head": "Address",
-            "street": "Street and house number",
-            "zip": "Zipcode",
-            "city": "City",
-            "country": "Country"
-        },
         "upload-prof-pic": "Upload profile picture",
         "update": "Update Profile",
         "Delete Account": "Delete Account"
+    },
+    "address": {
+        "head": "Address",
+        "street": "Street and house number",
+        "zip": "Zipcode",
+        "city": "City",
+        "country": "Country"
     },
     "product": {
         "{product.name}": "{product.name}",
