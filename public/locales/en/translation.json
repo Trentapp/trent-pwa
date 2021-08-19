@@ -9,7 +9,8 @@
         },
         "Log In": "Log In",
         "Sign Up": "Sign Up",
-        "Sign In": "Anmelden"
+        "Sign In": "Anmelden",
+        "Log Out": "Log Out"
     },
     "account-settings": {
         "delete": {
@@ -58,6 +59,7 @@
         "\u20ac/day": "\u20ac/day",
         "Address": "Address",
         "Leave empty to keep current images, or upload all new images.": "Leave empty to keep current images, or upload all new images. If you upload something, old images will be deleted.",
+        "Upload Pictures": "Upload Pictures",
         "Submit": "Submit"
     },
     "add-review": {},
@@ -112,7 +114,9 @@
         "Log In": "Log In",
         "Login": "Login",
         "New to us?{\" \"}": "New to us?{{\" \"}}",
-        "Sign Up": "Sign Up"
+        "Sign Up": "Sign Up",
+        "Forgot Password?": "Forgot Passowrd?",
+        "New to us? ": "New to us? "
     },
     "NotFound": {
         "404": "404",
@@ -127,7 +131,8 @@
     "Profile": {
         "Upload profile picture": "Upload profile picture",
         "Inventory of ": "Inventory of ",
-        "This user has not received any reviews yet.": "This user has not received any reviews yet."
+        "This user has not received any reviews yet.": "This user has not received any reviews yet.",
+        "Add new item": "Add New Item"
     },
     "profileCard": {},
     "Review": {
@@ -136,8 +141,11 @@
     },
     "signup": {
         "Sign Up": "Sign Up",
-        "Already have an account?{\" \"}": "Already have an account?{{\" \"}}",
-        "Log In": "Log In"
+        "Log In": "Log In",
+        "By signing up you agree to our ": "By signing up you agree to our ",
+        "Terms and Conditions": "Terms and Conditions",
+        "T&Cend": "",
+        "Already have an account? ": "Already have an account? "
     },
     "TransactionCard": {
         " borrowing ": " borrowing ",
@@ -145,5 +153,25 @@
     },
     "TransactionList": {
         "Your transactions": "Your transactions"
-    }
+    },
+    "login-placeholders": {
+        "email address": "email address",
+        "password": "password"
+    },
+    "signup-placeholders": {
+        "First name": "First name",
+        "Last name": "Last name",
+        "email address": "email address",
+        "password": "password",
+        "confirm password": "confirm password"
+    },
+    "add-product-placeholders": {
+        "per Hour": "per Hour",
+        "per Day": "per Day",
+        "Street and house number": "Street and house number",
+        "Zipcode": "Zipcode",
+        "City": "City",
+        "Country": "Country"
+    },
+    "Reset Password": "Reset Password"
 }

@@ -9,7 +9,8 @@
         },
         "Log In": "Einloggen",
         "Sign Up": "Registrieren",
-        "Sign In": "Anmelden"
+        "Sign In": "Anmelden",
+        "Log Out": "Ausloggen"
     },
     "account-settings": {
         "delete": {
@@ -51,13 +52,14 @@
     "add-product": {
         "Update Product": "Produkt aktualisieren",
         "Add a new product": "F\u00fcge ein neues Produkt hinzu",
-        "Item name": "Artikelname",
+        "Item name": "Gegenstand",
         "Description": "Beschreibung",
         "Use a point for floating point numbers": "Verwende einen Punkt f\u00fcr Flie\u00dfkommazahlen",
         "\u20ac/hour": "\u20ac/Stunde",
         "\u20ac/day": "\u20ac/Tag",
         "Address": "Adresse",
         "Leave empty to keep current images, or upload all new images.": "Leer lassen, um aktuelle Bilder zu halten, oder alle neuen Bilder hochladen. Beim hochladen neuer Bilder werden alte Bilder gelöscht.",
+        "Upload Pictures": "Bilder hochladen",
         "Submit": "Speichern"
     },
     "add-review": {},
@@ -110,7 +112,9 @@
     "login": {
         "Log In": "Einloggen",
         "Login": "Einloggen",
-        "Sign Up": "Registrieren"
+        "Sign Up": "Registrieren",
+        "Forgot Password?": "Passwort vergessen?",
+        "New to us? ": "Noch keinen Account? "
     },
     "NotFound": {
         "404": "404",
@@ -124,8 +128,9 @@
     },
     "Profile": {
         "Upload profile picture": "Profilbild hochladen",
-        "Inventory of ": "Inventar von ",
-        "This user has not received any reviews yet.": "Dieser Benutzer hat noch keine Bewertungen erhalten."
+        "Inventory of ": "Gegenstände von ",
+        "This user has not received any reviews yet.": "Dieser Benutzer hat noch keine Bewertungen erhalten.",
+        "Add new item": "Gegenstand hinzufügen"
     },
     "profileCard": {},
     "Review": {
@@ -133,7 +138,11 @@
     },
     "signup": {
         "Sign Up": "Registrieren",
-        "Log In": "Einloggen"
+        "Log In": "Einloggen",
+        "By signing up you agree to our ": "Durch das Registrieren stimmst du unseren ",
+        "Terms and Conditions": "Allgemeinen Nutzungsbedinungen",
+        "T&Cend": "zu",
+        "Already have an account? ": "Schon registriert? "
     },
     "TransactionCard": {
         " borrowing ": " leiht ",
@@ -141,5 +150,25 @@
     },
     "TransactionList": {
         "Your transactions": "Deine Transaktionen"
-    }
+    },
+    "login-placeholders": {
+        "email address": "Email",
+        "password": "Passwort"
+    },
+    "signup-placeholders": {
+        "First name": "Vorname",
+        "Last name": "Nachname",
+        "email address": "Email",
+        "password": "Passwort",
+        "confirm password": "Passwort bestätigen"
+    },
+    "add-product-placeholders": {
+        "per Hour": "pro Stunde",
+        "per Day": "pro Tag",
+        "Street and house number": "Straße und Hausnummer",
+        "Zipcode": "Postleitzahl",
+        "City": "Stadt",
+        "Country": "Land"
+    },
+    "Reset Password": "Passwort zurücksetzen"
 }
