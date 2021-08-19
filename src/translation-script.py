@@ -1,5 +1,6 @@
 import re
 import json
+from googletrans import Translator
 # from copy import deepcopy
 
 prefix = "./components/"
@@ -7,7 +8,26 @@ prefix = "./components/"
 #do datenschutz and impressum separately
 files = ["add-product", "add-review", "ask-question", "booking-request", "BookingCard", "chat", "ChatsList", "dashboard", "footer", "ForgotPassword", "login", "NotFound", "ProductCard", "products-list", "Profile", "profileCard", "Review", "signup", "TransactionCard", "TransactionList"]
 suffix = ".js"
-
+trans = Translator()
+# lng = "de"
+# obj = {}
+# for filename in files:
+#     with open(prefix+filename+suffix, "r") as file:
+#         f = file.read()
+#         obj[filename] = {}
+#         pattern = r'{t\("[\w\s,;:?!&\./(=)%€$-]+"\)}'
+#         texts = re.findall(pattern, f)
+#         for text in texts:
+#             text = text[4:-3]
+#             if text != "":
+#                 print(text)
+#                 obj[filename][text] = trans.translate(text, src="en", dest=lng).text
+                
+# print(json.dumps(obj, indent=4))
+# with open("../public/locales/de/translation.json", "w") as file:
+#    file.write(json.dumps(obj, indent=4))
+#translating english to json-english
+"""
 obj = {}
 for filename in files:
     with open(prefix+filename+suffix, "r") as file:
@@ -46,16 +66,48 @@ for filename, dic in obj.items(): #[("Profile", obj["Profile"])]:
             #     attach += '"' + o[1:-1] + '"' + ": " + o[1:-1] + ", "
             # if attach != "":
             #     attach = ", {" + attach[:-2] + "}"
-            print(key)
             f = re.sub(key, '{t("'+key+'"'+attach+')}', f)
     # print(f)
-    with open(prefix+filename+suffix, "w") as file:
-        file.write(f)
+    # with open(prefix+filename+suffix, "w") as file:
+    #     file.write(f)
 
+# writing JSON to en/translation file
+# with open("../public/locales/en/translation2.json", "w") as file:
+#    file.write(json.dumps(obj, indent=4))
+"""
+#translating to german (maybe I should have just written a JSON translator)
+#for JSON translator: simply use pattern r': "[\w{}()\s,;.=:-?!%\/€$]+"'
+# trans = Translator()
+# lng = "de"
+# obj = {}
+# for filename in files:
+#     with open(prefix+filename+suffix, "r") as file:
+#         f = file.read()
+#         obj[filename] = {}
+#         pattern = r'{t\("[\w\s,;:?!&\./(=)%€$-]+"\)}'
+#         texts = re.findall(pattern, f)
+#         for text in texts:
+#             text = text[4:-3]
+#             if text != "":
+#                 print(text)
+#                 obj[filename][text] = trans.translate(text, src="en", dest=lng).text
+                
 # print(json.dumps(obj, indent=4))
-with open("../public/locales/en/translation2.json", "w") as file:
-   file.write(json.dumps(obj, indent=4))
-        
+# with open("../public/locales/de/translation.json", "w") as file:
+#    file.write(json.dumps(obj, indent=4))
+
+
+#########################################
+# helper script to add the "file." extensions that I forgot earlier
+files.append("product")
+for filename in files:
+    f = ""
+    with open(prefix+filename+suffix, "r") as file:
+        f = file.read()
+        pattern = r'{t\("[\w\s,;:?!&\./(=)%€$-]+"\)}'
+        texts = re.findall(pattern, f)
+        for text in texts:
+            f = f.replace(text, text[:4] + filename + "." + text[4:])
 
 
 
