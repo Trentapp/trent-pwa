@@ -58,14 +58,14 @@ export default function Login() {
                 </Alert>}
                 <FormControl>
                     <InputGroup>
-                    <Input type="email" placeholder="email address" ref={emailRef} />
+                    <Input type="email" placeholder={t("login-placeholders.email address")} ref={emailRef} />
                     </InputGroup>
                 </FormControl>
                 <FormControl>
                     <InputGroup>
                     <Input
                         type="password"
-                        placeholder="password"
+                        placeholder={t("login-placeholders.password")}
                         ref={passwordRef}
                     />
                     </InputGroup>

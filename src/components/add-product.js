@@ -161,24 +161,24 @@ const AddProduct = props => {
                             </Popover>
                         </FormLabel>
                         <HStack>
-                            <Input min={0} type="number" step={0.01} placeholder="per Hour" onChange={onChangeHourPrice} value={product.prices.perHour}/>
+                            <Input min={0} type="number" step={0.01} placeholder={t("add-product-placeholders.per Hour")} onChange={onChangeHourPrice} value={product.prices.perHour}/>
                             <Text>{t("add-product.€/hour")}</Text>
-                            <Input min={0} type="number" step={0.01} placeholder="per Day" onChange={onChangeDayPrice} value={product.prices.perDay}/>
+                            <Input min={0} type="number" step={0.01} placeholder={t("add-product-placeholders.per Day")} onChange={onChangeDayPrice} value={product.prices.perDay}/>
                             <Text>{t("add-product.€/day")}</Text>
                         </HStack>
                     </FormControl>
                     <Text mt={5}>{t("add-product.Address")}</Text>
                     <FormControl mt={4}>
-                        <Input placeholder="Street and house number" onChange={onChangeStreetWithNr} value={product.address.streetWithNr}/>
+                        <Input placeholder={t("add-product-placeholders.Street and house number")} onChange={onChangeStreetWithNr} value={product.address.streetWithNr}/>
                     </FormControl>
                     <FormControl mt={4}>
                         <HStack>
-                            <Input placeholder="Zipcode" onChange={onChangeZipcode} value={product.address.zipcode}/>
-                            <Input placeholder="City" onChange={onChangeCity} value={product.address.city}/>
+                            <Input placeholder={t("add-product-placeholders.Zipcode")} onChange={onChangeZipcode} value={product.address.zipcode}/>
+                            <Input placeholder={t("add-product-placeholders.City")} onChange={onChangeCity} value={product.address.city}/>
                         </HStack>
                     </FormControl>
                     <FormControl mt={4}>
-                        <Input type="country" placeholder="Country" onChange={onChangeCountry} value={product.address.country}/>
+                        <Input type="country" placeholder={t("add-product-placeholders.Country")} onChange={onChangeCountry} value={product.address.country}/>
                     </FormControl>
                     <FormControl mt={4}>
                         <FormLabel htmlFor="files">

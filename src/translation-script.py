@@ -92,7 +92,6 @@ for filename, dic in obj.items(): #[("Profile", obj["Profile"])]:
 #                 print(text)
 #                 obj[filename][text] = trans.translate(text, src="en", dest=lng).text
                 
-# print(json.dumps(obj, indent=4))
 # with open("../public/locales/de/translation.json", "w") as file:
 #    file.write(json.dumps(obj, indent=4))
 
@@ -114,3 +113,25 @@ for filename in files:
         file.write(f)
 
 """
+
+#translating placeholders
+files = ["login", "signup", "add-product"]
+obj = {}
+for filename in files:
+    f = ""
+    obj[filename+"-placeholders"] = {}
+    with open(prefix+filename+suffix, "r") as file:
+        f = file.read()
+        patt = r'placeholder="[\w\s,;:?!&\./(=)%€$-]*"'
+        texts = re.findall(patt, f)
+        for text in texts:
+            f = f.replace(text, 'placeholder={t("'+filename+'-placeholders.'+text[13:-1]+'")}')
+            obj[filename+"-placeholders"][text[13:-1]] = text[13:-1]
+    with open(prefix+filename+suffix, "w") as file:
+        file.write(f)
+
+# print(json.dumps(obj, indent=4))
+with open("../public/locales/en/translation2.json", "w") as file:
+    file.write(json.dumps(obj, indent=4))
+
+

@@ -73,21 +73,21 @@ export default function SignUp() {
                 <FormControl>
                     <InputGroup>
                     <HStack>
-                        <Input placeholder="First name" ref={firstNameRef}/>
-                        <Input placeholder="Last name" ref={lastNameRef}/>
+                        <Input placeholder={t("signup-placeholders.First name")} ref={firstNameRef}/>
+                        <Input placeholder={t("signup-placeholders.Last name")} ref={lastNameRef}/>
                     </HStack>
                     </InputGroup>
                 </FormControl>
                 <FormControl>
                     <InputGroup>
-                    <Input type="email" placeholder="email address" ref={emailRef} />
+                    <Input type="email" placeholder={t("signup-placeholders.email address")} ref={emailRef} />
                     </InputGroup>
                 </FormControl>
                 <FormControl>
                     <InputGroup>
                     <Input
                         type="password"
-                        placeholder="password"
+                        placeholder={t("signup-placeholders.password")}
                         ref={passwordRef}
                     />
                     </InputGroup>
@@ -96,7 +96,7 @@ export default function SignUp() {
                     <InputGroup>
                     <Input
                         type="password"
-                        placeholder="confirm password"
+                        placeholder={t("signup-placeholders.confirm password")}
                         ref={passwordConfirmRef}
                     />
                     </InputGroup>
