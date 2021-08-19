@@ -99,6 +99,7 @@ for filename, dic in obj.items(): #[("Profile", obj["Profile"])]:
 
 #########################################
 # helper script to add the "file." extensions that I forgot earlier
+"""
 files.append("product")
 files.remove("dashboard")#because I tested it before with dashboard
 for filename in files:
@@ -112,4 +113,4 @@ for filename in files:
     with open(prefix+filename+suffix, "w") as file:
         file.write(f)
 
-
+"""

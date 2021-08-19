@@ -31,7 +31,8 @@
             "country": "Country"
         },
         "upload-prof-pic": "Upload profile picture",
-        "update": "Update Profile"
+        "update": "Update Profile",
+        "Delete Account": "Delete Account"
     },
     "product": {
         "{product.name}": "{product.name}",
@@ -53,7 +54,7 @@
         "\u20ac/hour": "\u20ac/hour",
         "\u20ac/day": "\u20ac/day",
         "Address": "Address",
-        "Leave empty to keep current images, or upload all new images.": "Leave empty to keep current images, or upload all new images.",
+        "Leave empty to keep current images, or upload all new images.": "Leave empty to keep current images, or upload all new images. If you upload something, old images will be deleted.",
         "Submit": "Submit"
     },
     "add-review": {},
@@ -68,7 +69,7 @@
         "Send Request": "Send Request"
     },
     "BookingCard": {
-        "Choose time to book": "Choose time to book"
+        "Choose time to borrow": "Choose time to borrow"
     },
     "chat": {
         "Chat with ": "Chat with ",
@@ -94,7 +95,7 @@
     "footer": {
         "Home": "Home",
         "Dashboard": "Dashboard",
-        "AGB": "AGB",
+        "AGB": "T&C",
         "Impressum": "Impressum",
         "Datenschutz": "Datenschutz",
         "\u00dcber uns": "\u00dcber uns"

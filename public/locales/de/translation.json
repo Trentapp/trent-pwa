@@ -5,7 +5,7 @@
             "a": "Dein Profil",
             "b": "Account Einstellungen",
             "c": "Chats",
-            "d": "Transactionen"
+            "d": "Transaktionen"
         }
     },
     "account-settings": {
@@ -13,7 +13,7 @@
             "certain": "Sicher, dass du diesen Account löschen möchtest?"
         },
         "error": {
-            "passw-match": "Passwörter sind nicht gleich.",
+            "passw-match": "Passwörter sind nicht gleich",
             "general": "Konnte Profil nicht Updaten. Bei Problemen kontaktiere bitte support@trentapp.com"
         },
         "heading": "Account Einstellungen",
@@ -22,7 +22,7 @@
         "lastname": "Nachname",
         "new-pw": "Neues Passwort",
         "confirm-pw": "Neues Password bestätigen",
-        "leave-empty": "Leer lassen um Passwort nicht zu ändern",
+        "leave-empty": "Leer lassen um Passwort gleich zu lassen",
         "addr": {
             "head": "Adresse",
             "street": "Straße und Hausnummer",
@@ -31,7 +31,8 @@
             "country": "Land"
         },
         "upload-prof-pic": "Profilbild hochladen",
-        "update": "Profil updaten"
+        "update": "Profil updaten",
+        "Delete Account": "Account löschen"
     },
     "product": {
         "{product.name}": "{product.name}",
@@ -46,94 +47,95 @@
     },
     "add-product": {
         "Update Product": "Produkt aktualisieren",
-        "Add a new product": "F\u00fcgen Sie ein neues Produkt hinzu",
+        "Add a new product": "F\u00fcge ein neues Produkt hinzu",
         "Item name": "Artikelname",
         "Description": "Beschreibung",
-        "Use a point for floating point numbers": "Verwenden Sie einen Punkt f\u00fcr Flie\u00dfkommazahlen",
-        "\u20ac/hour": "\u20ac / Stunde",
-        "\u20ac/day": "\u20ac / Tag",
+        "Use a point for floating point numbers": "Verwende einen Punkt f\u00fcr Flie\u00dfkommazahlen",
+        "\u20ac/hour": "\u20ac/Stunde",
+        "\u20ac/day": "\u20ac/Tag",
         "Address": "Adresse",
-        "Leave empty to keep current images, or upload all new images.": "Lassen Sie leer, um aktuelle Bilder zu halten, oder laden Sie alle neuen Bilder hoch.",
-        "Submit": "einreichen"
+        "Leave empty to keep current images, or upload all new images.": "Leer lassen, um aktuelle Bilder zu halten, oder alle neuen Bilder hochladen. Beim hochladen neuer Bilder werden alte Bilder gelöscht.",
+        "Submit": "Speichern"
     },
     "add-review": {},
     "ask-question": {
-        "Send Message to ": "Nachricht an senden",
+        "Send Message to ": "Semde Nachricht an ",
         "Send": "Senden"
     },
     "booking-request": {
+        "_comment": "deprecated and not used anymore",
         "Specify time to borrow here": "Geben Sie die Zeit an, um sich hier auszutauschen",
         "Start time: ": "Startzeit:",
-        "End time: ": "Endzeit:",
+        "End time: ": "Endzeit: ",
         "Send Request": "Anfrage senden"
     },
     "BookingCard": {
-        "Choose time to book": "W\u00e4hlen Sie die Zeit, um zu buchen"
+        "Choose time to borrow": "W\u00e4hle wann du es leihen willst"
     },
     "chat": {
-        "Chat with ": "Plaudern mit",
-        " about ": "\u00dcber",
+        "Chat with ": "Chat mit ",
+        " about ": " über ",
         "Send": "Senden"
     },
     "ChatsList": {
         "Your Chats": "Deine Chats",
-        " lending ": "Ausleihe",
-        " borrowing your ": "Leihen Sie Ihre"
+        " lending ": " verleiht ",
+        " borrowing your ": " leiht dein(e) "
     },
     "dashboard": {
         "Overview": "Überblick",
         "Your Profile": "Dein Profil",
         "Chats": "Chats",
         "Transactions": "Transaktionen",
-        " lending ": "Ausleihe",
-        " borrowing your ": "Leihen Sie Ihre",
+        " lending ": " verleiht ",
+        " borrowing your ": " leiht dein(e) ",
         "New Requests": "Neue Anfragen",
-        "Upcoming transactions": "Bevorstehende Transaktionen."
+        "Upcoming transactions": "Bevorstehende Transaktionen"
     },
     "footer": {
-        "Home": "Heim",
-        "Dashboard": "Armaturenbrett",
-        "AGB": "Agb.",
-        "Impressum": "Impressum.",
+        "Home": "Home",
+        "Dashboard": "Dashboard",
+        "AGB": "AGB",
+        "Impressum": "Impressum",
         "Datenschutz": "Datenschutz",
-        "\u00dcber uns": "\u00dcber nicht"
+        "\u00dcber uns": "\u00dcber uns"
     },
     "ForgotPassword": {
-        "Login": "Anmeldung",
-        "Sign Up": "Anmeldung"
+        "Login": "Log In",
+        "Sign Up": "Sign Up"
     },
     "login": {
         "Log In": "Einloggen",
-        "Login": "Anmeldung",
-        "Sign Up": "Anmeldung"
+        "Login": "Einloggen",
+        "Sign Up": "Anmelden"
     },
     "NotFound": {
-        "404": "404.",
+        "404": "404",
         "Not found": "Nicht gefunden"
     },
     "ProductCard": {
-        "\u20ac/day": "\u20ac / Tag"
+        "\u20ac/day": "\u20ac/Tag"
     },
     "products-list": {
         "No items found": "Keine Elemente gefunden"
     },
     "Profile": {
-        "Upload profile picture": "Profilbild hochladen.",
-        "Inventory of ": "Inventar von",
+        "Upload profile picture": "Profilbild hochladen",
+        "Inventory of ": "Inventar von ",
         "This user has not received any reviews yet.": "Dieser Benutzer hat noch keine Bewertungen erhalten."
     },
     "profileCard": {},
     "Review": {
-        "Posted by ": "Geschrieben von"
+        "Posted by ": "Geschrieben von "
     },
     "signup": {
-        "Sign Up": "Anmeldung",
+        "Sign Up": "Anmelden",
         "Log In": "Einloggen"
     },
     "TransactionCard": {
-        " borrowing ": "Kreditaufnahme"
+        " borrowing ": " leiht "
     },
     "TransactionList": {
-        "Your transactions": "Ihre Transaktionen"
+        "Your transactions": "Deine Transaktionen"
     }
 }

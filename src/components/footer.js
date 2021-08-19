@@ -12,7 +12,7 @@ const Footer = props => {
             {/*<div className="social"><a href="#"><i className="icon ion-social-instagram"></i></a><a href="#"><i className="icon ion-social-snapchat"></i></a><a href="#"><i className="icon ion-social-twitter"></i></a><a href="#"><i className="icon ion-social-facebook"></i></a></div>*/}
             <ul className="list-inline">
                 <li className="list-inline-item"><Link to="/">{t("footer.Home")}</Link></li>
-                <li className="list-inline-item"><Link to="/dashboard">{t("footer.Dashboard")}</Link></li>
+                {/* <li className="list-inline-item"><Link to="/dashboard">{t("footer.Dashboard")}</Link></li> */}
                 <li className="list-inline-item"><a target="_blank" rel="noopener noreferrer" href="/AllgemeineNutzungsbedingungen.pdf">{t("footer.AGB")}</a></li>
                 <li className="list-inline-item"><Link to="/impressum">{t("footer.Impressum")}</Link></li>
                 <li className="list-inline-item"><Link to="/datenschutz">{t("footer.Datenschutz")}</Link></li>
@@ -35,8 +35,8 @@ export const ProductsListFooter = props => {
                 {/*<Box className="social"><a href="#"><i className="icon ion-social-instagram"></i></a><a href="#"><i className="icon ion-social-snapchat"></i></a><a href="#"><i className="icon ion-social-twitter"></i></a><a href="#"><i className="icon ion-social-facebook"></i></a></Box>*/}
                 <ul className="list-inline">
                     <li className="list-inline-item"><Link to="/">{t("footer.Home")}</Link></li>
-                    <li className="list-inline-item"><Link to="/dashboard">{t("footer.Dashboard")}</Link></li>
-                    <li className="list-inline-item"><Link to="/about">{t("footer.Über uns")}</Link></li>
+                    {/* <li className="list-inline-item"><Link to="/dashboard">{t("footer.Dashboard")}</Link></li> */}
+                    {/* <li className="list-inline-item"><Link to="/about">{t("footer.Über uns")}</Link></li> */}
                     <li className="list-inline-item"><a target="_blank" rel="noopener noreferrer" href="/AllgemeineNutzungsbedingungen.pdf">{t("footer.AGB")}</a></li>
                     <li className="list-inline-item"><Link to="/impressum">{t("footer.Impressum")}</Link></li>
                     <li className="list-inline-item"><Link to="/datenschutz">{t("footer.Datenschutz")}</Link></li>

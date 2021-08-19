@@ -122,8 +122,8 @@ export default function UpdateProfile(props) {
                     <FormLabel>Name</FormLabel>
                     <InputGroup>
                     <HStack>
-                        <Input placeholder={t("firstname")} ref={firstNameRef} defaultValue={props.user.firstName}/>
-                        <Input placeholder={t("lastname")} ref={lastNameRef} defaultValue={props.user.lastName}/>
+                        <Input placeholder={t("account-settings.firstname")} ref={firstNameRef} defaultValue={props.user.firstName}/>
+                        <Input placeholder={t("account-settings.lastname")} ref={lastNameRef} defaultValue={props.user.lastName}/>
                     </HStack>
                     </InputGroup>
                 </FormControl>
@@ -132,7 +132,7 @@ export default function UpdateProfile(props) {
                     <InputGroup>
                     <Input
                         type="password"
-                        placeholder={t("leave-empty")}
+                        placeholder={t("account-settings.leave-empty")}
                         ref={passwordRef}
                     />
                     </InputGroup>
@@ -142,7 +142,7 @@ export default function UpdateProfile(props) {
                     <InputGroup>
                     <Input
                         type="password"
-                        placeholder={t("leave-empty")}
+                        placeholder={t("account-settings.leave-empty")}
                         ref={passwordConfirmRef}
                     />
                     </InputGroup>
@@ -177,7 +177,7 @@ export default function UpdateProfile(props) {
                     {t("account-settings.update")}
                 </Button>
                 </Stack>
-                <Center><Button w="100%" marginTop={3} mx={4} onClick={deleteAccount} colorScheme="red">Delete Account</Button></Center>
+                <Center><Button w="100%" marginTop={3} mx={4} onClick={deleteAccount} colorScheme="red">{t("account-settings.Delete Account")}</Button></Center>
             </Box>
         </Stack>
     </Box>

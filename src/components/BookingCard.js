@@ -44,7 +44,7 @@ export default function BookingCard(props) {
             boxShadow="lg"
             p={2}>
             <Box px={4} paddingTop={1}>
-                <Heading size="md">{t("BookingCard.Choose time to book")}</Heading>
+                <Heading size="md">{t("BookingCard.Choose time to borrow")}</Heading>
                 <Box marginTop={4} border="1px" borderColor="gray.300">
                     <DatePicker selected={startDate}
                         placeholderText="Start Date"
