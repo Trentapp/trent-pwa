@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect} from "react";
 import qs from "qs";
 import dotenv from "dotenv";
 import { useTranslation } from 'react-i18next';
@@ -16,7 +16,7 @@ const locationHD = {
 };
 
 const ProductsList = props => {
-  const {t, i18n} = useTranslation();
+  const {t} = useTranslation();
 
   const calcMaxDist = (zoom) => window.innerHeight*0.001*2**(16-zoom);
 

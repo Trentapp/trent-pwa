@@ -14,7 +14,7 @@ import ProductCard from './ProductCard';
 import { EditIcon } from '@chakra-ui/icons';
 
 const Profile = props => {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     const initialUserState = {name: "", mail: "", inventory: []}; //later probably replace mail with email
     const [profileUser, setProfileUser] = useState(initialUserState);

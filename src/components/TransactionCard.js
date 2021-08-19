@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import TransactionDataService from "../services/transaction-data";
 
 export default function TransactionCard(props) {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     const onCancelRequest = async () => {
         try {

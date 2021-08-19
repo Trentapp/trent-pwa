@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import TransactionDataService from "../services/transaction-data";
 
 export default function BookingCard(props) {
-    const [t, i18n] = useTranslation();
+    const {t} = useTranslation();
     
     const [startDate, setStartDate] = useState(null);//useState(new Date());
     const [endDate, setEndDate] = useState(null);//useState(new Date());

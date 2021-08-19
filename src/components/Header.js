@@ -23,7 +23,7 @@ import { useTranslation } from 'react-i18next';
 import {LogoSmall} from "./landing-page";
 
 export default function Header (props) {
-  const {t, i18n} = useTranslation();
+  const {t} = useTranslation();
 
   const [isLargerMd] = useMediaQuery("(min-width: 860px)")
 

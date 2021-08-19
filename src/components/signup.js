@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import UserDataService from "../services/user-data";
 
 export default function SignUp() {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     const firstNameRef = useRef();
     const lastNameRef = useRef();

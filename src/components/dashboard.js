@@ -8,7 +8,7 @@ import { Box, Button, Center, Container, Divider, Heading, HStack, VStack } from
 import TransactionCard from "./TransactionCard";
 
 const Dashboard = props => {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     const [newMessagesChats, setNewMessagesChats] = useState([]);
     const [newRequests, setNewRequests] = useState([]);

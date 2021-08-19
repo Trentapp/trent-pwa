@@ -10,7 +10,7 @@ import ProductDataService from "../services/product-data";
 
 //later: make location of product the location of the user by default
 const AddProduct = props => { 
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     const initialProductState = {
         name: "",
@@ -115,7 +115,7 @@ const AddProduct = props => {
     const saveProduct = async () => {
         try {
             if (product.prices.perDay < 0 || (product.prices.perDay*100)%1 !== 0 || product.prices.perHour < 0 || (product.prices.perHour*100)%1 !== 0) {
-                throw "no negative or non-integer cent prices allowed";
+                throw Error("no negative or non-integer cent prices allowed");
             }
             const fd = fileUploadHandler();//hopefully I don't run into update problems
             const blob = new Blob([JSON.stringify({product: {...product, prices: {perDay: product.prices.perDay*100, perHour: product.prices.perHour*100}}, uid: props.user.uid})], {type: "application/json"});

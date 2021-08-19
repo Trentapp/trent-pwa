@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
 export default function ForgotPassword() {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     const emailRef = useRef();
     const {resetPassword} = useAuth();

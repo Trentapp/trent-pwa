@@ -6,7 +6,7 @@ import TransactionCard from './TransactionCard';
 import TransactionDataService from "../services/transaction-data";
 
 export default function TransactionList(props) {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     const [transactions, setTransactions] = useState([]);
 

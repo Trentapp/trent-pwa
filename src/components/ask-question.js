@@ -3,7 +3,7 @@ import React from "react";
 import { useTranslation } from 'react-i18next';
 
 const QuestionForm = props => {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     return(
         <Modal isOpen={props.isOpen} onClose={() => props.setIsOpen(false)}>

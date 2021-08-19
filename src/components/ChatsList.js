@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import ChatDataService from "../services/chat-data";
 
 export default function ChatsList(props) {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     const [chats, setChats] = useState([]);
 

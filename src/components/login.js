@@ -7,7 +7,7 @@ import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, Ale
 
 
 export default function Login() {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     const emailRef = useRef();
     const passwordRef = useRef();

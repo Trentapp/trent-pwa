@@ -14,7 +14,7 @@ import AddProduct from "./add-product";
 import QuestionForm from "./ask-question";
 
 const Product = props => {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
     const [product, setProduct] = useState({prices: {}, user: {}}); //maybe add better initial state, though currently the information is shown conditionally
     // const [error, setError] = useState(""); //can get rid of that if redirect works
     // const [showQuestionForm, setShowQuestionForm] = useState(false);

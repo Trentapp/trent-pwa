@@ -5,7 +5,7 @@ import "../css/footer.css";
 import { useTranslation } from 'react-i18next';
 
 const Footer = props => {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     return(
         <div className="footer-basic">
@@ -25,7 +25,7 @@ const Footer = props => {
 export default Footer;
 
 export const ProductsListFooter = props => {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     return(
         <Box w="100%">

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route, useHistory, useLocation } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/styles.css";
 import { Box } from "@chakra-ui/react";
 

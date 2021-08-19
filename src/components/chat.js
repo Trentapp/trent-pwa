@@ -9,8 +9,6 @@ import ChatDataService from "../services/chat-data";
 // show it in simple boxes (google for sth like bootstrap chat)
 
 const Message = props => {
-    const {t, i18n} = useTranslation();
-
     return(
         <Box w="100%">
         {props.message.sender._id === props.user._id ? (
@@ -33,7 +31,7 @@ const Message = props => {
 }
 
 const Chat = props => {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     const [chat, setChat] = useState({product: ""});
     const [otherUser, setOtherUser] = useState([]);

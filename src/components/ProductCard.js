@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 
 export default function ProductCard(props) {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     return (
         <Box w={{base: "300px", md: "600px"}}>
@@ -39,7 +39,7 @@ export default function ProductCard(props) {
 
 
 export const ProductCard2 = (props) => {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     return (
         <Box w="100%" h={{base: "130px", md: "240px"}} onMouseOver={() => {console.log(props.product.name); props.setEnhanced(props.product)}} onMouseOut={() => props.setEnhanced(null)}>
@@ -78,7 +78,7 @@ export const ProductCard2 = (props) => {
 }
 
 export const ProductCardSmall = (props) => {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     return (
         <Box w="200px" h="67px">
@@ -120,7 +120,7 @@ const CardStyle = {
 };
 
 export const ProductCardFixed = (props) => {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     return (
         <Box w={{base: "300px", md: "600px"}} style={CardStyle}
