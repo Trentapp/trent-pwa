@@ -42,7 +42,7 @@ export const ProductCard2 = (props) => {
     const {t} = useTranslation();
 
     return (
-        <Box w="100%" h={{base: "130px", md: "240px"}} onMouseOver={() => {console.log(props.product.name); props.setEnhanced(props.product)}} onMouseOut={() => props.setEnhanced(null)}>
+        <Box w="100%" h={{base: "130px", md: "240px"}} onMouseOver={() => {props.setEnhanced(props.product)}} onMouseOut={() => props.setEnhanced(null)}>
             <Box _hover={{bg:"gray.100"}} h="100%">
             <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/product/${props.product._id}`}>
                 <HStack

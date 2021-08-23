@@ -8,7 +8,7 @@ import ProductDataService from "../services/product-data";
 import ChatDataService from "../services/chat-data";
 import { Box, Container, Heading, HStack, Divider, VStack, Text, Button, Center, IconButton, Stack } from "@chakra-ui/react";
 import ProfileCard from "./profileCard";
-import BookingCard from "./BookingCard";
+import BookingCard, { BookingCardSoon } from "./BookingCard";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import AddProduct from "./add-product";
 import QuestionForm from "./ask-question";
@@ -121,10 +121,10 @@ const Product = props => {
                         </Text>
                     </Box>
                     <Box>
-                        {props.user._id !== product.user._id ? <>
+                        {props.user._id !== product.user?._id ? <>
                             <Center>
                                 <VStack spacing="20px">
-                                        {process.env.REACT_APP_ENV === "dev" && <BookingCard user={props.user} product={product} />}
+                                        {product.free ? <BookingCard user={props.user} product={product} /> : <BookingCardSoon user={props.user} product={product} />}
                                         <Button borderRadius="lg" width="100%" onClick={() => setShowSendMessage(true)}>{t("product.Send Message")}</Button>
                                 </VStack>
                             </Center>
