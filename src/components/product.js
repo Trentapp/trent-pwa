@@ -107,7 +107,7 @@ const Product = props => {
                                 <VStack align="left">
                                     <Heading>{product.name}</Heading>
                                     {/* replace following with "{t("product.free")}" if {t("product.free")}, maybe make a button or so that shows that you make it {t("product.free")} */}
-                                    { (product.prices.perHour || product.prices.perDay) ? <Text textAlign="left" fontWeight="bold" color="gray.500">{product.prices.perHour !== undefined && product.prices.perHour !== 0 && <>{product.prices.perHour}€/hour </>}{product.prices.perDay !== undefined && product.prices.perDay !== 0 && <>{product.prices.perDay}€/day </>}</Text>
+                                    { (product.prices.perHour || product.prices.perDay) ? <Text textAlign="left" fontWeight="bold" color="gray.500">{product.prices?.perHour ? <>{product.prices.perHour}€/hour </> : <></>}{product.prices?.perDay ? <>{product.prices.perDay}€/day </> : <></>}</Text>
                                         : <Text textAlign="left" fontWeight="bold" color="gray.500">{t("product.free")}</Text>}
                                     {/*product.prices.perWeek !== undefined && <>{product.prices.perWeek}€/week </>}{product.prices.perMonth !== undefined && <>{product.prices.perMonth}€/month </>*/}
                                 </VStack>

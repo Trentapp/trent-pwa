@@ -22,6 +22,7 @@ export default function BookingCard(props) {
         } else if (props.product.prices.perHour) {
             return Math.ceil((endDate - startDate)/(1000*60*60)) * props.product.prices.perHour;
         }
+        return 0;
     }
 
     const onChangeStartDate = (date) => {
@@ -101,6 +102,7 @@ export const BookingCardSoon = (props) => {
         } else if (props.product.prices.perHour) {
             return Math.ceil((endDate - startDate)/(1000*60*60)) * props.product.prices.perHour;
         }
+        return 0;
     }
 
     const onChangeStartDate = (date) => {
