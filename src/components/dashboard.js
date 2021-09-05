@@ -20,7 +20,7 @@ const Dashboard = props => {
                 const response = await ChatDataService.getNewMessages(uid);
                 setNewMessagesChats(response.data);
             } catch(e) {
-                console.log("Error in get transactions by user: ", e);
+                console.log("Error in getNewMessages: ", e);
             }
         }
         const getNewRequests = async (uid) => {
@@ -28,7 +28,7 @@ const Dashboard = props => {
                 const response = await TransactionDataService.getNewRequests(uid);
                 setNewRequests(response.data);
             } catch(e) {
-                console.log("Error in get transactions by user: ", e);
+                console.log("Error in getNewRequests: ", e);
             }
         }
         const getUpcomingTransactions = async (uid) => {
@@ -36,7 +36,7 @@ const Dashboard = props => {
                 const response = await TransactionDataService.getUpcoming(uid);
                 setUpcomingTransactions(response.data);
             } catch(e) {
-                console.log("Error in get transactions by user: ", e);
+                console.log("Error in get upcoming transactions: ", e);
             }
         }
         getNewMessages(props.user?.uid);

@@ -46,7 +46,7 @@ export default function TransactionCard(props) {
                 </Center>
                 <VStack>
                     <Text fontWeight="bold">
-                        {props.transaction.borrower.name}{t("TransactionCard. borrowing ")}{props.transaction.product?.name}{t("TransactionCard. from ")}{props.transaction.lender.name}
+                        {props.transaction?.borrower?.name}{t("TransactionCard. borrowing ")}{props.transaction.product?.name}{t("TransactionCard. from ")}{props.transaction?.lender?.name}
                     </Text>
                     <Text color="gray.500"> {/* attention: currently only german date format */}
                         {(new Date(props.transaction.startDate)).toLocaleString("de")} - {(new Date(props.transaction.endDate)).toLocaleString("de")}
