@@ -76,7 +76,7 @@ const Chat = props => {
                             {chat.messages && chat.messages.map(message => <Message user={props.user} message={message} key={message._id}/>)}
                         </VStack>
                     </Box>
-                    {(chat.borrower.delted || chat.lender.deleted) ? <Heading marginTop={4} color="red.500">The other user was deleted. You cannot write any more messages.</Heading> :
+                    {(chat.borrower?.deleted || chat.lender?.deleted) ? <Heading marginTop={4} size="md" color="red.500">The other user was deleted. You cannot write any more messages.</Heading> :
                     <HStack marginTop={4} w="100%">
                         <Input borderColor="gray.400" type="text" ref={messageRef} />
                         <Button onClick={onSendMessage}>{t("chat.Send")}</Button>

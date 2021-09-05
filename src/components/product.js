@@ -124,8 +124,8 @@ const Product = props => {
                         {props.user._id !== product.user?._id ? <>
                             <Center>
                                 <VStack spacing="20px">
-                                        {product.free ? <BookingCard user={props.user} product={product} /> : <BookingCardSoon user={props.user} product={product} />}
-                                        <Button borderRadius="lg" width="100%" onClick={() => setShowSendMessage(true)}>{t("product.Send Message")}</Button>
+                                    {(product.free || process.env.REACT_APP_ENV === "dev") ? <BookingCard user={props.user} product={product} /> : <BookingCardSoon user={props.user} product={product} />}
+                                    <Button borderRadius="lg" width="100%" onClick={() => setShowSendMessage(true)}>{t("product.Send Message")}</Button>
                                 </VStack>
                             </Center>
                             </> : 

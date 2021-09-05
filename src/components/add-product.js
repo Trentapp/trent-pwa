@@ -31,6 +31,7 @@ const AddProduct = props => {
     const [product, setProduct] = useState(initialProductState);
     const history = useHistory();
     const [files, setFiles] = useState([]);
+    const [loading, setLoading] = useState(false);
     
     useEffect(() => {
         // async function getOldProduct() {
@@ -117,6 +118,7 @@ const AddProduct = props => {
             if (product.prices.perDay < 0 || (product.prices.perDay*100)%1 !== 0 || product.prices.perHour < 0 || (product.prices.perHour*100)%1 !== 0) {
                 throw Error("no negative or non-integer cent prices allowed");
             }
+            setLoading(true);
             const fd = fileUploadHandler();//hopefully I don't run into update problems
             const blob = new Blob([JSON.stringify({product: {...product, prices: {perDay: product.prices.perDay*100, perHour: product.prices.perHour*100}}, uid: props.user.uid})], {type: "application/json"});
             fd.append("product", blob);//probably change product to blob
@@ -197,7 +199,7 @@ const AddProduct = props => {
                 </ModalBody>
                 <ModalFooter>
                     <Center w="100%">
-                        <Button onClick={saveProduct} colorScheme="green" w="100%">
+                        <Button onClick={saveProduct} disabled={loading} colorScheme="green" w="100%">
                             {t("add-product.Submit")}
                         </Button>
                     </Center>
