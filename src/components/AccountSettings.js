@@ -130,7 +130,7 @@ export default function UpdateProfile(props) {
                     </HStack>
                     </InputGroup>
                 </FormControl>
-                <FormControl>
+                {/*<FormControl>
                     <FormLabel>{t("account-settings.new-pw")}</FormLabel>
                     <InputGroup>
                     <Input
@@ -149,7 +149,7 @@ export default function UpdateProfile(props) {
                         ref={passwordConfirmRef}
                     />
                     </InputGroup>
-                </FormControl>
+                </FormControl>*/}
                 <Flex text-align="left">
                     <Text mt={4}>{t("address.head")}</Text>
                 </Flex>
