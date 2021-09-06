@@ -10970,6 +10970,11 @@
     "@babel/runtime" "^7.14.5"
     "html-parse-stringify" "^3.0.1"
 
+"react-icons@^4.2.0":
+  "integrity" "sha512-rmzEDFt+AVXRzD7zDE21gcxyBizD/3NqjbX6cmViAgdqfJ2UiLer8927/QhhrXQV7dEj/1EGuOTPp7JnLYVJKQ=="
+  "resolved" "https://registry.npmjs.org/react-icons/-/react-icons-4.2.0.tgz"
+  "version" "4.2.0"
+
 "react-image-gallery@^1.2.6":
   "integrity" "sha512-+uL8RB3YrsXOtL95KY9oLWup2jww95qvvwsHOkRdV1SOImUO4qGuYh/0+M+vuqzBy7AB7G19+KhgucOPetn6+Q=="
   "resolved" "https://registry.npmjs.org/react-image-gallery/-/react-image-gallery-1.2.6.tgz"
