@@ -3,8 +3,9 @@ import React, {useRef, useState} from 'react';
 // import "bootstrap/dist/css/bootstrap.min.css";
 import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
-import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, Text } from '@chakra-ui/react';
+import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, Text, Icon, Divider } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
+import { AiFillApple, AiOutlineGoogle } from "react-icons/ai";
 
 import UserDataService from "../services/user-data";
 
@@ -16,10 +17,37 @@ export default function SignUp() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
-    const {signup} = useAuth();
+    const {signup, googleAuth, appleAuth} = useAuth();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const history = useHistory();
+
+    const signInGoogle = async () => {
+        try {
+            const res = await googleAuth();
+            const response = await UserDataService.get(res.user.uid);
+            if (!response.data) {
+                await UserDataService.createUser({user: {name: res.user.displayName, mail: res.user.email, uid: res.user.uid}})
+            }
+            window.location.reload();
+        } catch(e) {
+            console.log("Google auth failed: ", e);
+        }
+    }
+
+    const signInApple = async () => { // I'm not sure if sign in with apple works, I just hope it works like sign in with google
+        try {
+            const res = await appleAuth();
+            console.log("Result from apple auth: ", res);
+            const user = await UserDataService.get(res.user.uid);
+            if (!user) {
+                await UserDataService.createUser({user: {name: res.user.displayName, mail: res.user.email, uid: res.user.uid}})
+            }
+            window.location.reload();
+        } catch(e) {
+            console.log("Apple auth failed: ", e);
+        }
+    }
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -113,6 +141,15 @@ export default function SignUp() {
                 >
                     {t("signup.Sign Up")}
                 </Button>
+                <HStack>
+                    <Divider colorScheme="gray.400" />
+                    <Box minW="120px"><Text color="gray.400">or continue with</Text></Box>
+                    <Divider colorScheme="gray.400" />
+                </HStack>
+                <HStack w="100%" alignItems="center" justifyContent="center">
+                    <Button onClick={signInGoogle} w="48%"><Icon as={AiOutlineGoogle} /></Button>
+                    <Button onClick={signInApple} w="48%"><Icon as={AiFillApple} /></Button>
+                </HStack>
                 </Stack>
             </Box>
             <HStack>

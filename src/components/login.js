@@ -3,8 +3,10 @@ import { useTranslation } from 'react-i18next';
 
 import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
-import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, Text, HStack, Divider, Icon, IconButton } from '@chakra-ui/react';
+import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, Text, HStack, Divider, Icon } from '@chakra-ui/react';
 import { AiFillApple, AiOutlineGoogle } from "react-icons/ai";
+
+import UserDataService from "../services/user-data";
 
 export default function Login() {
     const {t} = useTranslation();
@@ -17,13 +19,30 @@ export default function Login() {
     const history = useHistory();
 
     const signInGoogle = async () => {
-        const res = await googleAuth();
-        console.log(res);
+        try {
+            const res = await googleAuth();
+            const response = await UserDataService.get(res.user.uid);
+            if (!response.data) {
+                await UserDataService.createUser({user: {name: res.user.displayName, mail: res.user.email, uid: res.user.uid}})
+            }
+            window.location.reload();
+        } catch(e) {
+            console.log("Google auth failed: ", e);
+        }
     }
 
-    const signInApple = async () => {
-        const res = await appleAuth();
-        console.log(res);
+    const signInApple = async () => { // I'm not sure if sign in with apple works, I just hope it works like sign in with google
+        try {
+            const res = await appleAuth();
+            console.log("Result from apple auth: ", res);
+            const user = await UserDataService.get(res.user.uid);
+            if (!user) {
+                await UserDataService.createUser({user: {name: res.user.displayName, mail: res.user.email, uid: res.user.uid}})
+            }
+            window.location.reload();
+        } catch(e) {
+            console.log("Apple auth failed: ", e);
+        }
     }
 
     async function handleSubmit(e) {
