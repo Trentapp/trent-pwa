@@ -30,7 +30,7 @@ import followInstagram from "../assets/follow-us-on-instagram.png";
 
 function App(props) {
   const history = useHistory();
-  if (window.location.pathname === "/" && props.user._id){
+  if (window.location.pathname === "/" && props.user?._id){
     history.push("/dashboard");
   }
   const mql = window.matchMedia('(max-width:1100px)');

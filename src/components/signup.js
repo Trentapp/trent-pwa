@@ -57,13 +57,13 @@ export default function SignUp() {
         try {
             setError(""); // I somehow get a warning "state update on unmounted component not possible". Maybe fix later.
             setLoading(true);
-            const signupResponse = await signup(emailRef.current.value, passwordRef.current.value);
-            console.log("firebase response: ", signupResponse);
+            let signupResponse = await signup(emailRef.current.value, passwordRef.current.value);
+            await signupResponse.user.sendEmailVerification();
             //firebase user.uid is correct, right? // probably change that below later (pass user directly as body)
             await UserDataService.createUser({user: {firstName: firstNameRef.current.value, lastName: lastNameRef.current.value, mail: emailRef.current.value, uid: signupResponse.user.uid}}) //use Promise.all() or so so that the firebase entry is not created if createUser fails (is that possible?)
             alert("Awesome! You are one of the first trent users - whoohoo!! As this is still a beta renting is not available yet. However we would really appreciate if you already posted some products and spread the word about trent. If you have questions or feedback we would love to hear from you at support@trentapp.com")
             history.push("/dashboard");
-            window.location.reload();
+            window.location.reload();//sometimes does not work properly right away (does not get user fast enough)
         } catch(err) {
             setError("Failed to create an account");
             console.log("Failed to create account: ", err);

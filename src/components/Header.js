@@ -56,7 +56,7 @@ export default function Header (props) {
             </InputGroup>
           </HStack>
           <Stack direction="row" align="center" spacing={8}>
-            {props.user._id ? 
+            {props.user?._id ? 
             <Menu>
               <MenuButton>
                 <HStack spacing="5px">

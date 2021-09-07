@@ -49,8 +49,11 @@ function App() {
   useEffect(() => {
     async function getUser() {
       try {
+        console.log(currentUser)
         const response = await UserDataService.get(currentUser.uid);
-        setUser(response.data);
+        if (user){
+          setUser(response.data);
+        }
       } catch (err) {
         console.log("error trying to get user: ", err);
       }
@@ -63,7 +66,7 @@ function App() {
   return (
     <>
     <Box className="wrapper flex-shrink-0">
-    {location.pathname !== '/landing-page' && (location.pathname !== '/' || user._id) && <FeedbackButton />}
+    {location.pathname !== '/landing-page' && (location.pathname !== '/' || user?._id) && <FeedbackButton />}
     <Header user={user} handleLogout={handleLogout}/>
       <Box>
         <Switch>

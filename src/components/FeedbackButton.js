@@ -20,7 +20,7 @@ export default function FeedbackButton() {
         </PopoverTrigger>
         <PopoverContent>
             <PopoverCloseButton />
-            Hi, if you have problems or feedback, we would love if you contact us: <a href="mailto:support@trentapp.com">support@trentapp.com</a>
+            Hi, if you have problems or feedback, we would love to hear from you: <a href="mailto:support@trentapp.com">support@trentapp.com</a>
         </PopoverContent>
     </Popover>
     )

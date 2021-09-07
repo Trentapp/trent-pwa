@@ -5,7 +5,7 @@ function LoggedOutRoute({component: Component, ...rest}) {
     return(
         <Route
             {...rest}
-            render={props => {return !(rest.user._id) ? <Component {...props} {...rest}/> : <Redirect to="/" />}}
+            render={props => {return !(rest.user?._id) ? <Component {...props} {...rest}/> : <Redirect to="/" />}}
         />
     )
 }
