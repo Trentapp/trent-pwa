@@ -13,6 +13,7 @@ export default function BookingCard(props) {
     const [startDate, setStartDate] = useState(null);//useState(new Date());
     const [endDate, setEndDate] = useState(null);//useState(new Date());
     const history = useHistory();
+    const [loading, setLoading] = useState(false);
 
     const calcPrice = () => {
         if (props.product.prices.perHour && props.product.prices.perDay){
@@ -40,6 +41,7 @@ export default function BookingCard(props) {
 
     const onBookRequest = async () => {
         try {
+            setLoading(true);
             const transaction = {
                 uid: props.user.uid,
                 productId: props.product._id,
@@ -49,7 +51,8 @@ export default function BookingCard(props) {
             await TransactionDataService.createTransaction(transaction);
             history.push("/dashboard");
         } catch(e) {
-            console.log("Failed to create transaction: ", e)
+            console.log("Failed to create transaction: ", e);
+            setLoading(false);
         }
     }
 
@@ -79,7 +82,7 @@ export default function BookingCard(props) {
                         dateFormat="MMMM d, yyyy h:mm aa"/>
                 </Box>
                 <Text fontWeight="bold" my={3}>Price: {calcPrice()}€</Text>
-                <Button w="100%" borderRadius="lg" display="flex" onClick={onBookRequest} bgGradient="linear(to-br, pink.500, red.500)" color="white" _hover={{ bgGradient:"linear(to-br, pink.600, red.600)" }}>Send booking request</Button>
+                <Button disabled={loading} w="100%" borderRadius="lg" display="flex" onClick={onBookRequest} bgGradient="linear(to-br, pink.500, red.500)" color="white" _hover={{ bgGradient:"linear(to-br, pink.600, red.600)" }}>Send booking request</Button>
             </Box>
         </Flex>
     )

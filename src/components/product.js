@@ -23,9 +23,11 @@ const Product = props => {
     const [images, setImages] = useState([]);
     const messageRef = useRef();
     let history = useHistory();
+    const [messageLoading, setMessageLoading] = useState(false);
 
     const onSendMessage = async () => {
         try {
+            setMessageLoading(true);
             const chat = {
                 uid: props.user.uid,
                 productId: product._id,
@@ -34,7 +36,8 @@ const Product = props => {
             const response = await ChatDataService.sendMessage(chat);
             history.push(`/chats/${response.data.chatId}`);
         } catch(e) {
-            console.log("Failed to send message: ", e)
+            console.log("Failed to send message: ", e);
+            setMessageLoading(false);
         }
     }
 
@@ -124,7 +127,7 @@ const Product = props => {
                         {props.user._id !== product.user?._id ? <>
                             <Center>
                                 <VStack spacing="20px">
-                                    {(product.free || process.env.REACT_APP_ENV === "dev") ? <BookingCard user={props.user} product={product} /> : <BookingCardSoon user={props.user} product={product} />}
+                                    {(product.free || process.env.REACT_APP_ENV === "dev") ? <BookingCard user={props.user} product={product} loading={messageLoading}/> : <BookingCardSoon user={props.user} product={product} />}
                                     <Button borderRadius="lg" width="100%" onClick={() => setShowSendMessage(true)}>{t("product.Send Message")}</Button>
                                 </VStack>
                             </Center>
