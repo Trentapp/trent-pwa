@@ -27,6 +27,7 @@ import { useAuth } from "./context/AuthContext";
 import UserDataService from "./services/user-data";
 import ChatsList from "./components/ChatsList";
 import TransactionList from "./components/TransactionList";
+import FeedbackButton from "./components/FeedbackButton";
 
 function App() {
 
@@ -62,7 +63,7 @@ function App() {
   return (
     <>
     <Box className="wrapper flex-shrink-0">
-    {/* {location.pathname !== '/landing-page' && (location.pathname !== '/' || user._id) && <Header user={user} handleLogout={handleLogout}/>} */}
+    {location.pathname !== '/landing-page' && (location.pathname !== '/' || user._id) && <FeedbackButton />}
     <Header user={user} handleLogout={handleLogout}/>
       <Box>
         <Switch>
