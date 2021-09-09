@@ -35,7 +35,9 @@ export default function BookingCard(props) {
     }
 
     const onChangeEndDate = (date) => {
-        setEndDate(date);
+        if (date > startDate){
+            setEndDate(date);
+        }
         //for Datetime (not Datepicker): setEndDate(date._d);
     }
 
@@ -71,7 +73,7 @@ export default function BookingCard(props) {
                         onChange={onChangeStartDate}
                         minDate={new Date()}
                         showTimeSelect
-                        dateFormat="MMMM d, yyyy h:mm aa"/> {/*Note: later we can easily add exclude_times and exclude_dates for times-available*/}
+                        dateFormat="MMMM d, yyyy HH:mm"/> {/*Note: later we can easily add exclude_times and exclude_dates for times-available*/}
                 </Box>
                 <Box marginTop={2} border="1px" borderColor="gray.300">
                     <DatePicker selected={endDate}
@@ -79,7 +81,7 @@ export default function BookingCard(props) {
                         onChange={onChangeEndDate}
                         minDate={new Date()}
                         showTimeSelect
-                        dateFormat="MMMM d, yyyy h:mm aa"/>
+                        dateFormat="MMMM d, yyyy HH:mm"/>
                 </Box>
                 <Text fontWeight="bold" my={3}>Price: {calcPrice()}€</Text>
                 <Button disabled={loading} w="100%" borderRadius="lg" display="flex" onClick={onBookRequest} bgGradient="linear(to-br, pink.500, red.500)" color="white" _hover={{ bgGradient:"linear(to-br, pink.600, red.600)" }}>Send booking request</Button>
