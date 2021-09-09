@@ -76,14 +76,14 @@ function App() {
             render={(props) => (<LandingPage {...props} user={user} />)} />
           <Route exact path={["/dashboard"]} 
             render={(props) => (<Dashboard {...props} user={user} />)} />
-          <PrivateRoute exact path="/inventory"
-            component={ProductsList} inventory={true} user={user}/>
+          {/* <PrivateRoute exact path="/inventory"
+            component={ProductsList} inventory={true} user={user}/> */}
           <Route path={["/products/product/:id", "/product/:id"]}
             render={(props) => (<Product {...props} user={user}/>)} />
-          <PrivateRoute exact path="/products/create"
+          {/* <PrivateRoute exact path="/products/create"
             component={AddProduct} user={user}/>
           <PrivateRoute exact path="/products/update/:id"
-            component={AddProduct} user={user}/>
+            component={AddProduct} user={user}/> */}
           <LoggedOutRoute path="/signup" component={SignUp} user={user}/>
           <LoggedOutRoute path="/login" component={LogIn} user={user}/>
           <LoggedOutRoute path="/forgot-password" component={ForgotPassword} user={user}/>

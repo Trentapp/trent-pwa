@@ -1,11 +1,13 @@
 import React from "react";
-import {Redirect, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
+
+import Login from "./login.js";
 
 function PrivateRoute({component: Component, ...rest}) {
     return(
         <Route
             {...rest}
-            render={props => {return rest.user?._id ? <Component {...props} {...rest}/> : <Redirect to="/login" />}}
+            render={props => {return rest.user?._id ? <Component {...props} {...rest}/> : <Login />}}
         />
     )
 }
