@@ -16,14 +16,17 @@ export default function BookingCard(props) {
     const [loading, setLoading] = useState(false);
 
     const calcPrice = () => {
+        let result;
         if (props.product.prices.perHour && props.product.prices.perDay){
-            return Math.min(Math.ceil((endDate - startDate)/(1000*60*60*24)) * props.product.prices.perDay, Math.ceil((endDate - startDate)/(1000*60*60)) * props.product.prices.perHour);
+            result = Math.min(Math.ceil((endDate - startDate)/(1000*60*60*24)) * props.product.prices.perDay, Math.ceil((endDate - startDate)/(1000*60*60)) * props.product.prices.perHour);
         } else if (props.product.prices.perDay) {
-            return Math.ceil((endDate - startDate)/(1000*60*60*24)) * props.product.prices.perDay;
+            result = Math.ceil((endDate - startDate)/(1000*60*60*24)) * props.product.prices.perDay;
         } else if (props.product.prices.perHour) {
-            return Math.ceil((endDate - startDate)/(1000*60*60)) * props.product.prices.perHour;
+            result = Math.ceil((endDate - startDate)/(1000*60*60)) * props.product.prices.perHour;
+        } else {
+            return 0;
         }
-        return 0;
+        return Math.round(result * 100) / 100;
     }
 
     const onChangeStartDate = (date) => {
