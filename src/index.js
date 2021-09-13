@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from "./context/AuthContext";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react"
 import { createBreakpoints } from "@chakra-ui/theme-tools"
+
+import './i18n';
 
 const colors = {
   brand: {
@@ -22,7 +24,9 @@ ReactDOM.render(
   <BrowserRouter>
     <ChakraProvider theme={extendedTheme}>
       <AuthProvider>
-        <App />
+        <Suspense fallback="loading">
+          <App />
+        </Suspense>
       </AuthProvider>
     </ChakraProvider>
   </BrowserRouter>,

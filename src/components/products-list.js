@@ -1,6 +1,7 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect} from "react";
 import qs from "qs";
 import dotenv from "dotenv";
+import { useTranslation } from 'react-i18next';
 
 import ProductDataService from "../services/product-data";
 import { ProductCard2 } from "./ProductCard";
@@ -15,7 +16,9 @@ const locationHD = {
 };
 
 const ProductsList = props => {
-    const calcMaxDist = (zoom) => window.innerHeight*0.001*2**(16-zoom);
+  const {t} = useTranslation();
+
+  const calcMaxDist = (zoom) => window.innerHeight*0.001*2**(16-zoom);
 
     const [products, setProducts] = useState([]);
     const initialZoom = 14
@@ -75,7 +78,7 @@ const ProductsList = props => {
               </Box>
               <Box  w={{base: "100%", md: "50%"}}>
                 <VStack divider={<StackDivider borderColor="gray.200" />}>
-                  {products?.length ? products.map((product) => <ProductCard2 product={product} setEnhanced={setEnhanced}/>) : <Text marginTop={3} fontSize="lg">No items found</Text>} {/* try similar products or increase search area (?) */}
+                  {products?.length ? products.map((product) => <ProductCard2 product={product} setEnhanced={setEnhanced}/>) : <Text marginTop={3} fontSize="lg">{t("products-list.No items found")}</Text>} {/* try similar products or increase search area (?) */}
                 </VStack>
               </Box>
             </Stack>
@@ -85,66 +88,5 @@ const ProductsList = props => {
 
 export default ProductsList;
 
+// todo: add filters
 
-/* <div className="col-lg-4 pb-3" key={product._id}>
-  <div className="card">
-    <div className="card-body">
-      <h5 className="card-title">{product.name}</h5>
-      {product.thumbnail && <img alt="ups" src={`data:${product.thumbnail.contentType};base64,${Buffer.from(product.thumbnail.data.data).toString('base64')}`}/>}
-      <p className="card-text">
-        <strong>Description: </strong>{product.desc}<br/>
-        <strong>Price per Hour: </strong>{product.prices.perHour}€<br/>
-        <strong>Price per Day: </strong>{product.prices.perDay}€
-      </p>
-      <div>
-        <Link to={`/products/product/${product._id}`} className="btn btn-primary col-lg-5 mx-1 mb-1">
-          View details
-        </Link>
-      </div>
-    </div>
-  </div>
-</div> */
-
-
-/* <div className="row pb-2">
-              <div className="input-group col-lg-4">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Search by name"
-                  value={filters.name}
-                  onChange={onChangeSearchName}
-                />
-              </div>
-              <div className="input-group col-lg-4">
-                <input
-                  type="number"
-                  className="form-control"
-                  placeholder="Maximum day price (in €)"
-                  value={filters.dayPriceMax}
-                  onChange={onChangeDayPriceFilter}
-                />
-                <input
-                  type="number"
-                  className="form-control"
-                  placeholder="Maximum hour price (in €)"
-                  value={filters.hourPriceMax}
-                  onChange={onChangeHourPriceFilter}
-                />
-              </div>
-            </div> */
-
-//const onChangeSearchName = e => {
-    //   e.persist();
-    //   setFilters(filters => ({...filters, name: e.target.value}));
-    // }
-
-    // const onChangeDayPriceFilter = e => {
-    //   e.persist();
-    //   setFilters(filters => ({...filters, dayPriceMax: e.target.value}));
-    // }
-
-    // const onChangeHourPriceFilter = e => {
-    //   e.persist();
-    //   setFilters(filters => ({...filters, hourPriceMax: e.target.value}));
-    // }

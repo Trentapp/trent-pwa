@@ -1,5 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react';
 import {auth} from "../firebase";
+//import { GoogleAuthProvider, OAuthProvider } from "firebase/auth";
+import firebase from "firebase/app";
 
 const AuthContext = React.createContext();
 
@@ -10,6 +12,16 @@ export function useAuth() {
 export function AuthProvider({children}) {
     const [currentUser, setCurrentUser] = useState();
     const [loading, setLoading] = useState(true);
+
+    const googleAuth = () => {
+        const googleProvider = new firebase.auth.GoogleAuthProvider();
+        return auth.signInWithPopup(googleProvider);
+    }
+
+    const appleAuth = () => {
+        const appleProvider = new firebase.auth.OAuthProvider('apple.com');
+        return auth.signInWithPopup(appleProvider);
+    }
 
     function signup(email, password) {
         return auth.createUserWithEmailAndPassword(email, password);
@@ -46,6 +58,8 @@ export function AuthProvider({children}) {
         logout,
         resetPassword,
         updatePassword,
+        appleAuth,
+        googleAuth
     };
 
     return (

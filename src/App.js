@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route, useHistory, useLocation } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/styles.css";
 import { Box } from "@chakra-ui/react";
 
@@ -28,8 +27,10 @@ import { useAuth } from "./context/AuthContext";
 import UserDataService from "./services/user-data";
 import ChatsList from "./components/ChatsList";
 import TransactionList from "./components/TransactionList";
+import FeedbackButton from "./components/FeedbackButton";
 
 function App() {
+
   const { currentUser, logout } = useAuth();
   const history = useHistory();
   const [user, setUser] = useState({ name: "", address: { street: "", houseNumber: "", zipcode: "", city: "", country: "" } });
@@ -48,8 +49,11 @@ function App() {
   useEffect(() => {
     async function getUser() {
       try {
+        console.log(currentUser)
         const response = await UserDataService.get(currentUser.uid);
-        setUser(response.data);
+        if (user){
+          setUser(response.data);
+        }
       } catch (err) {
         console.log("error trying to get user: ", err);
       }
@@ -62,7 +66,7 @@ function App() {
   return (
     <>
     <Box className="wrapper flex-shrink-0">
-    {/* {location.pathname !== '/landing-page' && (location.pathname !== '/' || user._id) && <Header user={user} handleLogout={handleLogout}/>} */}
+    {location.pathname !== '/landing-page' && (location.pathname !== '/' || user?._id) && <FeedbackButton />}
     <Header user={user} handleLogout={handleLogout}/>
       <Box>
         <Switch>
@@ -72,14 +76,14 @@ function App() {
             render={(props) => (<LandingPage {...props} user={user} />)} />
           <Route exact path={["/dashboard"]} 
             render={(props) => (<Dashboard {...props} user={user} />)} />
-          <PrivateRoute exact path="/inventory"
-            component={ProductsList} inventory={true} user={user}/>
+          {/* <PrivateRoute exact path="/inventory"
+            component={ProductsList} inventory={true} user={user}/> */}
           <Route path={["/products/product/:id", "/product/:id"]}
             render={(props) => (<Product {...props} user={user}/>)} />
-          <PrivateRoute exact path="/products/create"
+          {/* <PrivateRoute exact path="/products/create"
             component={AddProduct} user={user}/>
           <PrivateRoute exact path="/products/update/:id"
-            component={AddProduct} user={user}/>
+            component={AddProduct} user={user}/> */}
           <LoggedOutRoute path="/signup" component={SignUp} user={user}/>
           <LoggedOutRoute path="/login" component={LogIn} user={user}/>
           <LoggedOutRoute path="/forgot-password" component={ForgotPassword} user={user}/>

@@ -1,8 +1,11 @@
 import { HStack, Image, VStack, Text, Heading, Box, Center } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next';
 
 export default function ProductCard(props) {
+    const {t} = useTranslation();
+
     return (
         <Box w={{base: "300px", md: "600px"}}>
             <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/product/${props.product._id}`}>
@@ -20,7 +23,7 @@ export default function ProductCard(props) {
                         <Box w="100%">
                             <HStack justify="space-between" paddingLeft={2} paddingRight={3}>
                                 <Heading as="h3" size="md">{props.product.name}</Heading>
-                                <Heading as="h3" size="md">{props.product.prices.perDay}€/day</Heading>
+                                <Heading as="h3" size="md">{props.product.prices.perDay}{t("ProductCard.€/day")}</Heading>
                             </HStack>
                         </Box>
                         <Box w="100%" textAlign="left" px={2}>
@@ -36,8 +39,10 @@ export default function ProductCard(props) {
 
 
 export const ProductCard2 = (props) => {
+    const {t} = useTranslation();
+
     return (
-        <Box w="100%" h={{base: "130px", md: "240px"}} onMouseOver={() => {console.log(props.product.name); props.setEnhanced(props.product)}} onMouseOut={() => props.setEnhanced(null)}>
+        <Box w="100%" h={{base: "130px", md: "240px"}} onMouseOver={() => {props.setEnhanced(props.product)}} onMouseOut={() => props.setEnhanced(null)}>
             <Box _hover={{bg:"gray.100"}} h="100%">
             <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/product/${props.product._id}`}>
                 <HStack
@@ -57,7 +62,7 @@ export const ProductCard2 = (props) => {
                         <Box w="100%">
                             <HStack justify="space-between" paddingLeft={2} paddingRight={4}>
                                 <Heading as="h3" size="md">{props.product.name}</Heading>
-                                <Heading as="h3" size="md">{props.product.prices.perDay}€/day</Heading>
+                                <Heading as="h3" size="md">{props.product.prices.perDay}{t("ProductCard.€/day")}</Heading>
                             </HStack>
                         </Box>
                         <Box w="100%" textAlign="left" px={2}>
@@ -73,6 +78,8 @@ export const ProductCard2 = (props) => {
 }
 
 export const ProductCardSmall = (props) => {
+    const {t} = useTranslation();
+
     return (
         <Box w="200px" h="67px">
             <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/product/${props.product._id}`}>
@@ -93,7 +100,7 @@ export const ProductCardSmall = (props) => {
                         <Box w="100%">
                             <HStack justify="space-between" paddingLeft={2} paddingRight={3}>
                                 <Heading as="h3" size="md">{props.product.name}</Heading>
-                                <Heading as="h3" size="md">{props.product.prices.perDay}€/day</Heading>
+                                <Heading as="h3" size="md">{props.product.prices.perDay}{t("ProductCard.€/day")}</Heading>
                             </HStack>
                         </Box>
                         <Box w="100%" textAlign="left" px={2}>
@@ -113,6 +120,8 @@ const CardStyle = {
 };
 
 export const ProductCardFixed = (props) => {
+    const {t} = useTranslation();
+
     return (
         <Box w={{base: "300px", md: "600px"}} style={CardStyle}
             bottom="35px"
@@ -132,7 +141,7 @@ export const ProductCardFixed = (props) => {
                         <Box w="100%">
                             <HStack justify="space-between" paddingLeft={2} paddingRight={3}>
                                 <Heading as="h3" size="md">{props.product.name}</Heading>
-                                <Heading as="h3" size="md">{props.product.prices.perDay}€/day</Heading>
+                                <Heading as="h3" size="md">{props.product.prices.perDay}{t("ProductCard.€/day")}</Heading>
                             </HStack>
                         </Box>
                         <Box w="100%" textAlign="left" px={2}>

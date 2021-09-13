@@ -3,21 +3,51 @@ import React, {useRef, useState} from 'react';
 // import "bootstrap/dist/css/bootstrap.min.css";
 import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
-import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, Text } from '@chakra-ui/react';
-
+import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, Text, Icon, Divider } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
+import { AiFillApple, AiOutlineGoogle } from "react-icons/ai";
 
 import UserDataService from "../services/user-data";
 
 export default function SignUp() {
+    const {t} = useTranslation();
+
     const firstNameRef = useRef();
     const lastNameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
-    const {signup} = useAuth();
+    const {signup, googleAuth, appleAuth} = useAuth();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const history = useHistory();
+
+    const signInGoogle = async () => {
+        try {
+            const res = await googleAuth();
+            const response = await UserDataService.get(res.user.uid);
+            if (!response.data) {
+                await UserDataService.createUser({user: {name: res.user.displayName, mail: res.user.email, uid: res.user.uid}})
+            }
+            window.location.reload();
+        } catch(e) {
+            console.log("Google auth failed: ", e);
+        }
+    }
+
+    const signInApple = async () => { // I'm not sure if sign in with apple works, I just hope it works like sign in with google
+        try {
+            const res = await appleAuth();
+            console.log("Result from apple auth: ", res);
+            const user = await UserDataService.get(res.user.uid);
+            if (!user) {
+                await UserDataService.createUser({user: {name: res.user.displayName, mail: res.user.email, uid: res.user.uid}})
+            }
+            window.location.reload();
+        } catch(e) {
+            console.log("Apple auth failed: ", e);
+        }
+    }
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -27,13 +57,13 @@ export default function SignUp() {
         try {
             setError(""); // I somehow get a warning "state update on unmounted component not possible". Maybe fix later.
             setLoading(true);
-            const signupResponse = await signup(emailRef.current.value, passwordRef.current.value);
-            console.log("firebase response: ", signupResponse);
+            let signupResponse = await signup(emailRef.current.value, passwordRef.current.value);
+            await signupResponse.user.sendEmailVerification();
             //firebase user.uid is correct, right? // probably change that below later (pass user directly as body)
             await UserDataService.createUser({user: {firstName: firstNameRef.current.value, lastName: lastNameRef.current.value, mail: emailRef.current.value, uid: signupResponse.user.uid}}) //use Promise.all() or so so that the firebase entry is not created if createUser fails (is that possible?)
             alert("Awesome! You are one of the first trent users - whoohoo!! As this is still a beta renting is not available yet. However we would really appreciate if you already posted some products and spread the word about trent. If you have questions or feedback we would love to hear from you at support@trentapp.com")
             history.push("/dashboard");
-            window.location.reload();
+            window.location.reload();//sometimes does not work properly right away (does not get user fast enough)
         } catch(err) {
             setError("Failed to create an account");
             console.log("Failed to create account: ", err);
@@ -63,7 +93,7 @@ export default function SignUp() {
                 border="1px"
                 borderColor="gray.400"
                 >
-                <Heading size="lg">Sign Up</Heading>
+                <Heading size="lg">{t("signup.Sign Up")}</Heading>
                 {error && <Alert status="error">
                     <AlertIcon />
                     {error}
@@ -71,21 +101,21 @@ export default function SignUp() {
                 <FormControl>
                     <InputGroup>
                     <HStack>
-                        <Input placeholder="First name" ref={firstNameRef}/>
-                        <Input placeholder="Last name" ref={lastNameRef}/>
+                        <Input placeholder={t("signup-placeholders.First name")} ref={firstNameRef}/>
+                        <Input placeholder={t("signup-placeholders.Last name")} ref={lastNameRef}/>
                     </HStack>
                     </InputGroup>
                 </FormControl>
                 <FormControl>
                     <InputGroup>
-                    <Input type="email" placeholder="email address" ref={emailRef} />
+                    <Input type="email" placeholder={t("signup-placeholders.email address")} ref={emailRef} />
                     </InputGroup>
                 </FormControl>
                 <FormControl>
                     <InputGroup>
                     <Input
                         type="password"
-                        placeholder="password"
+                        placeholder={t("signup-placeholders.password")}
                         ref={passwordRef}
                     />
                     </InputGroup>
@@ -94,12 +124,12 @@ export default function SignUp() {
                     <InputGroup>
                     <Input
                         type="password"
-                        placeholder="confirm password"
+                        placeholder={t("signup-placeholders.confirm password")}
                         ref={passwordConfirmRef}
                     />
                     </InputGroup>
                 </FormControl>
-                <Text>By signing up you agree to our <a style={{color: "#2b6cb0"}} target="_blank" rel="noopener noreferrer" href="/AllgemeineNutzungsbedingungen.pdf">Terms and Conditions</a>.</Text>
+                <Text>{t("signup.By signing up you agree to our ")}<a style={{color: "#2b6cb0"}} target="_blank" rel="noopener noreferrer" href="/AllgemeineNutzungsbedingungen.pdf">{t("signup.Terms and Conditions")}</a> {t("signup.T&Cend")}.</Text>
                 <Button
                     borderRadius={0}
                     type="submit"
@@ -109,53 +139,26 @@ export default function SignUp() {
                     onClick={handleSubmit}
                     disabled={loading}
                 >
-                    Sign Up
+                    {t("signup.Sign Up")}
                 </Button>
+                <HStack>
+                    <Divider colorScheme="gray.400" />
+                    <Box minW="120px"><Text color="gray.400">or continue with</Text></Box>
+                    <Divider colorScheme="gray.400" />
+                </HStack>
+                <HStack w="100%" alignItems="center" justifyContent="center">
+                    <Button onClick={signInGoogle} w="48%"><Icon as={AiOutlineGoogle} /></Button>
+                    <Button onClick={signInApple} w="48%"><Icon as={AiFillApple} /></Button>
+                </HStack>
                 </Stack>
             </Box>
             <HStack>
-                <Text>Already have an account?{" "}</Text>
+                <Text>{t("signup.Already have an account? ")}</Text>
                 <Link to="/login">
-                    <Text fontWeight="bold" color="blue.600">Log In</Text>
+                    <Text fontWeight="bold" color="blue.600">{t("signup.Log In")}</Text>
                 </Link>
             </HStack>
         </Stack>
     </Box>
     );
 }
-
-        // <Container className="d-flex align-items-center justify-content-center" style={{minHeight: "100vh"}}>
-        //     <div className="w-100" style={{maxWidth: "400px"}}>
-        //         <Card>
-        //             <Card.Body>
-        //                 <h2 className="text-center mb-4">Sign Up</h2>
-        //                 {error && <Alert variant="danger">{error}</Alert>}
-        //                 <Form onSubmit={handleSubmit}>
-        //                     <Form.Group id="name">
-        //                         <Form.Label>Full Name</Form.Label>
-        //                         <Form.Control type="text" ref={nameRef} required />
-        //                     </Form.Group>
-        //                     <Form.Group id="email">
-        //                         <Form.Label>Email</Form.Label>
-        //                         <Form.Control type="email" ref={emailRef} required />
-        //                     </Form.Group>
-        //                     <Form.Group id="password">
-        //                         <Form.Label>Password</Form.Label>
-        //                         <Form.Control type="password" ref={passwordRef} required />
-        //                     </Form.Group>
-        //                     <Form.Group id="password-confirm">
-        //                         <Form.Label>Confirm Password</Form.Label>
-        //                         <Form.Control type="password" ref={passwordConfirmRef} required />
-        //                     </Form.Group>
-        //                     <Button disabled={loading} className="w-100 mt-3" type="submit">
-        //                         Sign Up
-        //                     </Button>
-        //                 </Form>
-        //             </Card.Body>
-        //         </Card>
-        //         <div className="w-100 text-center mt-2">
-        //             Already have an account? <Link to="/login">Log In</Link>
-        //         </div>  
-        //     </div>
-        // </Container>
-

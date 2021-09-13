@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from "react-router-dom";
 import StarRatings from "react-star-ratings";
+import { useTranslation } from 'react-i18next';
 
 import UserDataService from "../services/user-data";
 import ReviewDataService from "../services/reviews-data";
@@ -13,6 +14,8 @@ import ProductCard from './ProductCard';
 import { EditIcon } from '@chakra-ui/icons';
 
 const Profile = props => {
+    const {t} = useTranslation();
+
     const initialUserState = {name: "", mail: "", inventory: []}; //later probably replace mail with email
     const [profileUser, setProfileUser] = useState(initialUserState);
     const [showAddProduct, setShowAddProduct] = useState(false);
@@ -72,24 +75,24 @@ const Profile = props => {
                             <Avatar size="4xl" src={profileUser.picture && `data:${profileUser.picture.contentType};base64,${Buffer.from(profileUser.picture.data.data).toString('base64')}`} />
                         </Box>
                         <Box px={3}>
-                            <Heading size="md" paddingTop={2}>{profileUser.name}</Heading>
+                            <Heading size="md" paddingTop={2} textAlign="center">{profileUser.name}</Heading>
                             <HStack>
                                 <StarRatings rating={profileUser.rating} starRatedColor="rgb(250,200,30)" starDimension="16px" starSpacing="2px"/>
                                 <Text fontWeight="bold">({profileUser.numberOfRatings})</Text>
                             </HStack>
                         </Box>
                         {profileUser._id === props.user._id && <Link to="/account-settings"><IconButton icon={<EditIcon/>} /></Link>}
-                        {/* {profileUser._id === props.user._id && <Button>Upload profile picture</Button>} */}
+                        {/* {profileUser._id === props.user._id && <Button>{t("Profile.Upload profile picture")}</Button>} */}
                         {/*later add description (about me): <Text></Text> */}
                     </VStack>
                     <VStack minW={["250px", "400px"]} pb={3}>
                         <Box w="100%" paddingBottom={3}>
-                            <Center><Heading size="lg">Inventory of {profileUser.name}</Heading></Center>
+                            <Center><Heading size="lg">{t("Profile.Inventory of ")}{profileUser.name}</Heading></Center>
                             <Divider color="gray.500" />
                         </Box>
                         {profileUser._id === props.user._id && 
                             <Button width="100%" colorScheme="green" onClick={() => setShowAddProduct(true)}>
-                                Add new item
+                                {t("Profile.Add new item")}
                             </Button>
                         }
                         <VStack spacing="15px" paddingTop={4}>
@@ -110,22 +113,4 @@ const Profile = props => {
 
 export default Profile;
 
-        // <div>
-        //     {error ? error : (
-        //         <div>
-        //             <h2>{profileUser.name}</h2>
-        //             {profileUser.rating > 0 && <p>Rating: {profileUser.rating}: <StarRatings rating={profileUser.rating} starRatedColor="rgb(250,200,30)" starDimension="28px" />
-        //             </p>}
-        //             {profileUser.picture && <img alt="ups" src={`data:${profileUser.picture.contentType};base64,${Buffer.from(profileUser.picture.data.data).toString('base64')}`}/>}
-        //             {(props.user._id === profileUser._id) && <p><Link to="/update-profile">Update Profile</Link></p>}
-        //             <br/>
-        //             {openReview && <AddReview ratedUserId={props.match.params.id} user={props.user}/>}
-        //             <h2>Reviews</h2>
-        //             {reviews.length > 0 ? reviews.map(review => <Review review={review} user={props.user} key={review._id}/>) : <p>This user has not received any reviews yet.</p>}
-        //         </div>
-        //     )}
-        // </div>
-
-/* <Flex borderRadius="3xl" overflow="hidden">
-    {profileUser.picture && <Image src={`data:${profileUser.picture.contentType};base64,${Buffer.from(profileUser.picture.data.data).toString('base64')}`} />}
-</Flex> */
+// todo: map reviews: {reviews.length > 0 ? reviews.map(review => <Review review={review} user={props.user} key={review._id}/>) : <p>{t("Profile.This user has not received any reviews yet.")}</p>}
