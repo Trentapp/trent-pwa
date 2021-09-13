@@ -170,5 +170,8 @@
         "City": "Stadt",
         "Country": "Land"
     },
-    "Reset Password": "Passwort zurücksetzen"
+    "Reset Password": "Passwort zurücksetzen",
+    "feedback": {
+        "HearFromYou": "Hi, wenn du Probleme hast oder Feedback geben willst, würden wir uns freuen, von dir zu hören: "
+    }
 }

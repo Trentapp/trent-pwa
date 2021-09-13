@@ -18,7 +18,7 @@ class UserDataService {
     }
 
     deleteUser(uid) {
-        return http.delete(`/users/delete`, uid);
+        return http.post(`/users/delete`, {uid: uid});
     }
 
     uploadPicture(data) {

@@ -6,11 +6,44 @@ from googletrans import Translator
 prefix = "./components/"
 #files without account settings because it was already done manually
 #do datenschutz and impressum separately
-files = ["add-product", "add-review", "ask-question", "booking-request", "BookingCard", "chat", "ChatsList", "dashboard", "footer", "ForgotPassword", "login", "NotFound", "ProductCard", "products-list", "Profile", "profileCard", "Review", "signup", "TransactionCard", "TransactionList"]
+#files = ["add-product", "add-review", "ask-question", "booking-request", "BookingCard", "chat", "ChatsList", "dashboard", "footer", "ForgotPassword", "login", "NotFound", "ProductCard", "products-list", "Profile", "profileCard", "Review", "signup", "TransactionCard", "TransactionList"]
 suffix = ".js"
 trans = Translator()
+files = ["FeedbackButton"]
+lng="de"
+obj={}
+for filename in files:
+    with open(prefix+filename+suffix, "r") as file:
+        f = file.read()
+        obj[filename] = {}
+        linkpatt = r'="(/[\w\.]*)*"'
+        f = re.sub(linkpatt, "", f)
+        parampatt = r'={[\w\.?+-;:=>()!/*]*}'
+        objpatt = r'[(]*{[\w\s,;:?!&\./(=)%€$-]*}[)]*' # should include all objects and already translated sections
+        f = re.sub(parampatt, "", f)
+        f = re.sub(objpatt, "</><>", f)#deleting objects so they are not shown
+        pattern = r'<[\w\s{}%"\.=]*>[\w\s{}()!?:;%/€,\."]+</[\w]*>'
+        tagpatt = r'<[/]*[\w\s{}%"\.=]*>'
+        texts = re.findall(pattern, f)
+        for text in texts:
+            text = re.sub(tagpatt, "", text)
+            text = re.sub("  ", "", text)
+            text = re.sub("\n", "", text)
+            if text != "":
+                obj[filename][text] = text
+
+# Todo: test if the results are right, edit english translation script, edit texts to translation text (don't forget file.+"rest of text"), implement translate json
+
+
+
+
+
+
+
+
 # lng = "de"
 # obj = {}
+# # finding strings of the translation style {t('...')} and translating them to other language
 # for filename in files:
 #     with open(prefix+filename+suffix, "r") as file:
 #         f = file.read()
@@ -24,11 +57,12 @@ trans = Translator()
 #                 obj[filename][text] = trans.translate(text, src="en", dest=lng).text
                 
 # print(json.dumps(obj, indent=4))
-# with open("../public/locales/de/translation.json", "w") as file:
+# with open("../public/locales/"+lng+"/translation.json", "w") as file:
 #    file.write(json.dumps(obj, indent=4))
 #translating english to json-english
 """
 obj = {}
+# finding strings to be translated
 for filename in files:
     with open(prefix+filename+suffix, "r") as file:
         f = file.read()
@@ -36,21 +70,18 @@ for filename in files:
         linkpatt = r'="(/[\w\.]*)*"'
         f = re.sub(linkpatt, "", f)
         parampatt = r'={[\w\.?+-;:=>()!/*]*}'
-        objpatt = r'[(]*{[\w\.?]*}[)]*'
+        objpatt = r'[(]*{[\w\.?]*}[)]*' # do objects include all already translated strings? (I think not)
         f = re.sub(parampatt, "", f)
         f = re.sub(objpatt, "</><>", f)#deleting objects so they are not shown
         pattern = r'<[\w\s{}%"\.=]*>[\w\s{}()!?:;%/€,\."]+</[\w]*>'
         tagpatt = r'<[/]*[\w\s{}%"\.=]*>'
-        # did not work :
-        # pattern = r'<[\w\s{}%"\.=]*("[/\w\.${}]*")*[\w\s{}%"\.=]*>[\w\s{}()!?:;%/€,\."]+</[\w]*>'
-        # tagpatt = r'<[/]*[\w\s{}%"\.=]*("[/\w\.${}]*")*[\w\s{}%"\.=]*>'
         texts = re.findall(pattern, f)
         for text in texts:
             text = re.sub(tagpatt, "", text)
             text = re.sub("  ", "", text)
             text = re.sub("\n", "", text)
             if text != "":
-                obj[filename][text] = text.replace("{", "{{").replace("}", "}}")
+                obj[filename][text] = text
 
 #problem: the strings may not be unique and may be substrings of other parts of the page that should not be changed (e.g. Send also makes replace onSendMessage)
 for filename, dic in obj.items(): #[("Profile", obj["Profile"])]: 
@@ -58,15 +89,7 @@ for filename, dic in obj.items(): #[("Profile", obj["Profile"])]:
     with open(prefix+filename+suffix, "r+") as file:
         f = file.read()
         for key, phrase in dic.items():
-            attach = ""
-            # from other option where you populated objects in translation:
-            # objpatt = r'{[\w\.]*}'
-            # objects = re.findall(objpatt, key)
-            # for o in objects:
-            #     attach += '"' + o[1:-1] + '"' + ": " + o[1:-1] + ", "
-            # if attach != "":
-            #     attach = ", {" + attach[:-2] + "}"
-            f = re.sub(key, '{t("'+key+'"'+attach+')}', f)
+            f = re.sub(key, '{t("'+key+'"'+')}', f)
     # print(f)
     # with open(prefix+filename+suffix, "w") as file:
     #     file.write(f)

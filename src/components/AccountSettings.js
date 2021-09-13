@@ -27,11 +27,14 @@ export default function UpdateProfile(props) {
         let result = window.confirm(t("account-settings.delete.certain"));
         if (result) {
             try {
-                await UserDataService.deleteUser(props.user.uid);
                 await currentUser.delete();
+                await UserDataService.deleteUser(props.user.uid);
                 history.push("/");
             } catch (e) {
                 console.log("Failed to delete user: ", e);
+                if (e?.code === "auth/requires-recent-login") {
+                    alert("Deleting user requires recent authentication. Log out and in and then try again.")
+                }
             }
         }
     }
@@ -127,7 +130,7 @@ export default function UpdateProfile(props) {
                     </HStack>
                     </InputGroup>
                 </FormControl>
-                <FormControl>
+                {/*<FormControl>
                     <FormLabel>{t("account-settings.new-pw")}</FormLabel>
                     <InputGroup>
                     <Input
@@ -146,7 +149,7 @@ export default function UpdateProfile(props) {
                         ref={passwordConfirmRef}
                     />
                     </InputGroup>
-                </FormControl>
+                </FormControl>*/}
                 <Flex text-align="left">
                     <Text mt={4}>{t("address.head")}</Text>
                 </Flex>

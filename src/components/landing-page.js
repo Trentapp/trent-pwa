@@ -3,6 +3,8 @@ import styled from 'styled-components'; //import {css} from ...
 import "../css/styles.css";
 import {Link, useHistory} from "react-router-dom";
 import { Box, Center, Flex, Image, Text, VStack } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
+
 
 // import anitaDenunzioQa8Bs887Id8Unsplash1 from "../assets/anita-denunzio-qa8bs887id8-unsplash-1-1@1x.png";
 // import rectangle19 from "../assets/rectangle-19-1@1x.svg";
@@ -20,7 +22,8 @@ import { Box, Center, Flex, Image, Text, VStack } from '@chakra-ui/react';
 import logoBeta from "../assets/logo_beta.png";
 
 //new landing page with images
-import page from "../assets/landing-page.png";
+import pageEnglish from "../assets/landing-page-english.png";
+import pageGerman from "../assets/landing-page-german.png";
 import insta1 from "../assets/insta-post/img1.JPEG";
 import insta2 from "../assets/insta-post/img2.jpg";
 import insta3 from "../assets/insta-post/img3.jpg";
@@ -30,7 +33,7 @@ import followInstagram from "../assets/follow-us-on-instagram.png";
 
 function App(props) {
   const history = useHistory();
-  if (window.location.pathname === "/" && props.user._id){
+  if (window.location.pathname === "/" && props.user?._id){
     history.push("/dashboard");
   }
   const mql = window.matchMedia('(max-width:1100px)');
@@ -45,9 +48,11 @@ function App(props) {
 }
 
 const LandingPageLarge = (props) => {
+  const {i18n} = useTranslation();
+
   return (
     <>
-    <Image w="100%" src={page} />
+    <Image w="100%" src={i18n.language === "en" ? pageEnglish : pageGerman} />
     </>
   )
 }

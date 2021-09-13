@@ -8,7 +8,7 @@ import ProductDataService from "../services/product-data";
 import ChatDataService from "../services/chat-data";
 import { Box, Container, Heading, HStack, Divider, VStack, Text, Button, Center, IconButton, Stack } from "@chakra-ui/react";
 import ProfileCard from "./profileCard";
-import BookingCard from "./BookingCard";
+import BookingCard, { BookingCardSoon } from "./BookingCard";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import AddProduct from "./add-product";
 import QuestionForm from "./ask-question";
@@ -23,9 +23,11 @@ const Product = props => {
     const [images, setImages] = useState([]);
     const messageRef = useRef();
     let history = useHistory();
+    const [messageLoading, setMessageLoading] = useState(false);
 
     const onSendMessage = async () => {
         try {
+            setMessageLoading(true);
             const chat = {
                 uid: props.user.uid,
                 productId: product._id,
@@ -34,7 +36,8 @@ const Product = props => {
             const response = await ChatDataService.sendMessage(chat);
             history.push(`/chats/${response.data.chatId}`);
         } catch(e) {
-            console.log("Failed to send message: ", e)
+            console.log("Failed to send message: ", e);
+            setMessageLoading(false);
         }
     }
 
@@ -107,7 +110,7 @@ const Product = props => {
                                 <VStack align="left">
                                     <Heading>{product.name}</Heading>
                                     {/* replace following with "{t("product.free")}" if {t("product.free")}, maybe make a button or so that shows that you make it {t("product.free")} */}
-                                    { (product.prices.perHour || product.prices.perDay) ? <Text textAlign="left" fontWeight="bold" color="gray.500">{product.prices.perHour !== undefined && product.prices.perHour !== 0 && <>{product.prices.perHour}€/hour </>}{product.prices.perDay !== undefined && product.prices.perDay !== 0 && <>{product.prices.perDay}€/day </>}</Text>
+                                    { (product.prices.perHour || product.prices.perDay) ? <Text textAlign="left" fontWeight="bold" color="gray.500">{product.prices?.perHour ? <>{product.prices.perHour}€/hour </> : <></>}{product.prices?.perDay ? <>{product.prices.perDay}€/day </> : <></>}</Text>
                                         : <Text textAlign="left" fontWeight="bold" color="gray.500">{t("product.free")}</Text>}
                                     {/*product.prices.perWeek !== undefined && <>{product.prices.perWeek}€/week </>}{product.prices.perMonth !== undefined && <>{product.prices.perMonth}€/month </>*/}
                                 </VStack>
@@ -121,11 +124,11 @@ const Product = props => {
                         </Text>
                     </Box>
                     <Box>
-                        {props.user._id !== product.user._id ? <>
+                        {props.user._id !== product.user?._id ? <>
                             <Center>
                                 <VStack spacing="20px">
-                                        {process.env.REACT_APP_ENV === "dev" && <BookingCard user={props.user} product={product} />}
-                                        <Button borderRadius="lg" width="100%" onClick={() => setShowSendMessage(true)}>{t("product.Send Message")}</Button>
+                                    {(product.free || process.env.REACT_APP_ENV === "dev") ? <BookingCard user={props.user} product={product} loading={messageLoading}/> : <BookingCardSoon user={props.user} product={product} />}
+                                    <Button borderRadius="lg" width="100%" onClick={() => setShowSendMessage(true)}>{t("product.Send Message")}</Button>
                                 </VStack>
                             </Center>
                             </> : 

@@ -3,18 +3,47 @@ import { useTranslation } from 'react-i18next';
 
 import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
-import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, Text, HStack } from '@chakra-ui/react';
+import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, Text, HStack, Divider, Icon } from '@chakra-ui/react';
+import { AiFillApple, AiOutlineGoogle } from "react-icons/ai";
 
+import UserDataService from "../services/user-data";
 
 export default function Login() {
     const {t} = useTranslation();
 
     const emailRef = useRef();
     const passwordRef = useRef();
-    const {login} = useAuth();
+    const {login, googleAuth, appleAuth} = useAuth();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const history = useHistory();
+
+    const signInGoogle = async () => {
+        try {
+            const res = await googleAuth();
+            const response = await UserDataService.get(res.user.uid);
+            if (!response.data) {
+                await UserDataService.createUser({user: {name: res.user.displayName, mail: res.user.email, uid: res.user.uid}})
+            }
+            window.location.reload();
+        } catch(e) {
+            console.log("Google auth failed: ", e);
+        }
+    }
+
+    const signInApple = async () => { // I'm not sure if sign in with apple works, I just hope it works like sign in with google
+        try {
+            const res = await appleAuth();
+            console.log("Result from apple auth: ", res);
+            const user = await UserDataService.get(res.user.uid);
+            if (!user) {
+                await UserDataService.createUser({user: {name: res.user.displayName, mail: res.user.email, uid: res.user.uid}})
+            }
+            window.location.reload();
+        } catch(e) {
+            console.log("Apple auth failed: ", e);
+        }
+    }
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -84,6 +113,15 @@ export default function Login() {
                 <Box>
                     <Link to="/forgot-password"><Text color="blue.600">{t("login.Forgot Password?")}</Text></Link>
                 </Box>
+                <HStack>
+                    <Divider colorScheme="gray.400" />
+                    <Box minW="120px"><Text color="gray.400">or continue with</Text></Box>
+                    <Divider colorScheme="gray.400" />
+                </HStack>
+                <HStack w="100%" alignItems="center" justifyContent="center">
+                    <Button onClick={signInGoogle} w="48%"><Icon as={AiOutlineGoogle} /></Button>
+                    <Button onClick={signInApple} w="48%"><Icon as={AiFillApple} /></Button>
+                </HStack>
                 </Stack>
             </Box>
             <HStack>
