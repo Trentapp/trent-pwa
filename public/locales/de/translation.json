@@ -172,6 +172,6 @@
     },
     "Reset Password": "Passwort zurücksetzen",
     "feedback": {
-        "Hi, if you have problems or feedback, we would love to hear from you: ": "Hi, wenn du Probleme hast oder Feedback geben willst, würden wir uns freuen, von dir zu hören: "
+        "HearFromYou": "Hi, wenn du Probleme hast oder Feedback geben willst, würden wir uns freuen, von dir zu hören: "
     }
 }

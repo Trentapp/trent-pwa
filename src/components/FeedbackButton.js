@@ -1,9 +1,11 @@
 import { QuestionIcon } from '@chakra-ui/icons'
 import { Popover, IconButton, PopoverCloseButton, PopoverContent, PopoverTrigger } from '@chakra-ui/react'
 import React from 'react'
-import { Fab } from 'react-tiny-fab'
+import { useTranslation } from 'react-i18next';
 
 export default function FeedbackButton() {
+    const {t} = useTranslation();
+
     const mainButtonStyles = {
         position: "absolute",
         bottom: "20px",
@@ -17,7 +19,7 @@ export default function FeedbackButton() {
         </PopoverTrigger>
         <PopoverContent>
             <PopoverCloseButton />
-            {t('feedback.Hi, if you have problems or feedback, we would love to hear from you: ')}<a href="mailto:support@trentapp.com">support@trentapp.com</a>
+            <>{t('feedback.HearFromYou')}</><a href="mailto:support@trentapp.com">support@trentapp.com</a>
         </PopoverContent>
     </Popover>
     )
