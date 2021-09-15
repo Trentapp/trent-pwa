@@ -28,6 +28,10 @@ import insta1 from "../assets/insta-post/img1.JPEG";
 import insta2 from "../assets/insta-post/img2.jpg";
 import insta3 from "../assets/insta-post/img3.jpg";
 import insta4 from "../assets/insta-post/img4.jpg";
+import insta1DE from "../assets/insta-post/InitialPost_DE.001.jpeg";
+import insta3DE from "../assets/insta-post/InitialPost_DE.002.jpeg";
+import insta4DE from "../assets/insta-post/InitialPost_DE.003.jpeg";
+import insta2DE from "../assets/insta-post/InitialPost_DE.004.jpeg";
 import followInstagram from "../assets/follow-us-on-instagram.png";
 // import appstore from "../assets/appstore.png";
 
@@ -58,13 +62,22 @@ const LandingPageLarge = (props) => {
 }
 
 const LandingPageSmall = (props) => {
+  const {i18n} = useTranslation();
+
   return (
     <>
       <Box h="100%" w="100%">
+        {i18n.language === "en" ? <>
         <Image w="100%" src={insta1} />
         <Image w="100%" src={insta2} />
         <Image w="100%" src={insta3} />
         <Image w="100%" src={insta4} />
+        </> : <>
+        <Image w="100%" src={insta1DE} />
+        <Image w="100%" src={insta2DE} />
+        <Image w="100%" src={insta3DE} />
+        <Image w="100%" src={insta4DE} />
+        </>}
         <Center>
           <VStack spacing={5}>
           {/* <Heading2 as="h1" size="3xl">GET THE APP!</Heading2>
