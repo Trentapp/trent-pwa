@@ -52,15 +52,15 @@ export default function UpdateProfile(props) {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        if (passwordRef.current.value !== passwordConfirmRef.current.value){
-            return setError(t("account-settings.error.passw-match"));
-        }
+        // if (passwordRef.current.value !== passwordConfirmRef.current.value){
+        //     return setError(t("account-settings.error.passw-match"));
+        // }
         try {
             setError("");
             setLoading(true);
-            if (passwordRef.current.value){
-                await updatePassword(passwordRef.current.value);
-            } // Note: Later when there are multiple update options I should use Promises and only update if they all succeed (?)
+            // if (passwordRef.current.value){
+            //     await updatePassword(passwordRef.current.value);
+            // } // Note: Later when there are multiple update options I should use Promises and only update if they all succeed (?)
             let change = false;
             const user = props.user;
             if (firstNameRef.current.value !== props.user.firstName) {
