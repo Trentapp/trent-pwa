@@ -17,6 +17,10 @@ class UserDataService {
         return http.put(`/users/update`, data); // still to be implemented in the backend
     }
 
+    setItems(uid, typeIdList) {
+        return http.post(`/users/updateItems`, {uid: uid, typeIdList: typeIdList});
+    }
+
     deleteUser(uid) {
         return http.post(`/users/delete`, {uid: uid});
     }

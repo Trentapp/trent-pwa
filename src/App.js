@@ -19,6 +19,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import LoggedOutRoute from "./components/LoggedOutRoute";
 import Chat from "./components/chat";
 import Footer, { ProductsListFooter } from "./components/footer";
+import Inventory from "./components/Inventory";
 // import About from "./components/about";
 import Impressum from "./components/impressum";
 import Datenschutz from "./components/datenschutz";
@@ -70,16 +71,15 @@ function App() {
     <Header user={user} handleLogout={handleLogout}/>
       <Box>
         <Switch>
-          <Route exact path="/products"
-            render={(props) => (<ProductsList {...props} inventory={false} />)} /> {/* I think it actually should not be rendered (just included as component), but it is just a test for now */}
+          {/* <Route exact path="/products"
+            render={(props) => (<ProductsList {...props} inventory={false} />)} />}*/}{/* I think it actually should not be rendered (just included as component), but it is just a test for now */}
           <Route exact path={["/", "/landing-page"]} 
             render={(props) => (<LandingPage {...props} user={user} />)} />
           <Route exact path={["/dashboard"]} 
             render={(props) => (<Dashboard {...props} user={user} />)} />
-          {/* <PrivateRoute exact path="/inventory"
-            component={ProductsList} inventory={true} user={user}/> */}
-          <Route path={["/products/product/:id", "/product/:id"]}
-            render={(props) => (<Product {...props} user={user}/>)} />
+          <PrivateRoute path="/inventory" component={Inventory} user={user} />
+          {/* <Route path={["/products/product/:id", "/product/:id"]}
+            render={(props) => (<Product {...props} user={user}/>)} /> */}
           {/* <PrivateRoute exact path="/products/create"
             component={AddProduct} user={user}/>
           <PrivateRoute exact path="/products/update/:id"
@@ -87,8 +87,8 @@ function App() {
           <LoggedOutRoute path="/signup" component={SignUp} user={user}/>
           <LoggedOutRoute path="/login" component={LogIn} user={user}/>
           <LoggedOutRoute path="/forgot-password" component={ForgotPassword} user={user}/>
-          <Route path="/profile/:id"
-            render={(props) => (<Profile {...props} user={user}/>)} />
+          {/* <Route path="/profile/:id"
+            render={(props) => (<Profile {...props} user={user}/>)} /> */}
           <PrivateRoute path="/account-settings" component={AccountSettings} user={user}/>
           <PrivateRoute exact path="/chats" component={ChatsList} user={user}/>
           <PrivateRoute path="/chats/:id" component={Chat} user={user} />

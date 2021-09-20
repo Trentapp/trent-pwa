@@ -36,11 +36,11 @@ export default function Header (props) {
 
   return (
     <Box h="75px">
-      <Box px={{base: 4, md: 8}} w="100%" bg="gray.900" as="nav" align="center" wrap="wrap" position="fixed" zIndex={999}>
+      <Box px={{base: 4, md: 8}} w="100%" bg="gray.900" as="nav" align="center" wrap="wrap" position="fixed" zIndex={999}> {/* or bgGradient="linear(to-r,#30b70b,#b0dd00)"  */}
         <HStack justify="space-between">
           <HStack spacing={{base: 4, md: 8}} flex={1} h="75px">
             <LogoSmall />
-            <InputGroup size="sm" maxW="400px" bg="gray.100" borderRadius="lg">
+            {/* <InputGroup size="sm" maxW="400px" bg="gray.100" borderRadius="lg">
               <Input
                 pr="4.5rem"
                 type="text"
@@ -53,7 +53,7 @@ export default function Header (props) {
                   <Search2Icon />            
                 </Button>
               </InputRightElement>
-            </InputGroup>
+            </InputGroup> */}
           </HStack>
           <Stack direction="row" align="center" spacing={8}>
             {props.user?._id ? 
@@ -65,7 +65,8 @@ export default function Header (props) {
                 </HStack>
               </MenuButton>
               <MenuList>
-                <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/profile/${props.user._id}`}><MenuItem>{t("header.dropmenu.a")}</MenuItem></Link>
+                {/* <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/profile/${props.user._id}`}><MenuItem>{t("header.dropmenu.a")}</MenuItem></Link> */}
+                <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/inventory`}><MenuItem>Inventar</MenuItem></Link>
                 <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/account-settings"><MenuItem>{t("header.dropmenu.b")}</MenuItem></Link>
                 <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/chats"><MenuItem>{t("header.dropmenu.c")}</MenuItem></Link>
                 <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/transactions"><MenuItem>{t("header.dropmenu.d")}</MenuItem></Link>
