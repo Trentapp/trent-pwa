@@ -92,7 +92,7 @@ export default function Inventory(props) {
         81: 'Regenschirm'
       };
     const [loading, setLoading] = useState(false);
-    const [typeIds, setTypeIds] = useState([]);
+    const [typeIds, setTypeIds] = useState(props.user.items.map(item => item.typeId));
 
     const addId = typeId => {
         setTypeIds([...typeIds, typeId]);//test that
@@ -112,17 +112,21 @@ export default function Inventory(props) {
         }
     }
 
-    useEffect(() => {
-        if (props.user?.uid && props.user?.items){
-            setTypeIds(props.user.items.map(item => item.typeId));
-        }
-    }, [props.user?.uid]);
+    // useEffect(() => {
+    //     if (props.user?.uid && props.user?.items){
+    //         setTypeIds(props.user.items.map(item => item.typeId));
+    //         props.user.items.map(item => {
+    //             document.getElementById(`item${item.typeId}`).setAttribute("checked", true);
+    //             return "blub";
+    //         })
+    //     }
+    // }, [props.user?.uid]);
 
     const handleSubmit = async () => {
         try{
             setLoading(true);
             const response = await UserDataService.setItems(props.user.uid, typeIds);
-            toast({title: "Inventory saved!", status: "success", duration: 4000, isClosable: true})
+            toast({title: "Inventar gespeichert!", status: "success", duration: 4000, isClosable: true})
             setLoading(false);
         } catch(e) {
             console.log("Failed to set Inventory: ", e);
@@ -163,11 +167,10 @@ export default function Inventory(props) {
                 <Text>Bitte gib hier die Gegenstände an, die du besitzt und die du dir vorstellen könntest, jemandem auszuleihen.  und vergiss am Ende nicht auf Speichern zu drücken.</Text>
                 <VStack spacing="2px" alignItems="left">
                 {Object.entries(items).map(itemArr => <HStack spacing="5px">
-                    <input onChange={() => onChangeItem(itemArr[0])} type="checkbox" id={`item${itemArr[0]}`} name={itemArr[1]} checked={typeIds.includes(itemArr[0]) ? true : false}/>
+                    <input onClick={() => onChangeItem(parseInt(itemArr[0]))} type="checkbox" id={`item${itemArr[0]}`} name={itemArr[1]} defaultChecked={typeIds.includes(parseInt(itemArr[0]))}/>
                     <label for={`item${itemArr[0]}`}>{itemArr[1]}</label>
                 </HStack>)}
                 </VStack>
-
                 <Button
                     borderRadius={0}
                     type="submit"
