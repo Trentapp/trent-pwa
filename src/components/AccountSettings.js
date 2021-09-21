@@ -85,7 +85,7 @@ export default function UpdateProfile(props) {
                 fd.append("parameters", blob);
                 await UserDataService.uploadPicture(fd);
             }
-            history.push(`/profile/${props.user._id}`);
+            history.push(`/dashboard`);
         } catch(err) {
             setError(t("account-settings.error.general")); //TODO: sometimes you get bad request 400: credentials too old. Handle it better.
             console.log("Failed to update profile: ", err)
