@@ -95,11 +95,11 @@ export default function Inventory(props) {
     const [typeIds, setTypeIds] = useState(props.user.items.map(item => item.typeId));
 
     const addId = typeId => {
-        setTypeIds([...typeIds, typeId]);//test that
+        setTypeIds([...typeIds, typeId]);
     }
 
     const deleteId = typeId => {
-        setTypeIds(typeIds.filter(tId => !(tId == typeId)));//test that
+        setTypeIds(typeIds.filter(tId => !(tId == typeId)));
         console.log(typeIds)
     }
 
@@ -111,16 +111,6 @@ export default function Inventory(props) {
             addId(typeId);
         }
     }
-
-    // useEffect(() => {
-    //     if (props.user?.uid && props.user?.items){
-    //         setTypeIds(props.user.items.map(item => item.typeId));
-    //         props.user.items.map(item => {
-    //             document.getElementById(`item${item.typeId}`).setAttribute("checked", true);
-    //             return "blub";
-    //         })
-    //     }
-    // }, [props.user?.uid]);
 
     const handleSubmit = async () => {
         try{

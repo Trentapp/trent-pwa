@@ -6,14 +6,10 @@ import { Box } from "@chakra-ui/react";
 import LandingPage from "./components/landing-page";
 import Header from "./components/Header";
 import Dashboard from "./components/dashboard";
-import ProductsList from "./components/products-list";
-import Product from "./components/product";
-import AddProduct from "./components/add-product";
 import SignUp from "./components/signup";
 import LogIn from "./components/login";
 import ForgotPassword from "./components/ForgotPassword";
 import AccountSettings from "./components/AccountSettings";
-import Profile from "./components/Profile";
 import NotFound from "./components/NotFound";
 import PrivateRoute from "./components/PrivateRoute";
 import LoggedOutRoute from "./components/LoggedOutRoute";
@@ -71,24 +67,14 @@ function App() {
     <Header user={user} handleLogout={handleLogout}/>
       <Box>
         <Switch>
-          {/* <Route exact path="/products"
-            render={(props) => (<ProductsList {...props} inventory={false} />)} />}*/}{/* I think it actually should not be rendered (just included as component), but it is just a test for now */}
           <Route exact path={["/", "/landing-page"]} 
             render={(props) => (<LandingPage {...props} user={user} />)} />
           <Route exact path={["/dashboard"]} 
             render={(props) => (<Dashboard {...props} user={user} />)} />
           <PrivateRoute path="/inventory" component={Inventory} user={user} />
-          {/* <Route path={["/products/product/:id", "/product/:id"]}
-            render={(props) => (<Product {...props} user={user}/>)} /> */}
-          {/* <PrivateRoute exact path="/products/create"
-            component={AddProduct} user={user}/>
-          <PrivateRoute exact path="/products/update/:id"
-            component={AddProduct} user={user}/> */}
           <LoggedOutRoute path="/signup" component={SignUp} user={user}/>
           <LoggedOutRoute path="/login" component={LogIn} user={user}/>
           <LoggedOutRoute path="/forgot-password" component={ForgotPassword} user={user}/>
-          {/* <Route path="/profile/:id"
-            render={(props) => (<Profile {...props} user={user}/>)} /> */}
           <PrivateRoute path="/account-settings" component={AccountSettings} user={user}/>
           <PrivateRoute exact path="/chats" component={ChatsList} user={user}/>
           <PrivateRoute path="/chats/:id" component={Chat} user={user} />

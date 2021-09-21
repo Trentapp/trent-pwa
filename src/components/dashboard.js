@@ -53,7 +53,7 @@ const Dashboard = props => {
                         <Divider color="gray.400"/>
                         <Box w="100%" py={3}>
                             <HStack>
-                                <Link to={`/profile/${props.user._id}`}><Button variant="outline">{t("dashboard.Your Profile")}</Button></Link>
+                                <Link to={`/inventory`}><Button variant="outline">Dein Inventar</Button></Link>
                                 <Link to="/chats"><Button variant="outline">{t("dashboard.Chats")}</Button></Link>
                                 <Link to="/transactions"><Button variant="outline">{t("dashboard.Transactions")}</Button></Link>
                             </HStack>
