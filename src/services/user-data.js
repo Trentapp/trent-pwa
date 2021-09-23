@@ -32,6 +32,10 @@ class UserDataService {
     deletePicture(uid) {
         return http.post(`/users/deleteProfilePicture`, uid);
     }
+
+    getByTypesAndLocation(typeIds, location) { // actually this route is only needed in Backend // also not tested
+        return http.post(`/items/getByTypesAndLocation`, {typeIds: typeIds, location: location});
+    }
 };
 
 export default new UserDataService();
