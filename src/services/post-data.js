@@ -8,6 +8,10 @@ class PostDataService {
     getAroundLocation(location, maxDistance=4) {
         return http.post(`/posts/getAroundLocation`, {location: location, maxDistance: maxDistance});
     }
+
+    setStatus(postId, uid, status) {
+        return http.put(`/posts/setStatus/${postId}`, {uid: uid, status: status});
+    }
 };
 
 export default new PostDataService();

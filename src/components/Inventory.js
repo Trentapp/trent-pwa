@@ -86,7 +86,8 @@ export const items = {
     78: 'Wohnwagen',
     79: 'Wohnmobil',
     80: '(mobile) Matratze',
-    81: 'Regenschirm'
+    81: 'Regenschirm',
+    9999: "Sonstiges (in Kommentar beschreiben)"
 };
 
 export default function Inventory(props) {

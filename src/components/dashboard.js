@@ -4,45 +4,69 @@ import { useTranslation } from 'react-i18next';
 
 import TransactionDataService from "../services/transaction-data";
 import ChatDataService from "../services/chat-data";
+import PostDataService from "../services/post-data";
 import { Box, Button, Center, Container, Divider, Heading, HStack, VStack } from "@chakra-ui/react";
 import TransactionCard from "./TransactionCard";
+import PostCard from "./PostCard";
 
 const Dashboard = props => {
     const {t} = useTranslation();
 
-    const [newMessagesChats, setNewMessagesChats] = useState([]);
-    const [newRequests, setNewRequests] = useState([]);
-    const [upcomingTransactions, setUpcomingTransactions] = useState([]);
+    const [posts, setPosts] = useState([]);
+
+    // const [newMessagesChats, setNewMessagesChats] = useState([]);
+    // const [newRequests, setNewRequests] = useState([]);
+    // const [upcomingTransactions, setUpcomingTransactions] = useState([]);
+
+    // useEffect(() => {
+    //     const getNewMessages = async (uid) => {
+    //         try {
+    //             const response = await ChatDataService.getNewMessages(uid);
+    //             setNewMessagesChats(response.data);
+    //         } catch(e) {
+    //             console.log("Error in getNewMessages: ", e);
+    //         }
+    //     }
+    //     const getNewRequests = async (uid) => {
+    //         try {
+    //             const response = await TransactionDataService.getNewRequests(uid);
+    //             setNewRequests(response.data);
+    //         } catch(e) {
+    //             console.log("Error in getNewRequests: ", e);
+    //         }
+    //     }
+    //     const getUpcomingTransactions = async (uid) => {
+    //         try {
+    //             const response = await TransactionDataService.getUpcoming(uid);
+    //             setUpcomingTransactions(response.data);
+    //         } catch(e) {
+    //             console.log("Error in get upcoming transactions: ", e);
+    //         }
+    //     }
+    //     getNewMessages(props.user?.uid);
+    //     getUpcomingTransactions(props.user?.uid);
+    //     getNewRequests(props.user?.uid);
+    // }, [props.user]);
 
     useEffect(() => {
-        const getNewMessages = async (uid) => {
+        const getFeed = async (loc) => {
             try {
-                const response = await ChatDataService.getNewMessages(uid);
-                setNewMessagesChats(response.data);
-            } catch(e) {
-                console.log("Error in getNewMessages: ", e);
-            }
-        }
-        const getNewRequests = async (uid) => {
-            try {
-                const response = await TransactionDataService.getNewRequests(uid);
-                setNewRequests(response.data);
-            } catch(e) {
-                console.log("Error in getNewRequests: ", e);
-            }
-        }
-        const getUpcomingTransactions = async (uid) => {
-            try {
-                const response = await TransactionDataService.getUpcoming(uid);
-                setUpcomingTransactions(response.data);
+                const response = await PostDataService.getAroundLocation(loc);
+                setPosts(response.data);
             } catch(e) {
                 console.log("Error in get upcoming transactions: ", e);
             }
+        };
+        let loc;
+        if (props.user?.location?.coordinates) { //if user has set an address, we take his location (maybe change later)
+            loc = props.user.location;
+        } else {
+            navigator.geolocation.getCurrentPosition((position) => {
+                loc = {type: "Point", coordinates: [position.coords.longitude, position.coords.latitude]};
+            });
         }
-        getNewMessages(props.user?.uid);
-        getUpcomingTransactions(props.user?.uid);
-        getNewRequests(props.user?.uid);
-    }, [props.user]);
+        getFeed(loc);
+    }, [props.user?._id]);
 
     return(
         <Container maxW="container.lg">
@@ -60,7 +84,16 @@ const Dashboard = props => {
                             </HStack>
                         </Box>
                         <Divider color="gray.400"/>
+                        {/* Feed */}
                         <VStack align="flex-start" paddingTop={3}>
+                            {posts.length && <Box paddingTop={3} paddingBottom={3}>
+                                <Heading size="lg" pb={4}>Aktuelle Posts aus deiner Umgebung</Heading>
+                                <VStack align="flex-start" spacing="15px">
+                                {posts.map(post => <PostCard user={props.user} post={post} />)}
+                                </VStack>
+                            </Box>}
+                        </VStack>
+                        {/* 
                             {newMessagesChats.length && <Box paddingTop={3}>
                                 <Heading size="lg">{t("dashboard.Chats")} with new messages</Heading>
                                 <VStack align="flex-start">
@@ -79,7 +112,7 @@ const Dashboard = props => {
                                 {upcomingTransactions.map(transaction => <TransactionCard user={props.user} transaction={transaction} />)}
                                 </VStack>
                             </Box>}
-                        </VStack>
+                        */}
                     </VStack>
                 </Center>
             </Box>

@@ -69,9 +69,9 @@ export default function Header (props) {
                 <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/inventory`}><MenuItem>Inventar</MenuItem></Link>
                 <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/account-settings"><MenuItem>{t("header.dropmenu.b")}</MenuItem></Link>
                 <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/chats"><MenuItem>{t("header.dropmenu.c")}</MenuItem></Link>
-                <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/transactions"><MenuItem>{t("header.dropmenu.d")}</MenuItem></Link>
-                <MenuItem>
-                  <Button w="100%" style={{ color: 'inherit', textDecoration: 'none' }} variant="link" onClick={props.handleLogout}>
+                {/* <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/transactions"><MenuItem>{t("header.dropmenu.d")}</MenuItem></Link> */}
+                <MenuItem p={0}>
+                  <Button w="100%" style={{ color: 'inherit', textDecoration: 'none' }} variant="link" onClick={props.handleLogout} p={3}>
                     <Box w="100%" textAlign="left">{t("header.Log Out")}</Box>
                   </Button>
                 </MenuItem>

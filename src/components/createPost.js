@@ -1,19 +1,21 @@
 import React, {useState, useRef} from 'react'
 import { Container, Stack, Box, Center, VStack, Heading, Text, Textarea, Button, HStack, Tooltip } from '@chakra-ui/react'
+import {useHistory} from "react-router-dom"
 import Select from 'react-select'
-import { InfoIcon } from '@chakra-ui/icons';
+import { InfoIcon } from '@chakra-ui/icons'
 
 import {items} from "./Inventory.js"
-import PostDataService from "../services/post-data.js";
+import PostDataService from "../services/post-data.js"
 
 export default function CreatePost(props) {
     let options = Object.entries(items).map(itemArr => {return {value: itemArr[0], label: itemArr[1]}});
-    const otherOption = {value: 9999, label: "Sonstiges (in Kommentar beschreiben)"};
     const commentPlacehoder = `Beschreibe hier, von wann bis wann du den Gegenstand (oder die Gegenstände) ausleihen willst. Beschreibe außerdem ggf. genauere Anforderungen oder spezifiziere das/die Produkte. Falls du etwas teures ausleihst und etwas für das Leihen zahlen würdest, schreibe auch rein, wie viel du zahlen würdest (du kannst auch gerne "auf Verhandlungsbasis" angeben).`;
-
-    const [selected, setSelected] = useState([otherOption]);
+    
+    const lastOption = {value: 9999, label: "Sonstiges (in Kommentar beschreiben)"}; // is also included in options
+    const [selected, setSelected] = useState([lastOption]);
     const [loading, setLoading] = useState(false);
     const commentRef = useRef();
+    const history = useHistory();
 
     const handleChange = selectedOptions => {
         setSelected(selectedOptions);
@@ -35,6 +37,7 @@ export default function CreatePost(props) {
             const response = await PostDataService.create(props.user.uid, selected.map(s => parseInt(s.value)), commentRef.current.value, loc);
             console.log(response);
             setLoading(false);
+            history.push("/dashboard");
         } catch(e) {
             console.log(`Could not create/edit Post: ${e}`);
             setLoading(false);
