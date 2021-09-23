@@ -74,6 +74,7 @@ function App() {
             render={(props) => (<Dashboard {...props} user={user} />)} />
           <PrivateRoute path="/inventory" component={Inventory} user={user} />
           <PrivateRoute path="/borrow" component={CreatePost} user={user} />
+          <PrivateRoute path="/editPost/:id" component={CreatePost} user={user} />
           <LoggedOutRoute path="/signup" component={SignUp} user={user}/>
           <LoggedOutRoute path="/login" component={LogIn} user={user}/>
           <LoggedOutRoute path="/forgot-password" component={ForgotPassword} user={user}/>

@@ -54,7 +54,7 @@ export default function PostCard(props) {
                             <Tooltip label="Post schließen (wenn du jemanden gefunden hast, der dir das was du brauchst, ausleiht)"><IconButton onClick={closePost} icon={<CheckIcon />} /></Tooltip>
                             <Tooltip label="Anfrage abbrechen (du brauchst die Gegenstände doch nicht mehr)"><IconButton onClick={cancelPost} icon={<CloseIcon />} /></Tooltip>
                             <Divider orientation="vertical" color="gray.400"/>
-                            <Tooltip label="Post editieren"><IconButton onClick={() => console.log("Should push to edit post page")} icon={<EditIcon />} /></Tooltip>
+                            <Tooltip label="Post editieren"><IconButton onClick={() => history.push(`/editPost/${props.post._id}`)} icon={<EditIcon />} /></Tooltip>
                         </>}
                         {/* maybe add "reopen" option later */}
                     </HStack>

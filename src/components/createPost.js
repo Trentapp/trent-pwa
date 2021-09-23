@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Container, Stack, Box, Center, VStack, Heading, Text, Textarea, Button, HStack, Tooltip } from '@chakra-ui/react'
 import {useHistory} from "react-router-dom"
 import Select from 'react-select'
@@ -14,8 +14,24 @@ export default function CreatePost(props) {
     const lastOption = {value: 9999, label: "Sonstiges (in Kommentar beschreiben)"}; // is also included in options
     const [selected, setSelected] = useState([lastOption]);
     const [loading, setLoading] = useState(false);
-    const commentRef = useRef();
+    const [comment, setComment] = useState("");
     const history = useHistory();
+
+    useEffect(() => {
+        const getPost = async postId => {
+            try {
+                const response = await PostDataService.getById(postId);
+                console.log(response.data);
+                setComment(response.data.comment);
+                setSelected(response.data.typeIds.map(tId => {return {value: tId, label: items[tId]}}));
+            } catch(e) {
+                console.log("could not get post: ", e);
+            }
+        }
+        if (props.match.params.id) {
+            getPost(props.match.params.id);
+        }
+    }, [props.match.params.id]);
 
     const handleChange = selectedOptions => {
         setSelected(selectedOptions);
@@ -34,8 +50,12 @@ export default function CreatePost(props) {
                     throw "Could not get location of user. Please don't block your location or enter your address in Account Settings.";
                 })
             }
-            const response = await PostDataService.create(props.user.uid, selected.map(s => parseInt(s.value)), commentRef.current.value, loc);
-            console.log(response);
+            let response;
+            if (props.match.params?.id) {
+                response = await PostDataService.update(props.match.params.id, props.user.uid, selected.map(s => parseInt(s.value)), comment, loc);
+            } else {
+                response = await PostDataService.create(props.user.uid, selected.map(s => parseInt(s.value)), comment, loc);
+            }
             setLoading(false);
             history.push("/dashboard");
         } catch(e) {
@@ -62,7 +82,7 @@ export default function CreatePost(props) {
                             <Text>Kommentar:</Text><Tooltip label={commentPlacehoder}><InfoIcon/></Tooltip>
                         </HStack>
                         <Box width="100%" mt={2}>
-                            <Textarea placeholder={commentPlacehoder} ref={commentRef}/>
+                            <Textarea placeholder={commentPlacehoder} value={comment} onChange={(e) => setComment(e.target.value)}/>
                         </Box>
                         </Box>
                         <Button
@@ -73,7 +93,7 @@ export default function CreatePost(props) {
                             onClick={handleSubmit}
                             disabled={loading}
                         >
-                            Posten
+                            {props.match.params?.id ? "Änderungen speichern" : "Posten"}
                         </Button>
                     </VStack>
                 </Center>
