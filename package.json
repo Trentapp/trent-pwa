@@ -31,6 +31,7 @@
     "react-image-gallery": "^1.2.6",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-select": "^4.3.1",
     "react-star-ratings": "^2.3.0",
     "react-tiny-fab": "^4.0.3",
     "sass-loader": "^10.1.1",

@@ -1,8 +1,8 @@
 import http from "../http-common";
 
 class PostDataService {
-    create(uid, typeId, desc, location) {
-        return http.post(`/posts/create`, {uid: uid, typeId: typeId, desc: desc, location: location});
+    create(uid, typeIds, comment, location) {
+        return http.post(`/posts/create`, {uid: uid, typeIds: typeIds, comment: comment, location: location});
     }
 
     getAroundLocation(location, maxDistance=4) {
