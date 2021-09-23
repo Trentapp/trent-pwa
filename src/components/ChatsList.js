@@ -33,7 +33,7 @@ export default function ChatsList(props) {
                     <Divider color="gray.400"/>
                     <Box w="100%">
                         <VStack>
-                            {chats.filter(chat => chat.product).map(chat => <Link to={`/chats/${chat._id}`}><Box w="100%" p={2} border="1px" borderRadius="lg" borderColor="gray.400" key={chat._id}>{props.user._id === chat.borrower._id ? <>{chat.lender.name}{t("ChatsList. lending ")}{chat.product.name}</> : <>{chat.borrower.name}{t("ChatsList. borrowing your ")}{chat.product.name}</>}</Box></Link> )}
+                            {chats.map(chat => <Link to={`/chats/${chat._id}`}><Box w="100%" p={2} border="1px" borderRadius="lg" borderColor="gray.400" key={chat._id}>Chat mit {props.user._id === chat.personA._id ? chat.personB.name : chat.personA.name}</Box></Link> )}
                         </VStack>
                     </Box>
                 </VStack>
