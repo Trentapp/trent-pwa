@@ -54,6 +54,11 @@ export default function Header (props) {
                 </Button>
               </InputRightElement>
             </InputGroup> */}
+            <Link to="/borrow">
+              <Button colorScheme="green">
+                Leih etwas aus
+              </Button>
+            </Link>
           </HStack>
           <Stack direction="row" align="center" spacing={8}>
             {props.user?._id ? 

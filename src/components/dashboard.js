@@ -79,7 +79,7 @@ const Dashboard = props => {
                             <HStack>
                                 <Link to={`/inventory`}><Button variant="outline">Inventar</Button></Link>
                                 <Link to="/chats"><Button variant="outline">{t("dashboard.Chats")}</Button></Link>
-                                <Link to="/transactions"><Button variant="outline">{t("dashboard.Transactions")}</Button></Link>
+                                {/* <Link to="/transactions"><Button variant="outline">{t("dashboard.Transactions")}</Button></Link> */}
                                 <Link to="/borrow"><Button variant="outline">Leih etwas aus</Button></Link>
                             </HStack>
                         </Box>
