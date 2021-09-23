@@ -16,10 +16,6 @@ class ChatDataService {
     sendMessage(data) {
         return http.post(`/chats/sendMessage`, data);
     }
-
-    getByLenderBorrowerProduct(lenderId, borrowerId, productId, uid) {
-        return http.post(`/chats/getByLenderBorrowerProduct/${lenderId}/${borrowerId}/${productId}`, {uid: uid});
-    }
 };
 
 export default new ChatDataService();

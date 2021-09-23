@@ -9,13 +9,13 @@ const QuestionForm = props => {
         <Modal isOpen={props.isOpen} onClose={() => props.setIsOpen(false)}>
             <ModalOverlay />
             <ModalContent>
-                <ModalHeader>{t("ask-question.Send Message to ")}{props?.lender?.name ?? "[deleted user]"}</ModalHeader>
+                <ModalHeader>{t("ask-question.Send Message to ")}{props?.recipient?.name ?? "[deleted user]"}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                     <Textarea placeholder="Your message" ref={props.messageRef} />
                 </ModalBody>
                 <ModalFooter>
-                    <Button colorScheme="blue" mr={3} onClick={props.onSendMessage} disabled={props.loading}>
+                    <Button colorScheme="blue" mr={3} onClick={props.onSendMessage}>
                         {t("ask-question.Send")}
                     </Button>
                     <Button onClick={() => props.setIsOpen(false)}>Cancel</Button>

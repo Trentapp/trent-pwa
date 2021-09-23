@@ -1,15 +1,33 @@
+import React, {useRef, useState} from 'react';
 import { CalendarIcon, ChatIcon, CheckIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
 import { VStack, HStack, Heading, Text, Box, IconButton, Divider, Tooltip, Center } from '@chakra-ui/react';
-import React from 'react';
 import {Link, useHistory} from "react-router-dom";
 
 import ProfileCard from './profileCard';
 import {items} from "./Inventory.js";
 import PostDataService from "../services/post-data.js";
-
+import ChatDataService from "../services/chat-data.js";
+import QuestionForm from "./ask-question.js";
 
 export default function PostCard(props) {
     const history = useHistory();
+
+    const messageRef = useRef();
+    const [messageOpen, setMessageOpen] = useState(false);
+
+    const onSendMessage = async () => {
+        try {
+            const chatRequest = {
+                uid: props.user.uid,
+                recipientId: props.post.user._id,
+                content: messageRef.current.value,
+            };
+            const response = await ChatDataService.sendMessage(chatRequest);
+            history.push(`/chats/${response.data.chatId}`);
+        } catch(e) {
+            console.log("Could not send Message: ", e);
+        }
+    }
 
     const closePost = async () => {
         try {
@@ -40,11 +58,12 @@ export default function PostCard(props) {
             alignItems="stretch"
             p={4}
         >
+            <QuestionForm messageRef={messageRef} user={props.user} isOpen={messageOpen} recipient={props.post.user} onSendMessage={onSendMessage} />
             <VStack align="flex-start">
                 <HStack justify="space-between" w="100%">
                     <HStack>
                         <ProfileCard creator={props.post.user}/>
-                        <IconButton icon={<ChatIcon />} onClick={() => history.push("/chatlink that I need to implement")} />
+                        <IconButton icon={<ChatIcon />} onClick={() => setMessageOpen(true)} />
                     </HStack>
                     <HStack>
                         <Box borderRadius="lg" bg={props.post.status === 0 ? "green.500" : (props.post.status === 1 ? "blue.400" : "red.400")} px={3} py={2}>

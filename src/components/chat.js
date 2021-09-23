@@ -34,7 +34,6 @@ const Chat = props => {
     const {t} = useTranslation();
 
     const [chat, setChat] = useState({product: ""});
-    const [otherUser, setOtherUser] = useState([]);
     const messageRef = useRef();
     const history = useHistory();
 
@@ -42,10 +41,9 @@ const Chat = props => {
         const getChat = async (chatId, uid) => {
             try {
                 const response = await ChatDataService.getById(chatId, uid);
-                setOtherUser(response.data.lender._id === props.user._id ? response.data.borrower : response.data.lender);
                 setChat(response.data);
             } catch(e) {
-                console.log("Error in get transactions by lender/borrower: ", e);
+                console.log("Error in get chat by Id: ", e);
             }
         }
         getChat(props.match.params.id, props.user.uid);
@@ -55,7 +53,7 @@ const Chat = props => {
         try {
             const chatRequest = {
                 uid: props.user.uid,
-                chatId: chat._id,
+                recipientId: props.user._id === chat.personA?._id ? chat.personB?._id : chat.personA?.id,
                 content: messageRef.current.value,
             };
             await ChatDataService.sendMessage(chatRequest);
@@ -69,14 +67,14 @@ const Chat = props => {
         <Container mawW="container.xl">
             <Box marginTop={4} borderRadius="xl" border="1px" p={4} borderColor="gray.300">
                 <VStack>
-                    <Heading size="lg">{t("chat.Chat with ")}{otherUser.name}{t("chat. about ")}{chat.product.name}</Heading>
+                    <Heading size="lg">{t("chat.Chat with ")}{props.user._id === chat.personA?._id ? chat.personB?.name : chat.personA?.name}</Heading>
                     <Divider color="gray.400" />
                     <Box w="100%">
                         <VStack spacing={4}>
                             {chat.messages && chat.messages.map(message => <Message user={props.user} message={message} key={message._id}/>)}
                         </VStack>
                     </Box>
-                    {(chat.borrower?.deleted || chat.lender?.deleted) ? <Heading marginTop={4} size="md" color="red.500">The other user was deleted. You cannot write any more messages.</Heading> :
+                    {(chat.personA?.deleted || chat.personB?.deleted) ? <Heading marginTop={4} size="md" color="red.500">The other user was deleted. You cannot write any more messages.</Heading> :
                     <HStack marginTop={4} w="100%">
                         <Input borderColor="gray.400" type="text" ref={messageRef} />
                         <Button onClick={onSendMessage}>{t("chat.Send")}</Button>
