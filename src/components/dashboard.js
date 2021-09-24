@@ -60,13 +60,16 @@ const Dashboard = props => {
         let loc;
         if (props.user?.location?.coordinates) { //if user has set an address, we take his location (maybe change later)
             loc = props.user.location;
-        } else {
-            navigator.geolocation.getCurrentPosition((position) => {
-                loc = {type: "Point", coordinates: [position.coords.longitude, position.coords.latitude]};
-            });
+        } 
+        // else {
+        //     navigator.geolocation.getCurrentPosition((position) => {
+        //         loc = {type: "Point", coordinates: [position.coords.longitude, position.coords.latitude]};
+        //     });
+        // }
+        if (loc){
+            getFeed(loc);
         }
-        getFeed(loc);
-    }, [props.user?._id]);
+    }, [props.user?._id, navigator.geolocation]);
 
     return(
         <Container maxW="container.lg">

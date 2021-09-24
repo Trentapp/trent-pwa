@@ -3,12 +3,12 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const baseURL = (process.env.REACT_APP_ENV === "dev") ? "http://localhost:8000/api" : "https://trent.uber.space/api";
+const baseURL = (process.env.REACT_APP_ENV === "dev") ? "http://localhost:8000/api" : "https://trentapp.com/api";
 
 export default axios.create({
     baseURL: baseURL,
     headers: {
-        "Content-type": "application/json"
+        "Content-type": "application/json",
     }
 });
 export const axiosFile = axios.create({
