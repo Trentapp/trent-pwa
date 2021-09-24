@@ -13,6 +13,7 @@ const Dashboard = props => {
     const {t} = useTranslation();
 
     const [posts, setPosts] = useState([]);
+    const [loc, setLoc] = useState(null);
 
     // const [newMessagesChats, setNewMessagesChats] = useState([]);
     // const [newRequests, setNewRequests] = useState([]);
@@ -49,6 +50,20 @@ const Dashboard = props => {
     // }, [props.user]);
 
     useEffect(() => {
+        if (!props.user?.location?.coordinates?.length){
+            if (props.user?.location?.coordinates?.length) { //if user has set an address, we take his location (maybe change later)
+                setLoc(props.user.location);
+            } 
+            else {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    console.log("position: ", position);
+                    setLoc({type: "Point", coordinates: [position.coords.longitude, position.coords.latitude]});
+                }, (err) => console.log("Could not get location: ", err));
+            }
+        }
+    }, [props.user?._id])
+
+    useEffect(() => {
         const getFeed = async (loc) => {
             try {
                 const response = await PostDataService.getAroundLocation(loc);
@@ -58,20 +73,12 @@ const Dashboard = props => {
                 console.log("Error in get upcoming transactions: ", e);
             }
         };
-        let loc;
-        if (props.user?.location?.coordinates) { //if user has set an address, we take his location (maybe change later)
-            loc = props.user.location;
-        } 
-        // else {
-        //     navigator.geolocation.getCurrentPosition((position) => {
-        //         loc = {type: "Point", coordinates: [position.coords.longitude, position.coords.latitude]};
-        //     });
-        // }
+        
+        console.log("location: ", loc);
         if (loc){
-            console.log(loc);
             getFeed(loc);
         }
-    }, [props.user?._id, navigator.geolocation]);
+    }, [props.user?._id, loc]);
 
     return(
         <Container maxW="container.lg">

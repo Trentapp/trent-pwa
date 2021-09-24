@@ -47,7 +47,6 @@ function App() {
   useEffect(() => {
     async function getUser() {
       try {
-        console.log(currentUser)
         const response = await UserDataService.get(currentUser.uid);
         if (user){
           setUser(response.data);

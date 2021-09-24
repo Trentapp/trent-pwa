@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import { Container, Stack, Box, Center, VStack, Heading, Text, Textarea, Button, HStack, Tooltip } from '@chakra-ui/react'
-import {useHistory} from "react-router-dom"
+import { Container, Stack, Box, Center, VStack, Heading, Text, Textarea, Button, HStack, Tooltip, Alert, AlertIcon } from '@chakra-ui/react'
+import {useHistory, Link} from "react-router-dom"
 import Select from 'react-select'
 import { InfoIcon } from '@chakra-ui/icons'
 
@@ -68,6 +68,10 @@ export default function CreatePost(props) {
         <Container maxW="container.lg">
             <Box p={4}>
                 <Center>
+                    {!props.user?.location?.coordinates?.length ? <Alert status="warning">
+                        <AlertIcon />
+                        <Text>Bitte gib in den <Link to="/account-settings">Accounteinstellungen</Link> deine Adresse ein. Danach kannst du hier dein Inventar hochladen.</Text>
+                    </Alert> : <>
                     <VStack spacing="20px">
                         <Heading>Erstelle einen Post um etwas auszuleihen!</Heading>
                         <Text fontSize="lg">Trent-User in deiner Umgebung, die den Gegenstand den du ausleihen willst besitzen, werden benachrichtigt und setzen sich dann mit dir in Verbindung.</Text>
@@ -96,6 +100,7 @@ export default function CreatePost(props) {
                             {props.match.params?.id ? "Änderungen speichern" : "Posten"}
                         </Button>
                     </VStack>
+                    </>}
                 </Center>
             </Box>
         </Container>
