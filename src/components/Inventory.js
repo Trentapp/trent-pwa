@@ -102,11 +102,9 @@ export default function Inventory(props) {
 
     const deleteId = typeId => {
         setTypeIds(typeIds.filter(tId => !(tId == typeId)));
-        console.log(typeIds)
     }
 
     const onChangeItem = typeId => {
-        console.log(typeIds)
         if (typeIds.includes(typeId)){
             deleteId(typeId);
         } else {
