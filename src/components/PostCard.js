@@ -78,7 +78,7 @@ export default function PostCard(props) {
                         {/* maybe add "reopen" option later */}
                     </HStack>
                 </HStack>
-                <Heading size="md">Gesuchte(r) Gegenstand/Gegenstände: {props.post.typeIds.map(tId => items[tId]).join(", ")}</Heading>
+                <Heading size="md">Suche: {props.post.typeIds.map(tId => items[tId]).join(", ")}</Heading>
                 <Text>{props.post.comment}</Text> {/* evtl das vornedran: <Text fontWeight="bold">Kommentar: </Text> */}
                 <HStack>
                     <CalendarIcon color="gray.600" />
