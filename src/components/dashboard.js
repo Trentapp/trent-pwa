@@ -50,7 +50,7 @@ const Dashboard = props => {
     // }, [props.user]);
 
     useEffect(() => {
-        if (!props.user?.location?.coordinates?.length){
+        if (!loc?.coordinates?.length){
             if (props.user?.location?.coordinates?.length) { //if user has set an address, we take his location (maybe change later)
                 setLoc(props.user.location);
             } 
