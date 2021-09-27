@@ -20,6 +20,10 @@ class PostDataService {
     getById(postId) {
         return http.get(`/posts/post/${postId}`);
     }
+
+    deletePost(postId, uid) {
+        return http.post(`/posts/delete/${postId}`, {uid: uid});
+    }
 };
 
 export default new PostDataService();

@@ -37,6 +37,22 @@ export default function CreatePost(props) {
         setSelected(selectedOptions);
     }
 
+    const deletePost = async () => {
+        if (props.match.params.id) {
+            try {
+                setLoading(true);
+                let result = window.confirm("Bist du sicher, dass du den Post löschen möchtest?");
+                if (result) {
+                    await PostDataService.deletePost(props.match.params.id, props.user.uid);
+                    history.push("/");
+                }
+            } catch(e){
+                console.log("Failed to delete post: ", e);
+            }
+            setLoading(false);
+        }
+    };
+
     const handleSubmit = async () => {
         try {
             setLoading(true);
@@ -99,6 +115,18 @@ export default function CreatePost(props) {
                         >
                             {props.match.params?.id ? "Änderungen speichern" : "Posten"}
                         </Button>
+                        {props.match.params.id && <>
+                            <Button
+                            type="submit"
+                            variant="solid"
+                            colorScheme="red"
+                            width={{base: "100%", md: "100%"}}
+                            onClick={deletePost}
+                            disabled={loading}
+                            >
+                                Delete Post
+                            </Button>
+                        </>}
                     </VStack>
                     </>}
                 </Center>
