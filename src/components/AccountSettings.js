@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, FormLabel, Center, Flex } from '@chakra-ui/react';
+import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, FormLabel, Center, Flex, Tooltip } from '@chakra-ui/react';
 // import { Button, Card, Form, Container, Alert } from "react-bootstrap";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -8,6 +8,7 @@ import { useHistory} from "react-router-dom";
 import UserDataService from "../services/user-data";
 import { Text } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
+import { InfoIcon } from '@chakra-ui/icons';
 
 export default function UpdateProfile(props) {
     const {t} = useTranslation();
@@ -152,7 +153,12 @@ export default function UpdateProfile(props) {
                     </InputGroup>
                 </FormControl>*/}
                 <Flex text-align="left">
-                    <Text mt={4}>{t("address.head")}</Text>
+                    <HStack>
+                    <Text mt={1}>{t("address.head")}</Text>
+                    <Tooltip label="Deine Adresse ist für niemanden sichtbar. Wir brauchen deine Adresse nur, um deine Nachbarschaft zu bestimmen.">
+                        <InfoIcon/>
+                    </Tooltip>
+                    </HStack>
                 </Flex>
                 <FormControl mt={3}>
                     <Input placeholder={t("address.street")} ref={streetWithNrRef} defaultValue={props.user.address?.streetWithNr}/>

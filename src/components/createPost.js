@@ -21,7 +21,6 @@ export default function CreatePost(props) {
         const getPost = async postId => {
             try {
                 const response = await PostDataService.getById(postId);
-                console.log(response.data);
                 setComment(response.data.comment);
                 setSelected(response.data.typeIds.map(tId => {return {value: tId, label: items[tId]}}));
             } catch(e) {

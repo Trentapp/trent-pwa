@@ -61,14 +61,13 @@ const Dashboard = props => {
                 }, (err) => console.log("Could not get location: ", err));
             }
         }
-    }, [props.user?._id])
+    }, [props.user?._id]);
 
     useEffect(() => {
         const getFeed = async (loc) => {
             try {
                 const response = await PostDataService.getAroundLocation(loc);
                 setPosts(response.data);
-                console.log(response.data);
             } catch(e) {
                 console.log("Error in get upcoming transactions: ", e);
             }
