@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Container, Stack, Box, Center, VStack, Heading, Text, Textarea, Button, HStack, Tooltip, Alert, AlertIcon } from '@chakra-ui/react'
+import { IconButton, Container, Stack, Box, Center, VStack, Heading, Text, Textarea, Button, HStack, Tooltip, Alert, AlertIcon, Popover, PopoverTrigger, PopoverContent, PopoverArrow, PopoverCloseButton, PopoverBody } from '@chakra-ui/react'
 import {useHistory, Link} from "react-router-dom"
 import Select from 'react-select'
 import { InfoIcon } from '@chakra-ui/icons'
@@ -9,7 +9,7 @@ import PostDataService from "../services/post-data.js"
 
 export default function CreatePost(props) {
     let options = Object.entries(items).map(itemArr => {return {value: itemArr[0], label: itemArr[1]}});
-    const commentPlacehoder = `Beschreibe hier, von wann bis wann du den Gegenstand (oder die Gegenstände) ausleihen willst. Beschreibe außerdem ggf. genauere Anforderungen oder spezifiziere das/die Produkte. Falls du etwas teures ausleihst und etwas für das Leihen zahlen würdest, schreibe auch rein, wie viel du zahlen würdest (du kannst auch gerne "auf Verhandlungsbasis" angeben).`;
+    const commentPlaceholder = `Beschreibe hier, von wann bis wann du den Gegenstand (oder die Gegenstände) ausleihen willst. Beschreibe außerdem ggf. genauere Anforderungen oder spezifiziere das/die Produkte. Falls du etwas teures ausleihst und etwas für das Leihen zahlen würdest, schreibe auch rein, wie viel du zahlen würdest (du kannst auch gerne "auf Verhandlungsbasis" angeben).`;
     
     const lastOption = {value: 9999, label: "Sonstiges (in Kommentar beschreiben)"}; // is also included in options
     const [selected, setSelected] = useState([lastOption]);
@@ -100,10 +100,20 @@ export default function CreatePost(props) {
                         </Stack>
                         <Box w="100%">
                         <HStack>
-                            <Text>Kommentar:</Text><Tooltip label={commentPlacehoder}><InfoIcon/></Tooltip>
+                            <Text>Kommentar:</Text> {/* <Tooltip label={commentPlaceholder}><InfoIcon/></Tooltip> */}
+                            <Popover>
+                                <PopoverTrigger>
+                                    <IconButton size="sm" icon={<InfoIcon/>} />
+                                </PopoverTrigger>
+                                <PopoverContent>
+                                    <PopoverArrow />
+                                    <PopoverCloseButton />
+                                    <PopoverBody>{commentPlaceholder}</PopoverBody>
+                                </PopoverContent>
+                            </Popover>
                         </HStack>
                         <Box width="100%" mt={2}>
-                            <Textarea placeholder={commentPlacehoder} value={comment} onChange={(e) => setComment(e.target.value)}/>
+                            <Textarea placeholder={commentPlaceholder} value={comment} onChange={(e) => setComment(e.target.value)}/>
                         </Box>
                         </Box>
                         <Button

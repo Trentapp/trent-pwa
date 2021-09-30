@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, FormLabel, Center, Flex, Tooltip } from '@chakra-ui/react';
+import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, FormLabel, Center, Flex, Tooltip, Popover, PopoverTrigger, PopoverContent, PopoverArrow, PopoverCloseButton, PopoverBody, IconButton } from '@chakra-ui/react';
 // import { Button, Card, Form, Container, Alert } from "react-bootstrap";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -157,9 +157,19 @@ export default function UpdateProfile(props) {
                 <Flex text-align="left">
                     <HStack>
                     <Text mt={1}>{t("address.head")}</Text>
-                    <Tooltip label="Deine Adresse ist für niemanden sichtbar. Wir brauchen deine Adresse nur, um deine Nachbarschaft zu bestimmen.">
+                    {/* <Tooltip label="Deine Adresse ist für niemanden sichtbar. Wir brauchen deine Adresse nur, um deine Nachbarschaft zu bestimmen.">
                         <InfoIcon/>
-                    </Tooltip>
+                    </Tooltip> */}
+                    <Popover>
+                        <PopoverTrigger>
+                            <IconButton size="sm" icon={<InfoIcon/>} />
+                        </PopoverTrigger>
+                        <PopoverContent>
+                            <PopoverArrow />
+                            <PopoverCloseButton />
+                            <PopoverBody>Deine Adresse ist für niemanden sichtbar. Wir brauchen deine Adresse nur, um deine Nachbarschaft zu bestimmen.</PopoverBody>
+                        </PopoverContent>
+                    </Popover>
                     </HStack>
                 </Flex>
                 <FormControl mt={3}>

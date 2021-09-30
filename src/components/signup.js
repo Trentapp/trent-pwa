@@ -3,12 +3,11 @@ import React, {useRef, useState} from 'react';
 // import "bootstrap/dist/css/bootstrap.min.css";
 import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
-import { InputRightElement, PopoverTrigger, PopoverContent, PopoverArrow, PopoverCloseButton, PopoverBody, Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, Text, Icon, Divider, useToast, IconButton, InputRightAddon, InputLeftAddon } from '@chakra-ui/react';
+import { Popover, InputRightElement, PopoverTrigger, PopoverContent, PopoverArrow, PopoverCloseButton, PopoverBody, Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, Text, Icon, Divider, useToast, IconButton, InputRightAddon, InputLeftAddon } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { AiFillApple, AiOutlineGoogle } from "react-icons/ai";
 
 import UserDataService from "../services/user-data";
-import { Popover } from 'bootstrap';
 import { QuestionIcon } from '@chakra-ui/icons';
 
 export default function SignUp() {
@@ -117,7 +116,7 @@ export default function SignUp() {
                     <InputGroup>
                     <InputLeftAddon children="Deine Uni-Email:"/>
                     <Input type="email" placeholder={t("signup-placeholders.email address")} ref={emailRef} />
-                    {/* maybe later improve by using a popover or so (probably with external target, because you cannot nest popover in InputGroup) */}
+                    {/* maybe later improve by using a popover or so (probably with external target, because you cannot nest popover in InputGroup) (update: the problem was most likely that I used bootstrap Popover, not chakra) */}
                     </InputGroup>
                 </FormControl>
                 <FormControl>
