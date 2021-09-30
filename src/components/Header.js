@@ -1,12 +1,9 @@
-import React, {useRef} from 'react';
-import {Link, useHistory} from "react-router-dom";
+import React from 'react';
+import {Link} from "react-router-dom";
 import {
   Box,
   Stack,
   HStack,
-  InputGroup,
-  Input,
-  InputRightElement,
   Menu,
   MenuButton,
   MenuList,
@@ -17,7 +14,7 @@ import {
   Center,
   useMediaQuery
 } from "@chakra-ui/react";
-import { Search2Icon, ChevronDownIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useTranslation } from 'react-i18next';
 
 import {LogoSmall} from "./landing-page";
@@ -26,13 +23,6 @@ export default function Header (props) {
   const {t} = useTranslation();
 
   const [isLargerMd] = useMediaQuery("(min-width: 860px)")
-
-  const searchRef = useRef();
-  const history = useHistory();
-
-  const onSearch = () => {
-    history.push(`/products?search=${searchRef.current.value}`)
-  }
 
   return (
     <Box h="75px">

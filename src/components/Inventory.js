@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {Link} from "react-router-dom";
 import { Box, Stack, Heading, Alert, AlertIcon, Text, Button, VStack, HStack, useToast} from '@chakra-ui/react';
 
@@ -101,7 +101,7 @@ export default function Inventory(props) {
     }
 
     const deleteId = typeId => {
-        setTypeIds(typeIds.filter(tId => !(tId == typeId)));
+        setTypeIds(typeIds.filter(tId => !(tId === typeId)));
     }
 
     const onChangeItem = typeId => {
@@ -115,7 +115,7 @@ export default function Inventory(props) {
     const handleSubmit = async () => {
         try{
             setLoading(true);
-            const response = await UserDataService.setItems(props.user.uid, typeIds);
+            await UserDataService.setItems(props.user.uid, typeIds);
             toast({title: "Inventar gespeichert!", status: "success", duration: 4000, isClosable: true})
             setLoading(false);
         } catch(e) {
@@ -156,7 +156,7 @@ export default function Inventory(props) {
                 <>
                 <Text>Bitte gib hier die Gegenstände an, die du besitzt und die du dir vorstellen könntest, jemandem auszuleihen.  und vergiss am Ende nicht auf Speichern zu drücken.</Text>
                 <VStack spacing="2px" alignItems="left">
-                {Object.entries(items).filter(itArr => itArr[0] != 9999).map(itemArr => <HStack spacing="5px">
+                {Object.entries(items).filter(itArr => parseInt(itArr[0]) !== 9999).map(itemArr => <HStack spacing="5px">
                     <input onClick={() => onChangeItem(parseInt(itemArr[0]))} type="checkbox" id={`item${itemArr[0]}`} name={itemArr[1]} defaultChecked={typeIds.includes(parseInt(itemArr[0]))}/>
                     <label for={`item${itemArr[0]}`}>{itemArr[1]}</label>
                 </HStack>)}

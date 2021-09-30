@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { IconButton, Container, Stack, Box, Center, VStack, Heading, Text, Textarea, Button, HStack, Tooltip, Alert, AlertIcon, Popover, PopoverTrigger, PopoverContent, PopoverArrow, PopoverCloseButton, PopoverBody } from '@chakra-ui/react'
+import { IconButton, Container, Stack, Box, Center, VStack, Heading, Text, Textarea, Button, HStack, Alert, AlertIcon, Popover, PopoverTrigger, PopoverContent, PopoverArrow, PopoverCloseButton, PopoverBody } from '@chakra-ui/react'
 import {useHistory, Link} from "react-router-dom"
 import Select from 'react-select'
 import { InfoIcon } from '@chakra-ui/icons'
@@ -60,18 +60,17 @@ export default function CreatePost(props) {
                 loc = props.user.location;
             } 
             else {
-                throw "Location not defined";
+                throw Error("Location not defined")
                 // navigator.geolocation.getCurrentPosition((position) => {
                 //     loc = {type: "Point", coordinates: [position.coords.longitude, position.coords.latitude]};
                 // }, (err) => {
                 //     throw "Could not get location of user. Please don't block your location or enter your address in Account Settings.";
                 // })
             }
-            let response;
             if (props.match.params?.id) {
-                response = await PostDataService.update(props.match.params.id, props.user.uid, selected.map(s => parseInt(s.value)), comment, loc);
+                await PostDataService.update(props.match.params.id, props.user.uid, selected.map(s => parseInt(s.value)), comment, loc);
             } else {
-                response = await PostDataService.create(props.user.uid, selected.map(s => parseInt(s.value)), comment, loc);
+                await PostDataService.create(props.user.uid, selected.map(s => parseInt(s.value)), comment, loc);
             }
             setLoading(false);
             history.push("/dashboard");

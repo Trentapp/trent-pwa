@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import { CalendarIcon, ChatIcon, CheckIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
-import { VStack, HStack, Stack, Heading, Text, Box, IconButton, Divider, Tooltip, Center } from '@chakra-ui/react';
-import {Link, useHistory} from "react-router-dom";
+import { VStack, HStack, Stack, Heading, Text, Box, IconButton, Divider, Tooltip } from '@chakra-ui/react';
+import { useHistory} from "react-router-dom";
 
 import ProfileCard from './profileCard';
 import {items} from "./Inventory.js";

@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, FormLabel, Center, Flex, Tooltip, Popover, PopoverTrigger, PopoverContent, PopoverArrow, PopoverCloseButton, PopoverBody, IconButton } from '@chakra-ui/react';
+import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, FormLabel, Center, Flex, Popover, PopoverTrigger, PopoverContent, PopoverArrow, PopoverCloseButton, PopoverBody, IconButton } from '@chakra-ui/react';
 // import { Button, Card, Form, Container, Alert } from "react-bootstrap";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -16,10 +16,10 @@ export default function UpdateProfile(props) {
 
     const firstNameRef = useRef();
     const lastNameRef = useRef();
-    const passwordRef = useRef();
-    const passwordConfirmRef = useRef();
+    const passwordRef = useRef();// eslint-disable-line no-unused-vars
+    const passwordConfirmRef = useRef();// eslint-disable-line no-unused-vars
     const [streetWithNrRef, zipRef, cityRef, countryRef] = [useRef(), useRef(), useRef(), useRef()];
-    const {currentUser, updatePassword} = useAuth();
+    const {currentUser, updatePassword} = useAuth();// eslint-disable-line no-unused-vars
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [file, setFile] = useState();

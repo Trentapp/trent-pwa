@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-
-import TransactionDataService from "../services/transaction-data";
-import ChatDataService from "../services/chat-data";
-import PostDataService from "../services/post-data";
 import { Box, Button, Center, Container, Divider, Heading, HStack, VStack, Alert, AlertIcon, Text } from "@chakra-ui/react";
-import TransactionCard from "./TransactionCard";
+
+import PostDataService from "../services/post-data";
+// import TransactionDataService from "../services/transaction-data";
+// import ChatDataService from "../services/chat-data";
+// import TransactionCard from "./TransactionCard";
 import PostCard from "./PostCard";
 
 const Dashboard = props => {
@@ -61,7 +61,7 @@ const Dashboard = props => {
         //         }
         //     }, (err) => console.log("Could not get location: ", err));
         // }
-    }, [props.user?.location?.coordinates?.length]);
+    }, [props.user?.location]);
 
     useEffect(() => {
         const getFeed = async (loc) => {

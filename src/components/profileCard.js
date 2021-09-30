@@ -1,7 +1,7 @@
 import { VStack, HStack, Flex, Text, Avatar, Center } from '@chakra-ui/react';
 import React from 'react';
-import {Link} from "react-router-dom";
-import StarRatings from "react-star-ratings";
+// import {Link} from "react-router-dom";
+// import StarRatings from "react-star-ratings";
 
 
 export default function ProfileCard(props) { //pass in creator for posts or products

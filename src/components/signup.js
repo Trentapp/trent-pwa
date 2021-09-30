@@ -3,12 +3,13 @@ import React, {useRef, useState} from 'react';
 // import "bootstrap/dist/css/bootstrap.min.css";
 import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
-import { Popover, InputRightElement, PopoverTrigger, PopoverContent, PopoverArrow, PopoverCloseButton, PopoverBody, Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, Text, Icon, Divider, useToast, IconButton, InputRightAddon, InputLeftAddon } from '@chakra-ui/react';
+import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, Text, Icon, Divider, useToast, InputLeftAddon } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { AiFillApple, AiOutlineGoogle } from "react-icons/ai";
 
 import UserDataService from "../services/user-data";
-import { QuestionIcon } from '@chakra-ui/icons';
+// import { QuestionIcon } from '@chakra-ui/icons';
+// import { Popover, InputRightElement, PopoverTrigger, PopoverContent, PopoverArrow, PopoverCloseButton, IconButton, InputRightAddon, PopoverBody } from "@chakra-ui/react";
 
 export default function SignUp() {
     const {t} = useTranslation();
