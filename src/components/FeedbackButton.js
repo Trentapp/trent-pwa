@@ -7,7 +7,7 @@ export default function FeedbackButton() {
     const {t} = useTranslation();
 
     const mainButtonStyles = {
-        position: "absolute",
+        position: "fixed",
         bottom: "20px",
         right: "20px",
     }
