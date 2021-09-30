@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import TransactionDataService from "../services/transaction-data";
 import ChatDataService from "../services/chat-data";
 import PostDataService from "../services/post-data";
-import { Box, Button, Center, Container, Divider, Heading, HStack, VStack } from "@chakra-ui/react";
+import { Box, Button, Center, Container, Divider, Heading, HStack, VStack, Alert, AlertIcon, Text } from "@chakra-ui/react";
 import TransactionCard from "./TransactionCard";
 import PostCard from "./PostCard";
 
@@ -50,18 +50,18 @@ const Dashboard = props => {
     // }, [props.user]);
 
     useEffect(() => {
-        if (!loc?.coordinates?.length){
-            if (props.user?.location?.coordinates?.length) { //if user has set an address, we take his location (maybe change later)
-                setLoc(props.user.location);
-            } 
-            else {
-                navigator.geolocation.getCurrentPosition((position) => {
-                    console.log("position: ", position);
-                    setLoc({type: "Point", coordinates: [position.coords.longitude, position.coords.latitude]});
-                }, (err) => console.log("Could not get location: ", err));
-            }
-        }
-    }, [props.user?._id]);
+        if (props.user?.location?.coordinates?.length) { //if user has set an address, we take his location (maybe change later)
+            setLoc(props.user.location);
+        } 
+        // else { //does not work because getCurrentPosition callback is triggered late and overwrites real location
+        //     navigator.geolocation.getCurrentPosition((position) => {
+        //         console.log("position: ", position);
+        //         if (!loc?.coordinates?.length) {
+        //             setLoc({type: "Point", coordinates: [position.coords.longitude, position.coords.latitude]});
+        //         }
+        //     }, (err) => console.log("Could not get location: ", err));
+        // }
+    }, [props.user?.location?.coordinates?.length]);
 
     useEffect(() => {
         const getFeed = async (loc) => {
@@ -96,6 +96,10 @@ const Dashboard = props => {
                         </Box>
                         <Divider color="gray.400"/>
                         {/* Feed */}
+                        {!props.user?.location?.coordinates?.length ? <Alert status="warning">
+                            <AlertIcon />
+                            <Text>Bitte gib in den <Link to="/account-settings">Accounteinstellungen</Link> deine Adresse ein, um Anfragen aus deiner Umgebung zu sehen.</Text>
+                        </Alert> : <>
                         <VStack align="flex-start" paddingTop={3}>
                             {posts.length && <Box paddingTop={3} paddingBottom={3}>
                                 <Heading size="lg" pb={4}>Aktuelle Posts aus deiner Umgebung</Heading>
@@ -104,6 +108,7 @@ const Dashboard = props => {
                                 </VStack>
                             </Box>}
                         </VStack>
+                        </>}
                         {/* 
                             {newMessagesChats.length && <Box paddingTop={3}>
                                 <Heading size="lg">{t("dashboard.Chats")} with new messages</Heading>

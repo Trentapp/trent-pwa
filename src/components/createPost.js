@@ -85,7 +85,7 @@ export default function CreatePost(props) {
                 <Center>
                     {!props.user?.location?.coordinates?.length ? <Alert status="warning">
                         <AlertIcon />
-                        <Text>Bitte gib in den <Link to="/account-settings">Accounteinstellungen</Link> deine Adresse ein. Danach kannst du hier dein Inventar hochladen.</Text>
+                        <Text>Bitte gib in den <Link to="/account-settings">Accounteinstellungen</Link> deine Adresse ein, um eine Ausleihanfrage zu senden.</Text>
                     </Alert> : <>
                     <VStack spacing="20px">
                         <Heading>Erstelle einen Post um etwas auszuleihen!</Heading>
