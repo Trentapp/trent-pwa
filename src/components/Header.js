@@ -40,20 +40,6 @@ export default function Header (props) {
         <HStack justify="space-between">
           <HStack spacing={{base: 4, md: 8}} flex={1} h="75px">
             <LogoSmall />
-            {/* <InputGroup size="sm" maxW="400px" bg="gray.100" borderRadius="lg">
-              <Input
-                pr="4.5rem"
-                type="text"
-                placeholder={t("header.search")}
-                ref={searchRef}
-                onKeyDown={e => {if (e.key === "Enter") {onSearch()}}}
-              />
-              <InputRightElement width="4.5rem">
-                <Button h="1.75rem" size="sm" onClick={onSearch}>
-                  <Search2Icon />            
-                </Button>
-              </InputRightElement>
-            </InputGroup> */}
             <Link to="/borrow">
               <Button colorScheme="green">
                 Leih etwas aus

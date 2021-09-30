@@ -58,12 +58,14 @@ export default function CreatePost(props) {
             let loc;
             if (props.user?.location?.coordinates) { //if user has set an address, we take his location (maybe change later)
                 loc = props.user.location;
-            } else {
-                navigator.geolocation.getCurrentPosition((position) => {
-                    loc = {type: "Point", coordinates: [position.coords.longitude, position.coords.latitude]};
-                }, (err) => {
-                    throw "Could not get location of user. Please don't block your location or enter your address in Account Settings.";
-                })
+            } 
+            else {
+                throw "Location not defined";
+                // navigator.geolocation.getCurrentPosition((position) => {
+                //     loc = {type: "Point", coordinates: [position.coords.longitude, position.coords.latitude]};
+                // }, (err) => {
+                //     throw "Could not get location of user. Please don't block your location or enter your address in Account Settings.";
+                // })
             }
             let response;
             if (props.match.params?.id) {
