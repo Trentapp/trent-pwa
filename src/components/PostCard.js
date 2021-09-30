@@ -48,7 +48,7 @@ export default function PostCard(props) {
     }
 
     useEffect(() => {
-        if (props?.match?.params?.id && props.user._id && props.post.status === 0){
+        if (props?.match?.params?.id && props.user?._id && props.post.status === 0){
             setMessageOpen(true);
         }
     }, [props?.match?.params?.id, props.post?.status, props.user?._id]);
