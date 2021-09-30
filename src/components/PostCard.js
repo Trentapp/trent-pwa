@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { CalendarIcon, ChatIcon, CheckIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
 import { VStack, HStack, Stack, Heading, Text, Box, IconButton, Divider, Tooltip } from '@chakra-ui/react';
 import { useHistory} from "react-router-dom";
@@ -47,6 +47,12 @@ export default function PostCard(props) {
         }
     }
 
+    useEffect(() => {
+        if (props?.match?.params?.id && props.user._id && props.post.status === 0){
+            setMessageOpen(true);
+        }
+    }, [props?.match?.params?.id, props.post?.status, props.user?._id]);
+
     return (
         <Box
             w={{base: "300px", md:"700px"}}
@@ -58,18 +64,18 @@ export default function PostCard(props) {
             alignItems="stretch"
             p={4}
         >
-            <QuestionForm messageRef={messageRef} user={props.user} isOpen={messageOpen} recipient={props.post.user} onSendMessage={onSendMessage} />
+            <QuestionForm messageRef={messageRef} user={props.user} setIsOpen={setMessageOpen} isOpen={messageOpen} defaultMsg={props?.defaultMsg} recipient={props.post.user} onSendMessage={onSendMessage} />
             <VStack align="flex-start">
                 <Stack direction={{base: "column", md: "row"}} justify="space-between" w="100%">
                     <HStack>
-                        <ProfileCard creator={props.post.user}/>
+                        <ProfileCard creator={props.post?.user}/>
                         <IconButton icon={<ChatIcon />} onClick={() => setMessageOpen(true)} />
                     </HStack>
                     <HStack>
                         <Box borderRadius="lg" bg={props.post.status === 0 ? "green.500" : (props.post.status === 1 ? "blue.400" : "red.400")} px={3} py={2}>
                             <Text fontSize="lg" fontWeight="bold">{props.post.status === 0 ? "Aktiv" : (props.post.status === 1 ? "Abgeschlossen" : "Abgebrochen")}</Text>
                         </Box>
-                        {props.user._id === props.post.user._id && props.post.status === 0 && <>
+                        {props.user?._id === props.post?.user?._id && props.post.status === 0 && <>
                             <Tooltip label="Post schließen (wenn du jemanden gefunden hast, der dir das was du brauchst, ausleiht)"><IconButton onClick={closePost} icon={<CheckIcon />} /></Tooltip>
                             <Tooltip label="Anfrage abbrechen (du brauchst die Gegenstände doch nicht mehr)"><IconButton onClick={cancelPost} icon={<CloseIcon />} /></Tooltip>
                             <Divider orientation="vertical" color="gray.400"/>
@@ -78,7 +84,7 @@ export default function PostCard(props) {
                         {/* maybe add "reopen" option later */}
                     </HStack>
                 </Stack>
-                <Heading size="md">Suche: {props.post.typeIds.map(tId => items[tId]).join(", ")}</Heading>
+                <Heading size="md">Suche: {props.post?.typeIds?.map(tId => items[tId]).join(", ")}</Heading>
                 <Text>{props.post.comment}</Text> {/* evtl das vornedran: <Text fontWeight="bold">Kommentar: </Text> */}
                 <HStack>
                     <CalendarIcon color="gray.600" />

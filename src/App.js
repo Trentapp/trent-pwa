@@ -20,6 +20,7 @@ import Inventory from "./components/Inventory";
 import Impressum from "./components/impressum";
 import Datenschutz from "./components/datenschutz";
 import CreatePost from "./components/createPost";
+import ViewPost from "./components/ViewPost";
 
 import { useAuth } from "./context/AuthContext";
 import UserDataService from "./services/user-data";
@@ -76,6 +77,7 @@ function App() {
           <PrivateRoute path="/inventory" component={Inventory} user={user} />
           <PrivateRoute path="/borrow" component={CreatePost} user={user} />
           <PrivateRoute path="/editPost/:id" component={CreatePost} user={user} />
+          <PrivateRoute path="/post/:id" component={ViewPost} user={user} />
           <LoggedOutRoute path="/signup" component={SignUp} user={user}/>
           <LoggedOutRoute path="/login" component={LogIn} user={user}/>
           <LoggedOutRoute path="/forgot-password" component={ForgotPassword} user={user}/>

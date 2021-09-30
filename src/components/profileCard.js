@@ -18,11 +18,11 @@ export default function ProfileCard(props) { //pass in creator for posts or prod
                     w="100%"
                 >
                     <Center>
-                    <Avatar src={props.creator.picture && `data:${props.creator.picture.contentType};base64,${Buffer.from(props.creator.picture.data.data).toString('base64')}`} />
+                    <Avatar src={props.creator?.picture && `data:${props.creator.picture.contentType};base64,${Buffer.from(props.creator.picture.data.data).toString('base64')}`} />
                     </Center>
                     <VStack>
                         <Text fontWeight="bold">
-                            {props.creator.name}
+                            {props.creator?.name}
                         </Text>
                         {/* <HStack>
                             <StarRatings rating={props.creator.rating} starRatedColor="rgb(250,200,30)" starDimension="16px" starSpacing="2px"/><Text fontWeight="bold">({props.creator.numberOfRatings})</Text>

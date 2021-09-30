@@ -12,7 +12,7 @@ const QuestionForm = props => {
                 <ModalHeader>{t("ask-question.Send Message to ")}{props?.recipient?.name ?? "[deleted user]"}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    <Textarea placeholder="Your message" ref={props.messageRef} />
+                    <Textarea placeholder="Your message" ref={props.messageRef} value={props.defaultMsg ?? ""}/>
                 </ModalBody>
                 <ModalFooter>
                     <Button colorScheme="blue" mr={3} onClick={props.onSendMessage}>
