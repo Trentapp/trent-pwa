@@ -3,7 +3,7 @@ import React, {useRef, useState} from 'react';
 // import "bootstrap/dist/css/bootstrap.min.css";
 import {useAuth} from "../context/AuthContext";
 import {Link, useHistory} from "react-router-dom";
-import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, Text, Icon, Divider } from '@chakra-ui/react';
+import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, AlertIcon, HStack, Text, Icon, Divider, useToast } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { AiFillApple, AiOutlineGoogle } from "react-icons/ai";
 
@@ -11,6 +11,7 @@ import UserDataService from "../services/user-data";
 
 export default function SignUp() {
     const {t} = useTranslation();
+    const toast = useToast();
 
     const firstNameRef = useRef();
     const lastNameRef = useRef();
@@ -22,6 +23,7 @@ export default function SignUp() {
     const [loading, setLoading] = useState(false);
     const history = useHistory();
 
+
     const signInGoogle = async () => {
         try {
             const res = await googleAuth();
@@ -29,7 +31,8 @@ export default function SignUp() {
             if (!response.data) {
                 await UserDataService.createUser({user: {name: res.user.displayName, mail: res.user.email, uid: res.user.uid}})
             }
-            window.location.reload();
+            history.push("/account-settings");
+            toast({title: "Registrierung Erfolgreich", description: "Bitte gib nun deine Adresse an. (Deine Adresse wird nicht öffentlich gezeigt.)", status: "success", duration: 8000, isClosable: true});
         } catch(e) {
             console.log("Google auth failed: ", e);
         }
@@ -43,7 +46,8 @@ export default function SignUp() {
             if (!user) {
                 await UserDataService.createUser({user: {name: res.user.displayName, mail: res.user.email, uid: res.user.uid}})
             }
-            window.location.reload();
+            history.push("/account-settings");
+            toast({title: "Registrierung Erfolgreich", description: "Bitte gib nun deine Adresse an. (Deine Adresse wird nicht öffentlich gezeigt.)", status: "success", duration: 8000, isClosable: true});
         } catch(e) {
             console.log("Apple auth failed: ", e);
         }
@@ -61,9 +65,10 @@ export default function SignUp() {
             await signupResponse.user.sendEmailVerification();
             //firebase user.uid is correct, right? // probably change that below later (pass user directly as body)
             await UserDataService.createUser({user: {firstName: firstNameRef.current.value, lastName: lastNameRef.current.value, mail: emailRef.current.value, uid: signupResponse.user.uid}}) //use Promise.all() or so so that the firebase entry is not created if createUser fails (is that possible?)
-            alert("Awesome! You are one of the first trent users - whoohoo!! As this is still a beta renting is not available yet. However we would really appreciate if you already posted some products and spread the word about trent. If you have questions or feedback we would love to hear from you at support@trentapp.com")
-            history.push("/dashboard");
-            window.location.reload();//sometimes does not work properly right away (does not get user fast enough)
+            //alert("Awesome! You are one of the first trent users - whoohoo!! Please enter your address and then your inventory. It would also be awesome if you share trent with your friend. And follow us on Instagram @gettrentapp! If you have questions or feedback we would love to hear from you at support@trentapp.com")
+            history.push("/account-settings");
+            toast({title: "Registrierung Erfolgreich", description: "Bitte gib nun deine Adresse an. (Deine Adresse wird nicht öffentlich gezeigt.)", status: "success", duration: 8000, isClosable: true});
+            //window.location.reload();//sometimes does not work properly right away (does not get user fast enough)
         } catch(err) {
             setError("Failed to create an account");
             console.log("Failed to create account: ", err);

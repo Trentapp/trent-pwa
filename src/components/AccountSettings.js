@@ -6,12 +6,13 @@ import { Box, Stack, Heading, FormControl, InputGroup, Input, Button, Alert, Ale
 import {useAuth} from "../context/AuthContext";
 import { useHistory} from "react-router-dom";
 import UserDataService from "../services/user-data";
-import { Text } from '@chakra-ui/react';
+import { Text, useToast } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { InfoIcon } from '@chakra-ui/icons';
 
 export default function UpdateProfile(props) {
     const {t} = useTranslation();
+    const toast = useToast(); 
 
     const firstNameRef = useRef();
     const lastNameRef = useRef();
@@ -86,8 +87,9 @@ export default function UpdateProfile(props) {
                 fd.append("parameters", blob);
                 await UserDataService.uploadPicture(fd);
             }
+            toast({title: "Gespeichert!", description: "Falls noch nicht geschehen, gib bitte dein Inventar an.", status: "success", duration: 5000, isClosable: true});
             history.push(`/dashboard`);
-            window.location.reload();
+            props.setReloadUser(props.reloadUser + 1);
         } catch(err) {
             setError(t("account-settings.error.general")); //TODO: sometimes you get bad request 400: credentials too old. Handle it better.
             console.log("Failed to update profile: ", err)

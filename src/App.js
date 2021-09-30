@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Switch, Route, useHistory, useLocation } from "react-router-dom";
 import "./css/styles.css";
 import { Box } from "@chakra-ui/react";
@@ -33,6 +33,7 @@ function App() {
   const history = useHistory();
   const [user, setUser] = useState({ name: "", address: { street: "", houseNumber: "", zipcode: "", city: "", country: "" } });
   const location = useLocation();
+  const [reloadUser, setReloadUser] = useState(0); //not prettiest solution, but it works
 
   async function handleLogout() {
     try {
@@ -43,22 +44,23 @@ function App() {
       console.log("Failed to log out");
     }
   }
-
+  
   useEffect(() => {
-    async function getUser() {
+    const getUser = async () => {
       try {
         const response = await UserDataService.get(currentUser.uid);
-        if (user){
+        if (response.data){
           setUser(response.data);
         }
       } catch (err) {
         console.log("error trying to get user: ", err);
       }
-    }
-    if (currentUser){
+    };
+    if (currentUser?.uid){
       getUser();
+      setTimeout(getUser, 2000);
     }
-  }, [currentUser]);
+  }, [currentUser?.uid, reloadUser]);
 
   return (
     <>
@@ -77,7 +79,7 @@ function App() {
           <LoggedOutRoute path="/signup" component={SignUp} user={user}/>
           <LoggedOutRoute path="/login" component={LogIn} user={user}/>
           <LoggedOutRoute path="/forgot-password" component={ForgotPassword} user={user}/>
-          <PrivateRoute path="/account-settings" component={AccountSettings} user={user}/>
+          <PrivateRoute path="/account-settings" component={AccountSettings} user={user} reloadUser={reloadUser} setReloadUser={setReloadUser}/>
           <PrivateRoute exact path="/chats" component={ChatsList} user={user}/>
           <PrivateRoute path="/chats/:id" component={Chat} user={user} />
           <PrivateRoute path="/transactions" component={TransactionList} user={user} />
