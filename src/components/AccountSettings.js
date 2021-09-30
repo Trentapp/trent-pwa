@@ -79,7 +79,7 @@ export default function UpdateProfile(props) {
                 change = true;
             }
             if (change) {
-                await UserDataService.updateUser({user: {...user, picture: null, inventory: []}});//maybe change that later so user gets passed directly in body
+                await UserDataService.updateUser({user: {...user, picture: null}});//maybe change that later so user gets passed directly in body
             }
             if (file){
                 const fd = fileUploadHandler();
