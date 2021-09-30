@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
 import { CalendarIcon, ChatIcon, CheckIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
-import { VStack, HStack, Heading, Text, Box, IconButton, Divider, Tooltip, Center } from '@chakra-ui/react';
+import { VStack, HStack, Stack, Heading, Text, Box, IconButton, Divider, Tooltip, Center } from '@chakra-ui/react';
 import {Link, useHistory} from "react-router-dom";
 
 import ProfileCard from './profileCard';
@@ -60,7 +60,7 @@ export default function PostCard(props) {
         >
             <QuestionForm messageRef={messageRef} user={props.user} isOpen={messageOpen} recipient={props.post.user} onSendMessage={onSendMessage} />
             <VStack align="flex-start">
-                <HStack justify="space-between" w="100%">
+                <Stack direction={{base: "column", md: "row"}} justify="space-between" w="100%">
                     <HStack>
                         <ProfileCard creator={props.post.user}/>
                         <IconButton icon={<ChatIcon />} onClick={() => setMessageOpen(true)} />
@@ -77,7 +77,7 @@ export default function PostCard(props) {
                         </>}
                         {/* maybe add "reopen" option later */}
                     </HStack>
-                </HStack>
+                </Stack>
                 <Heading size="md">Suche: {props.post.typeIds.map(tId => items[tId]).join(", ")}</Heading>
                 <Text>{props.post.comment}</Text> {/* evtl das vornedran: <Text fontWeight="bold">Kommentar: </Text> */}
                 <HStack>
