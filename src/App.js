@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route, useHistory, useLocation } from "react-router-dom";
 import "./css/styles.css";
-import { Box } from "@chakra-ui/react";
+import { Box, useToast } from "@chakra-ui/react";
 
 import LandingPage from "./components/landing-page";
 import Header from "./components/Header";
@@ -29,6 +29,7 @@ import TransactionList from "./components/TransactionList";
 import FeedbackButton from "./components/FeedbackButton";
 
 function App() {
+  const toast = useToast();
 
   const { currentUser, logout } = useAuth();
   const history = useHistory();
@@ -55,6 +56,7 @@ function App() {
         }
       } catch (err) {
         console.log("error trying to get user: ", err);
+        toast({title: "Ein Fehler ist aufgetreten", description: "Bitte lade die Seite neu und bei wiederholter Fehlermeldung kontaktiere uns bitte: support@trentapp.com", status: "error", duration: 10000, isClosable: true});
       }
     };
     if (currentUser?.uid){

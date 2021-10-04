@@ -37,6 +37,7 @@ export default function SignUp() {
             toast({title: "Registrierung Erfolgreich", description: "Bitte gib nun deine Adresse an. (Deine Adresse wird nicht öffentlich gezeigt.)", status: "success", duration: 8000, isClosable: true});
         } catch(e) {
             console.log("Google auth failed: ", e);
+            setError("Anmeldung fehlgeschlagen.");
         }
     }
 
@@ -52,13 +53,14 @@ export default function SignUp() {
             toast({title: "Registrierung Erfolgreich", description: "Bitte gib nun deine Adresse an. (Deine Adresse wird nicht öffentlich gezeigt.)", status: "success", duration: 8000, isClosable: true});
         } catch(e) {
             console.log("Apple auth failed: ", e);
+            setError("Anmeldung fehlgeschlagen.");
         }
     }
 
     async function handleSubmit(e) {
         e.preventDefault();
         if (passwordRef.current.value !== passwordConfirmRef.current.value){
-            return setError("Passwords do not match");
+            return setError("Passwörter sind nicht gleich.");
         }
         try {
             setError(""); // I somehow get a warning "state update on unmounted component not possible". Maybe fix later.
@@ -72,7 +74,7 @@ export default function SignUp() {
             toast({title: "Registrierung Erfolgreich", description: "Bitte gib nun deine Adresse an. (Deine Adresse wird nicht öffentlich gezeigt.)", status: "success", duration: 8000, isClosable: true});
             //window.location.reload();//sometimes does not work properly right away (does not get user fast enough)
         } catch(err) {
-            setError("Failed to create an account");
+            setError("Account konnte nicht erstellt werden. Bitte überprüfe, dass nicht bereits ein Account mit dieser Email existiert. Ansonsten kontaktiere: support@trentapp.com");
             console.log("Failed to create account: ", err);
         }
         setLoading(false);

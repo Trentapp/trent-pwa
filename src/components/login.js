@@ -28,6 +28,7 @@ export default function Login() {
             window.location.reload();
         } catch(e) {
             console.log("Google auth failed: ", e);
+            setError("Anmeldung fehlgeschlagen.");
         }
     }
 
@@ -42,6 +43,7 @@ export default function Login() {
             window.location.reload();
         } catch(e) {
             console.log("Apple auth failed: ", e);
+            setError("Anmeldung fehlgeschlagen.");
         }
     }
 
@@ -53,7 +55,7 @@ export default function Login() {
             await login(emailRef.current.value, passwordRef.current.value);
             history.push("/dashboard");
         } catch(err) {
-            setError("Failed to sign in");
+            setError("Anmeldung fehlgeschlagen. Bitte überpüfe Email und Passwort. Bei Problemen kontaktiere: support@trentapp.com");
         }
         setLoading(false);
     }
