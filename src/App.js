@@ -63,7 +63,7 @@ function App() {
       getUser();
       setTimeout(getUser, 2000);
     }
-  }, [currentUser?.uid, reloadUser]);
+  }, [currentUser?.uid, reloadUser, toast]);
 
   return (
     <>

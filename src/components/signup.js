@@ -117,7 +117,7 @@ export default function SignUp() {
                 </FormControl>
                 <FormControl>
                     <InputGroup>
-                    <InputLeftAddon children="Deine Uni-Email:"/>
+                    {/* <InputLeftAddon children="Deine Uni-Email:"/> */}
                     <Input type="email" placeholder={t("signup-placeholders.email address")} ref={emailRef} />
                     {/* maybe later improve by using a popover or so (probably with external target, because you cannot nest popover in InputGroup) (update: the problem was most likely that I used bootstrap Popover, not chakra) */}
                     </InputGroup>
