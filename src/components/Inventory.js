@@ -151,7 +151,7 @@ export default function Inventory(props) {
                 <Heading size="lg">Inventar</Heading>
                 {!(props.user?.address?.city) ? <Alert status="warning">
                     <AlertIcon />
-                    <Text>Bitte gib in den <Link to="/account-settings">Accounteinstellungen</Link> deine Adresse ein. Danach kannst du hier dein Inventar hochladen.</Text>
+                    <Text>Bitte gib in den <Link to="/account-settings" style={{color: "#1111dd"}}>Accounteinstellungen</Link> deine Adresse ein. Danach kannst du hier dein Inventar hochladen.</Text>
                 </Alert> : 
                 <>
                 <Text>Bitte gib hier die Gegenstände an, die du besitzt und die du dir vorstellen könntest, jemandem auszuleihen.  und vergiss am Ende nicht auf Speichern zu drücken.</Text>

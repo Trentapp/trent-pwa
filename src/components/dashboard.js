@@ -73,7 +73,6 @@ const Dashboard = props => {
             }
         };
         
-        console.log("location: ", loc);
         if (loc){
             getFeed(loc);
         }
@@ -98,7 +97,7 @@ const Dashboard = props => {
                         {/* Feed */}
                         {!props.user?.location?.coordinates?.length ? <Alert status="warning">
                             <AlertIcon />
-                            <Text>Bitte gib in den <Link to="/account-settings">Accounteinstellungen</Link> deine Adresse ein, um Anfragen aus deiner Umgebung zu sehen.</Text>
+                            <Text>Bitte gib in den <Link to="/account-settings"  style={{color: "#1111dd"}}>Accounteinstellungen</Link> deine Adresse ein, um Anfragen aus deiner Umgebung zu sehen.</Text>
                         </Alert> : <>
                         <VStack align="flex-start" paddingTop={3}>
                             {posts.length && <Box paddingTop={3} paddingBottom={3}>

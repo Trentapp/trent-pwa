@@ -86,7 +86,7 @@ export default function CreatePost(props) {
                 <Center>
                     {!props.user?.location?.coordinates?.length ? <Alert status="warning">
                         <AlertIcon />
-                        <Text>Bitte gib in den <Link to="/account-settings">Accounteinstellungen</Link> deine Adresse ein, um eine Ausleihanfrage zu senden.</Text>
+                        <Text>Bitte gib in den <Link to="/account-settings" style={{color: "#1111dd"}}>Accounteinstellungen</Link> deine Adresse ein, um eine Ausleihanfrage zu senden.</Text>
                     </Alert> : <>
                     <VStack spacing="20px">
                         <Heading>Erstelle einen Post um etwas auszuleihen!</Heading>
@@ -100,11 +100,11 @@ export default function CreatePost(props) {
                         <Box w="100%">
                         <HStack>
                             <Text>Kommentar:</Text> {/* <Tooltip label={commentPlaceholder}><InfoIcon/></Tooltip> */}
-                            <Popover>
+                            <Popover placement="right">
                                 <PopoverTrigger>
                                     <IconButton size="sm" icon={<InfoIcon/>} />
                                 </PopoverTrigger>
-                                <PopoverContent>
+                                <PopoverContent >
                                     <PopoverArrow />
                                     <PopoverCloseButton />
                                     <PopoverBody>{commentPlaceholder}</PopoverBody>
